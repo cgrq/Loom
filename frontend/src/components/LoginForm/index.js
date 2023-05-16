@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../store/session";
 import { useHistory } from 'react-router-dom';
 import "./LoginForm.css"
+import DemoUserButton from "../DemoUserButton";
 
 export default function LoginForm() {
     const history = useHistory();
@@ -28,6 +29,8 @@ export default function LoginForm() {
             history.push('/');
         }
     };
+
+
 
     return (
         <>
@@ -60,6 +63,7 @@ export default function LoginForm() {
                         Login
                     </button>
                 </form>
+                <DemoUserButton setErrors={setErrors} />
             </div>
         </>
     );

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { signUp, editUser } from "../../store/session";
 import { useHistory } from 'react-router-dom';
 import "./UserAuthForm.css"
+import DemoUserButton from "../DemoUserButton";
 
 export default function UserAuthForm({ componentType }) {
     const history = useHistory();
@@ -156,6 +157,7 @@ export default function UserAuthForm({ componentType }) {
                         {componentType === "update" ? "Edit user" : "Sign Up"}
                     </button>
                 </form>
+                <DemoUserButton setErrors={setErrors} />
             </div>
         </>
     );
