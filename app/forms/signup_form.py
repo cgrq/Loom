@@ -27,17 +27,24 @@ def valid_email(form, field):
     if not valid_email:
         raise ValidationError('Please provide a valid email address.')
 
+def valid_image(form, field):
+        profileImage = field.data
+
+        if profileImage:
+            if not profileImage.lower().endswith(('.jpg', '.jpeg', '.png', '.gif')):
+                raise ValidationError('Only JPG, JPEG, PNG, and GIF images are allowed.')
+
 
 class SignUpForm(FlaskForm):
     firstName = StringField('firstName', validators=[
-                            DataRequired()])  # added this
+                            DataRequired(), Length(1, 40)])  # added this
     lastName = StringField('lastName', validators=[
-                           DataRequired()])  # added this
+                           DataRequired(), Length(1, 40)])  # added this
     username = StringField(
         'username', validators=[DataRequired(), username_exists, Length(3, 20)])
 
     email = StringField('email', validators=[
-                        DataRequired(), user_exists, valid_email])
+                        DataRequired(), user_exists, valid_email, Length(1, 50)])
 
-    profileImage = StringField('profileImage')  # added this
+    profileImage = StringField('profileImage', validators=[valid_image])  # added this
     password = StringField('password', validators=[DataRequired()])

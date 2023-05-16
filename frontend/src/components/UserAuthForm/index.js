@@ -33,7 +33,7 @@ export default function UserAuthForm({ componentType }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (password === confirmPassword && !imageNotValid(profileImage)) {
+    if (password === confirmPassword) {
       const data =
         componentType === "update"
           ? await dispatch(
@@ -66,12 +66,12 @@ export default function UserAuthForm({ componentType }) {
         setErrors({
           ...errors,
           password:
-            "Confirm Password field must be the same as the Password field",
+            "Password fields must match",
         });
       }
-      if (imageNotValid(profileImage)) {
-        setErrors({ ...errors, ...imageNotValid(profileImage) });
-      }
+    //   if (imageNotValid(profileImage)) {
+    //     setErrors({ ...errors, ...imageNotValid(profileImage) });
+    //   }
     }
   };
 
@@ -87,7 +87,7 @@ export default function UserAuthForm({ componentType }) {
 
   return (
     <>
-    <div>
+    <div className="auth-form-wrapper">
       <h1 className="user-auth-form-h1">
         {componentType === "update" ? "Edit user" : "Sign up"}
       </h1>
@@ -102,6 +102,7 @@ export default function UserAuthForm({ componentType }) {
             required
           />
         </div>
+        {errors.firstName && <p className="input-error">{errors.firstName}</p>}
         <div>
           <label>Last Name</label>
           <input
@@ -111,6 +112,7 @@ export default function UserAuthForm({ componentType }) {
             required
           />
         </div>
+        {errors.lastName && <p className="input-error">{errors.lastName}</p>}
         <div>
           <label>Email</label>
           <input
@@ -120,6 +122,8 @@ export default function UserAuthForm({ componentType }) {
             required
           />
         </div>
+        {errors.email && <p className="input-error">{errors.email}</p>}
+
         <div>
           <label>Username</label>
           <input
@@ -129,15 +133,18 @@ export default function UserAuthForm({ componentType }) {
             required
           />
         </div>
+        {errors.username && <p className="input-error">{errors.username}</p>}
+
         <div>
           <label>Profile Image</label>
           <input
             type="text"
             value={profileImage}
             onChange={(e) => setprofileImage(e.target.value)}
-            placeholder="Optional"
           />
         </div>
+        {errors.profileImage && <p className="input-error">{errors.profileImage}</p>}
+
         <div>
           <label>Password</label>
           <input
@@ -156,6 +163,8 @@ export default function UserAuthForm({ componentType }) {
             required
           />
         </div>
+        {errors.password && <p className="input-error">{errors.password}</p>}
+
 
         <button className="user-auth-form-button" type="submit">
           {componentType === "update" ? "Edit user" : "Sign Up"}
