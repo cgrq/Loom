@@ -70,7 +70,6 @@ def sign_up():
             password=form.data['password'],
             first_name=form.data['firstName'],
             last_name=form.data['lastName'],
-            status=form.data['status'],
             profile_image=form.data['profileImage']
         )
         db.session.add(user)
@@ -79,7 +78,7 @@ def sign_up():
 
         login_user(user)
         return {"user": user.to_dict()}
-    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+    return {'errors': form.errors}, 401
 
 @auth_routes.route('/edit', methods=['PUT'])
 def edit():
@@ -100,8 +99,8 @@ def edit():
         user.username = form.data['username']
         user.email = form.data['email']
         user.password = form.data['password']
-        user.firstName = form.data['firstName']
-        user.lastName = form.data['lastName']
+        user.first_name = form.data['firstName']
+        user.last_name = form.data['lastName']
         user.profile_image = form.data['profileImage']
 
         db.session.commit()
