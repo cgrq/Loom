@@ -1,5 +1,4 @@
 import json
-import random
 from app.models import db, User, environment, SCHEMA
 from sqlalchemy.sql import text
 
@@ -18,8 +17,7 @@ def seed_users():
             last_name=u['last_name'],
             email=u['email'],
             password=u['password'],
-            profile_image_url='../test_image.png',
-            status=random.choice(['online', 'offline', 'away']),
+            profile_image=u['profile_image'],
         )
         db.session.add(user)
 

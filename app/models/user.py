@@ -10,17 +10,14 @@ class User(db.Model, UserMixin):
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}
 
-    # STATUS = ['online', 'offline', 'away']
-
     id = db.Column(db.Integer, primary_key=True)
 
-    first_name = db.Column(db.String(40), nullable=False)
-    last_name = db.Column(db.String(40), nullable=False)
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(50), nullable=False, unique=True)
-    hashed_password = db.Column(db.String(500), nullable=False)
-    profile_image_url = db.Column(db.String(500))
-    status = db.Column(db.String(50))
+    first_name = db.Column(db.String(40), nullable=False)
+    last_name = db.Column(db.String(40), nullable=False)
+    hashed_password = db.Column(db.String(50), nullable=False)
+    profile_image = db.Column(db.String(500))
 
     created_at = db.Column(db.DateTime, default=datetime.now())
     updated_at = db.Column(db.DateTime, default=datetime.now())
@@ -48,8 +45,7 @@ class User(db.Model, UserMixin):
             'last_name': self.last_name,
             'username': self.username,
             'email': self.email,
-            'profile_image_url': self.profile_image_url,
-            'status': self.status,
+            'profile_image': self.profile_image,
             'created_at': self.created_at,
             'updated_at': self.updated_at,
         }
