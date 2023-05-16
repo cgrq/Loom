@@ -71,7 +71,7 @@ def sign_up():
             first_name=form.data['firstName'],
             last_name=form.data['lastName'],
             status=form.data['status'],
-            profile_image_url=form.data['profileImageUrl'] if form.data['profileImageUrl'] else '../test_image.png'
+            profile_image=form.data['profileImage']
         )
         db.session.add(user)
         db.session.commit()
@@ -102,7 +102,7 @@ def edit():
         user.password = form.data['password']
         user.firstName = form.data['firstName']
         user.lastName = form.data['lastName']
-        user.profile_image_url = form.data['profileImageUrl']
+        user.profile_image = form.data['profileImage']
 
         db.session.commit()
 
