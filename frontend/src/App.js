@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import { authenticate } from "./store/session";
-import Navigation from "./components/Navigation";
+import Navigation from "./components/Navigation"
 import UserAuthForm from "./components/UserAuthForm";
 
 function App() {
