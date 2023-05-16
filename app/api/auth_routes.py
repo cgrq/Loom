@@ -70,7 +70,6 @@ def sign_up():
             password=form.data['password'],
             first_name=form.data['firstName'],
             last_name=form.data['lastName'],
-            status=form.data['status'],
             profile_image=form.data['profileImage']
         )
         db.session.add(user)

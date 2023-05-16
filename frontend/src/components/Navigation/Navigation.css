@@ -1,0 +1,10 @@
+.navigation-content-wrapper{
+    width:1024px;
+    display:flex;
+    justify-content: space-between;
+}
+.navigation-buttons-wrapper{
+    display:flex;
+    width:150px;
+    justify-content: space-between;
+}

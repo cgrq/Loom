@@ -2,17 +2,13 @@
 const SET_USER = "session/SET_USER";
 const REMOVE_USER = "session/REMOVE_USER";
 // const SET_USERS = "session/SET_USERS";
-const SET_TEAM_USERS = "session/SET_TEAM_USERS";
+
 
 // const setUsers = (users) => ({
 //   type: SET_USERS,
 //   payload: users,
 // });
 
-const setTeamUsers = (users) => ({
-  type: SET_TEAM_USERS,
-  payload: users,
-});
 
 const setUser = (user) => ({
   type: SET_USER,
@@ -23,19 +19,7 @@ const removeUser = () => ({
   type: REMOVE_USER,
 });
 
-export const setTeamUsersThunk = (teamId) => async (dispatch) => {
-  const response = await fetch(`/api/users/team/${teamId}`);
 
-  if (response.ok) {
-    const users = await response.json();
-    dispatch(setTeamUsers(users));
-
-    return users;
-  }
-
-  const errors = response.json();
-  return errors;
-};
 
 export const authenticate = () => async (dispatch) => {
   const response = await fetch("/api/auth", {
@@ -92,7 +76,7 @@ export const logout = () => async (dispatch) => {
 };
 
 export const signUp =
-  (username, email, password, firstName, lastName, profileImageUrl) =>
+  (username, email, password, firstName, lastName, profileImage) =>
     async (dispatch) => {
       const response = await fetch("/api/auth/signup", {
         method: "POST",
@@ -105,8 +89,7 @@ export const signUp =
           password,
           firstName,
           lastName,
-          profileImageUrl,
-          status: "online",
+          profileImage,
         }),
       });
 
@@ -126,7 +109,7 @@ export const signUp =
     };
 // SignupFormModal
 export const editUser =
-  (username, email, password, firstName, lastName, profileImageUrl) =>
+  (username, email, password, firstName, lastName, profileImage) =>
     async (dispatch) => {
       const response = await fetch(`/api/auth/edit`, {
         method: "PUT",
@@ -139,8 +122,7 @@ export const editUser =
           password,
           firstName,
           lastName,
-          profileImageUrl,
-          status: "online",
+          profileImage,
         }),
       });
 
@@ -167,7 +149,6 @@ export const deleteUser = (id) => async (dispatch) => {
 
 
   if (response.ok) {
-      const team = await response.json();
       dispatch(removeUser());
       return null;
   } else {
@@ -177,24 +158,12 @@ export const deleteUser = (id) => async (dispatch) => {
 };
 
 
-const initialState = { user: null, teamUsers: {} };
+const initialState = { user: null };
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case SET_USER:
       return { user: action.payload.user };
-
-    case SET_TEAM_USERS: {
-      const newState = { ...state, teamUsers: { ...state.teamUsers } };
-
-      const users = {};
-      action.payload.users.forEach((user) => (users[user.id] = user));
-
-      newState.teamUsers = users;
-
-      return newState;
-    }
-
     case REMOVE_USER:
       return { user: null };
     default:
