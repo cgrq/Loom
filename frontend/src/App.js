@@ -4,6 +4,7 @@ import { Route, Switch } from "react-router-dom";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation"
 import UserAuthForm from "./components/UserAuthForm";
+import LoginForm from "./components/LoginForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -34,7 +35,7 @@ function App() {
                   <UserAuthForm componentType={"create"} />
                 </Route>
                 <Route exact path={"/login"}>
-                  <h1>login</h1>
+                  <LoginForm />
                 </Route>
               </Switch>
             )}
