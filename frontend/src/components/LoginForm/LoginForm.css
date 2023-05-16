@@ -1,0 +1,7 @@
+.auth-form-wrapper{
+    width:400px;
+    /* border: 1px solid blue; */
+    display:flex;
+    flex-flow: column;
+    align-items: flex-start;
+}
