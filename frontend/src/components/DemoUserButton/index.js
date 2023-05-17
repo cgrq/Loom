@@ -1,6 +1,7 @@
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import { login } from "../../store/session";
+import { getUserStorefrontThunk } from '../../store/storefronts';
 
 
 export default function DemoUserButton({setErrors}) {
@@ -14,6 +15,7 @@ export default function DemoUserButton({setErrors}) {
         if (data) {
             setErrors(data);
         } else {
+            dispatch(getUserStorefrontThunk())
             history.push('/');
         }
     };

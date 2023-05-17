@@ -1,11 +1,18 @@
 import { NavLink } from "react-router-dom";
 import ProfileButton from "../ProfileButton"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import CTAButton from "../CTAButton";
 import "./Navigation.css"
+import { useEffect } from "react";
+import { getUserStorefrontThunk } from "../../store/storefronts"
 
 export default function Navigation() {
+    const dispatch = useDispatch()
     const sessionUser = useSelector((state) => state.session.user);
+
+    useEffect(() => {
+        dispatch(getUserStorefrontThunk())
+    })
 
     return (
         <div className="navigation-content-wrapper">
