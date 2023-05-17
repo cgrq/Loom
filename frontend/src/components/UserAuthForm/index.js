@@ -12,7 +12,7 @@ export default function UserAuthForm({ componentType }) {
 
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
-    const [profileImage, setprofileImage] = useState("");
+    const [profileImage, setProfileImage] = useState("");
     const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -47,7 +47,7 @@ export default function UserAuthForm({ componentType }) {
                     );
             if (data) {
                 setErrors(data);
-            } else{
+            } else {
                 history.push('/');
             }
         } else {
@@ -67,7 +67,7 @@ export default function UserAuthForm({ componentType }) {
             setFirstName(sessionUser.first_name);
             setLastName(sessionUser.last_name);
             setEmail(sessionUser.email);
-            setprofileImage(sessionUser.profile_image_url);
+            setProfileImage(sessionUser.profile_image);
             setUsername(sessionUser.username);
         }
     }, [sessionUser]);
@@ -127,7 +127,7 @@ export default function UserAuthForm({ componentType }) {
                         <input
                             type="text"
                             value={profileImage}
-                            onChange={(e) => setprofileImage(e.target.value)}
+                            onChange={(e) => setProfileImage(e.target.value)}
                         />
                     </div>
                     {errors.profileImage && <p className="input-error">{errors.profileImage}</p>}
@@ -157,7 +157,13 @@ export default function UserAuthForm({ componentType }) {
                         {componentType === "update" ? "Edit user" : "Sign Up"}
                     </button>
                 </form>
-                <DemoUserButton setErrors={setErrors} />
+                {
+                    componentType === "update"
+                        ? null
+                        : (
+                            <DemoUserButton setErrors={setErrors} />
+                        )
+                }
             </div>
         </>
     );

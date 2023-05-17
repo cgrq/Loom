@@ -1,17 +1,15 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField
-from wtforms.validators import DataRequired, Length, Email
-from .signup_form import valid_email
-
+from wtforms.validators import DataRequired, Length
+from .signup_form import valid_email, valid_image
 
 class EditUserForm(FlaskForm):
     firstName = StringField('firstName', validators=[
-                            DataRequired()])  # added this
+                            DataRequired(), Length(1, 40)])  # added this
     lastName = StringField('lastName', validators=[
-                           DataRequired()])  # added this
+                           DataRequired(), Length(1, 40)])  # added this
     username = StringField(
         'username', validators=[DataRequired(), Length(3, 20)])
-    email = StringField('email', validators=[DataRequired(), valid_email])
-    status = StringField('status', validators=[DataRequired()])
-    profileImageUrl = StringField('profileImageUrl')  # added this
-    password = StringField('password', validators=[DataRequired()])
+    email = StringField('email', validators=[DataRequired(), valid_email, Length(1, 50)])
+    profileImage = StringField('profileImage', validators=[valid_image, Length(1, 500)])  # added this
+    password = StringField('password', validators=[DataRequired(), Length(1, 50)])
