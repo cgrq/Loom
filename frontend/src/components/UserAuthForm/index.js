@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { signUp, editUser } from "../../store/session";
+import { signUp, editUser, deleteUser } from "../../store/session";
 import { useHistory } from 'react-router-dom';
 import "./UserAuthForm.css"
 import DemoUserButton from "../DemoUserButton";
@@ -17,6 +17,7 @@ export default function UserAuthForm({ componentType }) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [confirmDelete, setConfirmDelete] = useState(false);
     const [errors, setErrors] = useState({});
 
     const handleSubmit = async (e) => {
@@ -61,6 +62,17 @@ export default function UserAuthForm({ componentType }) {
 
         }
     };
+    const handleDelete = async () => {
+        const data = await dispatch(deleteUser());
+
+
+        if (data) {
+          setErrors(data);
+        } else {
+            history.push('/');
+        }
+
+      };
 
     useEffect(() => {
         if (componentType === "update" && sessionUser) {
@@ -159,7 +171,19 @@ export default function UserAuthForm({ componentType }) {
                 </form>
                 {
                     componentType === "update"
-                        ? null
+                        ? (
+                            <div>
+                                <button onClick={()=>setConfirmDelete(!confirmDelete)}>{confirmDelete? "Cancel" : "Delete"}</button>
+                                {
+                                    confirmDelete && (
+                                        <div>
+                                            <div>Are you sure you want to delete your account?</div>
+                                            <button onClick={handleDelete}>Delete</button>
+                                        </div>
+                                    )
+                                }
+                            </div>
+                        )
                         : (
                             <DemoUserButton setErrors={setErrors} />
                         )

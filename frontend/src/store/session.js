@@ -142,7 +142,7 @@ export const editUser =
     };
 
 // Delete a user thunk
-export const deleteUser = (id) => async (dispatch) => {
+export const deleteUser = () => async (dispatch) => {
   const response = await fetch(`/api/auth/delete`, {
       method: 'DELETE'
   });
