@@ -24,7 +24,7 @@ class User(db.Model, UserMixin):
 
     # Foreign Keys
     storefronts = db.relationship(
-        "Storefront", back_populates="users", cascade="all, delete-orphan")
+        "Storefront", back_populates="user", cascade="all, delete-orphan")
 
     @property
     def password(self):

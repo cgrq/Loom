@@ -36,7 +36,8 @@ def create_storefront():
     if form.validate_on_submit():
         storefront = Storefront(
             description=form.data['description'],
-            banner_image=form.data['bannerImage']
+            banner_image=form.data['bannerImage'],
+            user_id=current_user.id
         )
         db.session.add(storefront)
         db.session.commit()

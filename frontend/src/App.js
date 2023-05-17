@@ -41,7 +41,7 @@ function App() {
                   <UserAuthForm componentType={"update"} />
                 </Route>
                 <Route exact path={"/create-a-storefront"}>
-                  <StorefrontForm />
+                  <StorefrontForm componentType={"create"} />
                 </Route>
               </Switch>
             )}

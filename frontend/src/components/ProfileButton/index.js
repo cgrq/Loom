@@ -9,6 +9,8 @@ function ProfileButton({ user }) {
   const history = useHistory();
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
+  const [imageUrl, setImageUrl] = useState(process.env.PUBLIC_URL + "/default-profile-pic.png")
+
   const ulRef = useRef();
   const demoUserIds = [1, 2];
 
@@ -32,6 +34,12 @@ function ProfileButton({ user }) {
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
 
+  useEffect(() =>{
+    if(user.profile_image){
+      setImageUrl(user.profile_image)
+    }
+  }, [user])
+
   const closeMenu = () => {
     setShowMenu(false);
   };
@@ -41,7 +49,6 @@ function ProfileButton({ user }) {
     dispatch(logout());
     closeMenu();
     history.push('/');
-
   };
 
   return (
@@ -57,11 +64,11 @@ function ProfileButton({ user }) {
         <div className={user ? "nav-upper-container" : "hidden"}>
           {user && (
             <>
+              <img className="nav-user-img" onError={() => setImageUrl(process.env.PUBLIC_URL + "/default-image.png")} src={imageUrl}></img>
               <div className="nav-user-name-wrapper">
                 <div>Hello, <span className="user-name">{user.first_name}</span></div>
                 <div className="nav-user-email">{user.email}</div>
               </div>
-              <img className="nav-user-img" src={user.profile_image_url}></img>
             </>
           )}
         </div>

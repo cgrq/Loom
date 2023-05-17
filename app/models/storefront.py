@@ -20,7 +20,7 @@ class Storefront(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey(
         add_prefix_for_prod("users.id"), ondelete="CASCADE"), unique=True, nullable=False, )
 
-    user = db.relationship('User', back_populates="storefront")
+    user = db.relationship('User', back_populates="storefronts")
 
     def to_dict(self):
         return {

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { signUp, editUser, deleteUser } from "../../store/session";
+import { createStorefrontThunk } from "../../store/storefronts";
 import { useHistory } from 'react-router-dom';
 import "./Storefront.css"
 
@@ -19,14 +19,15 @@ export default function StorefrontForm({ componentType }) {
 
         const data =
             componentType === "update"
-                ? await dispatch(
-                    editUser(
-                        description,
-                        bannerImage
-                    )
-                )
+                ? <></>
+                // await dispatch(
+                //     editUser(
+                //         description,
+                //         bannerImage
+                //     )
+                // )
                 : await dispatch(
-                    signUp(
+                    createStorefrontThunk(
                         description,
                         bannerImage
                     )
@@ -110,6 +111,6 @@ export default function StorefrontForm({ componentType }) {
         </div>
     )
         : (
-            <h1>Log in</h1>
+            <h1>Please log in to create a store front</h1>
         )
 }
