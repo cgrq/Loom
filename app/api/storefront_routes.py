@@ -8,7 +8,7 @@ storefront_routes = Blueprint('storefronts', __name__)
 
 
 @storefront_routes.route('/')
-def storefronts():
+def get_storefronts():
     """
     Query for all storefronts and returns them as a list of storefront dictionaries
     """
@@ -16,13 +16,25 @@ def storefronts():
     return {'storefronts': [storefront.to_dict() for storefront in storefronts]}
 
 @storefront_routes.route('/<int:id>')
-def user(id):
+def get_storefront_by_id(id):
     """
     Query for a storefront by id and returns the storefront as a dictionary
     """
     storefront = Storefront.query.get(id)
 
-    return storefront.to_dict()
+    return {"storefront":storefront.to_dict()}
+
+@storefront_routes.route('/user')
+def get_user_storefront():
+    """
+    Query for a storefront by id and returns the storefront as a dictionary
+    """
+    storefront = Storefront.query.get(current_user.id)
+
+    if storefront is None:
+        return {"storefront": None}
+
+    return {"storefront":storefront.to_dict()}
 
 @storefront_routes.route('/create', methods=['POST'])
 @login_required
@@ -57,8 +69,8 @@ def edit_storefront():
     if form.validate_on_submit():
         storefront = Storefront.query.filter(Storefront.user_id == current_user.id).first()
 
-        user.description = form.data['description']
-        user.banner_image = form.data['banner_image']
+        storefront.description = form.data['description']
+        storefront.banner_image = form.data['bannerImage']
 
         db.session.commit()
 

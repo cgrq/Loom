@@ -1,21 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useDispatch } from "react-redux";
-import { NavLink, useHistory } from 'react-router-dom';
-import { logout } from "../../store/session";
 import "./ProfileButton.css";
-import CTAButton from "../CTAButton";
+import UserProfileNav from "../UserProfileNav";
 
 function ProfileButton({ user }) {
-  const history = useHistory();
-  const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
-  const [imageUrl, setImageUrl] = useState(process.env.PUBLIC_URL + "/default-profile-pic.png")
 
   const ulRef = useRef();
-  const demoUserIds = [1, 2];
 
   const openMenu = () => {
-    // console.log("profile button push -----------> ", showMenu)
+
     if (showMenu) return;
     setShowMenu(true);
   };
@@ -34,21 +27,8 @@ function ProfileButton({ user }) {
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
 
-  useEffect(() =>{
-    if(user.profile_image){
-      setImageUrl(user.profile_image)
-    }
-  }, [user])
-
   const closeMenu = () => {
     setShowMenu(false);
-  };
-
-  const handleLogout = (e) => {
-    e.preventDefault();
-    dispatch(logout());
-    closeMenu();
-    history.push('/');
   };
 
   return (
@@ -61,36 +41,7 @@ function ProfileButton({ user }) {
           } profile-list`}
         ref={ulRef}
       >
-        <div className={user ? "nav-upper-container" : "hidden"}>
-          {user && (
-            <>
-              <img className="nav-user-img" onError={() => setImageUrl(process.env.PUBLIC_URL + "/default-image.png")} src={imageUrl}></img>
-              <div className="nav-user-name-wrapper">
-                <div>Hello, <span className="user-name">{user.first_name}</span></div>
-                <div className="nav-user-email">{user.email}</div>
-              </div>
-            </>
-          )}
-        </div>
-        <div
-          className={`nav-lower-container nav-links ${!user ? `nav-lower-container-logged-out` : ""
-            }`}
-        >
-          <div>
-            {user && !demoUserIds.includes(user.id) && (
-              <NavLink onClick={closeMenu} exact to="/edit-profile" activeClassName="active">
-                <CTAButton buttonText={"Edit"} />
-              </NavLink>
-
-            )}
-            {demoUserIds.includes(user.id) && (
-              <>
-                <p className="demo-warning">*This demo user can't be edited/deleted</p>
-              </>
-            )}
-            <button onClick={handleLogout}>Log Out</button>
-          </div>
-        </div>
+        <UserProfileNav user={user} closeMenu={closeMenu}/>
       </div>
     </div>
   );

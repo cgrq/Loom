@@ -12,13 +12,7 @@
   border:1px solid black;
   width:400px;
 }
-.demo-warning {
-  color: rgb(254, 97, 97);
-  font-size: 12px;
-  border:1px solid red;
-  width:250px;
-  margin:0 auto;
-}
+
 
 .hidden{
   display: none
@@ -31,65 +25,17 @@
   z-index:20000;
 
 }
-
-.right-nav-container{
-  display:flex;
-  align-items: center;
-}
-
-
 .profile-container{
   position:relative;
   display:flex;
   margin-left:20px;
   justify-content: flex-end;
 }
-
 .profile-icon-button{
   background:none;
   border:none;
 }
 
-
-.nav-upper-container, .nav-lower-container{
-}
-.nav-upper-container{
-  padding-top:20px;
-  color:black;
-  display:flex;
-  justify-content: space-between;
-}
-.nav-user-name-wrapper{
-  display: flex;
-  flex-flow: column;
-}
-.nav-lower-container{
-  padding-top:20px;
-  padding-bottom:20px;
-  display:flex;
-  flex-flow: column;
-  align-items: center;
-  text-align: center;
-}
-.nav-lower-container-logged-out{
-  padding-top: 40px;
-}
-
-.nav-user-email{
-  font-size: 13px;
-  margin-top: 5px;
-}
-
-.user-name {
-  margin-left: 5px;
-}
-
-.nav-user-img{
-  width:40px;
-  height:40px;
-  object-fit: contain;
-  border-radius: 100%;
-}
 
 
 @media screen and (max-width: 767px) {

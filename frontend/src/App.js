@@ -40,8 +40,8 @@ function App() {
                 <Route exact path={"/edit-profile"}>
                   <UserAuthForm componentType={"update"} />
                 </Route>
-                <Route exact path={"/create-a-storefront"}>
-                  <StorefrontForm componentType={"create"} />
+                <Route exact path={"/storefront"}>
+                  <StorefrontForm  />
                 </Route>
               </Switch>
             )}

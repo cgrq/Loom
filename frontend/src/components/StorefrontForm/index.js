@@ -1,31 +1,41 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createStorefrontThunk } from "../../store/storefronts";
+import { createStorefrontThunk, editStorefrontThunk, deleteStorefront } from "../../store/storefronts";
 import { useHistory } from 'react-router-dom';
 import "./Storefront.css"
 
-export default function StorefrontForm({ componentType }) {
+export default function StorefrontForm() {
     const history = useHistory();
     const dispatch = useDispatch();
     const sessionUser = useSelector((state) => state.session.user);
+    const { userStorefront } = useSelector((state) => state.storefronts)
 
     const [description, setDescription] = useState("");
     const [bannerImage, setBannerImage] = useState("");
+    const [componentType, setComponentType] = useState("create")
     const [confirmDelete, setConfirmDelete] = useState(false);
     const [errors, setErrors] = useState({});
+
+    useEffect(()=>{
+        if(userStorefront){
+            setComponentType("update")
+            setDescription(userStorefront.description)
+            setBannerImage(userStorefront.banner_image)
+        }
+    }, [userStorefront])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         const data =
             componentType === "update"
-                ? <></>
-                // await dispatch(
-                //     editUser(
-                //         description,
-                //         bannerImage
-                //     )
-                // )
+                ?
+                await dispatch(
+                    editStorefrontThunk(
+                        description,
+                        bannerImage
+                    )
+                )
                 : await dispatch(
                     createStorefrontThunk(
                         description,
@@ -40,24 +50,17 @@ export default function StorefrontForm({ componentType }) {
 
     };
     const handleDelete = async () => {
-        //     const data = await dispatch(deleteUser());
+            history.push('/');
+
+            const data = await dispatch(deleteStorefront());
 
 
-        //     if (data) {
-        //       setErrors(data);
-        //     } else {
-        //         history.push('/');
-        //     }
+            if (data) {
+              setErrors(data);
+            } else {
+            }
 
     };
-
-    // useEffect(() => {
-    //     if (componentType === "update" && sessionUser) {
-    //         setFirstName(sessionUser.first_name);
-    //         setLastName(sessionUser.last_name);
-    //     }
-    // }, [sessionUser]);
-
 
     return sessionUser ? (
         <div className="storefront-form-wrapper">
