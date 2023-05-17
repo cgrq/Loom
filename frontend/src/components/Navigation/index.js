@@ -10,7 +10,7 @@ export default function Navigation() {
     return (
         <div className="navigation-content-wrapper">
             <NavLink exact to="/" activeClassName="active">home</NavLink>
-            <input></input>
+            {/* <input></input> */}
             <div className="navigation-buttons-wrapper">
                 {
                     sessionUser

@@ -5,6 +5,7 @@ import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation"
 import UserAuthForm from "./components/UserAuthForm";
 import LoginForm from "./components/LoginForm";
+import StorefrontForm from "./components/StorefrontForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -38,6 +39,9 @@ function App() {
                 </Route>
                 <Route exact path={"/edit-profile"}>
                   <UserAuthForm componentType={"update"} />
+                </Route>
+                <Route exact path={"/create-a-storefront"}>
+                  <StorefrontForm componentType={"create"} />
                 </Route>
               </Switch>
             )}

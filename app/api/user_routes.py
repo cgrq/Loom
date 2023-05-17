@@ -3,7 +3,6 @@ from flask_login import login_required
 from app.models import User
 
 user_routes = Blueprint('users', __name__)
-print()
 
 
 @user_routes.route('/')
@@ -27,4 +26,3 @@ def user(id):
     user = User.query.get(id)
 
     return user.to_dict()
-

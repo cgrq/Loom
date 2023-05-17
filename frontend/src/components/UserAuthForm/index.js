@@ -18,6 +18,7 @@ export default function UserAuthForm({ componentType }) {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [confirmDelete, setConfirmDelete] = useState(false);
+    const [startStorefront, setStartStorefront] = useState(false);
     const [errors, setErrors] = useState({});
 
     const handleSubmit = async (e) => {
@@ -49,7 +50,12 @@ export default function UserAuthForm({ componentType }) {
             if (data) {
                 setErrors(data);
             } else {
-                history.push('/');
+                console.log(`🖥 ~ file: index.js:54 ~ handleSubmit ~ startStorefront:`, startStorefront)
+                if (startStorefront){
+                    history.push('/create-a-storefront');
+                } else {
+                    history.push('/');
+                }
             }
         } else {
             if (password !== confirmPassword) {
@@ -163,6 +169,10 @@ export default function UserAuthForm({ componentType }) {
                         />
                     </div>
                     {errors.password && <p className="input-error">{errors.password}</p>}
+                    <div>
+                    <label>Start a storefront?</label>
+                    <input type="checkbox" value={startStorefront}  onChange={() => setStartStorefront(!startStorefront)}/>
+                    </div>
 
 
                     <button className="user-auth-form-button" type="submit">

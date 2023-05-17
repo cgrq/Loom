@@ -2,9 +2,13 @@
     width:1024px;
     display:flex;
     justify-content: space-between;
+    align-items: center;
+    height:50px;
 }
 .navigation-buttons-wrapper{
     display:flex;
     width:150px;
     justify-content: space-between;
+    align-items: center;
+
 }
