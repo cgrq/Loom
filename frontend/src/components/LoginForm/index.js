@@ -29,9 +29,7 @@ export default function LoginForm() {
             history.push('/');
         }
     };
-
-
-
+    
     return (
         <>
             <div className="auth-form-wrapper">
