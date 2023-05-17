@@ -31,6 +31,7 @@
     overflow-y: auto;
 }
 .app-body-content-wrapper{
+    border:1px solid transparent;
     width:1024px;
     padding-top: 30px;
     display: flex;

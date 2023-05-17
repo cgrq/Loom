@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { logout } from "../../store/session";
 import "./ProfileButton.css";
+import CTAButton from "../CTAButton";
 
 function ProfileButton({ user }) {
+  const history = useHistory();
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
@@ -38,6 +40,8 @@ function ProfileButton({ user }) {
     e.preventDefault();
     dispatch(logout());
     closeMenu();
+    history.push('/');
+
   };
 
   return (
@@ -46,9 +50,8 @@ function ProfileButton({ user }) {
         <i className="fas fa-user-circle profile-icon" />
       </button>
       <div
-        className={`${
-          "profile-dropdown" + (showMenu ? "" : " hidden")
-        } profile-list`}
+        className={`${(showMenu ? "" : " hidden")
+          } profile-list`}
         ref={ulRef}
       >
         <div className={user ? "nav-upper-container" : "hidden"}>
@@ -63,33 +66,23 @@ function ProfileButton({ user }) {
           )}
         </div>
         <div
-          className={`nav-lower-container nav-links ${
-            !user ? `nav-lower-container-logged-out` : ""
-          }`}
+          className={`nav-lower-container nav-links ${!user ? `nav-lower-container-logged-out` : ""
+            }`}
         >
-          {user && !demoUserIds.includes(user.id) && (
-            <div>
-              {/* <OpenModalButton
-                fillBackground={false}
-                buttonText="Edit"
-                onButtonClick={closeMenu}
-                modalComponent={<UserFormModal componentType={"update"} />}
-              />
-              <OpenModalButton
-                fillBackground={false}
-                buttonText="Delete"
-                onButtonClick={closeMenu}
-                modalComponent={<DeleteUserModal />}
-              /> */}
-              <button onClick={handleLogout}>Log Out</button>
-            </div>
-          )}
-          {demoUserIds.includes(user.id) && (
-            <>
-              <p className="demo-error-message">*This demo user can't be edited/deleted</p>
-              <button onClick={handleLogout}>Log Out</button>
-            </>
-          )}
+          <div>
+            {user && !demoUserIds.includes(user.id) && (
+              <NavLink onClick={closeMenu} exact to="/edit-profile" activeClassName="active">
+                <CTAButton buttonText={"Edit"} />
+              </NavLink>
+
+            )}
+            {demoUserIds.includes(user.id) && (
+              <>
+                <p className="demo-warning">*This demo user can't be edited/deleted</p>
+              </>
+            )}
+            <button onClick={handleLogout}>Log Out</button>
+          </div>
         </div>
       </div>
     </div>

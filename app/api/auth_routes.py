@@ -76,7 +76,7 @@ def edit():
     """
     print("HITTING EDIT ROUTE ~~~~~~")
     form = EditUserForm()
-    print("FORM", form)
+    print("FORM", form.data)
     form['csrf_token'].data = request.cookies['csrf_token']
     print("FORM TOKEN", form['csrf_token'].data)
     if form.validate_on_submit():

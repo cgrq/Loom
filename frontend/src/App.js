@@ -29,13 +29,15 @@ function App() {
             {isLoaded && (
               <Switch>
                 <Route exact path={"/"}>
-                  <h1>Home</h1>
                 </Route>
                 <Route exact path={"/sign-up"}>
                   <UserAuthForm componentType={"create"} />
                 </Route>
                 <Route exact path={"/login"}>
                   <LoginForm />
+                </Route>
+                <Route exact path={"/edit-profile"}>
+                  <UserAuthForm componentType={"update"} />
                 </Route>
               </Switch>
             )}
