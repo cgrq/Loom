@@ -60,7 +60,7 @@ export default function ProductForm({componentType}) {
         if (data) {
             setErrors(data);
         } else {
-            history.push('/storefront');
+            // history.push('/storefront');
         }
 
     };

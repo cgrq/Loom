@@ -1,7 +1,7 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
-from app.models import db, Product
-from app.forms import ProductDetailsForm
+from app.models import db, Product, ProductImages
+from app.forms import ProductDetailsForm, ProductImagesForm
 
 
 product_routes = Blueprint('products', __name__)
@@ -14,6 +14,31 @@ def get_products():
     """
     products = Storefront.query.all()
     return {'products': [product.to_dict() for product in products]}
+
+@product_routes.route('/<int:id>/images/create', methods=['POST'])
+@login_required
+def create_product_images(id):
+    """
+    Creates a new product images by product id
+    """
+    form = ProductImagesForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit():
+        product_images = ProductImages(
+            image1=form.data['image1'],
+            image2=form.data['image2'],
+            image3=form.data['image3'],
+            image4=form.data['image4'],
+            image5=form.data['image5'],
+            image6=form.data['image6'],
+            product_id=form.data['productId'],
+        )
+        db.session.add(product_images)
+        db.session.commit()
+
+        return {"productImages": product_images.to_dict()}
+    return {'errors': form.errors}, 401
 
 @product_routes.route('/<int:id>')
 def get_product_by_id(id):

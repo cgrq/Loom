@@ -22,9 +22,12 @@ class Product(db.Model):
 
     # Foreign Keys
     storefront_id = db.Column(db.Integer, db.ForeignKey(
-        add_prefix_for_prod("storefronts.id"), ondelete="CASCADE"), unique=True, nullable=False, )
+        add_prefix_for_prod("storefronts.id"), ondelete="CASCADE"), nullable=False, )
 
     storefront = db.relationship('Storefront', back_populates="products")
+
+    product_images = db.relationship(
+        "ProductImages", back_populates="product", cascade="all, delete-orphan")
 
     def to_dict(self):
         return {

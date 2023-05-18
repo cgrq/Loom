@@ -8,11 +8,13 @@ import LoginForm from "./components/LoginForm";
 import StorefrontForm from "./components/StorefrontForm";
 import Storefront from "./components/Storefront";
 import ProductForm from "./components/ProductForm";
+import ProductImagesForm from "./components/ProductImagesForm";
 
 function App() {
   const dispatch = useDispatch();
   const { user } = useSelector((store) => store.session);
   const { userStorefront} = useSelector((store) => store.storefronts);
+  const { currentProduct } = useSelector((store) => store.products)
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
@@ -44,10 +46,13 @@ function App() {
                   <UserAuthForm componentType={"update"} />
                 </Route>
                 <Route exact path={"/storefront/new-product"}>
-
                   {
                     userStorefront
-                      ? <ProductForm />
+                      ? (
+                        currentProduct
+                          ? <ProductImagesForm />
+                          : <ProductForm />
+                      )
                       : <h1>No store found</h1>
                   }
                 </Route>
