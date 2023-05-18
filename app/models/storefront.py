@@ -22,6 +22,9 @@ class Storefront(db.Model):
 
     user = db.relationship('User', back_populates="storefronts")
 
+    products = db.relationship(
+        "Product", back_populates="storefront", cascade="all, delete-orphan")
+
     def to_dict(self):
         return {
             'id': self.id,
