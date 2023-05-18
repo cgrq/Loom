@@ -12,7 +12,7 @@ export default function Navigation() {
 
     useEffect(() => {
         dispatch(getUserStorefrontThunk())
-    })
+    }, [])
 
     return (
         <div className="navigation-content-wrapper">

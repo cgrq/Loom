@@ -45,7 +45,7 @@ export default function StorefrontForm() {
         if (data) {
             setErrors(data);
         } else {
-            history.push('/');
+            history.push('/storefront');
         }
 
     };
