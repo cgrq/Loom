@@ -78,7 +78,7 @@ export default function StorefrontForm() {
                         required
                     />
                 </div>
-                {errors.firstName && <p className="input-error">{errors.firstName}</p>}
+                {errors.description && <p className="input-error">{errors.description}</p>}
 
                 <div>
                     <label>Banner Image</label>
@@ -88,7 +88,7 @@ export default function StorefrontForm() {
                         onChange={(e) => setBannerImage(e.target.value)}
                     />
                 </div>
-                {errors.profileImage && <p className="input-error">{errors.profileImage}</p>}
+                {errors.bannerImage && <p className="input-error">{errors.bannerImage}</p>}
 
                 <button className="user-auth-form-button" type="submit">
                     {componentType === "update" ? "Update" : "Create"}

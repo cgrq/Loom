@@ -7,6 +7,7 @@ import UserAuthForm from "./components/UserAuthForm";
 import LoginForm from "./components/LoginForm";
 import StorefrontForm from "./components/StorefrontForm";
 import Storefront from "./components/Storefront";
+import ProductForm from "./components/ProductForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -42,6 +43,14 @@ function App() {
                 <Route exact path={"/edit-profile"}>
                   <UserAuthForm componentType={"update"} />
                 </Route>
+                <Route exact path={"/storefront/new-product"}>
+
+                  {
+                    userStorefront
+                      ? <ProductForm />
+                      : <h1>No store found</h1>
+                  }
+                </Route>
                 <Route exact path={"/storefront/edit"}>
                   {
                     userStorefront
@@ -50,7 +59,6 @@ function App() {
                   }
                 </Route>
                 <Route exact path={"/storefront"}>
-
                   {
                     userStorefront
                       ? <Storefront />

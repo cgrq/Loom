@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import "./Storefront.css"
 import { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
 
 export default function Storefront() {
     const { user } = useSelector((state) => state.session)
@@ -24,6 +25,9 @@ export default function Storefront() {
                     {userStorefront.description}
                 </div>
             </div>
+            <NavLink to="/storefront/new-product">
+                Create a product
+            </NavLink>
         </div>
     )
 }
