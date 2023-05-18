@@ -29,7 +29,7 @@ export default function UserProfileNav({ user, closeMenu }) {
     const handleEditStorefront = (e) =>{
         e.preventDefault();
         closeMenu();
-        history.push('/storefront');
+        history.push('/storefront/edit');
     }
     return (
         <>
