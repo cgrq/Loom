@@ -51,10 +51,9 @@ export default function UserProfileNav({ user, closeMenu }) {
                         <h2>Your Storefront</h2>
                         <button onClick={handleEditStorefront}>Edit</button>
                     </div>
-                    <span>Description</span>
-                    <div className="nav-storefront-description-container">{userStorefront.description}</div>
-                    <span>Banner</span>
-                    <img src={userStorefront.banner_image} />
+                    <NavLink onClick={closeMenu} exact to="/storefront" activeClassName="active">
+                    <CTAButton buttonText={"Visit storefront"} />
+                </NavLink>
                 </div>
                 :<NavLink onClick={closeMenu} exact to="/storefront" activeClassName="active">
                     <CTAButton buttonText={"Create storefront"} />
