@@ -30,14 +30,29 @@ class Product(db.Model):
         "ProductImages", back_populates="product", cascade="all, delete-orphan")
 
     def to_dict(self):
-        return {
-            'id': self.id,
-            'name': self.name,
-            'description': self.description,
-            'quantity': self.quantity,
-            'price': self.price,
-            'category': self.category,
-            'subcategory': self.subcategory,
-            'created_at': self.created_at,
-            'updated_at': self.updated_at,
-        }
+        if len(self.product_images) == 0:
+            return {
+                'id': self.id,
+                'name': self.name,
+                'description': self.description,
+                'quantity': self.quantity,
+                'price': self.price,
+                'category': self.category,
+                'productImages': [],
+                'subcategory': self.subcategory,
+                'created_at': self.created_at,
+                'updated_at': self.updated_at,
+            }
+        else:
+            return {
+                'id': self.id,
+                'name': self.name,
+                'description': self.description,
+                'quantity': self.quantity,
+                'price': self.price,
+                'category': self.category,
+                'subcategory': self.subcategory,
+                'productImages': [images.to_dict() for images in self.product_images],
+                'created_at': self.created_at,
+                'updated_at': self.updated_at,
+            }

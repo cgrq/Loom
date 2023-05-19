@@ -50,16 +50,19 @@ def get_product_by_id(id):
     return {"product":product.to_dict()}
 
 @product_routes.route('/storefront/<int:id>')
-def get_storefront_product(id):
+def get_storefront_products(id):
     """
     Query for a product by storefront id and returns the product as a dictionary
     """
-    product = Product.query.get(id)
+    products = Product.query.filter(Product.storefront_id == id)
 
-    if product is None:
-        return {"product": None}
+    if products is None:
+        return {"products": None}
 
-    return {"product":product.to_dict()}
+    for product in products:
+        print("~~PRODUCT~~", product.to_dict())
+
+    return {"products":[product.to_dict() for product in products]}
 
 @product_routes.route('/create', methods=['POST'])
 @login_required
