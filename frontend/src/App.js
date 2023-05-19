@@ -52,6 +52,7 @@ function App() {
                       ? (
                         editingProductImagesForm
                           ? <ProductImagesForm
+                              componentType={"update"}
                               setEditingProductImagesForm={setEditingProductImagesForm}
                             />
                           : <ProductForm
@@ -71,7 +72,6 @@ function App() {
                               setEditingProductImagesForm={setEditingProductImagesForm}
                             />
                           : <ProductForm
-                              componentType={"update"}
                               setEditingProductImagesForm={setEditingProductImagesForm}
                             />
                       )
