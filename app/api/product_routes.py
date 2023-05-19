@@ -89,20 +89,25 @@ def create_product():
         return {"product": product.to_dict()}
     return {'errors': form.errors}, 401
 
-@product_routes.route('/edit', methods=['PUT'])
+@product_routes.route('<int:id>/edit', methods=['PUT'])
 @login_required
-def edit_product():
+def edit_product(id):
     """
     Edits a product
     """
-    form = StorefrontForm()
+    form = ProductDetailsForm()
 
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        product = Storefront.query.filter(Storefront.user_id == current_user.id).first()
+        product = Product.query.get(id)
 
-        product.description = form.data['description']
-        product.banner_image = form.data['bannerImage']
+        product.name=form.data['name']
+        product.description=form.data['description']
+        product.quantity=form.data['quantity']
+        product.price=form.data['price']
+        product.category=form.data['category']
+        product.subcategory=form.data['subcategory']
+        product.storefront_id=form.data['storefrontId']
 
         db.session.commit()
 

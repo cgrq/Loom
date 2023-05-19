@@ -70,6 +70,40 @@ export const createProductThunk =
       }
     };
 
+export const editProductThunk =
+(id, name, description, quantity, price, category, subcategory, storefrontId) =>
+    async (dispatch) => {
+      const response = await fetch(`/api/products/${id}/edit`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          description,
+          quantity,
+          price,
+          category,
+          subcategory,
+          storefrontId
+        }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        dispatch(setProduct(data));
+        return null;
+      } else if (response.status < 500) {
+        const data = await response.json();
+
+        if (data.errors) {
+          return data.errors;
+        }
+      } else {
+        return ["An error occurred. Please try again."];
+      }
+    };
+
 export const createProductImagesThunk =
   (image1, image2, image3, image4, image5, image6, productId) =>
     async (dispatch) => {
@@ -92,35 +126,6 @@ export const createProductImagesThunk =
       if (response.ok) {
         const data = await response.json();
         dispatch(createProductImages(data));
-        return null;
-      } else if (response.status < 500) {
-        const data = await response.json();
-
-        if (data.errors) {
-          return data.errors;
-        }
-      } else {
-        return ["An error occurred. Please try again."];
-      }
-    };
-
-export const editProductThunk =
-  (description, bannerImage) =>
-    async (dispatch) => {
-      const response = await fetch(`/api/products/edit`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          description,
-          bannerImage
-        }),
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        dispatch(setProduct(data));
         return null;
       } else if (response.status < 500) {
         const data = await response.json();
@@ -172,14 +177,14 @@ export default function reducer(state = initialState, action) {
       newState.currentProduct = action.payload.product
       return newState;
     case CREATE_PRODUCT_IMAGES:
-      newState = { ...state, storefrontProducts: { ...state.storefrontProducts }, currentProduct: {...state.currentProduct} }
+      newState = { ...state, storefrontProducts: { ...state.storefrontProducts }, currentProduct: { ...state.currentProduct } }
       newState.storefrontProducts[action.payload.productImages.product_id].images = action.payload.productImages
       newState.currentProduct.images = action.payload.productImages
       return newState;
     case SET_CURRENT_PRODUCT:
       newState = { ...state, currentProduct: null }
-      if(action.payload && action.payload.product){
-        newState.currentProduct = action.payload.product
+      if (action.payload ) {
+        newState.currentProduct = action.payload
       }
       return newState;
     case SET_PRODUCT:
@@ -188,7 +193,7 @@ export default function reducer(state = initialState, action) {
       return newState;
     case SET_PRODUCTS:
       newState = { ...state, storefrontProducts: { ...state.storefrontProducts } }
-      action.payload.products.forEach(product=> {
+      action.payload.products.forEach(product => {
         newState.storefrontProducts[product.id] = product
       })
       return newState;
