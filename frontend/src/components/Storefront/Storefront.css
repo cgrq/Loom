@@ -1,8 +1,8 @@
 .storefront-banner-wrapper{
-    width:900px;
+    width:100%;
     display:flex;
-    border-top-right-radius: 10px;
-    border-top-left-radius: 10px;
+    border-radius: 10px;
+    border-bottom-left-radius: 0;
     overflow: hidden;
     background-color: rgb(193, 243, 255);
 }
@@ -17,11 +17,11 @@
     left:50px;
 }
 .storefront-banner-image{
-    width:900px;
+    width:100%;
+    border:1px solid black;
     height:162px;
     object-fit: cover;
-    border-top-right-radius: 10px;
-    border-top-left-radius: 10px;
+    border-radius: 10px;
 }
 .storefront-details-wrapper{
     background-color: rgb(193, 243, 255);

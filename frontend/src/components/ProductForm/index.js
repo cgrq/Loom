@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createStorefrontThunk, editStorefrontThunk, deleteStorefront } from "../../store/storefronts";
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import "./ProductForm.css"
-import { createProductThunk } from "../../store/products";
+import { createProductThunk, editProductThunk, setCurrentProduct } from "../../store/products";
 
 export default function ProductForm({componentType}) {
     const history = useHistory();
     const dispatch = useDispatch();
+    const { productId } = useParams();
     const sessionUser = useSelector((state) => state.session.user);
     const { userStorefront } = useSelector((state) => state.storefronts)
+    const { storefrontProducts } = useSelector((state) => state.products)
+
     const [name, setName] = useState("");
 
     const [description, setDescription] = useState("");
@@ -21,46 +24,50 @@ export default function ProductForm({componentType}) {
     const [errors, setErrors] = useState({});
 
     useEffect(()=>{
-        if(componentType == "update"){
-            // setDescription(userStorefront.description)
-            // setBannerImage(userStorefront.banner_image)
+        if(storefrontProducts && storefrontProducts[productId] && componentType == "update"){
+            setName(storefrontProducts[productId].name)
+            setDescription(storefrontProducts[productId].description)
+            setQuantity(storefrontProducts[productId].quantity)
+            setPrice(storefrontProducts[productId].price)
+            setCategory(storefrontProducts[productId].category)
+            setSubcategory(storefrontProducts[productId].subcategory)
         }
-    }, [])
+    }, [storefrontProducts])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const id = productId
         const storefrontId = userStorefront.id
-        const data =
-            await dispatch(
-                createProductThunk(
-                    name,
-                    description,
-                    quantity,
-                    price,
-                    category,
-                    subcategory,
-                    storefrontId
-        ))
-
-        // const data =
-        //     componentType === "update"
-        //         ?
-        //         await dispatch(
-        //             editStorefrontThunk(
-        //                 description,
-        //                 bannerImage
-        //             )
-        //         )
-        //         : await dispatch(
-        //             createStorefrontThunk(
-        //                 description,
-        //                 bannerImage
-        //             )
-        //         );
+         const data =
+            componentType === "update"
+                ? await dispatch(
+                    editProductThunk(
+                        id,
+                        name,
+                        description,
+                        quantity,
+                        price,
+                        category,
+                        subcategory,
+                        storefrontId
+                    )
+                )
+                : await dispatch(
+                    createProductThunk(
+                        name,
+                        description,
+                        quantity,
+                        price,
+                        category,
+                        subcategory,
+                        storefrontId
+                    )
+                )
         if (data) {
             setErrors(data);
         } else {
-            // history.push('/storefront');
+            console.log(`🖥 ~ file: index.js:71 ~ handleSubmit ~ storefrontProducts[productId]:`, storefrontProducts[productId])
+            dispatch(setCurrentProduct(storefrontProducts[productId]))
         }
 
     };
@@ -80,7 +87,7 @@ export default function ProductForm({componentType}) {
     return sessionUser ? (
         <div className="storefront-form-wrapper">
             <h1 className="user-auth-form-h1">
-                {componentType === "update" ? "Edit Product Details" : "Step 1: Enter product details"}
+                {componentType === "update" ? "Step 1: Edit Product Details" : "Step 1: Enter product details"}
             </h1>
             <form className="storefront-form" onSubmit={handleSubmit}>
                 <div>
@@ -140,7 +147,7 @@ export default function ProductForm({componentType}) {
                 </div>
                 {errors.subcategory && <p className="input-error">{errors.subcategory}</p>}
                 <button className="user-auth-form-button" type="submit">
-                    {componentType === "update" ? "Update" : "Next"}
+                    Next
                 </button>
             </form>
             {
