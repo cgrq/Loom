@@ -16,6 +16,7 @@ function App() {
   const { userStorefront} = useSelector((store) => store.storefronts);
   const { currentProduct } = useSelector((store) => store.products)
   const [isLoaded, setIsLoaded] = useState(false);
+  const [editingProductImagesForm, setEditingProductImagesForm] = useState(false);
 
   useEffect(() => {
     dispatch(authenticate()).then(() => setIsLoaded(true));
@@ -49,9 +50,14 @@ function App() {
                   {
                     userStorefront
                       ? (
-                        currentProduct
-                          ? <ProductImagesForm />
-                          : <ProductForm componentType={"update"} />
+                        editingProductImagesForm
+                          ? <ProductImagesForm
+                              setEditingProductImagesForm={setEditingProductImagesForm}
+                            />
+                          : <ProductForm
+                              componentType={"update"}
+                              setEditingProductImagesForm={setEditingProductImagesForm}
+                            />
                       )
                       : <h1>No store found</h1>
                   }
@@ -60,9 +66,14 @@ function App() {
                   {
                     userStorefront
                       ? (
-                        currentProduct
-                          ? <ProductImagesForm />
-                          : <ProductForm />
+                        editingProductImagesForm
+                          ? <ProductImagesForm
+                              setEditingProductImagesForm={setEditingProductImagesForm}
+                            />
+                          : <ProductForm
+                              componentType={"update"}
+                              setEditingProductImagesForm={setEditingProductImagesForm}
+                            />
                       )
                       : <h1>No store found</h1>
                   }

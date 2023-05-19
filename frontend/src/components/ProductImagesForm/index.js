@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createProductImagesThunk, setCurrentProduct} from "../../store/products";
+import { createProductImagesThunk, editProductImagesThunk, setCurrentProduct} from "../../store/products";
 import { useHistory } from 'react-router-dom';
 import "./ProductImagesForm.css"
 
-export default function ProductImagesForm({componentType}) {
+export default function ProductImagesForm({
+        componentType, // Either update or create. Leaving blank defaults to create
+        setEditingProductImagesForm // Renders current product image update if true. Defaults to false and renders product form
+    }) {
     const history = useHistory();
     const dispatch = useDispatch();
     const sessionUser = useSelector((state) => state.session.user);
@@ -20,6 +23,16 @@ export default function ProductImagesForm({componentType}) {
     const [confirmDelete, setConfirmDelete] = useState(false);
     const [errors, setErrors] = useState({});
 
+    useEffect(() => {
+        if(currentProduct){
+            setImage1(currentProduct.productImages[0].image1)
+            setImage2(currentProduct.productImages[0].image2)
+            setImage3(currentProduct.productImages[0].image3)
+            setImage4(currentProduct.productImages[0].image4)
+            setImage5(currentProduct.productImages[0].image5)
+            setImage6(currentProduct.productImages[0].image6)
+        }
+    },[currentProduct])
 
 
     const handleSubmit = async (e) => {
@@ -28,12 +41,17 @@ export default function ProductImagesForm({componentType}) {
 
         const data =
             componentType === "update"
-                ?
-                // await dispatch(
-                //     editProductThunk(
-                //     )
-                <></>
-                // )
+                ? await dispatch(
+                    editProductImagesThunk(
+                        image1,
+                        image2,
+                        image3,
+                        image4,
+                        image5,
+                        image6,
+                        productId
+                    )
+                )
                 : await dispatch(
                     createProductImagesThunk(
                         image1,
@@ -49,6 +67,7 @@ export default function ProductImagesForm({componentType}) {
             setErrors(data);
         } else {
             dispatch(setCurrentProduct(null))
+            setEditingProductImagesForm(false)
             history.push('/storefront');
         }
 
