@@ -22,7 +22,7 @@ class ProductImages(db.Model):
 
     # Foreign Keys
     product_id = db.Column(db.Integer, db.ForeignKey(
-        add_prefix_for_prod("products.id"), ondelete="CASCADE"), nullable=False, )
+        add_prefix_for_prod("products.id"), ondelete="CASCADE"),unique=True, nullable=False, )
 
     product = db.relationship('Product', back_populates="product_images")
 

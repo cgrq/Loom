@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { createStorefrontThunk, editStorefrontThunk, deleteStorefront } from "../../store/storefronts";
 import { useHistory, useParams } from 'react-router-dom';
 import "./ProductForm.css"
-import { createProductThunk, editProductThunk, setCurrentProduct, deleteProduct } from "../../store/products";
+import { getProductByName, createProductThunk, editProductThunk, setCurrentProduct, deleteProduct } from "../../store/products";
 
 export default function ProductForm({
         componentType, // Either update or create. Leaving blank defaults to create
@@ -11,13 +11,18 @@ export default function ProductForm({
     }) {
     const history = useHistory();
     const dispatch = useDispatch();
-    const { productId } = useParams();
+    const { productName } = useParams();
     const sessionUser = useSelector((state) => state.session.user);
     const { userStorefront } = useSelector((state) => state.storefronts)
-    const { storefrontProducts } = useSelector((state) => state.products)
+    const { allProducts} = useSelector((state) => state.products)
 
+    useEffect(()=>{
+        dispatch(getProductByName(productName))
+    },[])
+
+
+    const [id, setId] = useState("");
     const [name, setName] = useState("");
-
     const [description, setDescription] = useState("");
     const [quantity, setQuantity] = useState(0);
     const [price, setPrice] = useState(0)
@@ -27,19 +32,20 @@ export default function ProductForm({
     const [errors, setErrors] = useState({});
 
     useEffect(()=>{
-        if(storefrontProducts && storefrontProducts[productId] && componentType == "update"){
-            setName(storefrontProducts[productId].name)
-            setDescription(storefrontProducts[productId].description)
-            setQuantity(storefrontProducts[productId].quantity)
-            setPrice(storefrontProducts[productId].price)
-            setCategory(storefrontProducts[productId].category)
-            setSubcategory(storefrontProducts[productId].subcategory)
+        if(allProducts && allProducts[productName] && componentType == "update"){
+            const product = allProducts[productName]
+            setId(product.id)
+            setName(product.name)
+            setDescription(product.description)
+            setQuantity(product.quantity)
+            setPrice(product.price)
+            setCategory(product.category)
+            setSubcategory(product.subcategory)
         }
-    }, [storefrontProducts])
+    }, [allProducts])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const id = productId
         const storefrontId = userStorefront.id
          const data =
             componentType === "update"
@@ -70,7 +76,7 @@ export default function ProductForm({
             setErrors(data);
         } else {
             if(componentType=="update"){
-                await dispatch(setCurrentProduct(storefrontProducts[productId]))
+                await dispatch(setCurrentProduct(id))
             }
             setEditingProductImagesForm(true)
         }
@@ -79,7 +85,7 @@ export default function ProductForm({
     const handleDelete = async () => {
             history.push('/storefront');
 
-            const data = await dispatch(deleteProduct(productId));
+            const data = await dispatch(deleteProduct(id));
 
 
             if (data) {

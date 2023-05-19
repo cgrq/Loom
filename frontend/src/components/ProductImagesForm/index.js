@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createProductImagesThunk, editProductImagesThunk, setCurrentProduct} from "../../store/products";
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import "./ProductImagesForm.css"
 
 export default function ProductImagesForm({
@@ -10,8 +10,10 @@ export default function ProductImagesForm({
     }) {
     const history = useHistory();
     const dispatch = useDispatch();
+    const { productName } = useParams();
     const sessionUser = useSelector((state) => state.session.user);
     const { currentProduct } = useSelector((state) => state.products)
+    const { allProducts} = useSelector((state) => state.products)
 
     const [image1, setImage1] = useState("");
     const [image2, setImage2] = useState("");
@@ -23,16 +25,18 @@ export default function ProductImagesForm({
     const [confirmDelete, setConfirmDelete] = useState(false);
     const [errors, setErrors] = useState({});
 
-    useEffect(() => {
-        if(currentProduct && componentType === "update"){
-            setImage1(currentProduct.productImages[0].image1)
-            setImage2(currentProduct.productImages[0].image2)
-            setImage3(currentProduct.productImages[0].image3)
-            setImage4(currentProduct.productImages[0].image4)
-            setImage5(currentProduct.productImages[0].image5)
-            setImage6(currentProduct.productImages[0].image6)
+    useEffect(()=>{
+        if(allProducts && allProducts[productName] && componentType == "update"){
+            const product = allProducts[productName]
+            setImage1(product.productImages[0].image1)
+            setImage2(product.productImages[0].image2)
+            setImage3(product.productImages[0].image3)
+            setImage4(product.productImages[0].image4)
+            setImage5(product.productImages[0].image5)
+            setImage6(product.productImages[0].image6)
         }
-    },[currentProduct])
+    }, [allProducts])
+
 
     useEffect(()=>{
         return () =>{
@@ -44,7 +48,8 @@ export default function ProductImagesForm({
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const productId = currentProduct.id
+        const product = allProducts[productName]
+        const productId = product.id
 
         const data =
             componentType === "update"
@@ -96,7 +101,7 @@ export default function ProductImagesForm({
     return sessionUser ? (
         <div className="product-form-wrapper">
             <h1 className="user-auth-form-h1">
-                {componentType === "update" ? "Edit Product" : "Step 2: Add product images"}
+                {componentType === "update" ? "Step 2: Edit product images" : "Step 2: Add product images"}
             </h1>
             <form className="product-form" onSubmit={handleSubmit}>
                 {/* <ErrorHandler errors={errors} /> */}
