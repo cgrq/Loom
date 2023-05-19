@@ -4,7 +4,10 @@ import { createProductImagesThunk, editProductImagesThunk, setCurrentProduct} fr
 import { useHistory } from 'react-router-dom';
 import "./ProductImagesForm.css"
 
-export default function ProductImagesForm({componentType}) {
+export default function ProductImagesForm({
+        componentType, // Either update or create. Leaving blank defaults to create
+        setEditingProductImagesForm // Renders current product image update if true. Defaults to false and renders product form
+    }) {
     const history = useHistory();
     const dispatch = useDispatch();
     const sessionUser = useSelector((state) => state.session.user);
@@ -64,6 +67,7 @@ export default function ProductImagesForm({componentType}) {
             setErrors(data);
         } else {
             dispatch(setCurrentProduct(null))
+            setEditingProductImagesForm(false)
             history.push('/storefront');
         }
 

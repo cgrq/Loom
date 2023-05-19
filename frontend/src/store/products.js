@@ -212,8 +212,7 @@ export default function reducer(state = initialState, action) {
       return newState;
     case SET_PRODUCT_IMAGES:
       newState = { ...state, storefrontProducts: { ...state.storefrontProducts }, currentProduct: { ...state.currentProduct } }
-      newState.storefrontProducts[action.payload.productImages.product_id].images = action.payload.productImages
-      newState.currentProduct.images = action.payload.productImages
+      newState.storefrontProducts[action.payload.productImages.product_id].productImages = action.payload.productImages
       return newState;
     case SET_CURRENT_PRODUCT:
       newState = { ...state, currentProduct: null }

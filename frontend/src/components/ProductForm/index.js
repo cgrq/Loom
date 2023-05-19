@@ -5,7 +5,10 @@ import { useHistory, useParams } from 'react-router-dom';
 import "./ProductForm.css"
 import { createProductThunk, editProductThunk, setCurrentProduct, deleteProduct } from "../../store/products";
 
-export default function ProductForm({componentType}) {
+export default function ProductForm({
+        componentType, // Either update or create. Leaving blank defaults to create
+        setEditingProductImagesForm // Renders product image update if true. Default false to render current product form
+    }) {
     const history = useHistory();
     const dispatch = useDispatch();
     const { productId } = useParams();
@@ -66,8 +69,8 @@ export default function ProductForm({componentType}) {
         if (data) {
             setErrors(data);
         } else {
-            console.log(`🖥 ~ file: index.js:71 ~ handleSubmit ~ storefrontProducts[productId]:`, storefrontProducts[productId])
             dispatch(setCurrentProduct(storefrontProducts[productId]))
+            setEditingProductImagesForm(true)
         }
 
     };
