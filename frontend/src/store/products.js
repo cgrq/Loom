@@ -220,9 +220,9 @@ export default function reducer(state = initialState, action) {
   let newState = {};
   switch (action.type) {
     case CREATE_PRODUCT:
-      newState = { ...state, storefrontProducts: { ...state.storefrontProducts }, currentProduct: null }
+      newState = { ...state, storefrontProducts: { ...state.storefrontProducts }, allProducts: { ...state.allProducts } }
       newState.storefrontProducts[action.payload.product.id] = action.payload.product
-      newState.currentProduct = action.payload.product
+      newState.allProducts[action.payload.product.name] = action.payload.product
       return newState;
     case SET_PRODUCT_IMAGES:
       newState = { ...state, storefrontProducts: { ...state.storefrontProducts }, currentProduct: { ...state.currentProduct } }
