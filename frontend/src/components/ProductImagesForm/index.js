@@ -24,7 +24,7 @@ export default function ProductImagesForm({
     const [errors, setErrors] = useState({});
 
     useEffect(() => {
-        if(currentProduct){
+        if(currentProduct && componentType === "update"){
             setImage1(currentProduct.productImages[0].image1)
             setImage2(currentProduct.productImages[0].image2)
             setImage3(currentProduct.productImages[0].image3)
@@ -33,6 +33,13 @@ export default function ProductImagesForm({
             setImage6(currentProduct.productImages[0].image6)
         }
     },[currentProduct])
+
+    useEffect(()=>{
+        return () =>{
+            dispatch(setCurrentProduct(null))
+            setEditingProductImagesForm(false)
+        }
+    }, [])
 
 
     const handleSubmit = async (e) => {
@@ -66,8 +73,7 @@ export default function ProductImagesForm({
         if (data) {
             setErrors(data);
         } else {
-            dispatch(setCurrentProduct(null))
-            setEditingProductImagesForm(false)
+
             history.push('/storefront');
         }
 

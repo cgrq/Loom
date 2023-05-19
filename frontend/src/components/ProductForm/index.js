@@ -69,7 +69,9 @@ export default function ProductForm({
         if (data) {
             setErrors(data);
         } else {
-            dispatch(setCurrentProduct(storefrontProducts[productId]))
+            if(componentType=="update"){
+                await dispatch(setCurrentProduct(storefrontProducts[productId]))
+            }
             setEditingProductImagesForm(true)
         }
 
