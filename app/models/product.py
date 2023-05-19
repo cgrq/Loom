@@ -9,7 +9,7 @@ class Product(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(255), nullable=False)
+    name = db.Column(db.String(255), nullable=False, unique=True)
 
     description = db.Column(db.String(255), nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
@@ -39,6 +39,7 @@ class Product(db.Model):
                 'price': self.price,
                 'category': self.category,
                 'productImages': [],
+                'storefrontId': self.storefront_id,
                 'subcategory': self.subcategory,
                 'created_at': self.created_at,
                 'updated_at': self.updated_at,
@@ -53,6 +54,7 @@ class Product(db.Model):
                 'category': self.category,
                 'subcategory': self.subcategory,
                 'productImages': [images.to_dict() for images in self.product_images],
+                'storefrontId': self.storefront_id,
                 'created_at': self.created_at,
                 'updated_at': self.updated_at,
             }

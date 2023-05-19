@@ -25,7 +25,7 @@ export default function ProductCard({ product }) {
                     <div>Remaining:</div>
                     <div>{product.quantity}</div>
                 </div>
-                <NavLink to={`/storefront/products/${product.id}/edit`}>
+                <NavLink to={`/products/${product.name}/edit`}>
                     <button >Edit</button>
                 </NavLink>
             </div>

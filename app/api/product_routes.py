@@ -65,14 +65,17 @@ def edit_product_images(id):
         return {"productImages": product_images.to_dict()}
     return {'errors': form.errors}, 401
 
-@product_routes.route('/<int:id>')
-def get_product_by_id(id):
+@product_routes.route('/<string:name>')
+def get_product_by_name(name):
     """
     Query for a product by id and returns the product as a dictionary
     """
-    product = product.query.get(id)
+    product = Product.query.filter(Product.name == name).first()
 
-    return {"product":product.to_dict()}
+    if product:
+        return {"product": product.to_dict()}
+    else:
+        return {"error": "Product not found"}, 404
 
 @product_routes.route('/storefront/<int:id>')
 def get_storefront_products(id):

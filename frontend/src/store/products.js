@@ -79,6 +79,7 @@ export const editProductThunk =
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
+          id,
           name,
           description,
           quantity,
@@ -199,8 +200,21 @@ export const getStorefrontProductsThunk = (storefrontId) => async (dispatch) => 
     return errorResponse.errors;
   }
 };
+export const getProductByName = (productName) => async (dispatch) => {
+  const response = await fetch(`/api/products/${productName}`);
+  if (response.ok) {
+    const product = await response.json();
+    dispatch(setProduct(product));
+    return null;
+  } else {
+    const errorResponse = await response.json();
+    return errorResponse.errors;
+  }
+};
 
-const initialState = { storefrontProducts: null, currentProduct: null };
+
+
+const initialState = { allProducts: {}, storefrontProducts: {}, currentProduct: null };
 
 export default function reducer(state = initialState, action) {
   let newState = {};
@@ -221,8 +235,8 @@ export default function reducer(state = initialState, action) {
       }
       return newState;
     case SET_PRODUCT:
-      newState = { ...state, storefrontProducts: { ...state.storefrontProducts } }
-      newState.storefrontProducts[action.payload.product.id] = action.payload.product
+      newState = { ...state, allProducts: { ...state.allProducts } }
+      newState.allProducts[action.payload.product.name] = action.payload.product
       return newState;
     case SET_PRODUCTS:
       newState = { ...state, storefrontProducts: { ...state.storefrontProducts } }

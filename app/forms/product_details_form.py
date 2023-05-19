@@ -1,10 +1,26 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField, FloatField
-from wtforms.validators import DataRequired, NumberRange, Length
+from wtforms.validators import DataRequired, ValidationError, NumberRange, Length
+from app.models import Product
+
+def product_exists(self, field):
+        id_field = self.id.data
+        submitted_name = field.data
+        if id_field:
+            product = Product.query.get(id_field)
+            if product and product.name == submitted_name:
+                print("~~~~~~~~~!!!!!!!!!!IS PUT REQUEST")
+
+                return # Skip validation for edit requests if field has a value
+
+        if Product.query.filter(Product.name == submitted_name).first():
+
+            raise ValidationError('Name already exists.')
 
 class ProductDetailsForm(FlaskForm):
+    id = IntegerField('id')
     name = StringField('name', validators=[
-                            DataRequired(), Length(1, 255)])
+                            DataRequired(), Length(1, 255), product_exists])
     description = StringField('description', validators=[
                             DataRequired(), Length(1, 255)])
     quantity = IntegerField('quantity', validators=[
