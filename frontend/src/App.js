@@ -53,7 +53,6 @@ function App() {
                       ? (
                         editingProductImagesForm
                           ? <ProductImagesForm
-                              componentType={"update"}
                               setEditingProductImagesForm={setEditingProductImagesForm}
                             />
                           : <ProductForm
@@ -70,15 +69,9 @@ function App() {
                 <Route exact path={"/storefront/new-product"}>
                   {
                     userStorefront
-                      ? (
-                        editingProductImagesForm
-                          ? <ProductImagesForm
+                      ?  <ProductForm
                               setEditingProductImagesForm={setEditingProductImagesForm}
                             />
-                          : <ProductForm
-                              setEditingProductImagesForm={setEditingProductImagesForm}
-                            />
-                      )
                       : <h1>No store found</h1>
                   }
                 </Route>

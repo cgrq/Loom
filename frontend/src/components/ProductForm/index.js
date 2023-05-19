@@ -75,10 +75,8 @@ export default function ProductForm({
         if (data) {
             setErrors(data);
         } else {
-            if(componentType=="update"){
-                await dispatch(setCurrentProduct(id))
-            }
             setEditingProductImagesForm(true)
+            history.push(`/products/${name}/edit`)
         }
 
     };

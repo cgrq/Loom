@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createProductImagesThunk, editProductImagesThunk, setCurrentProduct} from "../../store/products";
+import { createProductImagesThunk, editProductImagesThunk} from "../../store/products";
 import { useHistory, useParams } from 'react-router-dom';
 import "./ProductImagesForm.css"
 
 export default function ProductImagesForm({
-        componentType, // Either update or create. Leaving blank defaults to create
         setEditingProductImagesForm // Renders current product image update if true. Defaults to false and renders product form
     }) {
     const history = useHistory();
     const dispatch = useDispatch();
     const { productName } = useParams();
     const sessionUser = useSelector((state) => state.session.user);
-    const { currentProduct } = useSelector((state) => state.products)
     const { allProducts} = useSelector((state) => state.products)
 
     const [image1, setImage1] = useState("");
@@ -22,8 +20,17 @@ export default function ProductImagesForm({
     const [image5, setImage5] = useState("");
     const [image6, setImage6] = useState("");
 
+    const [componentType, setComponentType] = useState("create")
+
     const [confirmDelete, setConfirmDelete] = useState(false);
     const [errors, setErrors] = useState({});
+
+    useEffect(()=>{
+        if(allProducts[productName] && allProducts[productName].productImages.length > 0){
+            setComponentType("update")
+        }
+
+    }, [allProducts])
 
     useEffect(()=>{
         if(allProducts && allProducts[productName] && componentType == "update"){
@@ -35,12 +42,11 @@ export default function ProductImagesForm({
             setImage5(product.productImages[0].image5)
             setImage6(product.productImages[0].image6)
         }
-    }, [allProducts])
+    }, [componentType])
 
 
     useEffect(()=>{
         return () =>{
-            dispatch(setCurrentProduct(null))
             setEditingProductImagesForm(false)
         }
     }, [])
@@ -49,6 +55,7 @@ export default function ProductImagesForm({
     const handleSubmit = async (e) => {
         e.preventDefault();
         const product = allProducts[productName]
+
         const productId = product.id
 
         const data =
@@ -96,7 +103,6 @@ export default function ProductImagesForm({
 
     };
 
-    if(!currentProduct) return null
 
     return sessionUser ? (
         <div className="product-form-wrapper">
