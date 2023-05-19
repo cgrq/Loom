@@ -39,3 +39,8 @@
     margin-top:10px;
     border-radius:10px;
 }
+.storefront-products-wrapper{
+    display:flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}

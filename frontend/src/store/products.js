@@ -1,4 +1,5 @@
 const SET_PRODUCT = "session/SET_PRODUCT";
+const SET_PRODUCTS = "session/SET_PRODUCTS";
 const CREATE_PRODUCT = "session/CREATE_PRODUCT";
 const REMOVE_PRODUCT = "session/REMOVE_PRODUCT";
 const SET_CURRENT_PRODUCT = "session/SET_CURRENT_PRODUCT";
@@ -23,6 +24,11 @@ const createProductImages = (productImages) => ({
 
 const setProduct = (product) => ({
   type: SET_PRODUCT,
+  payload: product,
+});
+
+const setProducts = (product) => ({
+  type: SET_PRODUCTS,
   payload: product,
 });
 
@@ -85,7 +91,6 @@ export const createProductImagesThunk =
 
       if (response.ok) {
         const data = await response.json();
-        console.log(`🖥 ~ file: products.js:88 ~ data:`, data)
         dispatch(createProductImages(data));
         return null;
       } else if (response.status < 500) {
@@ -144,11 +149,11 @@ export const deleteProduct = () => async (dispatch) => {
   }
 };
 
-export const getStorefrontProductsThunk = () => async (dispatch) => {
-  const response = await fetch(`/api/products/storefront`);
+export const getStorefrontProductsThunk = (storefrontId) => async (dispatch) => {
+  const response = await fetch(`/api/products/storefront/${storefrontId}`);
   if (response.ok) {
-    const product = await response.json();
-    dispatch(setProduct(product));
+    const products = await response.json();
+    dispatch(setProducts(products));
     return null;
   } else {
     const errorResponse = await response.json();
@@ -167,10 +172,8 @@ export default function reducer(state = initialState, action) {
       newState.currentProduct = action.payload.product
       return newState;
     case CREATE_PRODUCT_IMAGES:
-      console.log(`🖥 ~ file: products.js:172 ~ reducer ~ action.payload.:`, action.payload.productImages)
       newState = { ...state, storefrontProducts: { ...state.storefrontProducts }, currentProduct: {...state.currentProduct} }
       newState.storefrontProducts[action.payload.productImages.product_id].images = action.payload.productImages
-      console.log(`🖥 ~ file: products.js:173 ~ reducer ~ action.payload.productImages.product_id:`, action.payload.productImages.product_id)
       newState.currentProduct.images = action.payload.productImages
       return newState;
     case SET_CURRENT_PRODUCT:
@@ -182,6 +185,12 @@ export default function reducer(state = initialState, action) {
     case SET_PRODUCT:
       newState = { ...state, storefrontProducts: { ...state.storefrontProducts } }
       newState.storefrontProducts[action.payload.product.id] = action.payload.product
+      return newState;
+    case SET_PRODUCTS:
+      newState = { ...state, storefrontProducts: { ...state.storefrontProducts } }
+      action.payload.products.forEach(product=> {
+        newState.storefrontProducts[product.id] = product
+      })
       return newState;
     case REMOVE_PRODUCT:
       return { ...state, storefrontProducts: null };
