@@ -40,6 +40,31 @@ def create_product_images(id):
         return {"productImages": product_images.to_dict()}
     return {'errors': form.errors}, 401
 
+@product_routes.route('/<int:id>/images/edit', methods=['PUT'])
+@login_required
+def edit_product_images(id):
+    """
+    Edit a product's images by product id
+    """
+    form = ProductImagesForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit():
+        product_images = ProductImages.query.get(id)
+
+        product_images.image1=form.data['image1']
+        product_images.image2=form.data['image2']
+        product_images.image3=form.data['image3']
+        product_images.image4=form.data['image4']
+        product_images.image5=form.data['image5']
+        product_images.image6=form.data['image6']
+        product_images.product_id=form.data['productId']
+
+        db.session.commit()
+
+        return {"productImages": product_images.to_dict()}
+    return {'errors': form.errors}, 401
+
 @product_routes.route('/<int:id>')
 def get_product_by_id(id):
     """
@@ -114,12 +139,12 @@ def edit_product(id):
         return {"product": product.to_dict()}
     return {'errors': form.errors}, 401
 
-@product_routes.route('/delete', methods=['DELETE'])
-def delete_product():
+@product_routes.route('<int:id>/delete', methods=['DELETE'])
+def delete_product(id):
     """
     Route to delete a product
     """
-    product = Storefront.query.filter(Storefront.user_id == current_user.id).first()
+    product = Product.query.get(id)
 
     db.session.delete(product)
     db.session.commit()

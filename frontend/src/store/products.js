@@ -3,7 +3,7 @@ const SET_PRODUCTS = "session/SET_PRODUCTS";
 const CREATE_PRODUCT = "session/CREATE_PRODUCT";
 const REMOVE_PRODUCT = "session/REMOVE_PRODUCT";
 const SET_CURRENT_PRODUCT = "session/SET_CURRENT_PRODUCT";
-const CREATE_PRODUCT_IMAGES = "session/CREATE_PRODUCT_IMAGES"
+const SET_PRODUCT_IMAGES = "session/SET_PRODUCT_IMAGES"
 
 
 
@@ -17,8 +17,8 @@ export const setCurrentProduct = (product) => ({
   payload: product,
 });
 
-const createProductImages = (productImages) => ({
-  type: CREATE_PRODUCT_IMAGES,
+const setProductImages = (productImages) => ({
+  type: SET_PRODUCT_IMAGES,
   payload: productImages
 })
 
@@ -125,7 +125,41 @@ export const createProductImagesThunk =
 
       if (response.ok) {
         const data = await response.json();
-        dispatch(createProductImages(data));
+        dispatch(setProductImages(data));
+        return null;
+      } else if (response.status < 500) {
+        const data = await response.json();
+
+        if (data.errors) {
+          return data.errors;
+        }
+      } else {
+        return ["An error occurred. Please try again."];
+      }
+    };
+
+    export const editProductImagesThunk =
+  (image1, image2, image3, image4, image5, image6, productId) =>
+    async (dispatch) => {
+      const response = await fetch(`/api/products/${productId}/images/edit`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          image1,
+          image2,
+          image3,
+          image4,
+          image5,
+          image6,
+          productId
+        }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        dispatch(setProductImages(data));
         return null;
       } else if (response.status < 500) {
         const data = await response.json();
@@ -139,8 +173,8 @@ export const createProductImagesThunk =
     };
 
 // Delete a user thunk
-export const deleteProduct = () => async (dispatch) => {
-  const response = await fetch(`/api/products/delete`, {
+export const deleteProduct = (id) => async (dispatch) => {
+  const response = await fetch(`/api/products/${id}/delete`, {
     method: 'DELETE'
   });
 
@@ -176,7 +210,7 @@ export default function reducer(state = initialState, action) {
       newState.storefrontProducts[action.payload.product.id] = action.payload.product
       newState.currentProduct = action.payload.product
       return newState;
-    case CREATE_PRODUCT_IMAGES:
+    case SET_PRODUCT_IMAGES:
       newState = { ...state, storefrontProducts: { ...state.storefrontProducts }, currentProduct: { ...state.currentProduct } }
       newState.storefrontProducts[action.payload.productImages.product_id].images = action.payload.productImages
       newState.currentProduct.images = action.payload.productImages

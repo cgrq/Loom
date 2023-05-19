@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { createStorefrontThunk, editStorefrontThunk, deleteStorefront } from "../../store/storefronts";
 import { useHistory, useParams } from 'react-router-dom';
 import "./ProductForm.css"
-import { createProductThunk, editProductThunk, setCurrentProduct } from "../../store/products";
+import { createProductThunk, editProductThunk, setCurrentProduct, deleteProduct } from "../../store/products";
 
 export default function ProductForm({componentType}) {
     const history = useHistory();
@@ -74,7 +74,7 @@ export default function ProductForm({componentType}) {
     const handleDelete = async () => {
             history.push('/storefront');
 
-            const data = await dispatch(deleteStorefront());
+            const data = await dispatch(deleteProduct(productId));
 
 
             if (data) {
