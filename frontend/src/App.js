@@ -47,19 +47,22 @@ function App() {
                 <Route exact path={"/edit-profile"}>
                   <UserAuthForm componentType={"update"} />
                 </Route>
+                <Route exact path={"/products/:productName/edit/images"}>
+                  {
+                    userStorefront
+                      ? <ProductImagesForm
+                            />
+
+                      : <h1>No store found</h1>
+                  }
+                </Route>
                 <Route exact path={"/products/:productName/edit"}>
                   {
                     userStorefront
-                      ? (
-                        editingProductImagesForm
-                          ? <ProductImagesForm
-                              setEditingProductImagesForm={setEditingProductImagesForm}
-                            />
-                          : <ProductForm
+                      ?  <ProductForm
                               componentType={"update"}
-                              setEditingProductImagesForm={setEditingProductImagesForm}
                             />
-                      )
+
                       : <h1>No store found</h1>
                   }
                 </Route>

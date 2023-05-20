@@ -10,16 +10,19 @@ import { getStorefrontProductsThunk } from "../../store/products";
 export default function Navigation() {
     const dispatch = useDispatch()
     const sessionUser = useSelector((state) => state.session.user);
+    const { userStorefront } = useSelector((state) => state.storefronts)
 
     useEffect(() => {
         dispatch(getUserStorefrontThunk())
-        dispatch(getStorefrontProductsThunk())
     }, [])
+
+    useEffect(()=>{
+        dispatch(getStorefrontProductsThunk(userStorefront.id))
+    }, [userStorefront])
 
     return (
         <div className="navigation-content-wrapper">
             <NavLink exact to="/" activeClassName="active">home</NavLink>
-            {/* <input></input> */}
             <div className="navigation-buttons-wrapper">
                 {
                     sessionUser

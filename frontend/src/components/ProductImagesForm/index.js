@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createProductImagesThunk, editProductImagesThunk, getStorefrontProductsThunk} from "../../store/products";
+import { getUserStorefrontThunk } from "../../store/storefronts"
+
 import { useHistory, useParams } from 'react-router-dom';
 import "./ProductImagesForm.css"
 
 export default function ProductImagesForm({
-        setEditingProductImagesForm // Renders current product image update if true. Defaults to false and renders product form
     }) {
     const history = useHistory();
     const dispatch = useDispatch();
@@ -13,7 +14,7 @@ export default function ProductImagesForm({
     const sessionUser = useSelector((state) => state.session.user);
     const { allProducts} = useSelector((state) => state.products)
     const { storefrontProducts} = useSelector((state) => state.products)
-
+    const { userStorefront } = useSelector((state) => state.storefronts)
 
     const [image1, setImage1] = useState("");
     const [image2, setImage2] = useState("");
@@ -29,22 +30,17 @@ export default function ProductImagesForm({
     const [errors, setErrors] = useState({});
 
     useEffect(()=>{
-        console.log("PRODUCT IMAGES MOUNTED ~~~~~~~~~~~")
-        console.log(`🖥 ~ file: index.js:33 ~ useEffect ~ mount`, productName)
-
-        dispatch(getStorefrontProductsThunk())
-        return () =>{
-            setEditingProductImagesForm(false)
-        }
+        dispatch(getUserStorefrontThunk())
     }, [])
+
     useEffect(()=>{
-        console.log("PARAMS CHANGES !!!!!~~~~~~~~~~~")
-        console.log(`🖥 ~ file: index.js:42 ~ useEffect ~ productName:`, productName)
+        dispatch(getStorefrontProductsThunk(userStorefront.id))
+    }, [userStorefront])
+
+    useEffect(()=>{
     }, [productName])
 
     useEffect(()=>{
-        console.log(`🖥 ~ file: index.js:33 ~ useEffect ~ storefrontProducts:`, storefrontProducts)
-        console.log(`🖥 ~ file: index.js:44 ~ currentProduct ~ productName:`, productName)
         if(storefrontProducts){
             const currentProduct = Object.values(storefrontProducts).find(product => {
                 console.log(`🖥 ~ file: index.js:43 ~ currentProduct ~ product.name:`, product.name)
@@ -52,7 +48,7 @@ export default function ProductImagesForm({
             })
             console.log(`🖥 ~ file: index.js:37 ~ currentProduct ~ currentProduct:`, currentProduct)
             setProduct(()=>currentProduct)
-            if(currentProduct.productImages.length > 0){
+            if(currentProduct && currentProduct.productImages.length > 0){
                 setComponentType("update")
             }
         }

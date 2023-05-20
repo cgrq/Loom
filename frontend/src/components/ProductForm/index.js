@@ -7,7 +7,6 @@ import { getProductByName, createProductThunk, editProductThunk, setCurrentProdu
 
 export default function ProductForm({
         componentType, // Either update or create. Leaving blank defaults to create
-        setEditingProductImagesForm // Renders product image update if true. Default false to render current product form
     }) {
     const history = useHistory();
     const dispatch = useDispatch();
@@ -82,9 +81,8 @@ export default function ProductForm({
         if (data) {
             setErrors(data);
         } else {
-            setEditingProductImagesForm(true)
             console.log(`🖥 ~ file: index.js:88 ~ handleSubmit ~ name:`, name)
-            history.push(`/products/${name}/edit`)
+            history.push(`/products/${name}/edit/images`)
         }
 
     };
