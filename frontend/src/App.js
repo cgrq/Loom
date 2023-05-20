@@ -92,6 +92,9 @@ function App() {
                       : <StorefrontForm  />
                   }
                 </Route>
+                <Route exact path={"/not-found"}>
+                  <h1>Sorry the resource you're requesting was not found on our servers</h1>
+                </Route>
               </Switch>
             )}
           </div>

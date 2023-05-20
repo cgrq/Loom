@@ -1,21 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createProductImagesThunk, editProductImagesThunk, getStorefrontProductsThunk} from "../../store/products";
+import { createProductImagesThunk, editProductImagesThunk, getStorefrontProductsThunk } from "../../store/products";
 import { getUserStorefrontThunk } from "../../store/storefronts"
 
 import { useHistory, useParams } from 'react-router-dom';
 import "./ProductImagesForm.css"
 
 export default function ProductImagesForm({
-    }) {
+}) {
     const history = useHistory();
     const dispatch = useDispatch();
-    const { productName } = useParams();
-    const sessionUser = useSelector((state) => state.session.user);
-    const { allProducts} = useSelector((state) => state.products)
-    const { storefrontProducts} = useSelector((state) => state.products)
-    const { userStorefront } = useSelector((state) => state.storefronts)
 
+    // Product name variable from route url.
+    const { productName } = useParams();
+
+    // Form input field state variables.
     const [image1, setImage1] = useState("");
     const [image2, setImage2] = useState("");
     const [image3, setImage3] = useState("");
@@ -23,40 +22,63 @@ export default function ProductImagesForm({
     const [image5, setImage5] = useState("");
     const [image6, setImage6] = useState("");
 
+    // Current product variable.
     const [product, setProduct] = useState({})
+
+    // Makes component dynamic between "update" and "create" states.
+    // State is set dynamically based on whether or not the product has images.
     const [componentType, setComponentType] = useState("create")
 
     const [confirmDelete, setConfirmDelete] = useState(false);
     const [errors, setErrors] = useState({});
 
-    useEffect(()=>{
+    // Store listeners.
+    const sessionUser = useSelector((state) => state.session.user);
+    const { allProducts } = useSelector((state) => state.products)
+    const { storefrontProducts } = useSelector((state) => state.products)
+    const { userStorefront } = useSelector((state) => state.storefronts)
+
+
+
+
+    // Get the user's storefront on mount...
+    useEffect(() => {
         dispatch(getUserStorefrontThunk())
     }, [])
 
-    useEffect(()=>{
+    // ...once we have the storefront get the storefront's products.
+    useEffect(() => {
         dispatch(getStorefrontProductsThunk(userStorefront.id))
     }, [userStorefront])
 
-    useEffect(()=>{
-    }, [productName])
-
-    useEffect(()=>{
-        if(storefrontProducts){
-            const currentProduct = Object.values(storefrontProducts).find(product => {
-                console.log(`🖥 ~ file: index.js:43 ~ currentProduct ~ product.name:`, product.name)
-                return product.name == productName
-            })
-            console.log(`🖥 ~ file: index.js:37 ~ currentProduct ~ currentProduct:`, currentProduct)
-            setProduct(()=>currentProduct)
-            if(currentProduct && currentProduct.productImages.length > 0){
-                setComponentType("update")
+    useEffect(() => {
+        // If the current signed in user has a storefront,
+        // and that storefront has products...
+        if (Object.values(storefrontProducts).length > 0) {
+            // ...check if the current product exists in the storefront.
+            const currentProduct = Object.values(storefrontProducts).find(
+                (product) => product.name === productName
+            );
+            // If the product does exist...
+            if (currentProduct) {
+                // ...set the product state to be equal to the current product.
+                setProduct(() => currentProduct);
+                // Then check if there are any images associated with the product...
+                if (currentProduct.productImages.length > 0) {
+                    // ...if there are images then we change the component type to "update".
+                    setComponentType("update");
+                }
+            } else {
+            // If it doesn't exist...
+                // ...redirect users to the resource not found page.
+                history.push("/not-found");
             }
         }
+    }, [storefrontProducts, productName, history]);
 
-    }, [storefrontProducts])
-
-    useEffect(()=>{
-        if(product && product.productImages && componentType == "update"){
+    // Set form input state variables to current product's values if making an update.
+    useEffect(() => {
+        if (product && product.productImages && componentType == "update") {
             setImage1(product.productImages[0].image1)
             setImage2(product.productImages[0].image2)
             setImage3(product.productImages[0].image3)
@@ -66,8 +88,11 @@ export default function ProductImagesForm({
         }
     }, [product])
 
-
-
+    // Guard clause.
+    // If the storefront doesn't have any products then don't render anything.
+    if (Object.values(storefrontProducts).length === 0) {
+        return null
+    }
 
 
     const handleSubmit = async (e) => {
@@ -105,20 +130,20 @@ export default function ProductImagesForm({
 
     };
     const handleDelete = async () => {
-            history.push('/');
+        history.push('/');
 
-            // const data = await dispatch(deleteProduct());
+        // const data = await dispatch(deleteProduct());
 
 
-            // if (data) {
-            //   setErrors(data);
-            // } else {
-            // }
+        // if (data) {
+        //   setErrors(data);
+        // } else {
+        // }
 
     };
 
 
-    return sessionUser ? (
+    return (
         <div className="product-form-wrapper">
             <h1 className="user-auth-form-h1">
                 {componentType === "update" ? "Step 2: Edit product images" : "Step 2: Add product images"}
@@ -207,7 +232,4 @@ export default function ProductImagesForm({
             }
         </div>
     )
-        : (
-            <h1>Please log in to create a store front</h1>
-        )
 }

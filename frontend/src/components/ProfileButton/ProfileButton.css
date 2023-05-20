@@ -24,7 +24,7 @@
 .profile-icon{
   font-size: 25px;
   z-index:20000;
-
+  color:white;
 }
 .profile-container{
   position:relative;

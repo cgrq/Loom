@@ -17,12 +17,16 @@ export default function Navigation() {
     }, [])
 
     useEffect(()=>{
-        dispatch(getStorefrontProductsThunk(userStorefront.id))
+        if(userStorefront && userStorefront.id){
+            dispatch(getStorefrontProductsThunk(userStorefront.id))
+        }
     }, [userStorefront])
 
     return (
         <div className="navigation-content-wrapper">
-            <NavLink exact to="/" activeClassName="active">home</NavLink>
+            <NavLink exact to="/" activeClassName="active">
+                <img className="navigation-loom-logo" src={process.env.PUBLIC_URL + '/logo.png'} />
+            </NavLink>
             <div className="navigation-buttons-wrapper">
                 {
                     sessionUser
@@ -38,7 +42,9 @@ export default function Navigation() {
                             </NavLink>
                         </div>
                 }
-                <div>Cart</div>
+                <div className="navigation-cart-wrapper">
+                    <i class="fas fa-shopping-cart"></i>
+                </div>
             </div>
         </div>
     )

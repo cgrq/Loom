@@ -27,12 +27,6 @@ button{
     align-items: center;
 }
 
-.app-navigation-wrapper{
-    height:100px;
-    /* border:1px solid red; */
-    justify-content: flex-end;
-
-}
 
 .app-body-wrapper{
     /* border:1px solid orange; */

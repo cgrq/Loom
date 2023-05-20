@@ -1,14 +1,29 @@
-.navigation-content-wrapper{
-    width:1024px;
-    display:flex;
+.navigation-content-wrapper {
+    width: calc(100% - 120px);
+    display: flex;
+    background-color: #FFBD6E;
     justify-content: space-between;
     align-items: center;
-    height:50px;
+    padding: 30px 60px;
 }
-.navigation-buttons-wrapper{
-    display:flex;
-    width:150px;
+
+
+.navigation-loom-logo {
+    width: 80px;
+}
+
+.navigation-buttons-wrapper {
+    display: flex;
+    width: 150px;
     justify-content: space-between;
     align-items: center;
+    background-color: white;
+    padding:5px 15px;
+    border-radius: 100px;
+}
 
+.navigation-cart-wrapper {
+    font-size: 20px;
+    z-index: 20000;
+    color: white;
 }

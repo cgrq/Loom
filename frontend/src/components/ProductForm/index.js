@@ -19,6 +19,7 @@ export default function ProductForm({
         dispatch(getProductByName(productName))
     },[])
 
+    const [product, setProduct] = useState({})
 
     const [id, setId] = useState("");
     const [name, setName] = useState("");
@@ -30,13 +31,29 @@ export default function ProductForm({
     const [confirmDelete, setConfirmDelete] = useState(false);
     const [errors, setErrors] = useState({});
 
+    useEffect(() => {
+        // If the current signed in user has a storefront,
+        // and that storefront has products...
+        if (Object.values(storefrontProducts).length > 0) {
+            // ...check if the current product exists in the storefront.
+            const currentProduct = Object.values(storefrontProducts).find(
+                (product) => product.name === productName
+            );
+            // If the product does exist...
+            if (currentProduct) {
+                // ...set the product state to be equal to the current product.
+                setProduct(() => currentProduct);
+            } else {
+            // If it doesn't exist...
+                // ...redirect users to the resource not found page.
+                history.push("/not-found");
+            }
+        }
+    }, [storefrontProducts, productName, history]);
+
+    // Set form input state variables to current product's values if making an update.
     useEffect(()=>{
-        if(storefrontProducts  && componentType == "update"){
-            console.log(`🖥 ~ file: index.js:37 ~ product ~ storefrontProducts:`, storefrontProducts)
-            const product = Object.values(storefrontProducts).find(product => {
-                return product.name == productName
-            })
-            console.log(`🖥 ~ file: index.js:37 ~ useEffect ~ product:`, product)
+        if(storefrontProducts  && Object.values(storefrontProducts).length > 0 && componentType == "update"){
             if(product){
                 setId(product.id)
                 setName(product.name)
@@ -49,6 +66,12 @@ export default function ProductForm({
 
         }
     }, [storefrontProducts])
+
+    // Guard clause.
+    // If the storefront doesn't have any products then don't render anything.
+    if (Object.values(storefrontProducts).length === 0) {
+        return null
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
