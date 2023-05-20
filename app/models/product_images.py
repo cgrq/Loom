@@ -1,5 +1,6 @@
 from datetime import datetime
 from .db import db, environment, SCHEMA, add_prefix_for_prod
+from app.models import Product
 
 
 class ProductImages(db.Model):
@@ -21,8 +22,8 @@ class ProductImages(db.Model):
     updated_at = db.Column(db.DateTime, default=datetime.now())
 
     # Foreign Keys
-    product_id = db.Column(db.Integer, db.ForeignKey(
-        add_prefix_for_prod("products.id"), ondelete="CASCADE"),unique=True, nullable=False, )
+    product_id = db.Column(db.String(255), db.ForeignKey(
+        add_prefix_for_prod("products.id"), ondelete="CASCADE"), unique=True, nullable=False)
 
     product = db.relationship('Product', back_populates="product_images")
 

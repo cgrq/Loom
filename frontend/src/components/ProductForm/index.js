@@ -14,7 +14,7 @@ export default function ProductForm({
     const { productName } = useParams();
     const sessionUser = useSelector((state) => state.session.user);
     const { userStorefront } = useSelector((state) => state.storefronts)
-    const { allProducts} = useSelector((state) => state.products)
+    const { storefrontProducts} = useSelector((state) => state.products)
 
     useEffect(()=>{
         dispatch(getProductByName(productName))
@@ -32,17 +32,24 @@ export default function ProductForm({
     const [errors, setErrors] = useState({});
 
     useEffect(()=>{
-        if(allProducts && allProducts[productName] && componentType == "update"){
-            const product = allProducts[productName]
-            setId(product.id)
-            setName(product.name)
-            setDescription(product.description)
-            setQuantity(product.quantity)
-            setPrice(product.price)
-            setCategory(product.category)
-            setSubcategory(product.subcategory)
+        if(storefrontProducts  && componentType == "update"){
+            console.log(`🖥 ~ file: index.js:37 ~ product ~ storefrontProducts:`, storefrontProducts)
+            const product = Object.values(storefrontProducts).find(product => {
+                return product.name == productName
+            })
+            console.log(`🖥 ~ file: index.js:37 ~ useEffect ~ product:`, product)
+            if(product){
+                setId(product.id)
+                setName(product.name)
+                setDescription(product.description)
+                setQuantity(product.quantity)
+                setPrice(product.price)
+                setCategory(product.category)
+                setSubcategory(product.subcategory)
+            }
+
         }
-    }, [allProducts])
+    }, [storefrontProducts])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -76,6 +83,7 @@ export default function ProductForm({
             setErrors(data);
         } else {
             setEditingProductImagesForm(true)
+            console.log(`🖥 ~ file: index.js:88 ~ handleSubmit ~ name:`, name)
             history.push(`/products/${name}/edit`)
         }
 

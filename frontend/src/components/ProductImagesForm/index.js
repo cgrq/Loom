@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createProductImagesThunk, editProductImagesThunk} from "../../store/products";
+import { createProductImagesThunk, editProductImagesThunk, getStorefrontProductsThunk} from "../../store/products";
 import { useHistory, useParams } from 'react-router-dom';
 import "./ProductImagesForm.css"
 
@@ -12,6 +12,8 @@ export default function ProductImagesForm({
     const { productName } = useParams();
     const sessionUser = useSelector((state) => state.session.user);
     const { allProducts} = useSelector((state) => state.products)
+    const { storefrontProducts} = useSelector((state) => state.products)
+
 
     const [image1, setImage1] = useState("");
     const [image2, setImage2] = useState("");
@@ -20,21 +22,45 @@ export default function ProductImagesForm({
     const [image5, setImage5] = useState("");
     const [image6, setImage6] = useState("");
 
+    const [product, setProduct] = useState({})
     const [componentType, setComponentType] = useState("create")
 
     const [confirmDelete, setConfirmDelete] = useState(false);
     const [errors, setErrors] = useState({});
 
     useEffect(()=>{
-        if(allProducts[productName] && allProducts[productName].productImages.length > 0){
-            setComponentType("update")
-        }
+        console.log("PRODUCT IMAGES MOUNTED ~~~~~~~~~~~")
+        console.log(`🖥 ~ file: index.js:33 ~ useEffect ~ mount`, productName)
 
-    }, [allProducts])
+        dispatch(getStorefrontProductsThunk())
+        return () =>{
+            setEditingProductImagesForm(false)
+        }
+    }, [])
+    useEffect(()=>{
+        console.log("PARAMS CHANGES !!!!!~~~~~~~~~~~")
+        console.log(`🖥 ~ file: index.js:42 ~ useEffect ~ productName:`, productName)
+    }, [productName])
 
     useEffect(()=>{
-        if(allProducts && allProducts[productName] && componentType == "update"){
-            const product = allProducts[productName]
+        console.log(`🖥 ~ file: index.js:33 ~ useEffect ~ storefrontProducts:`, storefrontProducts)
+        console.log(`🖥 ~ file: index.js:44 ~ currentProduct ~ productName:`, productName)
+        if(storefrontProducts){
+            const currentProduct = Object.values(storefrontProducts).find(product => {
+                console.log(`🖥 ~ file: index.js:43 ~ currentProduct ~ product.name:`, product.name)
+                return product.name == productName
+            })
+            console.log(`🖥 ~ file: index.js:37 ~ currentProduct ~ currentProduct:`, currentProduct)
+            setProduct(()=>currentProduct)
+            if(currentProduct.productImages.length > 0){
+                setComponentType("update")
+            }
+        }
+
+    }, [storefrontProducts])
+
+    useEffect(()=>{
+        if(product && product.productImages && componentType == "update"){
             setImage1(product.productImages[0].image1)
             setImage2(product.productImages[0].image2)
             setImage3(product.productImages[0].image3)
@@ -42,22 +68,14 @@ export default function ProductImagesForm({
             setImage5(product.productImages[0].image5)
             setImage6(product.productImages[0].image6)
         }
-    }, [componentType])
+    }, [product])
 
 
-    useEffect(()=>{
-        return () =>{
-            setEditingProductImagesForm(false)
-        }
-    }, [])
+
 
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const product = allProducts[productName]
-
-        const productId = product.id
-
         const data =
             componentType === "update"
                 ? await dispatch(
@@ -68,7 +86,7 @@ export default function ProductImagesForm({
                         image4,
                         image5,
                         image6,
-                        productId
+                        product.id
                     )
                 )
                 : await dispatch(
@@ -79,7 +97,7 @@ export default function ProductImagesForm({
                         image4,
                         image5,
                         image6,
-                        productId
+                        product.id
                     )
                 );
         if (data) {

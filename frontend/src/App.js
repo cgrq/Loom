@@ -70,8 +70,8 @@ function App() {
                   {
                     userStorefront
                       ?  <ProductForm
-                              setEditingProductImagesForm={setEditingProductImagesForm}
-                            />
+                            setEditingProductImagesForm={setEditingProductImagesForm}
+                          />
                       : <h1>No store found</h1>
                   }
                 </Route>

@@ -5,6 +5,7 @@ import CTAButton from "../CTAButton";
 import "./Navigation.css"
 import { useEffect } from "react";
 import { getUserStorefrontThunk } from "../../store/storefronts"
+import { getStorefrontProductsThunk } from "../../store/products";
 
 export default function Navigation() {
     const dispatch = useDispatch()
@@ -12,6 +13,7 @@ export default function Navigation() {
 
     useEffect(() => {
         dispatch(getUserStorefrontThunk())
+        dispatch(getStorefrontProductsThunk())
     }, [])
 
     return (

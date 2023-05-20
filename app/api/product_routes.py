@@ -49,8 +49,10 @@ def edit_product_images(id):
     form = ProductImagesForm()
     form['csrf_token'].data = request.cookies['csrf_token']
 
+
     if form.validate_on_submit():
-        product_images = ProductImages.query.get(id)
+        product_images = ProductImages.query.filter(ProductImages.product_id == id).first()
+
 
         product_images.image1=form.data['image1']
         product_images.image2=form.data['image2']
