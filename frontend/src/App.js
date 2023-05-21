@@ -75,7 +75,7 @@ function App() {
                 <Route exact path={"/create-a-storefront"}>
                   <StorefrontForm />
                 </Route>
-                <Route exact path={"/storefront/new-product"}>
+                <Route exact path={"/:storefrontName/new-product"}>
                   {
                     userStorefront
                       ? <ProductForm
@@ -84,7 +84,7 @@ function App() {
                       : <h1>No store found</h1>
                   }
                 </Route>
-                <Route exact path={"/storefront/edit"}>
+                <Route exact path={"/:storefrontName/edit"}>
                   {
                     userStorefront
                       ? <StorefrontForm />

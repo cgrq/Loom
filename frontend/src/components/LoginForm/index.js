@@ -4,7 +4,6 @@ import { login } from "../../store/session";
 import { useHistory } from 'react-router-dom';
 import "./LoginForm.css"
 import DemoUserButton from "../DemoUserButton";
-import { getUserStorefrontThunk } from "../../store/storefronts";
 
 export default function LoginForm() {
     const history = useHistory();
@@ -27,7 +26,6 @@ export default function LoginForm() {
         if (data) {
             setErrors(data);
         } else {
-            dispatch(getUserStorefrontThunk())
             history.push('/');
         }
     };

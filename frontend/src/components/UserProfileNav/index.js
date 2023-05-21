@@ -4,6 +4,7 @@ import { NavLink, useHistory } from 'react-router-dom';
 import CTAButton from "../CTAButton";
 import { logout } from "../../store/session";
 import "./UserProfileNav.css"
+import { getUserStorefrontThunk } from "../../store/storefronts";
 
 export default function UserProfileNav({ user, closeMenu }) {
     const history = useHistory();
@@ -28,7 +29,7 @@ export default function UserProfileNav({ user, closeMenu }) {
     const handleEditStorefront = (e) => {
         e.preventDefault();
         closeMenu();
-        history.push('/storefront/edit');
+        history.push(`/${user.username}/edit`);
     }
     return (
         <div className="nav-user-profile-nav">
@@ -56,11 +57,11 @@ export default function UserProfileNav({ user, closeMenu }) {
                                     <h2>Your Storefront</h2>
                                     <div className="nav-storefront-edit-wrapper" onClick={handleEditStorefront}>Edit</div>
                                 </div>
-                                <NavLink onClick={closeMenu} exact to="/storefront" activeClassName="active">
+                                <NavLink onClick={closeMenu} exact to={`${user.username}`} activeClassName="active">
                                     <CTAButton buttonText={"Visit storefront"} />
                                 </NavLink>
                             </div>
-                            : <NavLink onClick={closeMenu} exact to="/storefront" activeClassName="active">
+                            : <NavLink onClick={closeMenu} exact to="/create-a-storefront" activeClassName="active">
                                 <CTAButton buttonText={"Create your own storefront"} />
                             </NavLink>
 

@@ -9,12 +9,15 @@ import { getStorefrontProductsThunk } from "../../store/products";
 
 export default function Navigation() {
     const dispatch = useDispatch()
-    const sessionUser = useSelector((state) => state.session.user);
+    const { user } = useSelector((state) => state.session);
     const { userStorefront } = useSelector((state) => state.storefronts)
 
     useEffect(() => {
-        dispatch(getUserStorefrontThunk())
-    }, [])
+        console.log("LOGGED IN")
+        if(user){
+            dispatch(getUserStorefrontThunk())
+        }
+    }, [user])
 
     useEffect(() => {
         if (userStorefront && userStorefront.id) {
@@ -29,10 +32,10 @@ export default function Navigation() {
             </NavLink>
             <div className="navigation-buttons-wrapper">
                 <div className="navigation-profile-buttons-wrapper">
-                    <ProfileButton user={sessionUser} />
+                    <ProfileButton user={user} />
                 </div>
                 <div className="navigation-cart-wrapper">
-                    <i class="fas fa-shopping-cart"></i>
+                    <i className="fas fa-shopping-cart"></i>
                 </div>
             </div>
         </div>

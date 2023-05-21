@@ -4,9 +4,12 @@ import "./ProfileButton.css";
 import { NavLink } from "react-router-dom";
 import CTAButton from "../CTAButton";
 import UserLoggedOutNav from "../UserLoggedOutNav";
+import { getUserStorefrontThunk } from "../../store/storefronts";
+import { useDispatch } from "react-redux";
 
 function ProfileButton({ user }) {
   // State for showing/hiding profile list dropdown
+  const dispatch = useDispatch()
   const [showMenu, setShowMenu] = useState(false);
 
   // Ref of
@@ -17,6 +20,10 @@ function ProfileButton({ user }) {
     setShowMenu(true);
 
   };
+
+  useEffect(()=>{
+    dispatch(getUserStorefrontThunk())
+},[showMenu])
 
   useEffect(() => {
     if (!showMenu) return;
