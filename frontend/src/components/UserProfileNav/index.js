@@ -54,10 +54,10 @@ export default function UserProfileNav({ user, closeMenu }) {
                         userStorefront
                             ? <div className="nav-storefront-container">
                                 <div className="nav-storefront-title-wrapper">
-                                    <h2>Your Storefront</h2>
+                                    <h2>Storefront</h2>
                                     <div className="nav-storefront-edit-wrapper" onClick={handleEditStorefront}>Edit</div>
                                 </div>
-                                <NavLink onClick={closeMenu} exact to={`${user.username}`} activeClassName="active">
+                                <NavLink onClick={closeMenu} exact to={`/${user.username}`} activeClassName="active">
                                     <CTAButton buttonText={"Visit storefront"} />
                                 </NavLink>
                             </div>
