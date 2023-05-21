@@ -1,0 +1,54 @@
+.cta-button {
+    background: linear-gradient(60deg, #dbdcdd, #dbdcdd);
+    font-family: "Space Grotesk";
+    padding: 10px 15px;
+    border-radius: 100px;
+    border: none;
+    cursor: pointer;
+    color: white;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.5s;
+    white-space: nowrap;
+}
+
+.cta-button:hover {
+    background: linear-gradient(45deg, #fffeb3, #ffa48e, #ffa48e, #f8ffb5);
+
+    /* background: linear-gradient(60deg, #ffffd6, #ffb7b2, #d1e1dd, #c2e9e4, #aedefa, #9a96fe); */
+    background-size: 100% 100%;
+    animation: gradient 3s infinite, backgroundSize 2.5s infinite;
+}
+
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 60%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes backgroundSize {
+
+    0%,
+    100% {
+        background-size: 200% 350%;
+    }
+
+    50% {
+        background-size: 100% 200%;
+    }
+}
+
+@media screen and (max-width: 767px) {
+
+}

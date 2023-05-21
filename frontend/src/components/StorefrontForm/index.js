@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createStorefrontThunk, editStorefrontThunk, deleteStorefront } from "../../store/storefronts";
-import { useHistory } from 'react-router-dom';
+import { createStorefrontThunk, editStorefrontThunk,getStorefrontByName, deleteStorefront } from "../../store/storefronts";
+
+import { useHistory, useParams } from 'react-router-dom';
 import "./Storefront.css"
 
 export default function StorefrontForm() {
     const history = useHistory();
     const dispatch = useDispatch();
-    const sessionUser = useSelector((state) => state.session.user);
+    const { storefrontName } = useParams();
+    const { user } = useSelector((state) => state.session);
     const { userStorefront } = useSelector((state) => state.storefronts)
 
     const [description, setDescription] = useState("");
@@ -15,6 +17,10 @@ export default function StorefrontForm() {
     const [componentType, setComponentType] = useState("create")
     const [confirmDelete, setConfirmDelete] = useState(false);
     const [errors, setErrors] = useState({});
+
+    useEffect(()=>{
+        dispatch(getStorefrontByName(storefrontName))
+    },[])
 
     useEffect(()=>{
         if(userStorefront){
@@ -45,7 +51,7 @@ export default function StorefrontForm() {
         if (data) {
             setErrors(data);
         } else {
-            history.push('/storefront');
+            history.push(`/${user.username}`);
         }
 
     };
@@ -54,7 +60,6 @@ export default function StorefrontForm() {
 
             const data = await dispatch(deleteStorefront());
 
-
             if (data) {
               setErrors(data);
             } else {
@@ -62,13 +67,12 @@ export default function StorefrontForm() {
 
     };
 
-    return sessionUser ? (
+    return user ? (
         <div className="storefront-form-wrapper">
             <h1 className="user-auth-form-h1">
                 {componentType === "update" ? "Edit Storefront" : "Create a Storefront"}
             </h1>
             <form className="storefront-form" onSubmit={handleSubmit}>
-                {/* <ErrorHandler errors={errors} /> */}
                 <div>
                     <label>Description</label>
                     <input

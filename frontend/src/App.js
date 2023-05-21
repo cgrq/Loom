@@ -14,7 +14,7 @@ import { ProductPage } from "./components/ProductPage";
 function App() {
   const dispatch = useDispatch();
   const { user } = useSelector((store) => store.session);
-  const { userStorefront} = useSelector((store) => store.storefronts);
+  const { userStorefront } = useSelector((store) => store.storefronts);
   const { currentProduct } = useSelector((store) => store.products)
   const [isLoaded, setIsLoaded] = useState(false);
   const [editingProductImagesForm, setEditingProductImagesForm] = useState(false);
@@ -36,8 +36,6 @@ function App() {
           <div className="app-body-content-wrapper">
             {isLoaded && (
               <Switch>
-                <Route exact path={"/"}>
-                </Route>
                 <Route exact path={"/sign-up"}>
                   <UserAuthForm componentType={"create"} />
                 </Route>
@@ -47,47 +45,57 @@ function App() {
                 <Route exact path={"/edit-profile"}>
                   <UserAuthForm componentType={"update"} />
                 </Route>
-                <Route exact path={"/products/:productName/edit"}>
+
+                <Route exact path={"/not-found"}>
+                  <h1>Sorry the resource you're requesting was not found on our servers</h1>
+                </Route>
+                <Route exact path={"/create-a-storefront"}>
+                  <StorefrontForm />
+                </Route>
+                <Route exact path={"/:storefrontName/edit"}>
                   {
                     userStorefront
-                      ? (
-                        editingProductImagesForm
-                          ? <ProductImagesForm
-                              setEditingProductImagesForm={setEditingProductImagesForm}
-                            />
-                          : <ProductForm
-                              componentType={"update"}
-                              setEditingProductImagesForm={setEditingProductImagesForm}
-                            />
-                      )
+                      ? <StorefrontForm />
                       : <h1>No store found</h1>
                   }
                 </Route>
-                <Route exact path={"/products/:productName"}>
+                <Route exact path={"/:storefrontName/new-product"}>
+                  {
+                    userStorefront
+                      ? <ProductForm
+                        setEditingProductImagesForm={setEditingProductImagesForm}
+                      />
+                      : <h1>No store found</h1>
+                  }
+                </Route>
+                <Route exact path={"/:storefrontName/:productName/edit/images"}>
+                  {
+                    userStorefront
+                      ? <ProductImagesForm
+                      />
+
+                      : <h1>No store found</h1>
+                  }
+                </Route>
+
+
+                <Route exact path={"/:storefrontName/:productName/edit"}>
+                  {
+                    userStorefront
+                      ? <ProductForm
+                        componentType={"update"}
+                      />
+
+                      : <h1>No store found</h1>
+                  }
+                </Route>
+                <Route exact path={"/:storefrontName/:productName"}>
                   <ProductPage />
                 </Route>
-                <Route exact path={"/storefront/new-product"}>
-                  {
-                    userStorefront
-                      ?  <ProductForm
-                              setEditingProductImagesForm={setEditingProductImagesForm}
-                            />
-                      : <h1>No store found</h1>
-                  }
+                <Route exact path={"/:storefrontName"}>
+                  <Storefront />
                 </Route>
-                <Route exact path={"/storefront/edit"}>
-                  {
-                    userStorefront
-                      ? <StorefrontForm  />
-                      : <h1>No store found</h1>
-                  }
-                </Route>
-                <Route exact path={"/storefront"}>
-                  {
-                    userStorefront
-                      ? <Storefront />
-                      : <StorefrontForm  />
-                  }
+                <Route exact path={"/"}>
                 </Route>
               </Switch>
             )}

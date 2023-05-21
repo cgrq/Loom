@@ -49,8 +49,10 @@ def edit_product_images(id):
     form = ProductImagesForm()
     form['csrf_token'].data = request.cookies['csrf_token']
 
+
     if form.validate_on_submit():
-        product_images = ProductImages.query.get(id)
+        product_images = ProductImages.query.filter(ProductImages.product_id == id).first()
+
 
         product_images.image1=form.data['image1']
         product_images.image2=form.data['image2']
@@ -68,7 +70,7 @@ def edit_product_images(id):
 @product_routes.route('/<string:name>')
 def get_product_by_name(name):
     """
-    Query for a product by id and returns the product as a dictionary
+    Query for a product by name and returns the product as a dictionary
     """
     product = Product.query.filter(Product.name == name).first()
 

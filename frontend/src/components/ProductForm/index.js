@@ -7,19 +7,19 @@ import { getProductByName, createProductThunk, editProductThunk, setCurrentProdu
 
 export default function ProductForm({
         componentType, // Either update or create. Leaving blank defaults to create
-        setEditingProductImagesForm // Renders product image update if true. Default false to render current product form
     }) {
     const history = useHistory();
     const dispatch = useDispatch();
     const { productName } = useParams();
     const sessionUser = useSelector((state) => state.session.user);
     const { userStorefront } = useSelector((state) => state.storefronts)
-    const { allProducts} = useSelector((state) => state.products)
+    const { storefrontProducts} = useSelector((state) => state.products)
 
     useEffect(()=>{
         dispatch(getProductByName(productName))
     },[])
 
+    const [product, setProduct] = useState({})
 
     const [id, setId] = useState("");
     const [name, setName] = useState("");
@@ -31,18 +31,37 @@ export default function ProductForm({
     const [confirmDelete, setConfirmDelete] = useState(false);
     const [errors, setErrors] = useState({});
 
-    useEffect(()=>{
-        if(allProducts && allProducts[productName] && componentType == "update"){
-            const product = allProducts[productName]
-            setId(product.id)
-            setName(product.name)
-            setDescription(product.description)
-            setQuantity(product.quantity)
-            setPrice(product.price)
-            setCategory(product.category)
-            setSubcategory(product.subcategory)
+    useEffect(() => {
+        // If the current signed in user has a storefront,
+        // and that storefront has products...
+        if (Object.values(storefrontProducts).length > 0 && componentType === "update") {
+            // ...check if the current product exists in the storefront.
+            const currentProduct = Object.values(storefrontProducts).find(
+                (product) => product.name === productName
+            );
+            // If the product does exist...
+            if (currentProduct) {
+                // ...set the product state to be equal to the current product.
+                setProduct(() => currentProduct);
+            } 
         }
-    }, [allProducts])
+    }, [storefrontProducts, productName, history]);
+
+    // Set form input state variables to current product's values if making an update.
+    useEffect(()=>{
+        if(storefrontProducts  && Object.values(storefrontProducts).length > 0 && componentType == "update"){
+            if(product){
+                setId(product.id)
+                setName(product.name)
+                setDescription(product.description)
+                setQuantity(product.quantity)
+                setPrice(product.price)
+                setCategory(product.category)
+                setSubcategory(product.subcategory)
+            }
+
+        }
+    }, [storefrontProducts])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -75,8 +94,7 @@ export default function ProductForm({
         if (data) {
             setErrors(data);
         } else {
-            setEditingProductImagesForm(true)
-            history.push(`/products/${name}/edit`)
+            history.push(`/products/${name}/edit/images`)
         }
 
     };

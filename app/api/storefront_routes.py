@@ -6,30 +6,12 @@ from app.forms import StorefrontForm
 
 storefront_routes = Blueprint('storefronts', __name__)
 
-
-@storefront_routes.route('/')
-def get_storefronts():
-    """
-    Query for all storefronts and returns them as a list of storefront dictionaries
-    """
-    storefronts = Storefront.query.all()
-    return {'storefronts': [storefront.to_dict() for storefront in storefronts]}
-
-@storefront_routes.route('/<int:id>')
-def get_storefront_by_id(id):
-    """
-    Query for a storefront by id and returns the storefront as a dictionary
-    """
-    storefront = Storefront.query.get(id)
-
-    return {"storefront":storefront.to_dict()}
-
 @storefront_routes.route('/user')
 def get_user_storefront():
     """
     Query for a storefront by id and returns the storefront as a dictionary
     """
-    storefront = Storefront.query.get(current_user.id)
+    storefront = Storefront.query.filter(Storefront.user_id == current_user.id).first()
 
     if storefront is None:
         return {"storefront": None}
@@ -47,6 +29,7 @@ def create_storefront():
 
     if form.validate_on_submit():
         storefront = Storefront(
+            name=current_user.username,
             description=form.data['description'],
             banner_image=form.data['bannerImage'],
             user_id=current_user.id
@@ -88,3 +71,38 @@ def delete_storefront():
     db.session.commit()
 
     return {"message":"Delete successful"}
+
+
+@storefront_routes.route('/<string:name>')
+def get_storefront_by_name(name):
+    """
+    Query for a storefront by name and returns the product as a dictionary
+    """
+
+    print("STOREFRONT NAME!@#!@#")
+    storefront = Storefront.query.filter(Storefront.user_id == current_user.id).first()
+
+
+    if storefront:
+        return {"storefront":storefront.to_dict()}
+    else:
+        return {"error": "Product not found"}, 404
+
+@storefront_routes.route('/<int:id>')
+def get_storefront_by_id(id):
+    """
+    Query for a storefront by id and returns the storefront as a dictionary
+    """
+    storefront = Storefront.query.get(id)
+
+    return {"storefront":storefront.to_dict()}
+
+@storefront_routes.route('/')
+def get_storefronts():
+    """
+    Query for all storefronts and returns them as a list of storefront dictionaries
+    """
+    print("INTE@#$@#$")
+
+    storefronts = Storefront.query.all()
+    return {'storefronts': [storefront.to_dict() for storefront in storefronts]}

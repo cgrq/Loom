@@ -1,4 +1,5 @@
 const SET_STOREFRONT = "session/SET_STOREFRONT";
+const SET_USER_STOREFRONT = "session/SET_USER_STOREFRONT";
 const REMOVE_STOREFRONT = "session/REMOVE_STOREFRONT";
 
 
@@ -7,8 +8,15 @@ const setStorefront = (storefront) => ({
   payload: storefront,
 });
 
-const removeStorefront = () => ({
+const setUserStorefront = (storefront) => ({
+  type: SET_USER_STOREFRONT,
+  payload: storefront,
+});
+
+const removeStorefront = (storefrontId) => ({
   type: REMOVE_STOREFRONT,
+  payload: storefrontId,
+
 });
 
 export const createStorefrontThunk =
@@ -28,6 +36,7 @@ export const createStorefrontThunk =
       if (response.ok) {
         const data = await response.json();
         dispatch(setStorefront(data));
+        dispatch(setUserStorefront(data));
         return null;
       } else if (response.status < 500) {
         const data = await response.json();
@@ -57,6 +66,7 @@ export const editStorefrontThunk =
       if (response.ok) {
         const data = await response.json();
         dispatch(setStorefront(data));
+        dispatch(setUserStorefront(data));
         return null;
       } else if (response.status < 500) {
         const data = await response.json();
@@ -70,14 +80,14 @@ export const editStorefrontThunk =
     };
 
 // Delete a user thunk
-export const deleteStorefront = () => async (dispatch) => {
+export const deleteStorefront = (storefrontId) => async (dispatch) => {
   const response = await fetch(`/api/storefronts/delete`, {
     method: 'DELETE'
   });
 
 
   if (response.ok) {
-    dispatch(removeStorefront());
+    dispatch(removeStorefront(storefrontId));
     return null;
   } else {
     const errorResponse = await response.json();
@@ -89,7 +99,9 @@ export const getUserStorefrontThunk = () => async (dispatch) => {
   const response = await fetch(`/api/storefronts/user`);
   if (response.ok) {
     const storefront = await response.json();
-    dispatch(setStorefront(storefront));
+    console.log("DISPATCHED THUNK")
+
+    dispatch(setUserStorefront(storefront));
     return null;
   } else {
     const errorResponse = await response.json();
@@ -97,16 +109,36 @@ export const getUserStorefrontThunk = () => async (dispatch) => {
   }
 };
 
-const initialState = { userStorefront: null };
+export const getStorefrontByName = (storefrontName) => async (dispatch) => {
+  const response = await fetch(`/api/storefronts/${storefrontName}`);
+  if (response.ok) {
+    const product = await response.json();
+    dispatch(setStorefront(product));
+    return null;
+  } else {
+    const errorResponse = await response.json();
+    return errorResponse.errors;
+  }
+};
+
+const initialState = { currentStorefront:null, userStorefront:null };
 
 export default function reducer(state = initialState, action) {
+  let newState = {};
   switch (action.type) {
     case SET_STOREFRONT:
-      const newState = { ...state, userStorefront: { ...state.userStorefront } }
+      newState = { ...state, currentStorefront: { ...state.currentStorefront } }
+      newState[action.payload.storefront.id] = action.payload.storefront
+      newState.currentStorefront = action.payload.storefront
+      return newState
+    case SET_USER_STOREFRONT:
+      newState = { ...state, userStorefront:null }
       newState.userStorefront = action.payload.storefront
       return newState
     case REMOVE_STOREFRONT:
-      return { ...state, userStorefront: null };
+      const updatedState = { ...state };
+      delete updatedState[action.payload.storefrontId];
+      return updatedState;
     default:
       return state;
   }

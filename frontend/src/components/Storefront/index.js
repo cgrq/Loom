@@ -1,39 +1,44 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory, useParams } from "react-router-dom";
+
 import {getStorefrontProductsThunk }from "../../store/products"
 import ProductCard from "../ProductCard";
 import "./Storefront.css"
+import { getStorefrontByName } from "../../store/storefronts";
 
 export default function Storefront() {
     const dispatch = useDispatch()
+    const history = useHistory()
     const { user } = useSelector((state) => state.session)
-    const { userStorefront } = useSelector((state) => state.storefronts)
+    const { storefrontName } = useParams();
+    const { currentStorefront } = useSelector((state) => state.storefronts)
     const { storefrontProducts } = useSelector((state) => state.products)
-    // const [bannerImage, setBannerImage] =useState("")
-
-    // useEffect(()=>{
-
-    // },[userStorefront])
 
     useEffect(()=>{
-        dispatch(getStorefrontProductsThunk(userStorefront.id))
-    }, [userStorefront])
+        dispatch(getStorefrontByName(storefrontName))
+    },[storefrontName])
 
-    if(!storefrontProducts) return null
+    useEffect(()=>{
+        if(currentStorefront && currentStorefront.id){
+            dispatch(getStorefrontProductsThunk(currentStorefront.id))
+        }
+    }, [currentStorefront])
+
+    if(!user || !storefrontProducts || !currentStorefront || !currentStorefront.user) return null
     return (
         <div className="storefront-wrapper">
             <div className="storefront-banner-wrapper">
-                <img className="storefront-user-image" src={user.profile_image} />
-                <img className="storefront-banner-image" src={userStorefront.banner_image} />
+                <img className="storefront-user-image" src={currentStorefront.user.profile_image} />
+                <img className="storefront-banner-image" src={currentStorefront.banner_image} />
             </div>
             <div className="storefront-details-wrapper">
                 <span>Store description:</span>
                 <div className="storefront-description-wrapper">
-                    {userStorefront.description}
+                    {currentStorefront.description}
                 </div>
             </div>
-            <NavLink to="/storefront/new-product">
+            <NavLink to={`${user.username}/new-product`}>
                 Create a product
             </NavLink>
             {/* Render products here */}

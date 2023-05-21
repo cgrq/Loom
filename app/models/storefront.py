@@ -10,6 +10,8 @@ class Storefront(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
 
+    name = db.Column(db.String(40), nullable=False)
+    description = db.Column(db.String(255), nullable=False)
     description = db.Column(db.String(255), nullable=False)
     banner_image = db.Column(db.String(500))
 
@@ -28,8 +30,10 @@ class Storefront(db.Model):
     def to_dict(self):
         return {
             'id': self.id,
+            'name': self.name,
             'description': self.description,
             'banner_image': self.banner_image,
+            'user': self.user.to_dict(),
             'created_at': self.created_at,
             'updated_at': self.updated_at,
         }
