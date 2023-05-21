@@ -70,7 +70,7 @@ def edit_product_images(id):
 @product_routes.route('/<string:name>')
 def get_product_by_name(name):
     """
-    Query for a product by id and returns the product as a dictionary
+    Query for a product by name and returns the product as a dictionary
     """
     product = Product.query.filter(Product.name == name).first()
 

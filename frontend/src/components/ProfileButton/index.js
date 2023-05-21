@@ -1,23 +1,29 @@
 import React, { useState, useEffect, useRef } from "react";
-import "./ProfileButton.css";
 import UserProfileNav from "../UserProfileNav";
+import "./ProfileButton.css";
+import { NavLink } from "react-router-dom";
+import CTAButton from "../CTAButton";
+import UserLoggedOutNav from "../UserLoggedOutNav";
 
 function ProfileButton({ user }) {
+  // State for showing/hiding profile list dropdown
   const [showMenu, setShowMenu] = useState(false);
 
-  const ulRef = useRef();
+  // Ref of
+  const profileListRef = useRef();
 
   const openMenu = () => {
-
     if (showMenu) return;
     setShowMenu(true);
+
   };
 
   useEffect(() => {
     if (!showMenu) return;
 
+
     const closeMenu = (e) => {
-      if (!ulRef.current.contains(e.target)) {
+      if (!profileListRef.current.contains(e.target)) {
         setShowMenu(false);
       }
     };
@@ -37,14 +43,21 @@ function ProfileButton({ user }) {
         <i className="fas fa-user-circle profile-icon" />
       </button>
       <div
-        className={`${(showMenu ? "" : " hidden")
+        className={`${(showMenu ? "" : "hidden ")
           } profile-list`}
-        ref={ulRef}
+        ref={profileListRef}
       >
-        <UserProfileNav user={user} closeMenu={closeMenu}/>
+        {
+          user
+            ? <UserProfileNav user={user} closeMenu={closeMenu} />
+            : <UserLoggedOutNav />
+        }
       </div>
     </div>
   );
 }
+
+
+
 
 export default ProfileButton;

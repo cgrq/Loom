@@ -1,5 +1,11 @@
-export default function CTAButton({buttonText}){
+import "./CTAButton.css"
+export default function CTAButton({
+    buttonText, // Self explainatory, button text
+    onClick, //
+}){
     return(
-        <button>{buttonText}</button>
+        <button className="cta-button" onClick={onClick ? onClick : ()=>{}}>
+            {buttonText}
+        </button>
     )
 }

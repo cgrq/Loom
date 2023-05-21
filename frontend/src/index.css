@@ -1,45 +1,64 @@
 * {
     margin: 0;
     padding: 0;
+    font-family: "Space Grotesk";
 }
 
-button{
-    background-color: rgb(223, 252, 255);
-    padding:5px;
-    margin:5px;
-    border-radius: 5px;
-    border:none;
+i{
     cursor: pointer;
 }
-
-.app-wrapper{
-    display:flex;
+.app-wrapper {
+    display: flex;
     flex-flow: column nowrap;
-    width:100%;
-    height:100vh;
+    width: 100%;
+    height: 100vh;
     overflow-y: auto;
 }
 
-.app-row{
-    display:flex;
+.app-row {
+    display: flex;
     flex-flow: column nowrap;
-    width:100%;
+    width: 100%;
     align-items: center;
 }
 
 
-.app-body-wrapper{
+.app-body-wrapper {
     /* border:1px solid orange; */
-    height:calc(100vh - 100px);
+    height: calc(100vh - 100px);
     overflow-y: auto;
 }
-.app-body-content-wrapper{
-    border:1px solid transparent;
-    width:1024px;
+
+.app-body-content-wrapper {
+    border: 1px solid transparent;
+    width: 1024px;
     padding-top: 30px;
     display: flex;
     justify-content: center;
 }
-.input-error{
-    color:red;
+.active{
+    width:fit-content;
+    padding:0;
+    height:fit-content;
+}
+.input-error {
+    color: red;
+}
+.nav-user-details-wrapper{
+    margin-left: 16px;
+}
+.nav-user-name-wrapper {
+    display: flex;
+    flex-flow: row nowrap;
+}
+.nav-user-name{
+    display:inline-block;
+    max-width: 160px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.nav-user-name-wrapper div,
+.nav-user-name-wrapper span {
+    font-family: roboto, Helvetica, sans-serif !important;
 }

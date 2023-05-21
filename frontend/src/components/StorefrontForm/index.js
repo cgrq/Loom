@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createStorefrontThunk, editStorefrontThunk, deleteStorefront } from "../../store/storefronts";
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import "./Storefront.css"
 
 export default function StorefrontForm() {
     const history = useHistory();
     const dispatch = useDispatch();
     const sessionUser = useSelector((state) => state.session.user);
+    const { storefrontName } = useParams();
     const { userStorefront } = useSelector((state) => state.storefronts)
 
     const [description, setDescription] = useState("");

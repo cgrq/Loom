@@ -10,11 +10,6 @@ export default function Storefront() {
     const { user } = useSelector((state) => state.session)
     const { userStorefront } = useSelector((state) => state.storefronts)
     const { storefrontProducts } = useSelector((state) => state.products)
-    // const [bannerImage, setBannerImage] =useState("")
-
-    // useEffect(()=>{
-
-    // },[userStorefront])
 
     useEffect(()=>{
         dispatch(getStorefrontProductsThunk(userStorefront.id))

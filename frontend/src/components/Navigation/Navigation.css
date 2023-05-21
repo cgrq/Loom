@@ -1,12 +1,13 @@
 .navigation-content-wrapper {
     width: calc(100% - 120px);
+    min-width:200px;
     display: flex;
-    background-color: #FFBD6E;
+    background-color: #ffa48e;
     justify-content: space-between;
     align-items: center;
     padding: 30px 60px;
+    box-shadow: 0 2px 40px 10px rgba(0, 0, 0, 0.1);
 }
-
 
 .navigation-loom-logo {
     width: 80px;
@@ -14,16 +15,56 @@
 
 .navigation-buttons-wrapper {
     display: flex;
-    width: 150px;
     justify-content: space-between;
     align-items: center;
     background-color: white;
-    padding:5px 15px;
+    z-index: 10000;
+    height: 40px;
+    padding: 10px 20px;
     border-radius: 100px;
+}
+
+.navigation-profile-buttons-wrapper {
+    margin-right: 30px;
+}
+
+.navigation-content-auth-buttons-wrapper>a {
+    margin-right: 10px;
 }
 
 .navigation-cart-wrapper {
     font-size: 20px;
     z-index: 20000;
-    color: white;
+    color: #dbdcdd;
+}
+
+@media (max-width: 767px) {
+    .navigation-content-wrapper {
+        /* width: calc(100% - 120px); */
+        /* padding: 40px 30px; */
+    }
+
+    .navigation-loom-logo {
+        /* width: 65px; */
+    }
+
+    .navigation-buttons-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        /* padding: 5px 15px; */
+        /* height: fit-content */
+    }
+
+    .navigation-cart-wrapper {
+        /* font-size: 12px; */
+    }
+
+    .navigation-profile-buttons-wrapper {
+        margin-right: 25px;
+    }
+
+    .navigation-buttons-wrapper div i {
+        /* font-size: 18px; */
+    }
 }

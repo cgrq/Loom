@@ -1,15 +1,17 @@
-
+.nav-user-profile-nav{
+  width:400px;
+  min-width: 220px;
+  padding:60px;
+}
 .right-nav-container{
   display:flex;
   align-items: center;
 }
 
 .nav-upper-container{
-  padding-top:20px;
   color:black;
   display:flex;
   width:calc(100% - 60px);
-  padding:30px;
   justify-content: space-between;
 }
 .nav-user-name-wrapper{
@@ -17,13 +19,21 @@
   flex-flow: column;
 }
 .nav-lower-container{
-  padding-top:20px;
-  padding-bottom:20px;
+  width:100%;
   display:flex;
   flex-flow: column;
   align-items: center;
   text-align: center;
 }
+
+.nav-lower-content-container{
+width:100%;
+border-radius: 20px;
+justify-content: center;
+align-items: center;
+  background-color: white;
+}
+
 .nav-lower-container-logged-out{
   padding-top: 40px;
 }
@@ -43,13 +53,15 @@
   object-fit: contain;
   border-radius: 100%;
 }
+.nav-storefront-outer-container{
+  padding:20px 0;
+}
 .nav-storefront-container{
-  background-color: rgb(209, 246, 253);
-  width:calc(100% - 60px);
   display:flex;
   flex-flow:column;
-  justify-content: flex-start;
-  padding:30px;
+  justify-content: center;
+  align-items: center;
+  padding-bottom:0;
 }
 .nav-storefront-container span{
   margin:10px 0;
@@ -69,6 +81,16 @@
 .nav-storefront-title-wrapper{
   display:flex;
   align-items: center;
+  margin:0 auto;
+  margin-bottom:25px;
+}
+.nav-storefront-title-wrapper{
+  white-space: nowrap;
+}
+.nav-storefront-edit-wrapper{
+  margin-left:10px;
+  cursor: pointer;
+  font-size: 12px;
 }
 .nav-user-info-wrapper{
   display:flex;
@@ -76,8 +98,15 @@
 }
 .demo-warning {
   color: rgb(254, 97, 97);
+  background-color: white;
   font-size: 12px;
   border:1px solid red;
   width:250px;
-  margin:0 auto;
+  margin:10px auto;
+}
+@media screen and (max-width: 540px) {
+
+  .nav-user-profile-nav{
+    width:calc(100vw - 180px);
+  }
 }

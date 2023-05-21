@@ -24,6 +24,19 @@ def get_storefront_by_id(id):
 
     return {"storefront":storefront.to_dict()}
 
+
+@storefront_routes.route('/<string:name>')
+def get_storefront_by_name(name):
+    """
+    Query for a storefront by name and returns the product as a dictionary
+    """
+    product = Product.query.filter(Product.name == name).first()
+
+    if product:
+        return {"product": product.to_dict()}
+    else:
+        return {"error": "Product not found"}, 404
+
 @storefront_routes.route('/user')
 def get_user_storefront():
     """

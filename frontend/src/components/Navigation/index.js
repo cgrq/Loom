@@ -16,8 +16,8 @@ export default function Navigation() {
         dispatch(getUserStorefrontThunk())
     }, [])
 
-    useEffect(()=>{
-        if(userStorefront && userStorefront.id){
+    useEffect(() => {
+        if (userStorefront && userStorefront.id) {
             dispatch(getStorefrontProductsThunk(userStorefront.id))
         }
     }, [userStorefront])
@@ -28,20 +28,9 @@ export default function Navigation() {
                 <img className="navigation-loom-logo" src={process.env.PUBLIC_URL + '/logo.png'} />
             </NavLink>
             <div className="navigation-buttons-wrapper">
-                {
-                    sessionUser
-                        ?
-                        <ProfileButton user={sessionUser} />
-                        :
-                        <div>
-                            <NavLink exact to="/sign-up" activeClassName="active">
-                                <CTAButton buttonText={"Sign up"} />
-                            </NavLink>
-                            <NavLink exact to="/login" activeClassName="active">
-                                <CTAButton buttonText={"Login"} />
-                            </NavLink>
-                        </div>
-                }
+                <div className="navigation-profile-buttons-wrapper">
+                    <ProfileButton user={sessionUser} />
+                </div>
                 <div className="navigation-cart-wrapper">
                     <i class="fas fa-shopping-cart"></i>
                 </div>

@@ -14,7 +14,7 @@ import { ProductPage } from "./components/ProductPage";
 function App() {
   const dispatch = useDispatch();
   const { user } = useSelector((store) => store.session);
-  const { userStorefront} = useSelector((store) => store.storefronts);
+  const { userStorefront } = useSelector((store) => store.storefronts);
   const { currentProduct } = useSelector((store) => store.products)
   const [isLoaded, setIsLoaded] = useState(false);
   const [editingProductImagesForm, setEditingProductImagesForm] = useState(false);
@@ -51,7 +51,7 @@ function App() {
                   {
                     userStorefront
                       ? <ProductImagesForm
-                            />
+                      />
 
                       : <h1>No store found</h1>
                   }
@@ -59,9 +59,9 @@ function App() {
                 <Route exact path={"/products/:productName/edit"}>
                   {
                     userStorefront
-                      ?  <ProductForm
-                              componentType={"update"}
-                            />
+                      ? <ProductForm
+                        componentType={"update"}
+                      />
 
                       : <h1>No store found</h1>
                   }
@@ -69,31 +69,30 @@ function App() {
                 <Route exact path={"/products/:productName"}>
                   <ProductPage />
                 </Route>
+                <Route exact path={"/not-found"}>
+                  <h1>Sorry the resource you're requesting was not found on our servers</h1>
+                </Route>
+                <Route exact path={"/create-a-storefront"}>
+                  <StorefrontForm />
+                </Route>
                 <Route exact path={"/storefront/new-product"}>
                   {
                     userStorefront
-                      ?  <ProductForm
-                            setEditingProductImagesForm={setEditingProductImagesForm}
-                          />
+                      ? <ProductForm
+                        setEditingProductImagesForm={setEditingProductImagesForm}
+                      />
                       : <h1>No store found</h1>
                   }
                 </Route>
                 <Route exact path={"/storefront/edit"}>
                   {
                     userStorefront
-                      ? <StorefrontForm  />
+                      ? <StorefrontForm />
                       : <h1>No store found</h1>
                   }
                 </Route>
-                <Route exact path={"/storefront"}>
-                  {
-                    userStorefront
-                      ? <Storefront />
-                      : <StorefrontForm  />
-                  }
-                </Route>
-                <Route exact path={"/not-found"}>
-                  <h1>Sorry the resource you're requesting was not found on our servers</h1>
+                <Route exact path={"/:storefrontName"}>
+                  <Storefront />
                 </Route>
               </Switch>
             )}

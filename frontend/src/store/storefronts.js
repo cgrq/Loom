@@ -97,6 +97,18 @@ export const getUserStorefrontThunk = () => async (dispatch) => {
   }
 };
 
+export const getStorefrontByName = (storefrontName) => async (dispatch) => {
+  const response = await fetch(`/api/storefront/${storefrontName}`);
+  if (response.ok) {
+    const product = await response.json();
+    // dispatch(setProduct(product));
+    return null;
+  } else {
+    const errorResponse = await response.json();
+    return errorResponse.errors;
+  }
+};
+
 const initialState = { userStorefront: null };
 
 export default function reducer(state = initialState, action) {
