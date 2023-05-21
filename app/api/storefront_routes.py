@@ -80,7 +80,8 @@ def get_storefront_by_name(name):
     """
 
     print("STOREFRONT NAME!@#!@#")
-    storefront = Storefront.query.filter(Storefront.name == name).first()
+    storefront = Storefront.query.filter(Storefront.user_id == current_user.id).first()
+
 
     if storefront:
         return {"storefront":storefront.to_dict()}

@@ -17,7 +17,7 @@ export default function Storefront() {
 
     useEffect(()=>{
         dispatch(getStorefrontByName(storefrontName))
-    },[storefrontName ])
+    },[storefrontName])
 
     useEffect(()=>{
         if(currentStorefront && currentStorefront.id){
@@ -25,7 +25,7 @@ export default function Storefront() {
         }
     }, [currentStorefront])
 
-    if(!user || !storefrontProducts || !currentStorefront || !currentStorefront.user) return <h1>Resource not found</h1>
+    if(!user || !storefrontProducts || !currentStorefront || !currentStorefront.user) return null
     return (
         <div className="storefront-wrapper">
             <div className="storefront-banner-wrapper">
@@ -38,7 +38,7 @@ export default function Storefront() {
                     {currentStorefront.description}
                 </div>
             </div>
-            <NavLink to="/storefront/new-product">
+            <NavLink to={`${user.username}/new-product`}>
                 Create a product
             </NavLink>
             {/* Render products here */}

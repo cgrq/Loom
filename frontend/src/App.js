@@ -36,8 +36,6 @@ function App() {
           <div className="app-body-content-wrapper">
             {isLoaded && (
               <Switch>
-                <Route exact path={"/"}>
-                </Route>
                 <Route exact path={"/sign-up"}>
                   <UserAuthForm componentType={"create"} />
                 </Route>
@@ -47,33 +45,19 @@ function App() {
                 <Route exact path={"/edit-profile"}>
                   <UserAuthForm componentType={"update"} />
                 </Route>
-                <Route exact path={"/products/:productName/edit/images"}>
-                  {
-                    userStorefront
-                      ? <ProductImagesForm
-                      />
 
-                      : <h1>No store found</h1>
-                  }
-                </Route>
-                <Route exact path={"/products/:productName/edit"}>
-                  {
-                    userStorefront
-                      ? <ProductForm
-                        componentType={"update"}
-                      />
-
-                      : <h1>No store found</h1>
-                  }
-                </Route>
-                <Route exact path={"/products/:productName"}>
-                  <ProductPage />
-                </Route>
                 <Route exact path={"/not-found"}>
                   <h1>Sorry the resource you're requesting was not found on our servers</h1>
                 </Route>
                 <Route exact path={"/create-a-storefront"}>
                   <StorefrontForm />
+                </Route>
+                <Route exact path={"/:storefrontName/edit"}>
+                  {
+                    userStorefront
+                      ? <StorefrontForm />
+                      : <h1>No store found</h1>
+                  }
                 </Route>
                 <Route exact path={"/:storefrontName/new-product"}>
                   {
@@ -84,15 +68,34 @@ function App() {
                       : <h1>No store found</h1>
                   }
                 </Route>
-                <Route exact path={"/:storefrontName/edit"}>
+                <Route exact path={"/:storefrontName/:productName/edit/images"}>
                   {
                     userStorefront
-                      ? <StorefrontForm />
+                      ? <ProductImagesForm
+                      />
+
                       : <h1>No store found</h1>
                   }
                 </Route>
+
+
+                <Route exact path={"/:storefrontName/:productName/edit"}>
+                  {
+                    userStorefront
+                      ? <ProductForm
+                        componentType={"update"}
+                      />
+
+                      : <h1>No store found</h1>
+                  }
+                </Route>
+                <Route exact path={"/:storefrontName/:productName"}>
+                  <ProductPage />
+                </Route>
                 <Route exact path={"/:storefrontName"}>
                   <Storefront />
+                </Route>
+                <Route exact path={"/"}>
                 </Route>
               </Switch>
             )}
