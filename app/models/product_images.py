@@ -2,7 +2,6 @@ from datetime import datetime
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from app.models import Product
 
-
 class ProductImages(db.Model):
     __tablename__ = 'product_images'
 
@@ -10,7 +9,6 @@ class ProductImages(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-
     image1 = db.Column(db.String(500))
     image2 = db.Column(db.String(500))
     image3 = db.Column(db.String(500))
@@ -18,8 +16,8 @@ class ProductImages(db.Model):
     image5 = db.Column(db.String(500))
     image6 = db.Column(db.String(500))
 
-    created_at = db.Column(db.DateTime, default=datetime.now())
-    updated_at = db.Column(db.DateTime, default=datetime.now())
+    created_at = db.Column(db.DateTime, default=datetime.now)
+    updated_at = db.Column(db.DateTime, default=datetime.now)
 
     # Foreign Keys
     product_id = db.Column(db.Integer, db.ForeignKey(
