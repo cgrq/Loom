@@ -1,5 +1,6 @@
 const SET_PRODUCT = "session/SET_PRODUCT";
 const SET_PRODUCTS = "session/SET_PRODUCTS";
+const SET_STOREFRONT_PRODUCTS = "session/SET_STOREFRONT_PRODUCTS";
 const REMOVE_PRODUCT = "session/REMOVE_PRODUCT";
 const SET_PRODUCT_IMAGES = "session/SET_PRODUCT_IMAGES"
 
@@ -13,8 +14,13 @@ const setProduct = (product) => ({
   payload: product,
 });
 
-const setProducts = (product) => ({
+const setProducts = (products) => ({
   type: SET_PRODUCTS,
+  payload: products,
+});
+
+const setStorefrontProducts = (product) => ({
+  type: SET_STOREFRONT_PRODUCTS,
   payload: product,
 });
 
@@ -175,11 +181,22 @@ export const deleteProduct = (id) => async (dispatch) => {
   }
 };
 
+export const getAllProductsThunk = () => async (dispatch) => {
+  const response = await fetch(`/api/products/`);
+  if (response.ok) {
+    const products = await response.json();
+    dispatch(setProducts(products));
+    return null;
+  } else {
+    const errorResponse = await response.json();
+    return errorResponse.errors;
+  }
+};
 export const getStorefrontProductsThunk = (storefrontId) => async (dispatch) => {
   const response = await fetch(`/api/products/storefront/${storefrontId}`);
   if (response.ok) {
     const products = await response.json();
-    dispatch(setProducts(products));
+    dispatch(setStorefrontProducts(products));
     return null;
   } else {
     const errorResponse = await response.json();
@@ -210,16 +227,21 @@ export default function reducer(state = initialState, action) {
       newState.storefrontProducts[action.payload.product.id] = action.payload.product
       newState.allProducts[action.payload.product.id] = action.payload.product
       return newState;
-    case SET_PRODUCTS:
+      case SET_PRODUCTS:
+        newState = { ...state, storefrontProducts: { ...state.storefrontProducts }, allProducts: { ...state.allProducts }}
+        action.payload.products.forEach(product => {
+          newState.allProducts[product.id] = product
+        })
+      return newState;
+    case SET_STOREFRONT_PRODUCTS:
         newState = { ...state, storefrontProducts: { ...state.storefrontProducts }, allProducts: { ...state.allProducts }}
         action.payload.products.forEach(product => {
           newState.storefrontProducts[product.id] = product
-          newState.allProducts[product.id] = [[product]]
+          newState.allProducts[product.id] = product
         })
       return newState;
     case SET_PRODUCT_IMAGES:
         newState = { ...state, storefrontProducts: { ...state.storefrontProducts }, allProducts: { ...state.allProducts } }
-        console.log(`🖥 ~ file: products.js:223 ~ reducer ~ action.payload.productImages:`, action.payload.productImages)
         newState.storefrontProducts[action.payload.productImages.product_id].productImages = action.payload.productImages
         newState.allProducts[action.payload.productImages.product_id].productImages = action.payload.productImages
         return newState;

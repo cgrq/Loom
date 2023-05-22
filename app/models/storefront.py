@@ -12,7 +12,6 @@ class Storefront(db.Model):
 
     name = db.Column(db.String(40), nullable=False)
     description = db.Column(db.String(255), nullable=False)
-    description = db.Column(db.String(255), nullable=False)
     banner_image = db.Column(db.String(500))
 
     created_at = db.Column(db.DateTime, default=datetime.now())

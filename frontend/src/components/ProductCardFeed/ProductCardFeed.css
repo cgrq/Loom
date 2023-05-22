@@ -1,0 +1,13 @@
+.product-card-feed-container{
+    display: flex;
+    justify-content: center;
+    padding:30px;
+}
+.product-card-feed-wrapper{
+    display:flex;
+    flex-flow: row wrap;
+    width:fit-content;
+    margin:0 auto;
+    padding-top: 0;
+    justify-content: center;
+}

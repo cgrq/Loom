@@ -12,7 +12,7 @@ def get_products():
     """
     Query for all products and returns them as a list of product dictionaries
     """
-    products = Storefront.query.all()
+    products = Product.query.all()
     return {'products': [product.to_dict() for product in products]}
 
 @product_routes.route('/<int:id>/images/create', methods=['POST'])

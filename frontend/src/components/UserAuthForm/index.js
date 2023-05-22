@@ -4,6 +4,10 @@ import { signUp, editUser, deleteUser } from "../../store/session";
 import { useHistory } from 'react-router-dom';
 import "./UserAuthForm.css"
 import DemoUserButton from "../DemoUserButton";
+import FormWrapperComponent from "../FormWrapperComponent";
+import DeleteButton from "../DeleteButton";
+import InputField from "../InputField"
+
 
 export default function UserAuthForm({ componentType }) {
     const history = useHistory();
@@ -17,7 +21,6 @@ export default function UserAuthForm({ componentType }) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    const [confirmDelete, setConfirmDelete] = useState(false);
     const [startStorefront, setStartStorefront] = useState(false);
     const [errors, setErrors] = useState({});
 
@@ -51,7 +54,7 @@ export default function UserAuthForm({ componentType }) {
                 setErrors(data);
             } else {
                 console.log(`🖥 ~ file: index.js:54 ~ handleSubmit ~ startStorefront:`, startStorefront)
-                if (startStorefront){
+                if (startStorefront) {
                     history.push('/create-a-storefront');
                 } else {
                     history.push('/');
@@ -68,17 +71,7 @@ export default function UserAuthForm({ componentType }) {
 
         }
     };
-    const handleDelete = async () => {
-        const data = await dispatch(deleteUser());
 
-
-        if (data) {
-          setErrors(data);
-        } else {
-            history.push('/');
-        }
-
-      };
 
     useEffect(() => {
         if (componentType === "update" && sessionUser) {
@@ -92,113 +85,73 @@ export default function UserAuthForm({ componentType }) {
 
     return (
         <>
-            <div className="auth-form-wrapper">
-                <h1 className="user-auth-form-h1">
-                    {componentType === "update" ? "Edit user" : "Sign up"}
-                </h1>
-                <form className="user-auth-form" onSubmit={handleSubmit}>
-                    {/* <ErrorHandler errors={errors} /> */}
-                    <div>
-                        <label>First Name</label>
-                        <input
-                            type="text"
-                            value={firstName}
-                            onChange={(e) => setFirstName(e.target.value)}
-                            required
+            <FormWrapperComponent
+                title = {componentType === "update" ? "Edit profile details" : "Create a profile"}
+                onSubmit={handleSubmit}
+                submitButtonText={componentType === "update" ? "Update Profile" : "Create Profile"}
+                lowerComponent={() =>
+                    (componentType === "update"
+                    ? (
+                        <DeleteButton
+                            onDeleteThunk={deleteUser()}
+                            setErrors={setErrors}
                         />
-                    </div>
-                    {errors.firstName && <p className="input-error">{errors.firstName}</p>}
-                    <div>
-                        <label>Last Name</label>
-                        <input
-                            type="text"
-                            value={lastName}
-                            onChange={(e) => setLastName(e.target.value)}
-                            required
-                        />
-                    </div>
-                    {errors.lastName && <p className="input-error">{errors.lastName}</p>}
-                    <div>
-                        <label>Email</label>
-                        <input
-                            type="text"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            required
-                        />
-                    </div>
-                    {errors.email && <p className="input-error">{errors.email}</p>}
-
-                    <div>
-                        <label>Username</label>
-                        <input
-                            type="text"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
-                            required
-                        />
-                    </div>
-                    {errors.username && <p className="input-error">{errors.username}</p>}
-
-                    <div>
-                        <label>Profile Image</label>
-                        <input
-                            type="text"
-                            value={profileImage}
-                            onChange={(e) => setProfileImage(e.target.value)}
-                        />
-                    </div>
-                    {errors.profileImage && <p className="input-error">{errors.profileImage}</p>}
-
-                    <div>
-                        <label>Password</label>
-                        <input
-                            type="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <div>
-                        <label>Confirm Password</label>
-                        <input
-                            type="password"
-                            value={confirmPassword}
-                            onChange={(e) => setConfirmPassword(e.target.value)}
-                            required
-                        />
-                    </div>
-                    {errors.password && <p className="input-error">{errors.password}</p>}
-                    <div>
-                    <label>Start a storefront?</label>
-                    <input type="checkbox" value={startStorefront}  onChange={() => setStartStorefront(!startStorefront)}/>
-                    </div>
-
-
-                    <button className="user-auth-form-button" type="submit">
-                        {componentType === "update" ? "Edit user" : "Sign Up"}
-                    </button>
-                </form>
-                {
-                    componentType === "update"
-                        ? (
-                            <div>
-                                <button onClick={()=>setConfirmDelete(!confirmDelete)}>{confirmDelete? "Cancel" : "Delete"}</button>
-                                {
-                                    confirmDelete && (
-                                        <div>
-                                            <div>Are you sure you want to delete your account?</div>
-                                            <button onClick={handleDelete}>Delete</button>
-                                        </div>
-                                    )
-                                }
-                            </div>
-                        )
-                        : (
-                            <DemoUserButton setErrors={setErrors} />
-                        )
+                    )
+                    : (
+                        <DemoUserButton setErrors={setErrors} />
+                    ))
                 }
-            </div>
+            >
+                <InputField
+                    label = "First Name"
+                    value = {firstName}
+                    onChange = {setFirstName}
+                />
+                {errors.firstName && <p className="input-error">{errors.firstName}</p>}
+                <InputField
+                    label = "Last Name"
+                    value = {lastName}
+                    onChange = {setLastName}
+                />
+
+                {errors.lastName && <p className="input-error">{errors.lastName}</p>}
+                <InputField
+                    label = "Email"
+                    value = {email}
+                    onChange = {setEmail}
+                />
+                {errors.email && <p className="input-error">{errors.email}</p>}
+                <InputField
+                    label = "Username"
+                    value = {username}
+                    onChange = {setUsername}
+                />
+                {errors.username && <p className="input-error">{errors.username}</p>}
+                <InputField
+                    label = "Profile Image"
+                    value = {profileImage}
+                    onChange = {setProfileImage}
+                />
+                {errors.profileImage && <p className="input-error">{errors.profileImage}</p>}
+                <InputField
+                    label = "Password"
+                    value = {password}
+                    onChange = {setPassword}
+                />
+                <InputField
+                    label = "Confirm Password"
+                    value = {confirmPassword}
+                    onChange = {setConfirmPassword}
+                />
+                {errors.password && <p className="input-error">{errors.password}</p>}
+                <div className="auth-form-checkbox-wrapper">
+                    <label className="auth-form-checkbox-label">Start a storefront?</label>
+                    <input className="auth-form-checkbox" type="checkbox" value={startStorefront} onChange={() => setStartStorefront(!startStorefront)} />
+                </div>
+            </FormWrapperComponent>
+
+
+
         </>
     );
 }

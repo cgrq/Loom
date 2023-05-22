@@ -1,0 +1,20 @@
+.delete-button-wrapper{
+    width:100%;
+}
+
+.delete-button-confirmation-wrapper{
+    width:calc(100% - 70px);
+    padding:30px;
+    margin-top: 10px;
+    border-radius: 30px;
+    box-shadow: 0px 8px 13px 1px rgba(0, 0, 0, 0.087);
+
+}
+.delete-button-confirmation-wrapper > div{
+    font-size: 12px;
+    white-space: nowrap;
+    margin-bottom:10px;
+}
+.delete-button-final-warning{
+    margin-bottom:20px !important;
+}

@@ -5,6 +5,9 @@ import { getUserStorefrontThunk } from "../../store/storefronts"
 
 import { useHistory, useParams } from 'react-router-dom';
 import "./ProductImagesForm.css"
+import FormWrapperComponent from "../FormWrapperComponent";
+import InputField from "../InputField";
+import DeleteButton from "../DeleteButton";
 
 export default function ProductImagesForm({
 }) {
@@ -69,7 +72,7 @@ export default function ProductImagesForm({
                     setComponentType("update");
                 }
             } else {
-            // If it doesn't exist...
+                // If it doesn't exist...
                 // ...redirect users to the resource not found page.
                 history.push("/not-found");
             }
@@ -129,107 +132,47 @@ export default function ProductImagesForm({
         }
 
     };
-    const handleDelete = async () => {
-        history.push('/');
-
-        // const data = await dispatch(deleteProduct());
-
-
-        // if (data) {
-        //   setErrors(data);
-        // } else {
-        // }
-
-    };
 
 
     return (
-        <div className="product-form-wrapper">
-            <h1 className="user-auth-form-h1">
-                {componentType === "update" ? "Step 2: Edit product images" : "Step 2: Add product images"}
-            </h1>
-            <form className="product-form" onSubmit={handleSubmit}>
-                {/* <ErrorHandler errors={errors} /> */}
-                <div>
-                    <label>Main image</label>
-                    <input
-                        type="text"
-                        value={image1}
-                        onChange={(e) => setImage1(e.target.value)}
-                        required
-                    />
-                </div>
-                {errors.image1 && <p className="input-error">{errors.image1}</p>}
-                <div>
-                    <input
-                        type="text"
-                        value={image2}
-                        onChange={(e) => setImage2(e.target.value)}
-                        required
-                    />
-                </div>
-                {errors.image2 && <p className="input-error">{errors.image2}</p>}
-                <div>
+        <>
+            <FormWrapperComponent
+                title={componentType === "update" ? "Step 2: Edit product images" : "Step 2: Add product images"}
+                onSubmit={handleSubmit}
+                submitButtonText={componentType === "update" ? "Update" : "Create"}
+            >
+                <InputField
+                    label="Main"
+                    value={image1}
+                    onChange={setImage1}
+                />
+                <InputField
+                    label="A"
+                    value={image2}
+                    onChange={setImage2}
+                />
+                <InputField
+                    label="B"
+                    value={image3}
+                    onChange={setImage3}
+                />
+                <InputField
+                    label="C"
+                    value={image4}
+                    onChange={setImage4}
+                />
+                <InputField
+                    label="D"
+                    value={image5}
+                    onChange={setImage5}
+                />
+                <InputField
+                    label="E"
+                    value={image6}
+                    onChange={setImage6}
+                />
+            </FormWrapperComponent>
 
-                    <input
-                        type="text"
-                        value={image3}
-                        onChange={(e) => setImage3(e.target.value)}
-                        required
-                    />
-                </div>
-                {errors.image3 && <p className="input-error">{errors.image3}</p>}
-                <div>
-
-                    <input
-                        type="text"
-                        value={image4}
-                        onChange={(e) => setImage4(e.target.value)}
-                        required
-                    />
-                </div>
-                {errors.image4 && <p className="input-error">{errors.image4}</p>}
-                <div>
-
-                    <input
-                        type="text"
-                        value={image5}
-                        onChange={(e) => setImage5(e.target.value)}
-                        required
-                    />
-                </div>
-                {errors.image5 && <p className="input-error">{errors.image5}</p>}
-                <div>
-
-                    <input
-                        type="text"
-                        value={image6}
-                        onChange={(e) => setImage6(e.target.value)}
-                        required
-                    />
-                </div>
-                {errors.image6 && <p className="input-error">{errors.image6}</p>}
-                <button className="user-auth-form-button" type="submit">
-                    {componentType === "update" ? "Update" : "Create"}
-                </button>
-            </form>
-            {
-                componentType === "update"
-                    ? (
-                        <div>
-                            <button onClick={() => setConfirmDelete(!confirmDelete)}>{confirmDelete ? "Cancel" : "Delete"}</button>
-                            {
-                                confirmDelete && (
-                                    <div>
-                                        <div>Are you sure you want to delete your product?</div>
-                                        <button onClick={handleDelete}>Delete</button>
-                                    </div>
-                                )
-                            }
-                        </div>
-                    )
-                    : null
-            }
-        </div>
+        </>
     )
 }

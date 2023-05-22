@@ -13,14 +13,17 @@
     transition: background 0.5s;
     white-space: nowrap;
 }
-
-.cta-button:hover {
-    background: linear-gradient(45deg, #fffeb3, #ffa48e, #ffa48e, #f8ffb5);
-
-    /* background: linear-gradient(60deg, #ffffd6, #ffb7b2, #d1e1dd, #c2e9e4, #aedefa, #9a96fe); */
+.cta-button:hover{
     background-size: 100% 100%;
     animation: gradient 3s infinite, backgroundSize 2.5s infinite;
 }
+.standard-button:hover {
+    background: linear-gradient(45deg, #fffeb3, #ffa48e, #ffa48e, #f8ffb5);
+}
+.warning-button:hover {
+    background: linear-gradient(45deg, #fffecc, #fc4747, #ff84b1, #f8ffb5);
+}
+
 
 
 @keyframes gradient {

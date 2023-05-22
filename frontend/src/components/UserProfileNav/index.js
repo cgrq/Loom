@@ -36,7 +36,15 @@ export default function UserProfileNav({ user, closeMenu }) {
             <div className={user ? "nav-upper-container" : "hidden"}>
                 {user && (
                     <div className="nav-user-info-wrapper">
-                        <img className="nav-user-img" onError={() => setImageUrl(process.env.PUBLIC_URL + "/default-image.png")} src={imageUrl}></img>
+                        <div className="nav-user-img-edit-wrapper">
+                            <img className="nav-user-img" onError={() => setImageUrl(process.env.PUBLIC_URL + "/default-image.png")} src={imageUrl}></img>
+                        {user && !demoUserIds.includes(user.id) && (
+                                <NavLink onClick={closeMenu} exact to="/edit-profile" activeClassName="active">
+                                    Edit
+                                </NavLink>
+
+                            )}
+                            </div>
                         <div className="nav-user-details-wrapper">
                             <div className="nav-user-name-wrapper">
                                 <span>Hello,</span>
@@ -54,10 +62,10 @@ export default function UserProfileNav({ user, closeMenu }) {
                         userStorefront
                             ? <div className="nav-storefront-container">
                                 <div className="nav-storefront-title-wrapper">
-                                    <h2>Your Storefront</h2>
+                                    <h2>Storefront</h2>
                                     <div className="nav-storefront-edit-wrapper" onClick={handleEditStorefront}>Edit</div>
                                 </div>
-                                <NavLink onClick={closeMenu} exact to={`${user.username}`} activeClassName="active">
+                                <NavLink onClick={closeMenu} exact to={`/${user.username}`} activeClassName="active">
                                     <CTAButton buttonText={"Visit storefront"} />
                                 </NavLink>
                             </div>
@@ -72,18 +80,13 @@ export default function UserProfileNav({ user, closeMenu }) {
                             }`}
                     >
                         <div>
-                            {user && !demoUserIds.includes(user.id) && (
-                                <NavLink onClick={closeMenu} exact to="/edit-profile" activeClassName="active">
-                                    <CTAButton buttonText={"Edit Profile"} />
-                                </NavLink>
 
-                            )}
                             {demoUserIds.includes(user.id) && (
                                 <>
                                     <p className="demo-warning">*This demo user can't be edited/deleted</p>
                                 </>
                             )}
-                                    <CTAButton buttonText={"Log Out"} onClick={handleLogout}/>
+                                    <CTAButton buttonText={"Log Out"} onClick={handleLogout} warningButton={true}/>
 
                         </div>
 

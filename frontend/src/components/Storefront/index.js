@@ -2,10 +2,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { NavLink, useHistory, useParams } from "react-router-dom";
 
-import {getStorefrontProductsThunk }from "../../store/products"
+import { getStorefrontProductsThunk } from "../../store/products"
 import ProductCard from "../ProductCard";
 import "./Storefront.css"
 import { getStorefrontByName } from "../../store/storefronts";
+import ProductCardFeed from "../ProductCardFeed";
 
 export default function Storefront() {
     const dispatch = useDispatch()
@@ -15,41 +16,45 @@ export default function Storefront() {
     const { currentStorefront } = useSelector((state) => state.storefronts)
     const { storefrontProducts } = useSelector((state) => state.products)
 
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(getStorefrontByName(storefrontName))
-    },[storefrontName])
+    }, [storefrontName])
 
-    useEffect(()=>{
-        if(currentStorefront && currentStorefront.id){
+    useEffect(() => {
+        if (currentStorefront && currentStorefront.id) {
             dispatch(getStorefrontProductsThunk(currentStorefront.id))
         }
     }, [currentStorefront])
 
-    if(!user || !storefrontProducts || !currentStorefront || !currentStorefront.user) return null
+    if (!user || !storefrontProducts || !currentStorefront || !currentStorefront.user) return null
     return (
         <div className="storefront-wrapper">
             <div className="storefront-banner-wrapper">
-                <img className="storefront-user-image" src={currentStorefront.user.profile_image} />
-                <img className="storefront-banner-image" src={currentStorefront.banner_image} />
+                <div className="storefront-banner-image-wrapper">
+                    <div className="storefront-banner-image-fade-left" />
+                    <div className="storefront-banner-image-fade-right" />
+                    <img className="storefront-banner-image" src={currentStorefront.banner_image} />
+
+                </div>
             </div>
             <div className="storefront-details-wrapper">
-                <span>Store description:</span>
+                <img className="storefront-user-image" src={currentStorefront.user.profile_image} />
                 <div className="storefront-description-wrapper">
+                    <span className="storefront-description-label">Description:</span>
                     {currentStorefront.description}
                 </div>
             </div>
-            <NavLink to={`${user.username}/new-product`}>
-                Create a product
-            </NavLink>
-            {/* Render products here */}
-            <div className="storefront-products-wrapper">
-                {
-                    Object.values(storefrontProducts).map((product)=>{
-                        return <ProductCard key={product.id} product={product}/>
-                    })
-                }
-
+            <div className="storefront-create-a-product-container">
+                <NavLink to={`${user.username}/new-product`}>
+                    <div className="storefront-create-a-product-button-wrapper">
+                        + Create a new product
+                    </div>
+                </NavLink>
             </div>
+            {/* Render products here */}
+            <ProductCardFeed
+                products={storefrontProducts}
+            />
         </div>
     )
 }

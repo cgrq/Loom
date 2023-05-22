@@ -1,0 +1,23 @@
+.input-field-wrapper{
+    display:flex;
+    flex-flow:column nowrap;
+    width:100%;
+    margin-bottom:10px;
+}
+.input-field-label{
+    font-size: 12px;
+    color:rgb(177, 177, 177)
+}
+.input-field{
+    padding:10px 20px;
+    border:none;
+    border-bottom: 1px solid rgb(210, 210, 210);
+    width:calc(100% - 40px);
+}
+
+.input-field:focus{
+    outline:none;
+    box-shadow: 0px 8px 13px 1px rgba(0, 0, 0, 0.087);
+    border-radius: 20px;
+
+}

@@ -3,7 +3,11 @@
     padding: 0;
     font-family: "Space Grotesk";
 }
+h1, h2{
+    font-family: "Montserrat Alternates";
+    color: #7a7a7a
 
+}
 i{
     cursor: pointer;
 }
@@ -24,15 +28,13 @@ i{
 
 
 .app-body-wrapper {
-    /* border:1px solid orange; */
     height: calc(100vh - 100px);
     overflow-y: auto;
+    width:100%;
 }
 
 .app-body-content-wrapper {
-    border: 1px solid transparent;
-    width: 1024px;
-    padding-top: 30px;
+    width:100%;
     display: flex;
     justify-content: center;
 }

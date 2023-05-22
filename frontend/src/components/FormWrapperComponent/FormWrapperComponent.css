@@ -1,0 +1,21 @@
+.form-wrapper{
+    box-shadow: 0px 8px 13px 1px rgba(0, 0, 0, 0.087);
+    padding:40px 60px;
+    border-radius: 35px;
+    display:flex;
+    flex-flow: column;
+    align-items: flex-start;
+    margin:30px 0;
+}
+.form-wrapper-title{
+    margin-bottom: 20px;
+    font-size: 26px;
+    min-width: 254px;
+    text-align: left;
+}
+.form-wrapper-form{
+    width:100%;
+}
+.form-wrapper-button-wrapper{
+    margin:20px 0;
+}
