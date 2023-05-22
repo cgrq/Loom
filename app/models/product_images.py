@@ -22,7 +22,7 @@ class ProductImages(db.Model):
     updated_at = db.Column(db.DateTime, default=datetime.now())
 
     # Foreign Keys
-    product_id = db.Column(db.String(255), db.ForeignKey(
+    product_id = db.Column(db.Integer, db.ForeignKey(
         add_prefix_for_prod("products.id"), ondelete="CASCADE"), unique=True, nullable=False)
 
     product = db.relationship('Product', back_populates="product_images")
