@@ -30,12 +30,11 @@ i{
 .app-body-wrapper {
     height: calc(100vh - 100px);
     overflow-y: auto;
+    width:100%;
 }
 
 .app-body-content-wrapper {
-    border: 1px solid transparent;
-    width: 1024px;
-    padding-top: 30px;
+    width:100%;
     display: flex;
     justify-content: center;
 }

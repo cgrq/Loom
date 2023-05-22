@@ -6,6 +6,7 @@ import "./UserAuthForm.css"
 import DemoUserButton from "../DemoUserButton";
 import FormWrapperComponent from "../FormWrapperComponent";
 import DeleteButton from "../DeleteButton";
+import InputField from "../InputField"
 
 
 export default function UserAuthForm({ componentType }) {
@@ -85,7 +86,7 @@ export default function UserAuthForm({ componentType }) {
     return (
         <>
             <FormWrapperComponent
-                title = {componentType === "update" ? "Edit profile details" : "Create"}
+                title = {componentType === "update" ? "Edit profile details" : "Create a profile"}
                 onSubmit={handleSubmit}
                 submitButtonText={componentType === "update" ? "Update Profile" : "Create Profile"}
                 lowerComponent={() =>
@@ -101,80 +102,51 @@ export default function UserAuthForm({ componentType }) {
                     ))
                 }
             >
-                <div>
-                    <label>First Name</label>
-                    <input
-                        type="text"
-                        value={firstName}
-                        onChange={(e) => setFirstName(e.target.value)}
-                        required
-                    />
-                </div>
+                <InputField
+                    label = "First Name"
+                    value = {firstName}
+                    onChange = {setFirstName}
+                />
                 {errors.firstName && <p className="input-error">{errors.firstName}</p>}
-                <div>
-                    <label>Last Name</label>
-                    <input
-                        type="text"
-                        value={lastName}
-                        onChange={(e) => setLastName(e.target.value)}
-                        required
-                    />
-                </div>
+                <InputField
+                    label = "Last Name"
+                    value = {lastName}
+                    onChange = {setLastName}
+                />
+
                 {errors.lastName && <p className="input-error">{errors.lastName}</p>}
-                <div>
-                    <label>Email</label>
-                    <input
-                        type="text"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                    />
-                </div>
+                <InputField
+                    label = "Email"
+                    value = {email}
+                    onChange = {setEmail}
+                />
                 {errors.email && <p className="input-error">{errors.email}</p>}
-
-                <div>
-                    <label>Username</label>
-                    <input
-                        type="text"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                        required
-                    />
-                </div>
+                <InputField
+                    label = "Username"
+                    value = {username}
+                    onChange = {setUsername}
+                />
                 {errors.username && <p className="input-error">{errors.username}</p>}
-
-                <div>
-                    <label>Profile Image</label>
-                    <input
-                        type="text"
-                        value={profileImage}
-                        onChange={(e) => setProfileImage(e.target.value)}
-                    />
-                </div>
+                <InputField
+                    label = "Profile Image"
+                    value = {profileImage}
+                    onChange = {setProfileImage}
+                />
                 {errors.profileImage && <p className="input-error">{errors.profileImage}</p>}
-
-                <div>
-                    <label>Password</label>
-                    <input
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Confirm Password</label>
-                    <input
-                        type="password"
-                        value={confirmPassword}
-                        onChange={(e) => setConfirmPassword(e.target.value)}
-                        required
-                    />
-                </div>
+                <InputField
+                    label = "Password"
+                    value = {password}
+                    onChange = {setPassword}
+                />
+                <InputField
+                    label = "Confirm Password"
+                    value = {confirmPassword}
+                    onChange = {setConfirmPassword}
+                />
                 {errors.password && <p className="input-error">{errors.password}</p>}
-                <div>
-                    <label>Start a storefront?</label>
-                    <input type="checkbox" value={startStorefront} onChange={() => setStartStorefront(!startStorefront)} />
+                <div className="auth-form-checkbox-wrapper">
+                    <label className="auth-form-checkbox-label">Start a storefront?</label>
+                    <input className="auth-form-checkbox" type="checkbox" value={startStorefront} onChange={() => setStartStorefront(!startStorefront)} />
                 </div>
             </FormWrapperComponent>
 

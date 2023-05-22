@@ -10,6 +10,7 @@ import Storefront from "./components/Storefront";
 import ProductForm from "./components/ProductForm";
 import ProductImagesForm from "./components/ProductImagesForm";
 import { ProductPage } from "./components/ProductPage";
+import Homepage from "./components/Homepage";
 
 function App() {
   const dispatch = useDispatch();
@@ -96,6 +97,8 @@ function App() {
                   <Storefront />
                 </Route>
                 <Route exact path={"/"}>
+                  {/* <Homepage /> */}
+                  <Homepage />
                 </Route>
               </Switch>
             )}

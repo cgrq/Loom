@@ -1,23 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createStorefrontThunk, editStorefrontThunk, deleteStorefront } from "../../store/storefronts";
+import FormWrapperComponent from "../FormWrapperComponent"
 import { useHistory, useParams } from 'react-router-dom';
 import "./ProductForm.css"
 import { getProductByName, createProductThunk, editProductThunk, setCurrentProduct, deleteProduct } from "../../store/products";
+import InputField from "../InputField";
+import DeleteButton from "../DeleteButton";
 
 export default function ProductForm({
-        componentType, // Either update or create. Leaving blank defaults to create
-    }) {
+    componentType, // Either update or create. Leaving blank defaults to create
+}) {
     const history = useHistory();
     const dispatch = useDispatch();
     const { productName } = useParams();
     const sessionUser = useSelector((state) => state.session.user);
     const { userStorefront } = useSelector((state) => state.storefronts)
-    const { storefrontProducts} = useSelector((state) => state.products)
+    const { storefrontProducts } = useSelector((state) => state.products)
 
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(getProductByName(productName))
-    },[])
+    }, [])
 
     const [product, setProduct] = useState({})
 
@@ -43,14 +46,14 @@ export default function ProductForm({
             if (currentProduct) {
                 // ...set the product state to be equal to the current product.
                 setProduct(() => currentProduct);
-            } 
+            }
         }
     }, [storefrontProducts, productName, history]);
 
     // Set form input state variables to current product's values if making an update.
-    useEffect(()=>{
-        if(storefrontProducts  && Object.values(storefrontProducts).length > 0 && componentType == "update"){
-            if(product){
+    useEffect(() => {
+        if (storefrontProducts && Object.values(storefrontProducts).length > 0 && componentType == "update") {
+            if (product) {
                 setId(product.id)
                 setName(product.name)
                 setDescription(product.description)
@@ -66,7 +69,7 @@ export default function ProductForm({
     const handleSubmit = async (e) => {
         e.preventDefault();
         const storefrontId = userStorefront.id
-         const data =
+        const data =
             componentType === "update"
                 ? await dispatch(
                     editProductThunk(
@@ -99,102 +102,71 @@ export default function ProductForm({
 
     };
     const handleDelete = async () => {
-            history.push('/storefront');
+        history.push('/storefront');
 
-            const data = await dispatch(deleteProduct(id));
+        const data = await dispatch(deleteProduct(id));
 
 
-            if (data) {
-              setErrors(data);
-            } else {
-            }
+        if (data) {
+            setErrors(data);
+        } else {
+        }
 
     };
 
     return sessionUser ? (
-        <div className="storefront-form-wrapper">
-            <h1 className="user-auth-form-h1">
-                {componentType === "update" ? "Step 1: Edit Product Details" : "Step 1: Enter product details"}
-            </h1>
-            <form className="storefront-form" onSubmit={handleSubmit}>
-                <div>
-                    <label>Name</label>
-                    <input
-                        type="text"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        required
-                    />
-                </div>
-                {errors.name && <p className="input-error">{errors.name}</p>}
-                <div>
-                    <label>Description</label>
-                    <input
-                        type="text"
-                        value={description}
-                        onChange={(e) => setDescription(e.target.value)}
-                        required
-                    />
-                </div>
-                {errors.description && <p className="input-error">{errors.description}</p>}
-                <div>
-                    <label>Quantity</label>
-                    <input
-                        type="text"
-                        value={quantity}
-                        onChange={(e) => setQuantity(e.target.value)}
-                    />
-                </div>
-                {errors.quantity && <p className="input-error">{errors.quantity}</p>}
-                <div>
-                    <label>Price</label>
-                    <input
-                        type="text"
-                        value={price}
-                        onChange={(e) => setPrice(e.target.value)}
-                    />
-                </div>
-                {errors.price && <p className="input-error">{errors.price}</p>}
-                <div>
-                    <label>Category</label>
-                    <input
-                        type="text"
-                        value={category}
-                        onChange={(e) => setCategory(e.target.value)}
-                    />
-                </div>
-                {errors.category && <p className="input-error">{errors.category}</p>}
-                <div>
-                    <label>Sub-category</label>
-                    <input
-                        type="text"
-                        value={subcategory}
-                        onChange={(e) => setSubcategory(e.target.value)}
-                    />
-                </div>
-                {errors.subcategory && <p className="input-error">{errors.subcategory}</p>}
-                <button className="user-auth-form-button" type="submit">
-                    Next
-                </button>
-            </form>
-            {
-                componentType === "update"
-                    ? (
-                        <div>
-                            <button onClick={() => setConfirmDelete(!confirmDelete)}>{confirmDelete ? "Cancel" : "Delete"}</button>
-                            {
-                                confirmDelete && (
-                                    <div>
-                                        <div>Are you sure you want to delete your product?</div>
-                                        <button onClick={handleDelete}>Delete</button>
-                                    </div>
-                                )
-                            }
-                        </div>
-                    )
-                    : null
-            }
-        </div>
+
+        <>
+            <FormWrapperComponent
+                title={componentType === "update" ? "Step 1: Edit Product Details" : "Step 1: Enter product details"}
+                onSubmit={handleSubmit}
+                submitButtonText="Next"
+                lowerComponent={() =>
+                (
+                    componentType === "update"
+                        ? (
+                            <DeleteButton
+                                onDeleteThunk={deleteProduct(id)}
+                                setErrors={setErrors}
+                            />
+
+                        )
+                        : null
+                )}
+            >
+                <InputField
+                    label="Name"
+                    value={name}
+                    onChange={setName}
+                />
+                <InputField
+                    label="Description"
+                    value={description}
+                    onChange={setDescription}
+                />
+                <InputField
+                    label="Quantity"
+                    value={quantity}
+                    onChange={setQuantity}
+                />
+                <InputField
+                    label="Price"
+                    value={price}
+                    onChange={setPrice}
+                />
+                <InputField
+                    label="Category"
+                    value={category}
+                    onChange={setCategory}
+                />
+                <InputField
+                    label="Sub-category"
+                    value={subcategory}
+                    onChange={setSubcategory}
+                />
+            </FormWrapperComponent>
+
+        </>
     )
         : (
             <h1>Please log in to create a store front and start creating products</h1>

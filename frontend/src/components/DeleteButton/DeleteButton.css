@@ -11,6 +11,10 @@
 
 }
 .delete-button-confirmation-wrapper > div{
-    font-size: 14px;
+    font-size: 12px;
+    white-space: nowrap;
     margin-bottom:10px;
+}
+.delete-button-final-warning{
+    margin-bottom:20px !important;
 }

@@ -1,0 +1,33 @@
+.storefront-form-image-preview-container{
+    display: flex;
+    width: 100%;
+    margin-bottom: 20px;
+    justify-content: center;
+}
+.storefront-form-image-preview-wrapper{
+    position:relative;
+    border-radius: 10px;
+    height:60px;
+    width:250px;
+    margin:0;
+    padding: 0;
+    display:flex;
+    justify-content: center;
+    overflow: hidden;
+    align-items: center;
+    background-image: url("");
+    box-shadow: 0px 5px 11px 1px rgba(0, 0, 0, 0.087);
+
+}
+.storefront-form-image-placeholder{
+    position: absolute;
+    z-index:-1;
+    height:60px;
+    width:250px;
+    object-fit: cover;
+
+}
+.storefront-form-image-preview{
+    object-fit: cover;
+    width:120%;
+}

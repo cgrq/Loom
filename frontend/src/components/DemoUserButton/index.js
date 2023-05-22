@@ -1,6 +1,7 @@
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import { login } from "../../store/session";
+import CTAButton from '../CTAButton';
 
 
 export default function DemoUserButton({setErrors}) {
@@ -18,8 +19,9 @@ export default function DemoUserButton({setErrors}) {
         }
     };
     return (
-        <button onClick={handleDemoSubmit}>
-            Demo user
-        </button>
+        <CTAButton
+            buttonText={"Log in as Demo User"}
+            onClick={handleDemoSubmit}
+        />
     )
 }

@@ -31,7 +31,8 @@ export default function DeleteButton({
             {
                 confirmDelete && (
                     <div className="delete-button-confirmation-wrapper">
-                        <div>Are you sure? This can't be undone</div>
+                        <div>Are you sure?</div>
+                        <div className="delete-button-final-warning"> This can't be undone.</div>
                         <CTAButton
                             buttonText="Delete"
                             warningButton={true}

@@ -5,9 +5,16 @@
     display:flex;
     flex-flow: column;
     align-items: flex-start;
+    margin:30px 0;
 }
 .form-wrapper-title{
     margin-bottom: 20px;
+    font-size: 26px;
+    min-width: 254px;
+    text-align: left;
+}
+.form-wrapper-form{
+    width:100%;
 }
 .form-wrapper-button-wrapper{
     margin:20px 0;
