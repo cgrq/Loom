@@ -7,19 +7,24 @@ import { setCurrentProduct } from "../../store/products"
 
 export default function ProductCard({ product }) {
     const dispatch = useDispatch()
-    const [imageUrl, setImageUrl] = useState(process.env.PUBLIC_URL + "/default-profile-pic.png")
+    const [imageUrl, setImageUrl] = useState("")
     const { storefrontProducts } = useSelector(state => state.products)
 
     useEffect(() => {
-        setImageUrl(product.productImages.length > 0 ? product.productImages[0].image1 : process.env.PUBLIC_URL + "/default-profile-pic.png")
+        if(product && product.productImages && product.productImages[0]){
+            setImageUrl(product.productImages.length > 0 ? product.productImages[0].image1 : process.env.PUBLIC_URL + "/default-profile-pic.png")
+        }
     }, [product])
 
-
+    if (!imageUrl || !product || !product.productImages || !product.productImages[0]) return null
 
     return (
         <div key={product.id} className="product-card-wrapper">
             <NavLink to={`/products/${product.name}`}>
-            <img onError={() => setImageUrl(process.env.PUBLIC_URL + "/default-image.png")} src={imageUrl} />
+                <img
+                // onError={() => setImageUrl(process.env.PUBLIC_URL + "/default-image.png")}
+                src={imageUrl}
+            />
 
             </NavLink>
             <div className="product-card-details-wrapper">

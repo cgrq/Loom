@@ -53,6 +53,31 @@ function App() {
                 <Route exact path={"/create-a-storefront"}>
                   <StorefrontForm />
                 </Route>
+
+                <Route exact path={"/products/:productName/edit/images"}>
+                  {
+                    userStorefront
+                      ? <ProductImagesForm
+                      />
+
+                      : <h1>No store found</h1>
+                  }
+                </Route>
+
+
+                <Route exact path={"/products/:productName/edit"}>
+                  {
+                    userStorefront
+                      ? <ProductForm
+                        componentType={"update"}
+                      />
+
+                      : <h1>No store found</h1>
+                  }
+                </Route>
+                <Route exact path={"/products/:productName"}>
+                  <ProductPage />
+                </Route>
                 <Route exact path={"/:storefrontName/edit"}>
                   {
                     userStorefront
@@ -69,35 +94,10 @@ function App() {
                       : <h1>No store found</h1>
                   }
                 </Route>
-                <Route exact path={"/:storefrontName/:productName/edit/images"}>
-                  {
-                    userStorefront
-                      ? <ProductImagesForm
-                      />
-
-                      : <h1>No store found</h1>
-                  }
-                </Route>
-
-
-                <Route exact path={"/:storefrontName/:productName/edit"}>
-                  {
-                    userStorefront
-                      ? <ProductForm
-                        componentType={"update"}
-                      />
-
-                      : <h1>No store found</h1>
-                  }
-                </Route>
-                <Route exact path={"/:storefrontName/:productName"}>
-                  <ProductPage />
-                </Route>
                 <Route exact path={"/:storefrontName"}>
                   <Storefront />
                 </Route>
                 <Route exact path={"/"}>
-                  {/* <Homepage /> */}
                   <Homepage />
                 </Route>
               </Switch>
