@@ -1,0 +1,19 @@
+.card-feed-filter-wrapper{
+    display:flex;
+    justify-content: center;
+}
+
+.card-feed-filter-category{
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    margin:0 15px;
+}
+.card-feed-filter-category-title{
+    color:rgb(200, 200, 200);
+    font-family: "Space Grotesk";
+    margin-bottom:3px;
+}
+.card-feed-filter-subcategorys-wrapper{
+    display:flex;
+}

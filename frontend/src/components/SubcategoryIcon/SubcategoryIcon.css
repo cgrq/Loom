@@ -1,0 +1,22 @@
+
+.subcategory-wrapper{
+    display:flex;
+    font-family: "Source Sans Pro";
+    font-size: 12px;
+    font-weight: 700;
+    color:#c5c5c5;
+    flex-flow: column;
+    cursor: pointer;
+    align-items: center;
+    padding:10px 0;
+}
+.subcategory-wrapper:hover{
+    box-shadow: 0px 8px 13px 1px rgba(0, 0, 0, 0.087);
+    border-radius: 20px;
+}
+.subcategory-wrapper img{
+    width:80px;
+    height:80px;
+    margin:0 10px;
+    margin-bottom:5px;
+}

@@ -7,6 +7,7 @@ import "./ProductForm.css"
 import { getProductByName, createProductThunk, editProductThunk, setCurrentProduct, deleteProduct } from "../../store/products";
 import InputField from "../InputField";
 import DeleteButton from "../DeleteButton";
+import SelectField from "../SelectField";
 
 export default function ProductForm({
     componentType, // Either update or create. Leaving blank defaults to create
@@ -27,8 +28,8 @@ export default function ProductForm({
     const [id, setId] = useState("");
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
-    const [quantity, setQuantity] = useState(0);
-    const [price, setPrice] = useState(0)
+    const [quantity, setQuantity] = useState("");
+    const [price, setPrice] = useState("")
     const [category, setCategory] = useState("")
     const [subcategory, setSubcategory] = useState("")
     const [confirmDelete, setConfirmDelete] = useState(false);
@@ -154,16 +155,38 @@ export default function ProductForm({
                     value={price}
                     onChange={setPrice}
                 />
-                <InputField
+                <SelectField
                     label="Category"
                     value={category}
+                    options={["clothing", "furniture", "art"]}
                     onChange={setCategory}
                 />
-                <InputField
-                    label="Sub-category"
-                    value={subcategory}
-                    onChange={setSubcategory}
-                />
+                {
+                    category && category === "clothing" && <SelectField
+                        label="Subcategory"
+                        value={subcategory}
+                        options={["tops", "bottoms", "footwear"]}
+                        onChange={setSubcategory}
+                    />
+                }
+                {
+                    category && category === "furniture" && <SelectField
+                        label="Subcategory"
+                        value={subcategory}
+                        options={["seating", "surfaces", "storage"]}
+                        onChange={setSubcategory}
+                    />
+                }
+                {
+                    category && category === "art" && <SelectField
+                        label="Subcategory"
+                        value={subcategory}
+                        options={["walls", "spaces", "desk"]}
+                        onChange={setSubcategory}
+                    />
+                }
+
+
             </FormWrapperComponent>
 
         </>

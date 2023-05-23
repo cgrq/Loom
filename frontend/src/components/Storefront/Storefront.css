@@ -1,98 +1,131 @@
-.storefront-wrapper{
-    width:100%;
+.storefront-wrapper {
+    width: 100%;
     flex-flow: column nowrap;
     justify-content: center;
     align-items: center;
 }
-.storefront-user-image{
-    height:120px;
-    width:120px;
+
+.storefront-details-profile-wrapper {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    margin-right:40px;
+    justify-content: center;
+}
+
+.storefront-toggle-show-profile-button {
+    margin-top:10px;
+    font-size: 12px;
+    font-family: "Space Grotesk";
+    cursor:pointer;
+    font-weight: 500;
+    color: rgb(155, 155, 155);
+}
+
+.storefront-user-image {
+    height: 120px;
+    width: 120px;
     border-radius: 100%;
     z-index: 10000;
     box-shadow: 0px 8px 13px 1px rgba(0, 0, 0, 0.087);
-    margin:20px;
-    top:50px;
-    left:50px;
+    top: 50px;
+    left: 50px;
 }
-.storefront-banner-wrapper{
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    height:120px;
-    overflow: hidden;
-    background-color: rgb(52, 52, 52);
-}
-.storefront-banner-image-wrapper{
-    position:relative;
-    max-width: 1200px;
-    width:80%;
-}
-.storefront-banner-image{
-    object-fit: cover;
-    width:100% !important;
-}
-.storefront-banner-image-fade-left{
-    height:100%;
-    width:160px;
-    left:0;
-    background:linear-gradient(90deg, rgb(52, 52, 52), rgba(0, 0, 0, 0));
-    position:absolute;
-}
-.storefront-banner-image-fade-right{
-    height:100%;
-    width:160px;
-    right:0;
-    background:linear-gradient(90deg,  rgba(0, 0, 0, 0), rgb(52, 52, 52));
-    position:absolute;
-}
-.storefront-details-wrapper{
+
+.storefront-banner-wrapper {
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 120px;
+    overflow: hidden;
+    transition: height 0.69s ease;
+    background-color: rgb(52, 52, 52);
+}
+
+.storefront-hide-banner-wrapper{
+    height:0;
+}
+
+.storefront-banner-image-wrapper {
+    position: relative;
+    max-width: 1200px;
+    width: 80%;
+}
+
+.storefront-banner-image {
+    object-fit: cover;
+    width: 100% !important;
+}
+
+.storefront-banner-image-fade-left {
+    height: 100%;
+    width: 160px;
+    left: 0;
+    background: linear-gradient(90deg, rgb(52, 52, 52), rgba(0, 0, 0, 0));
+    position: absolute;
+}
+
+.storefront-banner-image-fade-right {
+    height: 100%;
+    width: 160px;
+    right: 0;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0), rgb(52, 52, 52));
+    position: absolute;
+}
+
+.storefront-details-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height:190px;
     box-shadow: 0px 8px 13px 1px rgba(0, 0, 0, 0.087);
     background-color: #f7f7f7;
 }
-.storefront-description-wrapper{
+
+.storefront-description-wrapper {
     background-color: white;
     box-shadow: 0px 8px 13px 1px rgba(0, 0, 0, 0.087);
-    margin:20px 0;
-    padding:20px;
-    padding-top:40px;
-    width:400px;
-    border-radius:10px;
-    position:relative;
+    margin: 20px 0;
+    padding: 20px;
+    padding-top: 40px;
+    width: 400px;
+    border-radius: 10px;
+    position: relative;
 }
-.storefront-description-label{
+
+.storefront-description-label {
     position: absolute;
     font-family: "Space Grotesk";
-    top:20px;
-    left:20px;
+    top: 20px;
+    left: 20px;
     font-size: 12px;
 }
 
-.storefront-create-a-product-container{
-    width:100%;
-    height:50px;
+.storefront-create-a-product-container {
+    width: 100%;
+    height: 50px;
     align-items: center;
     display: flex;
     justify-content: center;
-    padding:30px 0;
+    padding: 30px 0;
 }
 
-.storefront-create-a-product-button-wrapper{
+.storefront-create-a-product-button-wrapper {
     box-shadow: 0px 8px 13px 1px rgba(0, 0, 0, 0.087);
-    padding:10px 20px;
+    padding: 10px 20px;
     border-radius: 10px;
     cursor: pointer;
 
 }
-.storefront-create-a-product-button-wrapper:hover{
-    margin-top:1px;
+
+.storefront-create-a-product-button-wrapper:hover {
+    margin-top: 1px;
 }
-.storefront-create-a-product-container a{
+
+.storefront-create-a-product-container a {
     text-decoration: none;
     font-family: "Space Grotesk";
     font-size: 14px;
-    color:rgb(76, 76, 76);
-    height:fit-content;
+    color: rgb(76, 76, 76);
+    height: fit-content;
 }

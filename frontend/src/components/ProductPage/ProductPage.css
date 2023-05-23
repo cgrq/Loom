@@ -2,7 +2,7 @@
     display:flex;
     margin-top:30px;
 }
-.product-page-image-title-wrapper, .product-page-images-wrapper, .product-page-details-row{
+.product-page-images-wrapper, .product-page-details-row{
     padding:30px;
     box-shadow: 0px 8px 13px 1px rgba(0, 0, 0, 0.087);
     border-radius: 50px;
@@ -46,11 +46,12 @@
     margin-bottom: 20px;
 }
 .product-page-price{
-
+    align-items: center;
     display: flex;
 }
 .product-page-price-dollar-sign{
     margin-right:5px;
+    font-size:12px;
     font-weight: 400;
     color:rgb(171, 171, 171)
 }
