@@ -63,7 +63,7 @@ export const createProductThunk =
     };
 
 export const editProductThunk =
-(id, name, description, quantity, price, category, subcategory, storefrontId) =>
+  (id, name, description, quantity, price, category, subcategory, storefrontId) =>
     async (dispatch) => {
       const response = await fetch(`/api/products/${id}/edit`, {
         method: "PUT",
@@ -131,8 +131,8 @@ export const createProductImagesThunk =
       }
     };
 
-    export const editProductImagesThunk =
-  (image1, image2, image3, image4, image5, image6,  productId) =>
+export const editProductImagesThunk =
+  (image1, image2, image3, image4, image5, image6, productId) =>
     async (dispatch) => {
       const response = await fetch(`/api/products/${productId}/images/edit`, {
         method: "PUT",
@@ -217,7 +217,29 @@ export const getProductByName = (productName) => async (dispatch) => {
 
 
 
-const initialState = { allProducts: {}, storefrontProducts: {} };
+const initialState = {
+  allProducts: {},
+  storefrontProducts: {
+    tops: {},
+    bottoms: {},
+    footwear: {},
+    seating: {},
+    surfaces: {},
+    storage: {},
+    walls: {},
+    spaces: {},
+    desk: {},
+  },
+  tops: {},
+  bottoms: {},
+  footwear: {},
+  seating: {},
+  surfaces: {},
+  storage: {},
+  walls: {},
+  spaces: {},
+  desk: {},
+};
 
 export default function reducer(state = initialState, action) {
   let newState = {};
@@ -227,24 +249,56 @@ export default function reducer(state = initialState, action) {
       newState.storefrontProducts[action.payload.product.id] = action.payload.product
       newState.allProducts[action.payload.product.id] = action.payload.product
       return newState;
-      case SET_PRODUCTS:
-        newState = { ...state, storefrontProducts: { ...state.storefrontProducts }, allProducts: { ...state.allProducts }}
-        action.payload.products.forEach(product => {
-          newState.allProducts[product.id] = product
-        })
+    case SET_PRODUCTS:
+      newState = {
+        ...state,
+        allProducts: { ...state.allProducts },
+        tops: { ...state.tops },
+        bottoms: { ...state.bottoms },
+        footwear: { ...state.footwear },
+        seating: { ...state.seating },
+        surfaces: { ...state.surfaces },
+        storage: { ...state.storage },
+        walls: { ...state.walls },
+        spaces: { ...state.spaces },
+        desk: { ...state.desk },
+      }
+      action.payload.products.forEach(product => {
+        newState.allProducts[product.id] = product
+        console.log(`🖥 ~ file: products.js:259 ~ reducer ~ product.subcategory:`, product.subcategory)
+        newState[product.subcategory][product.id] = product
+      })
       return newState;
     case SET_STOREFRONT_PRODUCTS:
-        newState = { ...state, storefrontProducts: { ...state.storefrontProducts }, allProducts: { ...state.allProducts }}
-        action.payload.products.forEach(product => {
-          newState.storefrontProducts[product.id] = product
-          newState.allProducts[product.id] = product
-        })
+      newState = {
+        ...state,
+        storefrontProducts: {
+          ...state.storefrontProducts,
+          tops: { ...state.storefrontProducts.tops },
+          bottoms: { ...state.storefrontProducts.bottoms },
+          footwear: { ...state.storefrontProducts.footwear },
+          seating: { ...state.storefrontProducts.seating },
+          surfaces: { ...state.storefrontProducts.surfaces },
+          storage: { ...state.storefrontProducts.storage },
+          walls: { ...state.storefrontProducts.walls },
+          spaces: { ...state.storefrontProducts.spaces },
+          desk: { ...state.storefrontProducts.desk },
+        },
+        allProducts: {
+          ...state.allProducts
+        }
+      }
+      action.payload.products.forEach(product => {
+        newState.storefrontProducts[product.id] = product
+        newState.storefrontProducts[product.subcategory][product.id] = product
+        newState.allProducts[product.id] = product
+      })
       return newState;
     case SET_PRODUCT_IMAGES:
-        newState = { ...state, storefrontProducts: { ...state.storefrontProducts }, allProducts: { ...state.allProducts } }
-        newState.storefrontProducts[action.payload.productImages.product_id].productImages = action.payload.productImages
-        newState.allProducts[action.payload.productImages.product_id].productImages = action.payload.productImages
-        return newState;
+      newState = { ...state, storefrontProducts: { ...state.storefrontProducts }, allProducts: { ...state.allProducts } }
+      newState.storefrontProducts[action.payload.productImages.product_id].productImages = action.payload.productImages
+      newState.allProducts[action.payload.productImages.product_id].productImages = action.payload.productImages
+      return newState;
     case REMOVE_PRODUCT:
       return { ...state, storefrontProducts: null };
     default:

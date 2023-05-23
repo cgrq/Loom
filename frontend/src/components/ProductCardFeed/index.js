@@ -4,6 +4,7 @@ import "./ProductCardFeed.css"
 export default function ProductCardFeed({
     products,
 }) {
+    if (!products) return null
     return (
         <div className="product-card-feed-container">
             <div className="product-card-feed-wrapper">

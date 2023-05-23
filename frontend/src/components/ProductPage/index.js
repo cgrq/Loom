@@ -87,14 +87,6 @@ export function ProductPage() {
                     </div>
                 </div>
                 <div className="product-page-details-wrapper">
-                    <div className="product-page-details-row">
-                        <div  className="product-page-details-label">
-                            Product Description:
-                        </div>
-                        <div>
-                            {product.description}
-                        </div>
-                    </div>
                     <div className="product-page-details-row product-page-price-quantity">
                         <div className="product-page-price">
                             <div className="product-page-price-dollar-sign">$</div>
@@ -103,6 +95,14 @@ export function ProductPage() {
                         <div className="product-page-quantity">
                             {product.quantity}
                             <div className="product-page-quantity-left">left</div>
+                        </div>
+                    </div>
+                    <div className="product-page-details-row">
+                        <div  className="product-page-details-label">
+                            Product Description:
+                        </div>
+                        <div>
+                            {product.description}
                         </div>
                     </div>
                 </div>

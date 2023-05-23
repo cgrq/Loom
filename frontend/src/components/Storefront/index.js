@@ -7,6 +7,7 @@ import ProductCard from "../ProductCard";
 import "./Storefront.css"
 import { getStorefrontByName } from "../../store/storefronts";
 import ProductCardFeed from "../ProductCardFeed";
+import CardFeedFilter from "../CardFeedFilter";
 
 export default function Storefront() {
     const dispatch = useDispatch()
@@ -15,6 +16,9 @@ export default function Storefront() {
     const { storefrontName } = useParams();
     const { currentStorefront } = useSelector((state) => state.storefronts)
     const { storefrontProducts } = useSelector((state) => state.products)
+
+    const [showProfile, setShowProfile] = useState(false)
+    const [products, setProducts] = useState({})
 
     useEffect(() => {
         dispatch(getStorefrontByName(storefrontName))
@@ -26,10 +30,17 @@ export default function Storefront() {
         }
     }, [currentStorefront])
 
+    useEffect(()=>{
+        if(storefrontProducts){
+            setProducts(storefrontProducts)
+        }
+    }, [storefrontProducts])
+
     if (!user || !storefrontProducts || !currentStorefront || !currentStorefront.user) return null
     return (
         <div className="storefront-wrapper">
-            <div className="storefront-banner-wrapper">
+
+            <div className={`storefront-banner-wrapper ${showProfile ? "" : "storefront-hide-banner-wrapper"}`}>
                 <div className="storefront-banner-image-wrapper">
                     <div className="storefront-banner-image-fade-left" />
                     <div className="storefront-banner-image-fade-right" />
@@ -37,12 +48,32 @@ export default function Storefront() {
 
                 </div>
             </div>
+
             <div className="storefront-details-wrapper">
-                <img className="storefront-user-image" src={currentStorefront.user.profile_image} />
-                <div className="storefront-description-wrapper">
-                    <span className="storefront-description-label">Description:</span>
-                    {currentStorefront.description}
+                <div className="storefront-details-profile-wrapper">
+                    <img className="storefront-user-image" src={currentStorefront.user.profile_image} />
+                    <div
+                        className="storefront-toggle-show-profile-button"
+                        onClick={()=> setShowProfile(!showProfile)}
+                    >
+                        {
+                            showProfile
+                                ? "Show filters"
+                                : "Show owner profile"
+                        }
+                    </div>
                 </div>
+                {
+                    showProfile
+                        ? (
+                            <div className="storefront-description-wrapper">
+                                <span className="storefront-description-label">Description:</span>
+                                {currentStorefront.description}
+                            </div>
+                        )
+                        : <CardFeedFilter products={products} setProducts={setProducts} userStorefront={true}/>
+                }
+
             </div>
             <div className="storefront-create-a-product-container">
                 <NavLink to={`${user.username}/new-product`}>
@@ -53,7 +84,7 @@ export default function Storefront() {
             </div>
             {/* Render products here */}
             <ProductCardFeed
-                products={storefrontProducts}
+                products={products}
             />
         </div>
     )
