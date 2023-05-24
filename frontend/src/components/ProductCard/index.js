@@ -9,6 +9,8 @@ export default function ProductCard({ product }) {
     const dispatch = useDispatch()
     const [imageUrl, setImageUrl] = useState("")
     const { storefrontProducts } = useSelector(state => state.products)
+    const { user } = useSelector(state => state.session)
+    const { userStorefront } = useSelector(state => state.storefronts)
 
     useEffect(() => {
         if(product && product.productImages && product.productImages[0]){
@@ -40,7 +42,12 @@ export default function ProductCard({ product }) {
                 </div>
                 <span className="product-card-name">{product.name}</span>
                 {
-                    storefrontProducts && storefrontProducts[product.id] && (
+                    user
+                    && storefrontProducts
+                    && storefrontProducts[product.id]
+                    && userStorefront
+                    && storefrontProducts[product.id].storefrontId === userStorefront.id
+                    && (
                         <NavLink to={`/products/${product.name}/edit`}>
                             Edit
                         </NavLink>

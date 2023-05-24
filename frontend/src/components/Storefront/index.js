@@ -60,9 +60,7 @@ export default function Storefront() {
     }, [tops])
 
     useEffect(()=>{
-        console.log("!!@#!@#!_", bottoms)
         if (selectedFilter === "bottoms"){
-            console.log("~~~!!~~~ UPDATED !!~~~!!!~~~")
             setProducts(bottoms)
         }
     }, [bottoms])
@@ -113,10 +111,9 @@ export default function Storefront() {
 
 
     useEffect(()=>{
-        console.log(`🖥 ~ file: index.js:107 ~ useEffect ~ products:`, products)
     },[products])
 
-    if (!user || !storefrontProducts || !currentStorefront || !currentStorefront.user) return null
+    if (!user || !storefrontName || !storefrontProducts || !currentStorefront || !currentStorefront.user) return null
     return (
         <div className="storefront-wrapper">
 
