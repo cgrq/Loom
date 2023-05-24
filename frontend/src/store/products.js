@@ -1,8 +1,9 @@
-const SET_PRODUCT = "session/SET_PRODUCT";
-const SET_PRODUCTS = "session/SET_PRODUCTS";
-const SET_STOREFRONT_PRODUCTS = "session/SET_STOREFRONT_PRODUCTS";
-const REMOVE_PRODUCT = "session/REMOVE_PRODUCT";
-const SET_PRODUCT_IMAGES = "session/SET_PRODUCT_IMAGES"
+const SET_PRODUCT = "products/SET_PRODUCT";
+const SET_PRODUCTS = "products/SET_PRODUCTS";
+const SET_STOREFRONT_PRODUCTS = "products/SET_STOREFRONT_PRODUCTS";
+const REMOVE_PRODUCT = "products/REMOVE_PRODUCT";
+const SET_PRODUCT_IMAGES = "products/SET_PRODUCT_IMAGES"
+const RESET_PRODUCTS = "products/RESET_PRODUCTS";
 
 const setProductImages = (productImages) => ({
   type: SET_PRODUCT_IMAGES,
@@ -28,6 +29,10 @@ const removeProduct = (product) => ({
   type: REMOVE_PRODUCT,
   payload: product
 });
+
+export const resetProducts = () => ({
+  type: RESET_PRODUCTS
+})
 
 export const createProductThunk =
   (name, description, quantity, price, category, subcategory, storefrontId) =>
@@ -243,8 +248,8 @@ const initialState = {
   storefrontDesk: {},
 };
 
-function formatStorefrontCategoryNameForReducer(categoryName){
-  return `storefront${categoryName.slice(0,1).toUpperCase() + categoryName.slice(1)}`
+function formatStorefrontCategoryNameForReducer(categoryName) {
+  return `storefront${categoryName.slice(0, 1).toUpperCase() + categoryName.slice(1)}`
 }
 
 export default function reducer(state = initialState, action) {
@@ -252,24 +257,24 @@ export default function reducer(state = initialState, action) {
     ...state,
     storefrontProducts: { ...state.storefrontProducts },
     allProducts: { ...state.allProducts },
-    tops: {...state.tops},
-    bottoms: {...state.bottoms},
-    footwear: {...state.footwear},
-    seating: {...state.seating},
-    surfaces: {...state.surfaces},
-    storage: {...state.storage},
-    walls: {...state.walls},
-    spaces: {...state.spaces},
-    desk: {...state.desk},
-    storefrontTops: {...state.storefrontTops},
-    storefrontBottoms: {...state.storefrontBottoms},
-    storefrontFootwear: {...state.storefrontFootwear},
-    storefrontSeating: {...state.storefrontSeating},
-    storefrontSurfaces: {...state.storefrontSurfaces},
-    storefrontStorage: {...state.storefrontStorage},
-    storefrontWalls: {...state.storefrontWalls},
-    storefrontSpaces: {...state.storefrontSpaces},
-    storefrontDesk: {...state.storefrontDesk},
+    tops: { ...state.tops },
+    bottoms: { ...state.bottoms },
+    footwear: { ...state.footwear },
+    seating: { ...state.seating },
+    surfaces: { ...state.surfaces },
+    storage: { ...state.storage },
+    walls: { ...state.walls },
+    spaces: { ...state.spaces },
+    desk: { ...state.desk },
+    storefrontTops: { ...state.storefrontTops },
+    storefrontBottoms: { ...state.storefrontBottoms },
+    storefrontFootwear: { ...state.storefrontFootwear },
+    storefrontSeating: { ...state.storefrontSeating },
+    storefrontSurfaces: { ...state.storefrontSurfaces },
+    storefrontStorage: { ...state.storefrontStorage },
+    storefrontWalls: { ...state.storefrontWalls },
+    storefrontSpaces: { ...state.storefrontSpaces },
+    storefrontDesk: { ...state.storefrontDesk },
   }
   switch (action.type) {
     case SET_PRODUCT:
@@ -296,7 +301,7 @@ export default function reducer(state = initialState, action) {
 
       return newState;
 
-      case SET_PRODUCT_IMAGES:
+    case SET_PRODUCT_IMAGES:
       // newState.storefrontProducts[action.payload.productImages.product_id].productImages = action.payload.productImages
       // newState.allProducts[action.payload.productImages.product_id].productImages = action.payload.productImages
       // newState[action.payload.productSubcategory][action.payload.productImages.product_id] = action.payload.productImages
@@ -312,6 +317,30 @@ export default function reducer(state = initialState, action) {
 
       return newState;
 
+    case RESET_PRODUCTS:
+      newState = {
+        allProducts: {},
+        storefrontProducts: {},
+        tops: {},
+        bottoms: {},
+        footwear: {},
+        seating: {},
+        surfaces: {},
+        storage: {},
+        walls: {},
+        spaces: {},
+        desk: {},
+        storefrontTops: {},
+        storefrontBottoms: {},
+        storefrontFootwear: {},
+        storefrontSeating: {},
+        storefrontSurfaces: {},
+        storefrontStorage: {},
+        storefrontWalls: {},
+        storefrontSpaces: {},
+        storefrontDesk: {},
+      }
+      return newState;
     default:
       return state;
   }

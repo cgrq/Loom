@@ -5,6 +5,7 @@ import CTAButton from "../CTAButton";
 import { logout } from "../../store/session";
 import "./UserProfileNav.css"
 import { getUserStorefrontThunk, setUserStorefront } from "../../store/storefronts";
+import { resetProducts } from "../../store/products";
 
 export default function UserProfileNav({ user, closeMenu }) {
     const history = useHistory();
@@ -23,6 +24,7 @@ export default function UserProfileNav({ user, closeMenu }) {
         e.preventDefault();
         dispatch(logout());
         dispatch(setUserStorefront({storefront:null}))
+        dispatch(resetProducts())
         closeMenu();
         history.push('/');
     };
