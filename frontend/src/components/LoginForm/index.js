@@ -52,6 +52,7 @@ export default function LoginForm() {
             <InputField
                 label="Password"
                 value={password}
+                isPassword={true}
                 onChange={setPassword}
             />
         </FormWrapperComponent>

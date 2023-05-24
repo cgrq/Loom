@@ -13,6 +13,7 @@ export default function UserAuthForm({ componentType }) {
     const history = useHistory();
     const dispatch = useDispatch();
     const sessionUser = useSelector((state) => state.session.user);
+    const { userStorefront } = useSelector((state) => state.storefronts)
 
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -85,11 +86,11 @@ export default function UserAuthForm({ componentType }) {
     return (
         <>
             <FormWrapperComponent
-                title = {componentType === "update" ? "Edit profile details" : "Create a profile"}
+                title={componentType === "update" ? "Edit profile details" : "Create a profile"}
                 onSubmit={handleSubmit}
                 submitButtonText={componentType === "update" ? "Update Profile" : "Create Profile"}
                 lowerComponent={() =>
-                    (componentType === "update"
+                (componentType === "update"
                     ? (
                         <DeleteButton
                             onDeleteThunk={deleteUser()}
@@ -103,51 +104,59 @@ export default function UserAuthForm({ componentType }) {
                 }
             >
                 <InputField
-                    label = "First Name"
-                    value = {firstName}
-                    onChange = {setFirstName}
+                    label="First Name"
+                    value={firstName}
+                    onChange={setFirstName}
                 />
                 {errors.firstName && <p className="input-error">{errors.firstName}</p>}
                 <InputField
-                    label = "Last Name"
-                    value = {lastName}
-                    onChange = {setLastName}
+                    label="Last Name"
+                    value={lastName}
+                    onChange={setLastName}
                 />
 
                 {errors.lastName && <p className="input-error">{errors.lastName}</p>}
                 <InputField
-                    label = "Email"
-                    value = {email}
-                    onChange = {setEmail}
+                    label="Email"
+                    value={email}
+                    onChange={setEmail}
                 />
                 {errors.email && <p className="input-error">{errors.email}</p>}
                 <InputField
-                    label = "Username"
-                    value = {username}
-                    onChange = {setUsername}
+                    label="Username"
+                    value={username}
+                    onChange={setUsername}
                 />
                 {errors.username && <p className="input-error">{errors.username}</p>}
                 <InputField
-                    label = "Profile Image"
-                    value = {profileImage}
-                    onChange = {setProfileImage}
+                    label="Profile Image"
+                    value={profileImage}
+                    onChange={setProfileImage}
                 />
                 {errors.profileImage && <p className="input-error">{errors.profileImage}</p>}
                 <InputField
-                    label = "Password"
-                    value = {password}
-                    onChange = {setPassword}
+                    label="Password"
+                    isPassword={true}
+                    value={password}
+                    onChange={setPassword}
                 />
                 <InputField
-                    label = "Confirm Password"
-                    value = {confirmPassword}
-                    onChange = {setConfirmPassword}
+                    label="Confirm Password"
+                    isPassword={true}
+
+                    value={confirmPassword}
+                    onChange={setConfirmPassword}
                 />
                 {errors.password && <p className="input-error">{errors.password}</p>}
-                <div className="auth-form-checkbox-wrapper">
-                    <label className="auth-form-checkbox-label">Start a storefront?</label>
-                    <input className="auth-form-checkbox" type="checkbox" value={startStorefront} onChange={() => setStartStorefront(!startStorefront)} />
-                </div>
+                {
+                    !userStorefront && (
+                        <div className="auth-form-checkbox-wrapper">
+                            <label className="auth-form-checkbox-label">Start a storefront?</label>
+                            <input className="auth-form-checkbox" type="checkbox" value={startStorefront} onChange={() => setStartStorefront(!startStorefront)} />
+                        </div>
+                    )
+                }
+
             </FormWrapperComponent>
 
 

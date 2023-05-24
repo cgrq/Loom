@@ -8,7 +8,7 @@ import CardFeedFilter from "../CardFeedFilter";
 export default function Homepage() {
     const dispatch = useDispatch();
     const { allProducts } = useSelector(state=> state.products);
-    const [ products, setProducts ] = useState();
+    const [ products, setProducts ] = useState("");
     const [ productType, setProductType ] = useState("");
     const { userStorefront } = useSelector(state=>state.storefronts)
     const { tops } = useSelector(state => state.products);
@@ -21,15 +21,18 @@ export default function Homepage() {
     const { spaces } = useSelector(state => state.products);
     const { desk } = useSelector(state => state.products);
 
+    const [isLoaded, setIsLoaded] = useState(false);
+
     useEffect(()=>{
         dispatch(getAllProductsThunk())
     }, [])
 
     useEffect(()=>{
-        setProducts(allProducts)
+        if(!isLoaded && Object.values(allProducts).length > 0){
+            setProducts(allProducts)
+            setIsLoaded(true)
+        }
     }, [allProducts])
-
-
 
     useEffect(()=>{
         if (productType === "tops"){
@@ -93,7 +96,7 @@ export default function Homepage() {
         }
     }, [userStorefront])
 
-    if (!products) return null
+    if (!Object.values(products).length) return null
 
     return (
         <div>

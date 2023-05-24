@@ -77,7 +77,7 @@ export default function StorefrontForm() {
                 (componentType === "update"
                     ? (
                         <DeleteButton
-                            onDeleteThunk={deleteStorefront()}
+                            onDeleteThunk={deleteStorefront(userStorefront.id)}
                             redirectUrl={`/`}
                             setErrors={setErrors}
                         />
