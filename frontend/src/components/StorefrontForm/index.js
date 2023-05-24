@@ -70,14 +70,15 @@ export default function StorefrontForm() {
     return user ? (
         <>
             <FormWrapperComponent
-                title="Edit Storefront"
+                title={`${userStorefront ? "Edit":"Create"} Storefront`}
                 onSubmit={handleSubmit}
-                submitButtonText="Update"
+                submitButtonText={`${userStorefront ? "Edit":"Create"}`}
                 lowerComponent={() =>
                 (componentType === "update"
                     ? (
                         <DeleteButton
                             onDeleteThunk={deleteStorefront()}
+                            redirectUrl={`/`}
                             setErrors={setErrors}
                         />
                     )

@@ -7,6 +7,7 @@ import "./DeleteButton.css"
 export default function DeleteButton({
     onDeleteThunk, // Deletion thunk to run on click
     setErrors, // Error handling state setter passed
+    redirectUrl, // Redirect url to push to history on delete
 }) {
     const dispatch = useDispatch();
     const history = useHistory();
@@ -14,13 +15,13 @@ export default function DeleteButton({
     const [confirmDelete, setConfirmDelete] = useState(false);
 
     const handleDelete = async () => {
-        const data = await dispatch(onDeleteThunk());
+        const data = await dispatch(onDeleteThunk);
 
 
         if (data) {
             setErrors(data);
         } else {
-            history.push('/');
+            history.push(redirectUrl);
         }
 
     };

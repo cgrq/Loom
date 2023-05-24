@@ -9,12 +9,9 @@ def product_exists(self, field):
         if id_field:
             product = Product.query.get(id_field)
             if product and product.name == submitted_name:
-                print("~~~~~~~~~!!!!!!!!!!IS PUT REQUEST")
-
                 return # Skip validation for edit requests if field has a value
 
         if Product.query.filter(Product.name == submitted_name).first():
-
             raise ValidationError('Name already exists.')
 
 class ProductDetailsForm(FlaskForm):
@@ -24,12 +21,12 @@ class ProductDetailsForm(FlaskForm):
     description = StringField('description', validators=[
                             DataRequired(), Length(1, 255)])
     quantity = IntegerField('quantity', validators=[
-                            DataRequired(), NumberRange(min=0,max=9999)])
+                            DataRequired(message="This field is required and must be a number"), NumberRange(min=0,max=9999)])
     price = FloatField('price', validators=[
-                            DataRequired(), NumberRange(min=0,max=99999)])
+                            DataRequired(message="This field is required and must be a number"), NumberRange(min=0,max=99999)])
     category = StringField('category', validators=[
                             DataRequired(), Length(1, 50)])
     subcategory = StringField('subcategory', validators=[
                             DataRequired(), Length(1, 150)])
-    storefrontId = quantity = IntegerField('storefrontId', validators=[
+    storefrontId = IntegerField('storefrontId', validators=[
                             DataRequired()])

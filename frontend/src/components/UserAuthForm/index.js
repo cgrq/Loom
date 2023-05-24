@@ -53,7 +53,6 @@ export default function UserAuthForm({ componentType }) {
             if (data) {
                 setErrors(data);
             } else {
-                console.log(`🖥 ~ file: index.js:54 ~ handleSubmit ~ startStorefront:`, startStorefront)
                 if (startStorefront) {
                     history.push('/create-a-storefront');
                 } else {
@@ -95,6 +94,7 @@ export default function UserAuthForm({ componentType }) {
                         <DeleteButton
                             onDeleteThunk={deleteUser()}
                             setErrors={setErrors}
+                            redirectUrl={`/`}
                         />
                     )
                     : (

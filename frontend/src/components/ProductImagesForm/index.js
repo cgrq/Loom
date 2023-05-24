@@ -7,7 +7,6 @@ import { useHistory, useParams } from 'react-router-dom';
 import "./ProductImagesForm.css"
 import FormWrapperComponent from "../FormWrapperComponent";
 import InputField from "../InputField";
-import DeleteButton from "../DeleteButton";
 
 export default function ProductImagesForm({
 }) {
@@ -146,31 +145,37 @@ export default function ProductImagesForm({
                     value={image1}
                     onChange={setImage1}
                 />
+                {errors.image1 && <p className="input-error">{errors.image1}</p>}
                 <InputField
                     label="A"
                     value={image2}
                     onChange={setImage2}
                 />
+                {errors.image1 && <p className="input-error">{errors.image2}</p>}
                 <InputField
                     label="B"
                     value={image3}
                     onChange={setImage3}
                 />
+                {errors.image1 && <p className="input-error">{errors.image3}</p>}
                 <InputField
                     label="C"
                     value={image4}
                     onChange={setImage4}
                 />
+                {errors.image1 && <p className="input-error">{errors.image4}</p>}
                 <InputField
                     label="D"
                     value={image5}
                     onChange={setImage5}
                 />
+                {errors.image1 && <p className="input-error">{errors.image5}</p>}
                 <InputField
                     label="E"
                     value={image6}
                     onChange={setImage6}
                 />
+                {errors.image6 && <p className="input-error">{errors.image6}</p>}
             </FormWrapperComponent>
 
         </>

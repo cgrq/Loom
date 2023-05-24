@@ -79,7 +79,7 @@ def get_storefront_by_name(name):
     Query for a storefront by name and returns the product as a dictionary
     """
 
-    print("STOREFRONT NAME!@#!@#")
+
     storefront = Storefront.query.filter(Storefront.user_id == current_user.id).first()
 
 
@@ -102,7 +102,7 @@ def get_storefronts():
     """
     Query for all storefronts and returns them as a list of storefront dictionaries
     """
-    print("INTE@#$@#$")
+
 
     storefronts = Storefront.query.all()
     return {'storefronts': [storefront.to_dict() for storefront in storefronts]}

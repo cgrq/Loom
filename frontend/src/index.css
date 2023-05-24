@@ -43,6 +43,11 @@ i{
 }
 .input-error {
     color: red;
+    font-family: "Space Grotesk";
+    font-size: 12px;
+    margin-bottom:10px;
+    padding:10px;
+    border-left:1px solid red;
 }
 .nav-user-details-wrapper{
     margin-left: 16px;

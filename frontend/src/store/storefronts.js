@@ -8,7 +8,7 @@ const setStorefront = (storefront) => ({
   payload: storefront,
 });
 
-const setUserStorefront = (storefront) => ({
+export const setUserStorefront = (storefront) => ({
   type: SET_USER_STOREFRONT,
   payload: storefront,
 });
@@ -95,11 +95,12 @@ export const deleteStorefront = (storefrontId) => async (dispatch) => {
   }
 };
 
+
+
 export const getUserStorefrontThunk = () => async (dispatch) => {
   const response = await fetch(`/api/storefronts/user`);
   if (response.ok) {
     const storefront = await response.json();
-    console.log("DISPATCHED THUNK")
 
     dispatch(setUserStorefront(storefront));
     return null;

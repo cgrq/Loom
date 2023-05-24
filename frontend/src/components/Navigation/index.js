@@ -13,11 +13,12 @@ export default function Navigation() {
     const { userStorefront } = useSelector((state) => state.storefronts)
 
     useEffect(() => {
-        console.log("LOGGED IN")
         if(user){
             dispatch(getUserStorefrontThunk())
         }
     }, [user])
+
+    
 
     // useEffect(() => {
     //     if (userStorefront && userStorefront.id) {

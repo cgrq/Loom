@@ -4,7 +4,7 @@ import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import configureStore from "./store";
-import { ModalProvider, Modal } from "./context/Modal";
+import { FilterProvider } from "./context/Filter";
 import * as sessionActions from "./store/session";
 
 import "./index.css";
@@ -21,14 +21,13 @@ if (process.env.NODE_ENV !== "production") {
 // HTML elements on top of the all the other HTML elements:
 function Root() {
   return (
-    <ModalProvider>
+    <FilterProvider>
       <Provider store={store}>
         <BrowserRouter>
           <App />
-          <Modal />
         </BrowserRouter>
       </Provider>
-    </ModalProvider>
+    </FilterProvider>
   );
 }
 

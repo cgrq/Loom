@@ -1,16 +1,12 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "./CardFeedFilter.css"
 import { SubcomponentIcon } from "../SubcategoryIcon";
+import { useEffect, useState } from "react";
 
 export default function CardFeedFilter({
     setProducts, // Used to set products in parent to dictate what cards are being rendered
-    userStorefront = false // Defaults to false, dictates whether or not user specific storefronts will be rendered or just general products
+    userStorefront = false, // Defaults to false, dictates whether or not user specific storefronts will be rendered or just general products
 }) {
-    const dispatch = useDispatch();
-
-
-
-    const publicUrl = process.env.PUBLIC_URL;
 
     return (
         <div className="card-feed-filter-wrapper">
@@ -22,20 +18,19 @@ export default function CardFeedFilter({
                 <div className="card-feed-filter-subcategorys-wrapper">
                     <SubcomponentIcon
                         type="tops"
-                        setProductState={setProducts}
+                        setProducts={setProducts}
                         userStorefront={userStorefront}
                     />
                     <SubcomponentIcon
                         type="bottoms"
-                        setProductState={setProducts}
-                        userStorefront={userStorefront}
+                        setProducts={setProducts}
 
+                        userStorefront={userStorefront}
                     />
                     <SubcomponentIcon
                         type="footwear"
-                        setProductState={setProducts}
+                        setProducts={setProducts}
                         userStorefront={userStorefront}
-
                     />
                 </div>
             </div>
@@ -47,21 +42,18 @@ export default function CardFeedFilter({
                 <div className="card-feed-filter-subcategorys-wrapper">
                     <SubcomponentIcon
                         type="seating"
-                        setProductState={setProducts}
+                        setProducts={setProducts}
                         userStorefront={userStorefront}
-
                     />
                     <SubcomponentIcon
                         type="surfaces"
-                        setProductState={setProducts}
+                        setProducts={setProducts}
                         userStorefront={userStorefront}
-
                     />
                     <SubcomponentIcon
                         type="storage"
-                        setProductState={setProducts}
+                        setProducts={setProducts}
                         userStorefront={userStorefront}
-
                     />
                 </div>
             </div>
@@ -73,21 +65,18 @@ export default function CardFeedFilter({
                 <div className="card-feed-filter-subcategorys-wrapper">
                     <SubcomponentIcon
                         type="walls"
-                        setProductState={setProducts}
+                        setProducts={setProducts}
                         userStorefront={userStorefront}
-
                     />
                     <SubcomponentIcon
                         type="spaces"
-                        setProductState={setProducts}
+                        setProducts={setProducts}
                         userStorefront={userStorefront}
-
                     />
                     <SubcomponentIcon
                         type="desk"
-                        setProductState={setProducts}
+                        setProducts={setProducts}
                         userStorefront={userStorefront}
-
                     />
                 </div>
             </div>
