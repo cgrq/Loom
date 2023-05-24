@@ -296,11 +296,11 @@ export default function reducer(state = initialState, action) {
 
       return newState;
 
-    case SET_PRODUCT_IMAGES:
-      newState.storefrontProducts[action.payload.productImages.product_id].productImages = action.payload.productImages
-      newState.allProducts[action.payload.productImages.product_id].productImages = action.payload.productImages
-      newState[action.payload.product.subcategory][action.payload.productImages] = action.payload.productImages
-      newState[formatStorefrontCategoryNameForReducer(action.payload.product.subcategory)][action.payload.product.productImages] = action.payload.productImages
+      case SET_PRODUCT_IMAGES:
+      // newState.storefrontProducts[action.payload.productImages.product_id].productImages = action.payload.productImages
+      // newState.allProducts[action.payload.productImages.product_id].productImages = action.payload.productImages
+      // newState[action.payload.productSubcategory][action.payload.productImages.product_id] = action.payload.productImages
+      // newState[formatStorefrontCategoryNameForReducer(action.payload.productSubcategory)][action.payload.productImages.product_id] = action.payload.productImages
 
       return newState;
 

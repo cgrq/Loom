@@ -25,6 +25,8 @@ def create_product_images(id):
     form['csrf_token'].data = request.cookies['csrf_token']
 
     if form.validate_on_submit():
+        product = Product.query.get(id)
+
         product_images = ProductImages(
             image1=form.data['image1'],
             image2=form.data['image2'],
@@ -37,7 +39,7 @@ def create_product_images(id):
         db.session.add(product_images)
         db.session.commit()
 
-        return {"productImages": product_images.to_dict()}
+        return {"productImages": product_images.to_dict(), "productSubcategory": product.subcategory}
     return {'errors': form.errors}, 401
 
 @product_routes.route('/<int:id>/images/edit', methods=['PUT'])
@@ -51,6 +53,7 @@ def edit_product_images(id):
 
 
     if form.validate_on_submit():
+        product = Product.query.get(id)
         product_images = ProductImages.query.filter(ProductImages.product_id == id).first()
 
 
@@ -64,7 +67,7 @@ def edit_product_images(id):
 
         db.session.commit()
 
-        return {"productImages": product_images.to_dict()}
+        return {"productImages": product_images.to_dict(), "productSubcategory": product.subcategory}
     return {'errors': form.errors}, 401
 
 @product_routes.route('/<string:name>')

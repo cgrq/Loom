@@ -30,16 +30,17 @@ export function ProductPage() {
     }, [allProducts])
 
     useEffect(() => {
-        if (product && product.productImages && product.productImages[0] && product.productImages[0].image1) {
+        console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~>", Object.values(product))
+        if (Object.values(product).length > 0 && product.productImages && product.productImages[0] && product.productImages[0].image1) {
             setMainImage(product.productImages[0].image1)
         }
     }, [product])
 
-    if (!product || !product.name) return null;
+    if (!Object.values(product).length || !product.name) return null;
     const productImages = product.productImages[0]
 
 
-
+    if(!productImages || !productImages.image1) return null;
 
     return (
         <div>

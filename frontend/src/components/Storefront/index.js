@@ -31,7 +31,6 @@ export default function Storefront() {
     const desk  = useSelector(state => state.products.storefrontDesk);
 
     useEffect(()=>{
-        console.log("!!@#!@#!_", bottoms)
     },[])
 
     useEffect(()=>{
