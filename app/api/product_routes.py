@@ -89,8 +89,6 @@ def get_storefront_products(id):
     if products is None:
         return {"products": None}
 
-    for product in products:
-        print("~~PRODUCT~~", product.to_dict())
 
     return {"products":[product.to_dict() for product in products]}
 

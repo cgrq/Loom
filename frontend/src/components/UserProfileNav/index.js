@@ -4,7 +4,7 @@ import { NavLink, useHistory } from 'react-router-dom';
 import CTAButton from "../CTAButton";
 import { logout } from "../../store/session";
 import "./UserProfileNav.css"
-import { getUserStorefrontThunk } from "../../store/storefronts";
+import { getUserStorefrontThunk, setUserStorefront } from "../../store/storefronts";
 
 export default function UserProfileNav({ user, closeMenu }) {
     const history = useHistory();
@@ -22,6 +22,7 @@ export default function UserProfileNav({ user, closeMenu }) {
     const handleLogout = (e) => {
         e.preventDefault();
         dispatch(logout());
+        dispatch(setUserStorefront({storefront:null}))
         closeMenu();
         history.push('/');
     };

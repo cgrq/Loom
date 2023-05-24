@@ -31,8 +31,7 @@ def login():
         login_user(user)
 
         return {"user": user.to_dict()}
-    print("!!!ERRORS")
-    print(form.errors)
+
     return {'errors': form.errors}, 401
 
 @auth_routes.route('/logout')
@@ -78,7 +77,7 @@ def edit():
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         user = User.query.get(current_user.id)
-        print(user.to_dict())
+
 
         user.username = form.data['username']
         user.email = form.data['email']

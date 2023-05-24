@@ -24,8 +24,9 @@ const setStorefrontProducts = (product) => ({
   payload: product,
 });
 
-const removeProduct = () => ({
+const removeProduct = (product) => ({
   type: REMOVE_PRODUCT,
+  payload: product
 });
 
 export const createProductThunk =
@@ -165,15 +166,17 @@ export const editProductImagesThunk =
       }
     };
 
-// Delete a user thunk
-export const deleteProduct = (id) => async (dispatch) => {
+export const deleteProduct = (id, subcategory) => async (dispatch) => {
   const response = await fetch(`/api/products/${id}/delete`, {
     method: 'DELETE'
   });
 
 
   if (response.ok) {
-    dispatch(removeProduct());
+    dispatch(removeProduct({
+      productId: id,
+      subcategory
+    }));
     return null;
   } else {
     const errorResponse = await response.json();
@@ -219,17 +222,7 @@ export const getProductByName = (productName) => async (dispatch) => {
 
 const initialState = {
   allProducts: {},
-  storefrontProducts: {
-    tops: {},
-    bottoms: {},
-    footwear: {},
-    seating: {},
-    surfaces: {},
-    storage: {},
-    walls: {},
-    spaces: {},
-    desk: {},
-  },
+  storefrontProducts: {},
   tops: {},
   bottoms: {},
   footwear: {},
@@ -239,68 +232,86 @@ const initialState = {
   walls: {},
   spaces: {},
   desk: {},
+  storefrontTops: {},
+  storefrontBottoms: {},
+  storefrontFootwear: {},
+  storefrontSeating: {},
+  storefrontSurfaces: {},
+  storefrontStorage: {},
+  storefrontWalls: {},
+  storefrontSpaces: {},
+  storefrontDesk: {},
 };
 
+function formatStorefrontCategoryNameForReducer(categoryName){
+  return `storefront${categoryName.slice(0,1).toUpperCase() + categoryName.slice(1)}`
+}
+
 export default function reducer(state = initialState, action) {
-  let newState = {};
+  let newState = {
+    ...state,
+    storefrontProducts: { ...state.storefrontProducts },
+    allProducts: { ...state.allProducts },
+    tops: {...state.tops},
+    bottoms: {...state.bottoms},
+    footwear: {...state.footwear},
+    seating: {...state.seating},
+    surfaces: {...state.surfaces},
+    storage: {...state.storage},
+    walls: {...state.walls},
+    spaces: {...state.spaces},
+    desk: {...state.desk},
+    storefrontTops: {...state.storefrontTops},
+    storefrontBottoms: {...state.storefrontBottoms},
+    storefrontFootwear: {...state.storefrontFootwear},
+    storefrontSeating: {...state.storefrontSeating},
+    storefrontSurfaces: {...state.storefrontSurfaces},
+    storefrontStorage: {...state.storefrontStorage},
+    storefrontWalls: {...state.storefrontWalls},
+    storefrontSpaces: {...state.storefrontSpaces},
+    storefrontDesk: {...state.storefrontDesk},
+  }
   switch (action.type) {
     case SET_PRODUCT:
-      newState = { ...state, storefrontProducts: { ...state.storefrontProducts }, allProducts: { ...state.allProducts } }
       newState.storefrontProducts[action.payload.product.id] = action.payload.product
       newState.allProducts[action.payload.product.id] = action.payload.product
+      newState[action.payload.product.subcategory][action.payload.product.id] = action.payload.product // ex. newstate[footwear][1]
+      newState[formatStorefrontCategoryNameForReducer(action.payload.product.subcategory)][action.payload.product.id] = action.payload.product // ex. newState[storefrontFootwear][1] = action.payload.product
+
       return newState;
+
     case SET_PRODUCTS:
-      newState = {
-        ...state,
-        allProducts: { ...state.allProducts },
-        tops: { ...state.tops },
-        bottoms: { ...state.bottoms },
-        footwear: { ...state.footwear },
-        seating: { ...state.seating },
-        surfaces: { ...state.surfaces },
-        storage: { ...state.storage },
-        walls: { ...state.walls },
-        spaces: { ...state.spaces },
-        desk: { ...state.desk },
-      }
       action.payload.products.forEach(product => {
         newState.allProducts[product.id] = product
-        console.log(`🖥 ~ file: products.js:259 ~ reducer ~ product.subcategory:`, product.subcategory)
         newState[product.subcategory][product.id] = product
       })
+
       return newState;
+
     case SET_STOREFRONT_PRODUCTS:
-      newState = {
-        ...state,
-        storefrontProducts: {
-          ...state.storefrontProducts,
-          tops: { ...state.storefrontProducts.tops },
-          bottoms: { ...state.storefrontProducts.bottoms },
-          footwear: { ...state.storefrontProducts.footwear },
-          seating: { ...state.storefrontProducts.seating },
-          surfaces: { ...state.storefrontProducts.surfaces },
-          storage: { ...state.storefrontProducts.storage },
-          walls: { ...state.storefrontProducts.walls },
-          spaces: { ...state.storefrontProducts.spaces },
-          desk: { ...state.storefrontProducts.desk },
-        },
-        allProducts: {
-          ...state.allProducts
-        }
-      }
       action.payload.products.forEach(product => {
         newState.storefrontProducts[product.id] = product
-        newState.storefrontProducts[product.subcategory][product.id] = product
-        newState.allProducts[product.id] = product
+        newState[formatStorefrontCategoryNameForReducer(product.subcategory)][product.id] = product
       })
+
       return newState;
+
     case SET_PRODUCT_IMAGES:
-      newState = { ...state, storefrontProducts: { ...state.storefrontProducts }, allProducts: { ...state.allProducts } }
       newState.storefrontProducts[action.payload.productImages.product_id].productImages = action.payload.productImages
       newState.allProducts[action.payload.productImages.product_id].productImages = action.payload.productImages
+      newState[action.payload.product.subcategory][action.payload.productImages] = action.payload.productImages
+      newState[formatStorefrontCategoryNameForReducer(action.payload.product.subcategory)][action.payload.product.productImages] = action.payload.productImages
+
       return newState;
+
     case REMOVE_PRODUCT:
-      return { ...state, storefrontProducts: null };
+      delete newState.storefrontProducts[action.payload.productId]
+      delete newState.allProducts[action.payload.productId]
+      delete newState[action.payload.subcategory][action.payload.productId]
+      delete newState[formatStorefrontCategoryNameForReducer(action.payload.subcategory)][action.payload.productId]
+
+      return newState;
+
     default:
       return state;
   }

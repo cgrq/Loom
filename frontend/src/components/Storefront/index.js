@@ -1,13 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { NavLink, useHistory, useParams } from "react-router-dom";
-
 import { getStorefrontProductsThunk } from "../../store/products"
 import ProductCard from "../ProductCard";
 import "./Storefront.css"
 import { getStorefrontByName } from "../../store/storefronts";
 import ProductCardFeed from "../ProductCardFeed";
 import CardFeedFilter from "../CardFeedFilter";
+import { useFilter } from "../../context/Filter";
 
 export default function Storefront() {
     const dispatch = useDispatch()
@@ -16,9 +16,80 @@ export default function Storefront() {
     const { storefrontName } = useParams();
     const { currentStorefront } = useSelector((state) => state.storefronts)
     const { storefrontProducts } = useSelector((state) => state.products)
+    const { selectedFilter } = useFilter()
+    const [ showProfile, setShowProfile ] = useState(false)
+    const [ products, setProducts ] = useState()
+    const { userStorefront } = useSelector(state=>state.storefronts)
+    const tops = useSelector(state => state.products.storefrontTops);
+    const bottoms = useSelector(state => state.products.storefrontBottoms);
+    const footwear  = useSelector(state => state.products.storefrontFootwear);
+    const seating  = useSelector(state => state.products.storefrontSeating);
+    const surfaces  = useSelector(state => state.products.storefrontSurfaces);
+    const storage = useSelector(state => state.products.storefrontStorage);
+    const walls  = useSelector(state => state.products.storefrontWalls);
+    const spaces  = useSelector(state => state.products.storefrontSpaces);
+    const desk  = useSelector(state => state.products.storefrontDesk);
 
-    const [showProfile, setShowProfile] = useState(false)
-    const [products, setProducts] = useState({})
+    useEffect(()=>{
+        console.log("!!@#!@#!_", bottoms)
+    },[])
+
+    useEffect(()=>{
+        if (selectedFilter === "tops"){
+            setProducts(tops)
+        }
+    }, [tops])
+
+    useEffect(()=>{
+        console.log("!!@#!@#!_", bottoms)
+        if (selectedFilter === "bottoms"){
+            console.log("~~~!!~~~ UPDATED !!~~~!!!~~~")
+            setProducts(bottoms)
+        }
+    }, [bottoms])
+
+    useEffect(()=>{
+        if (selectedFilter === "footwear"){
+            setProducts(footwear)
+        }
+    }, [footwear])
+
+    useEffect(()=>{
+        if (selectedFilter === "seating"){
+            setProducts(seating)
+        }
+    }, [seating])
+
+    useEffect(()=>{
+        if (selectedFilter === "surfaces"){
+            setProducts(surfaces)
+        }
+    }, [surfaces])
+
+    useEffect(()=>{
+        if (selectedFilter === "storage"){
+            setProducts(storage)
+        }
+    }, [storage])
+
+    useEffect(()=>{
+        if (selectedFilter === "walls"){
+            setProducts(walls)
+        }
+    }, [walls])
+
+    useEffect(()=>{
+        if (selectedFilter === "spaces"){
+            setProducts(spaces)
+        }
+    }, [spaces])
+
+    useEffect(()=>{
+        if (selectedFilter === "desk"){
+            setProducts(desk)
+        }
+    }, [desk])
+
 
     useEffect(() => {
         dispatch(getStorefrontByName(storefrontName))
@@ -35,6 +106,10 @@ export default function Storefront() {
             setProducts(storefrontProducts)
         }
     }, [storefrontProducts])
+
+    useEffect(()=>{
+        console.log(`🖥 ~ file: index.js:107 ~ useEffect ~ products:`, products)
+    },[products])
 
     if (!user || !storefrontProducts || !currentStorefront || !currentStorefront.user) return null
     return (
@@ -71,7 +146,11 @@ export default function Storefront() {
                                 {currentStorefront.description}
                             </div>
                         )
-                        : <CardFeedFilter products={products} setProducts={setProducts} userStorefront={true}/>
+                        : <CardFeedFilter
+                            products={products}
+                            setProducts={setProducts}
+                            userStorefront={true}
+                          />
                 }
 
             </div>
