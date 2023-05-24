@@ -21,13 +21,16 @@ export default function Homepage() {
     const { spaces } = useSelector(state => state.products);
     const { desk } = useSelector(state => state.products);
 
+    const [isLoaded, setIsLoaded] = useState(false);
+
     useEffect(()=>{
         dispatch(getAllProductsThunk())
     }, [])
 
     useEffect(()=>{
-        if(!Object.values(products).length){
+        if(!isLoaded && Object.values(allProducts).length > 0){
             setProducts(allProducts)
+            setIsLoaded(true)
         }
     }, [allProducts])
 

@@ -31,7 +31,27 @@ export default function Storefront() {
     const desk  = useSelector(state => state.products.storefrontDesk);
 
     useEffect(()=>{
+        if(storefrontName){
+            dispatch(getStorefrontByName(storefrontName))
+        }
+
     },[])
+
+    useEffect(()=>{
+        const storefrontProductsArr = Object.values(storefrontProducts);
+        if(storefrontProducts
+            && storefrontProductsArr.length > 0
+            && storefrontProductsArr[0].storefrontId === userStorefront.id){
+            setProducts(storefrontProducts)
+        }
+    }, [storefrontProducts])
+
+    useEffect(() => {
+        if (currentStorefront && currentStorefront.id) {
+            dispatch(getStorefrontProductsThunk(currentStorefront.id))
+        }
+    }, [currentStorefront])
+
 
     useEffect(()=>{
         if (selectedFilter === "tops"){
@@ -90,21 +110,7 @@ export default function Storefront() {
     }, [desk])
 
 
-    useEffect(() => {
-        dispatch(getStorefrontByName(storefrontName))
-    }, [storefrontName])
 
-    useEffect(() => {
-        if (currentStorefront && currentStorefront.id) {
-            dispatch(getStorefrontProductsThunk(currentStorefront.id))
-        }
-    }, [currentStorefront])
-
-    useEffect(()=>{
-        if(storefrontProducts){
-            setProducts(storefrontProducts)
-        }
-    }, [storefrontProducts])
 
     useEffect(()=>{
         console.log(`🖥 ~ file: index.js:107 ~ useEffect ~ products:`, products)

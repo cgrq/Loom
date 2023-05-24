@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createStorefrontThunk, editStorefrontThunk, deleteStorefront, getStorefrontByName } from "../../store/storefronts";
 import FormWrapperComponent from "../FormWrapperComponent"
 import { useHistory, useParams } from 'react-router-dom';
 import "./ProductForm.css"
-import { getProductByName, createProductThunk, editProductThunk, setCurrentProduct, deleteProduct, getStorefrontProductsThunk } from "../../store/products";
+import { getProductByName, createProductThunk, editProductThunk,  deleteProduct, getStorefrontProductsThunk } from "../../store/products";
 import InputField from "../InputField";
 import DeleteButton from "../DeleteButton";
 import SelectField from "../SelectField";
