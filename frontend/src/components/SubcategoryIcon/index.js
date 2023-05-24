@@ -22,10 +22,6 @@ export function SubcomponentIcon({
     if(!type) return null;
 
     const handleClick= () => {
-        console.log(`🖥 ~ file: index.js:29 ~ handleClick ~ userProduct:`, userProduct)
-        console.log(`🖥 ~ file: index.js:30 ~ handleClick ~ product:`, product)
-        console.log(`🖥 ~ file: index.js:30 ~ handleClick ~ formatted type:`, `storefront${type.slice(0,1) + type.slice(1)}`)
-
         setSelectedFilter(type);
         setProducts(userStorefront ? userProduct : product)
     }

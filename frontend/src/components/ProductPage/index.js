@@ -30,7 +30,6 @@ export function ProductPage() {
     }, [allProducts])
 
     useEffect(() => {
-        console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~>", Object.values(product))
         if (Object.values(product).length > 0 && product.productImages && product.productImages[0] && product.productImages[0].image1) {
             setMainImage(product.productImages[0].image1)
         }
