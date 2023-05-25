@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
 import { getProductByName } from "../../store/products"
 import "./ProductPage.css"
+import ProductPageReviews from "../ProductPageReviews"
 
 
 export function ProductPage() {
@@ -45,8 +46,9 @@ export function ProductPage() {
         <div>
             <div className="product-page-image-title-wrapper">
                 <div className="product-page-images-wrapper">
-                    <h1 className="product-page-name">{product.name}</h1>
-
+                    <div  className="product-page-name-wrapper">
+                        <h1 className="product-page-name">{product.name}</h1>
+                    </div>
                     <div>
                         <img
                             className="product-page-display-image"
@@ -106,6 +108,9 @@ export function ProductPage() {
                         </div>
                     </div>
                 </div>
+            </div>
+            <div className="product-reviews-wrapper">
+                <ProductPageReviews productId={product.id} />
             </div>
         </div>
     )

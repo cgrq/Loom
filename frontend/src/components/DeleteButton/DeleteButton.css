@@ -3,7 +3,6 @@
 }
 
 .delete-button-confirmation-wrapper{
-    width:calc(100% - 70px);
     padding:30px;
     margin-top: 10px;
     border-radius: 30px;
