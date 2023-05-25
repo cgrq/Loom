@@ -14,6 +14,41 @@
 .product-page-star-setter-delete-button{
     margin-left:10px;
 }
+
 .product-page-star-setter-button-wrapper{
     display:flex;
+}
+
+.product-page-review-wrapper{
+    display:flex;
+    flex-flow: column;
+    padding:50px 0;
+}
+
+.product-page-review-details-wrapper{
+    display:flex;
+    align-items: center;
+}
+
+.product-page-review-details-wrapper span{
+    font-family: "Source Sans Pro" !important;
+    margin:0 20px;
+}
+
+.product-page-review-details-wrapper img{
+    width:40px;
+    height:40px;
+}
+
+.product-page-review-details-wrapper i{
+    font-size:14px !important;
+}
+.product-page-review-message-wrapper{
+    padding:20px 30px;
+    background-color: rgb(237, 237, 237);
+    margin:20px;
+    border-radius:20px;
+}
+.product-page-review-date-wrapper{
+    font-size: 12px;
 }

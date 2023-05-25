@@ -5,7 +5,7 @@ import DeleteButton from "../DeleteButton"
 import "./ProductPageReviews.css"
 import StarSetter from "../StarSetter";
 import { useDispatch, useSelector } from "react-redux";
-import { createReviewThunk, editReviewThunk, getReviewsByProductId } from "../../store/reviews";
+import { createReviewThunk, deleteReview, editReviewThunk, getReviewsByProductId } from "../../store/reviews";
 
 
 export default function ProductPageReviews({
@@ -18,6 +18,7 @@ export default function ProductPageReviews({
     const [userReview, setUserReview] = useState("");
     const [rating, setRating] = useState(0);
     const [editingReview, setEditingReview] = useState(false)
+    const [errors, setErrors] = useState({})
 
     useEffect(() => {
         dispatch(getReviewsByProductId(productId))
@@ -46,28 +47,59 @@ export default function ProductPageReviews({
         }
     }, [editingReview])
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         if (rating > 0) {
-            dispatch(createReviewThunk(
+            setErrors({})
+            const data = await dispatch(createReviewThunk(
                 rating,
                 userReview,
                 productId,
                 user.id
             ))
+            if (data) {
+                setErrors(data);
+            }
+
         }
     }
 
-    const handleEdit = () => {
-        console.log(`🖥 ~ file: index.js:69 ~ handleEdit ~ rating:`, typeof rating)
-
-        dispatch(editReviewThunk(
+    const handleEdit = async () => {
+        setErrors({})
+        const data = await dispatch(editReviewThunk(
             reviewId,
             rating,
             userReview,
             productId,
             user.id
         ))
+        if (data) {
+            setErrors(data);
+        }
+
+
     }
+
+    function formatDate(dateString) {
+        const date = new Date(dateString);
+        const today = new Date();
+
+        const options = {
+          month: "numeric",
+          day: "numeric",
+          year: "2-digit",
+        };
+
+        const formattedDate = date.toLocaleDateString("en-US", options);
+        const todayFormattedDate = today.toLocaleDateString("en-US", options);
+
+        if (formattedDate === todayFormattedDate) {
+          return "today";
+        } else if (date.getDate() === today.getDate() - 1) {
+          return "yesterday";
+        } else {
+          return formattedDate.replace(/^0+/, ''); 
+        }
+      }
 
 
     return (
@@ -82,6 +114,8 @@ export default function ProductPageReviews({
                     onChange={setUserReview}
                 />
             </div>
+            {errors.message && <p className="input-error">{errors.message}</p>}
+
             <div className="product-page-star-setter-wrapper">
                 <StarSetter
                     value={rating}
@@ -99,10 +133,30 @@ export default function ProductPageReviews({
                     editingReview && (
                         <div className="product-page-star-setter-delete-button">
                             <DeleteButton
-
+                                onDeleteThunk={deleteReview(productId)}
+                                setErrors={setErrors}
                             />
                         </div>
                     )
+                }
+            </div>
+            <div className="product-page-reviews-feed">
+                {
+                    Object.values(reviews).map((review) => (
+                        <div key={review.id} className="product-page-review-wrapper">
+                            <div className="product-page-review-details-wrapper">
+                                <img src={review.userProfileImage} />
+                                <span>{review.username}</span>
+                                <StarSetter value={review.rating} />
+                            </div>
+                            <div className="product-page-review-message-wrapper">
+                                {review.message}
+                            </div>
+                            <div className="product-page-review-date-wrapper">
+                                {formatDate(review.updated_at)}
+                            </div>
+                        </div>
+                    ))
                 }
             </div>
         </div>

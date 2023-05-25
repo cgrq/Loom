@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
-from app.models import db, Review
+from app.models import db, Review, User
 from app.forms import ProductReviewsForm
 
 
@@ -64,13 +64,10 @@ def edit_review(id):
     Edits a review
     """
     form = ProductReviewsForm()
-    print("~~!!~~!! REVIEW 1")
 
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        print("~~!!~~!! REVIEW 2")
         review = Review.query.get(id)
-        print(review)
 
         review.rating = form.data['rating']
         review.message = form.data['message']
@@ -83,12 +80,12 @@ def edit_review(id):
     return {'errors': form.errors}, 401
 
 
-@review_routes.route('<int:id>/delete', methods=['DELETE'])
-def delete_review(id):
+@review_routes.route('product/<int:product_id>/delete', methods=['DELETE'])
+def delete_review(product_id):
     """
     Route to delete a review
     """
-    review = Review.query.get(id)
+    review = Review.query.filter(Review.product_id == product_id).first()
 
     db.session.delete(review)
     db.session.commit()

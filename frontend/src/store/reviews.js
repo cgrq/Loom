@@ -14,9 +14,9 @@ const setReviews = (reviews) => ({
   payload: reviews,
 });
 
-const removeReview = (review) => ({
+const removeReview = (productId) => ({
   type: REMOVE_REVIEW,
-  payload: review
+  payload: productId
 });
 
 export const resetReviews = () => ({
@@ -58,7 +58,6 @@ export const createReviewThunk =
 export const editReviewThunk =
   (id, rating, message, productId, userId) =>
     async (dispatch) => {
-      console.log(`🖥 ~ file: reviews.js:89 ~ rating:`, rating)
 
       const response = await fetch(`/api/reviews/${id}/edit`, {
         method: "PUT",
@@ -88,17 +87,14 @@ export const editReviewThunk =
       }
     };
 
-export const deleteReview = (id, subcategory) => async (dispatch) => {
-  const response = await fetch(`/api/reviews/${id}/delete`, {
+export const deleteReview = (productId) => async (dispatch) => {
+  const response = await fetch(`/api/reviews/product/${productId}/delete`, {
     method: 'DELETE'
   });
 
 
   if (response.ok) {
-    dispatch(removeReview({
-      reviewId: id,
-      subcategory
-    }));
+    dispatch(removeReview(productId));
     return null;
   } else {
     const errorResponse = await response.json();
@@ -153,7 +149,7 @@ export default function reducer(state = initialState, action) {
       return newState;
 
     case REMOVE_REVIEW:
-      delete newState[action.payload.review.productId]
+      delete newState[action.payload]
 
       return newState;
 
