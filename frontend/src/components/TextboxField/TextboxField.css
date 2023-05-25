@@ -1,0 +1,27 @@
+.textbox-field-wrapper{
+    display:flex;
+    flex-flow:column nowrap;
+    width:100%;
+    margin-bottom:10px;
+}
+.product-page-reviews-title-wrapper{
+    margin-bottom: 10px;
+}
+.textbox-field-label{
+    font-size: 12px;
+    margin-bottom: 10px;
+    color:rgb(177, 177, 177)
+}
+.textbox-field{
+    padding:20px;
+    border:none;
+    border-bottom: 1px solid rgb(210, 210, 210);
+    width:calc(100%-40px);
+    resize: none;
+    height:60px;
+}
+.textbox-field:focus{
+    outline:none;
+    box-shadow: 0px 8px 13px 1px rgba(0, 0, 0, 0.087);
+    border-radius: 20px;
+}
