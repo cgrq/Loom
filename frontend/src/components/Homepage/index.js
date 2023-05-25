@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllProductsThunk, getStorefrontProductsThunk } from "../../store/products";
 import "./Homepage.css"
 import CardFeedFilter from "../CardFeedFilter";
+import { getAllReviewsThunk } from "../../store/reviews";
 
 export default function Homepage() {
     const dispatch = useDispatch();
@@ -25,6 +26,7 @@ export default function Homepage() {
 
     useEffect(()=>{
         dispatch(getAllProductsThunk())
+        dispatch(getAllReviewsThunk())
     }, [])
 
     useEffect(()=>{

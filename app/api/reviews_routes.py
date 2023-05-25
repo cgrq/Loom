@@ -13,7 +13,6 @@ def get_reviews():
     Query for all reviews and returns them as a list of review dictionaries
     """
     reviews = Review.query.all()
-    print("!!!REVIEWS")
     print(reviews)
     return {'reviews': [review.to_dict() for review in reviews]}
 

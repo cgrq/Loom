@@ -1,19 +1,42 @@
-.product-page-image-title-wrapper{
+/* Layout */
+
+.product-page-upper-wrapper{
     display:flex;
-    margin-top:30px;
+    flex-flow: column;
+    margin-top:80px;
 }
-.product-page-images-wrapper, .product-page-details-row{
-    padding:30px;
-    box-shadow: 0px 8px 13px 1px rgba(0, 0, 0, 0.087);
-    border-radius: 50px;
+.product-page-details-row{
+    width:300px;
+    margin-bottom:40px;
 }
+
+/* Title */
+
+.product-page-title-wrapper{
+    width:100%;
+    display: flex;
+    margin-left:20px;
+    margin-bottom:10px;
+}
+.product-page-name{
+    padding-bottom:20px;
+}
+
+/* Images */
+
 .product-page-images-wrapper{
     display:flex;
     flex-flow: column nowrap;
     justify-content: center;
     align-items: center;
-    padding:50px;
-    width:360px
+    padding:0 20px;
+    width:360px;
+}
+.product-page-display-image{
+    width:260px;
+    height:260px;
+    border-radius: 20px;
+    object-fit: cover;
 }
 .product-page-image-button-wrapper{
     padding-top:40px;
@@ -26,30 +49,18 @@
     object-fit: cover;
     border-radius: 5px;
 }
-.product-page-name-wrapper{
-    width:100%;
-    display: flex;
-    margin-left:30px;
-}
-.product-page-name{
-    padding-bottom:20px;
-}
 
-.product-page-display-image{
-    width:260px;
-    height:260px;
-    border-radius: 20px;
-    object-fit: cover;
+/* Details */
+
+.product-page-content-wrapper{
+    display:flex;
+    margin-bottom:40px;
 }
 .product-page-details-wrapper{
-    margin-left:30px;
     display:flex;
+    padding:60px;
     flex-flow: column nowrap;
-    justify-content: center;
-}
-.product-page-details-row{
-    width:300px;
-    margin-bottom:20px;
+    align-items: flex-start;
 }
 .product-page-details-label{
     font-family: "Space Grotesk";
@@ -84,6 +95,26 @@
 }
 
 /* Reviews */
+
 .product-reviews-wrapper{
     margin:30px 0;
+
+}
+
+.product-page-average-rating-wrapper{
+    display:flex;
+    align-items: flex-end;
+}
+
+
+.product-page-avg-rating-wrapper div{
+    margin-right:10px;
+}
+.product-page-avg-rating{
+    display:flex;
+    margin-right:10px
+}
+.product-page-avg-rating-review-total{
+    margin-left:10px;
+    color:rgb(164, 164, 164);
 }
