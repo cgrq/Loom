@@ -13,12 +13,7 @@ export function SubcomponentIcon({
     const product = useSelector(state => state.products[type]);
     const userProduct = useSelector(state => state.products[`storefront${type.slice(0,1).toUpperCase() + type.slice(1)}`]);
     const { setSelectedFilter } = useFilter();
-
-    // useEffect(()=>{
-    //     if(userStorefront){
-    //     }
-    // },[userProduct])
-
+    
     if(!type) return null;
 
     const handleClick= () => {

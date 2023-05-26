@@ -26,10 +26,12 @@
 
 }
 
+/* Review */
+
 .product-page-review-wrapper{
     display:flex;
     flex-flow: column;
-    margin:10px 0;
+    margin:40px 0;
 }
 
 .product-page-review-details-wrapper{
@@ -45,6 +47,7 @@
 .product-page-review-details-wrapper img{
     width:40px;
     height:40px;
+    border-radius: 100%;
 }
 
 .product-page-review-details-wrapper i{

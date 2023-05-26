@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
-import { getProductByName } from "../../store/products"
+import { getProductByName, resetProducts } from "../../store/products"
 import "./ProductPage.css"
 import ProductPageReviews from "../ProductPageReviews"
 import { getReviewsByProductId } from "../../store/reviews"
@@ -21,6 +21,10 @@ export function ProductPage() {
 
     useEffect(() => {
         dispatch(getProductByName(productName))
+
+        return () => {
+            dispatch(resetProducts())
+        }
     }, [])
 
     useEffect(() => {
@@ -30,8 +34,6 @@ export function ProductPage() {
             const currentProduct = allProductsArr.find(
                 (product) => product.name === productName
             );
-
-
 
             // If the product does exist...
             if (Object.values(currentProduct).length > 0) {
@@ -52,12 +54,11 @@ export function ProductPage() {
     }, [product])
 
     useEffect(() => {
-        console.log("ALL REVIEWS")
         if(allReviews[product.id]){
             const currentProductReviewsArr = Object.values(allReviews[product.id])
             if (currentProductReviewsArr.length > 0) {
                 const starSum = currentProductReviewsArr.reduce((acc, review) => acc + review.rating, 0);
-                setAvgRating(Math.round(starSum / currentProductReviewsArr.length))
+                setAvgRating((Math.round((starSum / currentProductReviewsArr.length) * 10) / 10).toFixed(1))
                 setTotalRatings(currentProductReviewsArr.length)
             } else{
                 setAvgRating(0)
@@ -69,10 +70,8 @@ export function ProductPage() {
         }
     }, [allReviews])
 
-
     if ((!avgRating && avgRating !== 0) || (!totalRatings && totalRatings !== 0) || !allReviews || !Object.values(product).length || !product.name ) return null;
     const productImages = product.productImages[0]
-
 
 
     return (
@@ -137,7 +136,7 @@ export function ProductPage() {
                                         {
                                             avgRating > 0
                                                 ? <span className="product-page-avg-rating">
-                                                    {`${(Math.round(avgRating * 10) / 10).toFixed(1)}`}
+                                                    {`${avgRating}`}
 
                                                 </span>
                                                 : <span className="product-page-avg-rating">
