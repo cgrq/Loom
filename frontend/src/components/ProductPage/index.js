@@ -14,7 +14,8 @@ export function ProductPage() {
     const { allProducts } = useSelector(state => state.products)
     const { reviews } = useSelector(state => state)
     const [product, setProduct] = useState({})
-    const [avgRating, setAvgRating] = useState(0)
+    const [avgRating, setAvgRating] = useState()
+    const [totalRatings, setTotalRatings] = useState()
 
     const [mainImage, setMainImage] = useState()
 
@@ -24,13 +25,20 @@ export function ProductPage() {
     }, [])
 
     useEffect(() => {
-        const currentProduct = Object.values(allProducts).find(
-            (product) => product.name === productName
-        );
-        // If the product does exist...
-        if (currentProduct) {
-            // ...set the product state to be equal to the current product.
-            setProduct(() => currentProduct);
+        const allProductsArr = Object.values(allProducts);
+
+        if(allProductsArr.length > 0){
+            const currentProduct = allProductsArr.find(
+                (product) => product.name === productName
+            );
+
+
+
+            // If the product does exist...
+            if (Object.values(currentProduct).length > 0) {
+                // ...set the product state to be equal to the current product.
+                setProduct(currentProduct);
+            }
         }
     }, [allProducts])
 
@@ -45,19 +53,23 @@ export function ProductPage() {
     }, [product])
 
     useEffect(() => {
-        const reviewsArr = Object.values(reviews);
-        if (reviewsArr.length > 0) {
-            // console.log("123", reviews[0].rating)
-            const starSum = reviewsArr.reduce((acc, review) => acc + review.rating, 0);
-            setAvgRating(starSum / reviewsArr.length)
-        }
-    }, [reviews])
+        const reviewsArr = Object.values(reviews).filter(review => review.productId === product.id);
 
-    if (!Object.values(product).length || !product.name) return null;
+        if (reviewsArr.length > 0) {
+          setTotalRatings(reviewsArr.length);
+          const starSum = reviewsArr.reduce((acc, review) => acc + review.rating, 0);
+          setAvgRating(starSum / reviewsArr.length);
+        } else {
+          setTotalRatings(0);
+          setAvgRating(0);
+        }
+      }, [reviews]);
+
+
+    if ((!avgRating && avgRating !== 0) || (!totalRatings && totalRatings !== 0) || !reviews || !Object.values(product).length || !product.name ) return null;
     const productImages = product.productImages[0]
 
 
-    if (!productImages || !productImages.image1) return null;
 
     return (
         <div>
@@ -124,14 +136,14 @@ export function ProductPage() {
                                                     {`${(Math.round(avgRating * 10) / 10).toFixed(1)}`}
 
                                                 </span>
-                                                : <span>
+                                                : <span className="product-page-avg-rating">
                                                     Not yet rated
                                                 </span>
                                         }
                                     </div>
                                     <StarSetter value={avgRating} />
                                     <span className="product-page-avg-rating-review-total">
-                                                          {`${Object.values(reviews).length} ratings`}
+                                                          {`${totalRatings} ratings`}
                                                     </span>
                                 </>
                             }
