@@ -11,3 +11,6 @@
     color:rgb(181, 181, 181);
 
 }
+.star-setter-clickable i{
+    cursor:pointer !important;
+}

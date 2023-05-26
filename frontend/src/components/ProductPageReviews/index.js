@@ -13,7 +13,7 @@ export default function ProductPageReviews({
 }) {
     const dispatch = useDispatch()
     const { user } = useSelector(state => state.session)
-    const { reviews } = useSelector(state => state)
+    const allReviews  = useSelector(state => state.reviews)
     const [reviewId, setReviewId] = useState()
     const [userReview, setUserReview] = useState("");
     const [rating, setRating] = useState(0);
@@ -26,22 +26,23 @@ export default function ProductPageReviews({
 
     useEffect(() => {
         if (
-            reviews[productId]
-            && Object.values(reviews[productId]).length > 0
+            allReviews[productId]
+            && Object.values(allReviews[productId]).length > 0
             && user
-            && reviews[productId].userId === user.id
+            && allReviews[productId][user.id]
+            && Object.values(allReviews[productId][user.id].length > 0)
         ) {
             setEditingReview(true)
         } else {
             setEditingReview(false)
         }
-    }, [reviews])
+    }, [allReviews])
 
     useEffect(() => {
         if (editingReview) {
-            setUserReview(reviews[productId].message)
-            setRating(reviews[productId].rating)
-            setReviewId(reviews[productId].id)
+            setUserReview(allReviews[productId][user.id].message)
+            setRating(allReviews[productId][user.id].rating)
+            setReviewId(allReviews[productId][user.id].id)
         } else {
             setUserReview("")
         }
@@ -120,6 +121,7 @@ export default function ProductPageReviews({
                 <StarSetter
                     value={rating}
                     onChange={setRating}
+                    clickable={true}
                 />
             </div>
             <div className="product-page-star-setter-button-wrapper">
@@ -133,7 +135,7 @@ export default function ProductPageReviews({
                     editingReview && (
                         <div className="product-page-star-setter-delete-button">
                             <DeleteButton
-                                onDeleteThunk={deleteReview(productId)}
+                                onDeleteThunk={deleteReview(allReviews[productId][user.id])}
                                 setErrors={setErrors}
                             />
                         </div>
@@ -142,7 +144,9 @@ export default function ProductPageReviews({
             </div>
             <div className="product-page-reviews-feed">
                 {
-                    Object.values(reviews).map((review) => (
+                    allReviews[productId]
+                        ?
+                    (Object.values(allReviews[productId]).map((review) => (
                         review.productId === productId && (
                             <div key={review.id} className="product-page-review-wrapper">
                                 <div className="product-page-review-details-wrapper">
@@ -158,7 +162,8 @@ export default function ProductPageReviews({
                                 </div>
                             </div>
                         )
-                    ))
+                    )))
+                    : <></>
                 }
             </div>
         </div>
