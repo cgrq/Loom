@@ -31,7 +31,6 @@ export default function StarSetter({
                 className={`fas fa-star star-setter-star ${value >= 5 ? "star-setter-selected" : "star-setter-unselected"}`}
                 onClick={() => handleStarClick(5)}
             />
-
         </div>
     )
 }

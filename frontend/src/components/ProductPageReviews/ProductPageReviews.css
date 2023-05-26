@@ -19,10 +19,17 @@
     display:flex;
 }
 
+
+/* Reviews Feed */
+
+.product-page-reviews-feed{
+
+}
+
 .product-page-review-wrapper{
     display:flex;
     flex-flow: column;
-    padding:50px 0;
+    margin:10px 0;
 }
 
 .product-page-review-details-wrapper{

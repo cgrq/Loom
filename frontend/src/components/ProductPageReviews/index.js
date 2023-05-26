@@ -84,22 +84,22 @@ export default function ProductPageReviews({
         const today = new Date();
 
         const options = {
-          month: "numeric",
-          day: "numeric",
-          year: "2-digit",
+            month: "numeric",
+            day: "numeric",
+            year: "2-digit",
         };
 
         const formattedDate = date.toLocaleDateString("en-US", options);
         const todayFormattedDate = today.toLocaleDateString("en-US", options);
 
         if (formattedDate === todayFormattedDate) {
-          return "today";
+            return "today";
         } else if (date.getDate() === today.getDate() - 1) {
-          return "yesterday";
+            return "yesterday";
         } else {
-          return formattedDate.replace(/^0+/, ''); 
+            return formattedDate.replace(/^0+/, '');
         }
-      }
+    }
 
 
     return (
@@ -143,19 +143,21 @@ export default function ProductPageReviews({
             <div className="product-page-reviews-feed">
                 {
                     Object.values(reviews).map((review) => (
-                        <div key={review.id} className="product-page-review-wrapper">
-                            <div className="product-page-review-details-wrapper">
-                                <img src={review.userProfileImage} />
-                                <span>{review.username}</span>
-                                <StarSetter value={review.rating} />
+                        review.productId === productId && (
+                            <div key={review.id} className="product-page-review-wrapper">
+                                <div className="product-page-review-details-wrapper">
+                                    <img src={review.userProfileImage} />
+                                    <span>{review.username}</span>
+                                    <StarSetter value={review.rating} />
+                                </div>
+                                <div className="product-page-review-message-wrapper">
+                                    {review.message}
+                                </div>
+                                <div className="product-page-review-date-wrapper">
+                                    {formatDate(review.updated_at)}
+                                </div>
                             </div>
-                            <div className="product-page-review-message-wrapper">
-                                {review.message}
-                            </div>
-                            <div className="product-page-review-date-wrapper">
-                                {formatDate(review.updated_at)}
-                            </div>
-                        </div>
+                        )
                     ))
                 }
             </div>
