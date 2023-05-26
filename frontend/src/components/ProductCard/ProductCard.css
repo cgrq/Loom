@@ -30,6 +30,10 @@
     margin-bottom: 10px;
 }
 
+.product-card-name-wrapper i {
+    font-size: 14px;
+}
+
 .product-card-name{
     font-weight: 700;
     font-family: "Space Grotesk";

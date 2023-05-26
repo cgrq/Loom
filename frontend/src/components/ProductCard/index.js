@@ -10,7 +10,7 @@ export default function ProductCard({ product }) {
     const dispatch = useDispatch()
     const [imageUrl, setImageUrl] = useState("")
     const { storefrontProducts } = useSelector(state => state.products)
-    const { reviews } = useSelector(state => state)
+    const allReviews = useSelector(state => state.reviews)
     const { user } = useSelector(state => state.session)
     const { userStorefront } = useSelector(state => state.storefronts)
     const [avgRating, setAvgRating] = useState(0)
@@ -23,19 +23,18 @@ export default function ProductCard({ product }) {
     }, [product])
 
     useEffect(() => {
-
-        if(reviews[product.id]){
-            const allReviewsArr = Object.values(reviews);
-            const currentProductReviewsArr = allReviewsArr.filter(review => review.productId === product.id)
-            if (currentProductReviewsArr.length > 0) {
-                // console.log("123", reviews[0].rating)
+        if(allReviews[product.id]){
+            const currentProductReviewsArr = Object.values(allReviews[product.id])
+            if (
+                currentProductReviewsArr.length > 0
+            ) {
                 const starSum = currentProductReviewsArr.reduce((acc, review) => acc + review.rating, 0);
                 setAvgRating(Math.round(starSum / currentProductReviewsArr.length))
             }
         }
-    }, [reviews])
+    }, [allReviews])
 
-    if (!imageUrl || !product || !product.productImages || !product.productImages[0] || !reviews) return null
+    if (!imageUrl || !product || !product.productImages || !product.productImages[0] || !allReviews) return null
 
     return (
         <div key={product.id} className="product-card-wrapper">

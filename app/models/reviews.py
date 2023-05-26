@@ -17,14 +17,16 @@ class Review(db.Model):
 
     # Foreign Keys
     product_id = db.Column(db.Integer, db.ForeignKey(
-        add_prefix_for_prod("products.id"), ondelete="CASCADE"), unique=True, nullable=False)
+        add_prefix_for_prod("products.id"), ondelete="CASCADE"), nullable=False)
 
     user_id = db.Column(db.Integer, db.ForeignKey(
-        add_prefix_for_prod("users.id"), ondelete="CASCADE"),  nullable=False, )
+        add_prefix_for_prod("users.id"), ondelete="CASCADE"), nullable=False)
 
     product = db.relationship('Product', back_populates="reviews")
-
     user = db.relationship('User', back_populates="reviews")
+
+    # Add a unique constraint on user_id and product_id
+    __table_args__ = (db.UniqueConstraint('user_id', 'product_id'),)
 
     def to_dict(self):
         user = User.query.get(self.user_id)

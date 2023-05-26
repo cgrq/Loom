@@ -3,34 +3,67 @@ import "./StarSetter.css"
 export default function StarSetter({
     value, // Rating value
     onChange, // Rating setter
+    clickable = false,
 }) {
-    const handleStarClick = (number)=>{
-        if(onChange){
+
+    const handleStarClick = (number) => {
+        if (onChange) {
             onChange(number)
         }
     }
+
     return (
-        <div>
-            <i
-                className={`fas fa-star star-setter-star ${value >= 1 ? "star-setter-selected" : "star-setter-unselected"}`}
-                onClick={() => handleStarClick(1)}
+        <div className={`${clickable ? "star-setter-clickable" : ""}`}>
+            <Star
+                value={value}
+                onChange={handleStarClick}
+                number={1}
             />
-            <i
-                className={`fas fa-star star-setter-star ${value >= 2 ? "star-setter-selected" : "star-setter-unselected"}`}
-                onClick={() => handleStarClick(2)}
+            <Star
+                value={value}
+                onChange={handleStarClick}
+                number={2}
             />
-            <i
-                className={`fas fa-star star-setter-star ${value >= 3 ? "star-setter-selected" : "star-setter-unselected"}`}
-                onClick={() => handleStarClick(3)}
+            <Star
+                value={value}
+                onChange={handleStarClick}
+                number={3}
             />
-            <i
-                className={`fas fa-star star-setter-star ${value >= 4 ? "star-setter-selected" : "star-setter-unselected"}`}
-                onClick={() => handleStarClick(4)}
+            <Star
+                value={value}
+                onChange={handleStarClick}
+                number={4}
             />
-            <i
-                className={`fas fa-star star-setter-star ${value >= 5 ? "star-setter-selected" : "star-setter-unselected"}`}
-                onClick={() => handleStarClick(5)}
+            <Star
+                value={value}
+                onChange={handleStarClick}
+                number={5}
             />
         </div>
+    )
+}
+
+function Star({
+    value,
+    onChange,
+    number
+}){
+    const numberMinusOne = number - 1;
+
+    return (
+        <>
+             {
+                (value > 1 && value > (numberMinusOne + .25) && value < (numberMinusOne + .75))
+                    // Half Star
+                    ? <i
+                        className={`fas fa-star-half star-setter-star star-setter-selected`}
+                      />
+                    // Full Star
+                    : <i
+                        className={`fas fa-star star-setter-star ${(value >= number) ? "star-setter-selected" : "star-setter-unselected"}`}
+                        onClick={()=>onChange(number)}
+                      />
+            }
+        </>
     )
 }

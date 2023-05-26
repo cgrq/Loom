@@ -12,13 +12,12 @@ export function ProductPage() {
     const dispatch = useDispatch()
     const { productName } = useParams()
     const { allProducts } = useSelector(state => state.products)
-    const { reviews } = useSelector(state => state)
-    const [product, setProduct] = useState({})
-    const [avgRating, setAvgRating] = useState()
-    const [totalRatings, setTotalRatings] = useState()
+    const allReviews = useSelector(state => state.reviews)
+    const [ product, setProduct ] = useState({})
+    const [ avgRating, setAvgRating ] = useState()
+    const [ totalRatings, setTotalRatings ] = useState()
 
     const [mainImage, setMainImage] = useState()
-
 
     useEffect(() => {
         dispatch(getProductByName(productName))
@@ -53,20 +52,25 @@ export function ProductPage() {
     }, [product])
 
     useEffect(() => {
-        const reviewsArr = Object.values(reviews).filter(review => review.productId === product.id);
-
-        if (reviewsArr.length > 0) {
-          setTotalRatings(reviewsArr.length);
-          const starSum = reviewsArr.reduce((acc, review) => acc + review.rating, 0);
-          setAvgRating(starSum / reviewsArr.length);
+        console.log("ALL REVIEWS")
+        if(allReviews[product.id]){
+            const currentProductReviewsArr = Object.values(allReviews[product.id])
+            if (currentProductReviewsArr.length > 0) {
+                const starSum = currentProductReviewsArr.reduce((acc, review) => acc + review.rating, 0);
+                setAvgRating(Math.round(starSum / currentProductReviewsArr.length))
+                setTotalRatings(currentProductReviewsArr.length)
+            } else{
+                setAvgRating(0)
+                setTotalRatings(0)
+            }
         } else {
-          setTotalRatings(0);
-          setAvgRating(0);
+            setAvgRating(0)
+            setTotalRatings(0)
         }
-      }, [reviews]);
+    }, [allReviews])
 
 
-    if ((!avgRating && avgRating !== 0) || (!totalRatings && totalRatings !== 0) || !reviews || !Object.values(product).length || !product.name ) return null;
+    if ((!avgRating && avgRating !== 0) || (!totalRatings && totalRatings !== 0) || !allReviews || !Object.values(product).length || !product.name ) return null;
     const productImages = product.productImages[0]
 
 
