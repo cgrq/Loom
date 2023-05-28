@@ -1,4 +1,5 @@
 from flask_wtf import FlaskForm
+from flask_wtf.file import FileField, FileAllowed, FileRequired
 from wtforms import StringField,IntegerField
 from wtforms.validators import DataRequired,  Length
 from .signup_form import valid_image
