@@ -37,11 +37,13 @@
     height:260px;
     border-radius: 20px;
     object-fit: cover;
+    border:1px solid rgb(207, 207, 207);
 }
 .product-page-image-button-wrapper{
     padding-top:40px;
 }
 .product-page-image-button{
+    border:1px solid rgb(207, 207, 207);
     width:45px;
     height:45px;
     margin:0 5px;

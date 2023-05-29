@@ -9,7 +9,7 @@ class ProductImages(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    image1 = db.Column(db.String(500))
+    image1 = db.Column(db.String(500),nullable=False)
     image2 = db.Column(db.String(500))
     image3 = db.Column(db.String(500))
     image4 = db.Column(db.String(500))

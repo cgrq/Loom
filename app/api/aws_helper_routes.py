@@ -40,3 +40,20 @@ def upload_file_to_s3(file, filename, acl="public-read"):
         return {"errors":str(e)}
 
     return{'url':f"{S3_LOCATION}{filename}"}
+
+def delete_image(image_url):
+    s3 = boto3.client(
+        "s3",
+        aws_access_key_id=os.environ.get("S3_KEY"),
+        aws_secret_access_key=os.environ.get("S3_SECRET"),
+    )
+
+    bucket_name = os.environ.get("S3_BUCKET")
+    image_key = image_url.replace(f"https://{bucket_name}.s3.amazonaws.com/", "")
+
+    try:
+        s3.delete_object(Bucket=bucket_name, Key=image_key)
+    except Exception as e:
+        return {"errors": str(e)}
+
+    return {"message": "Image deleted successfully"}
