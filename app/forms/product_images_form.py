@@ -13,3 +13,6 @@ class ProductImagesForm(FlaskForm):
     image6 = FileField("Image6", validators=[FileAllowed(list(ALLOWED_EXTENSIONS))])
 
     productId = IntegerField('productId', validators=[DataRequired()])
+
+    def is_image1_modified(self):
+        return self.image1.data and self.image1.data != self.image1.default
