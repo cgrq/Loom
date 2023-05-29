@@ -6,6 +6,7 @@ import "./ProductPage.css"
 import ProductPageReviews from "../ProductPageReviews"
 import { getReviewsByProductId } from "../../store/reviews"
 import StarSetter from "../StarSetter"
+import ProductImages from "../ProductImages"
 
 
 export function ProductPage() {
@@ -13,11 +14,11 @@ export function ProductPage() {
     const { productName } = useParams()
     const { allProducts } = useSelector(state => state.products)
     const allReviews = useSelector(state => state.reviews)
-    const [ product, setProduct ] = useState({})
-    const [ avgRating, setAvgRating ] = useState()
-    const [ totalRatings, setTotalRatings ] = useState()
+    const [product, setProduct] = useState({})
+    const [avgRating, setAvgRating] = useState()
+    const [totalRatings, setTotalRatings] = useState()
 
-    const [mainImage, setMainImage] = useState()
+    const [selectedImage, setSelectedImage] = useState()
 
     useEffect(() => {
         dispatch(getProductByName(productName))
@@ -30,7 +31,7 @@ export function ProductPage() {
     useEffect(() => {
         const allProductsArr = Object.values(allProducts);
 
-        if(allProductsArr.length > 0){
+        if (allProductsArr.length > 0) {
             const currentProduct = allProductsArr.find(
                 (product) => product.name === productName
             );
@@ -49,18 +50,18 @@ export function ProductPage() {
         }
 
         if (Object.values(product).length > 0 && product.productImages && product.productImages[0] && product.productImages[0].image1) {
-            setMainImage(product.productImages[0].image1)
+            setSelectedImage(product.productImages[0].image1)
         }
     }, [product])
 
     useEffect(() => {
-        if(allReviews[product.id]){
+        if (allReviews[product.id]) {
             const currentProductReviewsArr = Object.values(allReviews[product.id])
             if (currentProductReviewsArr.length > 0) {
                 const starSum = currentProductReviewsArr.reduce((acc, review) => acc + review.rating, 0);
                 setAvgRating((Math.round((starSum / currentProductReviewsArr.length) * 10) / 10).toFixed(1))
                 setTotalRatings(currentProductReviewsArr.length)
-            } else{
+            } else {
                 setAvgRating(0)
                 setTotalRatings(0)
             }
@@ -70,9 +71,9 @@ export function ProductPage() {
         }
     }, [allReviews])
 
-    if ((!avgRating && avgRating !== 0) || (!totalRatings && totalRatings !== 0) || !allReviews || !Object.values(product).length || !product.name ) return null;
-    const productImages = product.productImages[0]
+    if ((!avgRating && avgRating !== 0) || (!totalRatings && totalRatings !== 0) || !allReviews || !Object.values(product).length || !product.name || !product.productImages) return null;
 
+    const productImages = Object.values(product.productImages[0]).filter((value) => typeof value === 'string' && value.startsWith('http'));
 
     return (
         <div>
@@ -81,46 +82,11 @@ export function ProductPage() {
                     <h1 className="product-page-name">{product.name}</h1>
                 </div>
                 <div className="product-page-content-wrapper">
-                    <div className="product-page-images-wrapper">
-                        <div>
-                            <img
-                                className="product-page-display-image"
-                                src={mainImage}
-                            />
-                        </div>
-                        <div className="product-page-image-button-wrapper">
-                            <img
-                                className="product-page-image-button"
-                                src={productImages.image1}
-                                onClick={() => setMainImage(() => productImages.image1)}
-                            />
-                            <img
-                                className="product-page-image-button"
-                                src={productImages.image2}
-                                onClick={() => setMainImage(() => productImages.image2)}
-                            />
-                            <img
-                                className="product-page-image-button"
-                                src={productImages.image3}
-                                onClick={() => setMainImage(() => productImages.image3)}
-                            />
-                            <img
-                                className="product-page-image-button"
-                                src={productImages.image4}
-                                onClick={() => setMainImage(() => productImages.image4)}
-                            />
-                            <img
-                                className="product-page-image-button"
-                                src={productImages.image5}
-                                onClick={() => setMainImage(() => productImages.image5)}
-                            />
-                            <img
-                                className="product-page-image-button"
-                                src={productImages.image6}
-                                onClick={() => setMainImage(() => productImages.image6)}
-                            />
-                        </div>
-                    </div>
+                    <ProductImages
+                        selectedImage={selectedImage}
+                        setSelectedImage={setSelectedImage}
+                        imageUrls={productImages}
+                    />
                     <div className="product-page-details-wrapper">
                         <div className="product-page-details-row product-page-price-quantity">
                             <div className="product-page-price">
@@ -146,8 +112,8 @@ export function ProductPage() {
                                     </div>
                                     <StarSetter value={avgRating} />
                                     <span className="product-page-avg-rating-review-total">
-                                                          {`${totalRatings} ratings`}
-                                                    </span>
+                                        {`${totalRatings} ratings`}
+                                    </span>
                                 </>
                             }
                         </div>

@@ -113,7 +113,6 @@ export default function Homepage() {
             <ProductCardFeed
                 products={products}
             />
-
             </div>
         </div>
     )

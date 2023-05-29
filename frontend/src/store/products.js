@@ -104,22 +104,12 @@ export const editProductThunk =
     };
 
 export const createProductImagesThunk =
-  (image1, image2, image3, image4, image5, image6, productId) =>
+  (formData) =>
     async (dispatch) => {
+      const productId = formData.get('productId');
       const response = await fetch(`/api/products/${productId}/images/create`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          image1,
-          image2,
-          image3,
-          image4,
-          image5,
-          image6,
-          productId
-        }),
+        body: formData,
       });
 
       if (response.ok) {
@@ -138,22 +128,12 @@ export const createProductImagesThunk =
     };
 
 export const editProductImagesThunk =
-  (image1, image2, image3, image4, image5, image6, productId) =>
+  (formData) =>
     async (dispatch) => {
+      const productId = formData.get('productId');
       const response = await fetch(`/api/products/${productId}/images/edit`, {
         method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          image1,
-          image2,
-          image3,
-          image4,
-          image5,
-          image6,
-          productId
-        }),
+        body: formData,
       });
 
       if (response.ok) {
@@ -286,6 +266,7 @@ export default function reducer(state = initialState, action) {
       return newState;
 
     case SET_PRODUCTS:
+      console.log(`🖥 ~ file: products.js:273 ~ reducer ~ action.payload.products:`, action.payload.products[200])
       action.payload.products.forEach(product => {
         newState.allProducts[product.id] = product
         newState[product.subcategory][product.id] = product

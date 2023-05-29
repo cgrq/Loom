@@ -13,7 +13,11 @@ export default function FormWrapperComponent({
             <h1 className="form-wrapper-title">
                 {title}
             </h1>
-            <form className="form-wrapper-form" onSubmit={onSubmit}>
+            <form
+                className="form-wrapper-form"
+                onSubmit={onSubmit}
+                encType="multipart/form-data"
+            >
                 {
                     children // Render input fields as children passed into wrapper component
                 }

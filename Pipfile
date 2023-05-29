@@ -28,6 +28,7 @@ wtforms = "==3.0.1"
 flask-socketio = "*"
 gevent-websocket = "*"
 eventlet = "*"
+boto3 = "*"
 
 [dev-packages]
 
