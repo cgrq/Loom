@@ -1,19 +1,19 @@
-import ProductCard from "../ProductCard"
-import "./ProductCardFeed.css"
+import ProductCard from "../ProductCard";
+import "./ProductCardFeed.css";
 
-export default function ProductCardFeed({
-    products,
-}) {
-    if (!products) return null
-    return (
-        <div className="product-card-feed-container">
-            <div className="product-card-feed-wrapper">
-                {
-                    Object.values(products).map((product) => {
-                        return <ProductCard key={product.id} product={product} />
-                    })
-                }
-            </div>
-        </div>
-    )
+export default function ProductCardFeed({ products }) {
+  if (!products) return null;
+
+  const productArray = Object.values(products); // Convert nested object to an array
+  const sortedProducts = productArray.sort((a, b) => b.id - a.id); // Sort products in descending order based on ID
+
+  return (
+    <div className="product-card-feed-container">
+      <div className="product-card-feed-wrapper">
+        {sortedProducts.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
+      </div>
+    </div>
+  );
 }

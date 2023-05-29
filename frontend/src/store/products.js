@@ -266,6 +266,7 @@ export default function reducer(state = initialState, action) {
       return newState;
 
     case SET_PRODUCTS:
+      console.log(`🖥 ~ file: products.js:273 ~ reducer ~ action.payload.products:`, action.payload.products[200])
       action.payload.products.forEach(product => {
         newState.allProducts[product.id] = product
         newState[product.subcategory][product.id] = product

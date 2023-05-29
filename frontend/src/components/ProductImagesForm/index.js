@@ -6,8 +6,9 @@ import { getUserStorefrontThunk } from "../../store/storefronts"
 import { useHistory, useParams } from 'react-router-dom';
 import "./ProductImagesForm.css"
 import FormWrapperComponent from "../FormWrapperComponent";
-import InputField from "../InputField";
+import ProductImages from "../ProductImages";
 import ImageField from "../ImageField";
+
 
 export default function ProductImagesForm({
 }) {
@@ -18,12 +19,16 @@ export default function ProductImagesForm({
     const { productName } = useParams();
 
     // Form input field state variables.
-    const [image1, setImage1] = useState("");
+    const [image1, setImage1] = useState("https://loom-shopping.s3.us-west-1.amazonaws.com/product+image+upload+placeholder/image1.png");
     const [image2, setImage2] = useState("");
     const [image3, setImage3] = useState("");
     const [image4, setImage4] = useState("");
     const [image5, setImage5] = useState("");
     const [image6, setImage6] = useState("");
+
+    const [selectedImage, setSelectedImage] = useState("image1")
+    const [productImages, setProductImages] = useState([image1])
+
 
     // Current product variable.
     const [product, setProduct] = useState({})
@@ -82,14 +87,29 @@ export default function ProductImagesForm({
     // Set form input state variables to current product's values if making an update.
     useEffect(() => {
         if (product && product.productImages && componentType == "update") {
+
             setImage1(product.productImages[0].image1)
             setImage2(product.productImages[0].image2)
             setImage3(product.productImages[0].image3)
             setImage4(product.productImages[0].image4)
             setImage5(product.productImages[0].image5)
             setImage6(product.productImages[0].image6)
+
+            setSelectedImage("image1")
         }
     }, [product])
+
+    useEffect(()=>{
+        setProductImages([image1, image2, image3, image4, image5, image6].filter((url) => {
+            if (typeof url === 'string' && url.startsWith('http')) {
+              return true;
+            } else if (url instanceof File) {
+              return true;
+            }
+            return false;
+          }));
+
+    }, [image1, image2, image3, image4, image5, image6])
 
     // Guard clause.
     // If the storefront doesn't have any products then don't render anything.
@@ -103,13 +123,13 @@ export default function ProductImagesForm({
 
         const formData = new FormData();
 
-        formData.append("image1",image1)
-        formData.append("image2",image2)
-        formData.append("image3",image3)
-        formData.append("image4",image4)
-        formData.append("image5",image5)
-        formData.append("image6",image6)
-        formData.append("productId",product.id)
+        formData.append("image1", image1)
+        formData.append("image2", image2)
+        formData.append("image3", image3)
+        formData.append("image4", image4)
+        formData.append("image5", image5)
+        formData.append("image6", image6)
+        formData.append("productId", product.id)
 
         const data =
             componentType === "update"
@@ -122,12 +142,51 @@ export default function ProductImagesForm({
         if (data) {
             setErrors(data);
         } else {
-
             history.push('/storefront');
         }
 
     };
 
+    const returnSelectedImage = () => {
+        switch (selectedImage) {
+            case "image1":
+                return image1;
+            case "image2":
+                return image2;
+            case "image3":
+                return image3;
+            case "image4":
+                return image4;
+            case "image5":
+                return image5;
+            case "image6":
+                return image6;
+            default:
+                return "";
+        }
+    }
+
+    const returnImageSetter = () => {
+        switch (selectedImage) {
+            case "image1":
+                return setImage1;
+            case "image2":
+                return setImage2;
+            case "image3":
+                return setImage3;
+            case "image4":
+                return setImage4;
+            case "image5":
+                return setImage5;
+            case "image6":
+                return setImage6;
+            default:
+                return "";
+        }
+
+    }
+
+    if(!productImages) return null
 
     return (
         <>
@@ -136,36 +195,22 @@ export default function ProductImagesForm({
                 onSubmit={handleSubmit}
                 submitButtonText={componentType === "update" ? "Update" : "Create"}
             >
-
+                <ProductImages
+                    selectedImage={returnSelectedImage()}
+                    setSelectedImage={setSelectedImage}
+                    imageUrls={productImages}
+                    componentType={componentType}
+                    onAddButtonImageClick={returnImageSetter()}
+                />
                 <ImageField
-                    label="Main"
-                    onChange={setImage1}
+                    label={"Upload new image"}
+                    onChange={returnImageSetter()}
                 />
                 {errors.image1 && <p className="input-error">{errors.image1}</p>}
-                <ImageField
-                    label="A"
-                    onChange={setImage2}
-                />
-                {errors.image1 && <p className="input-error">{errors.image2}</p>}
-                <ImageField
-                    label="B"
-                    onChange={setImage3}
-                />
-                {errors.image1 && <p className="input-error">{errors.image3}</p>}
-                <ImageField
-                    label="C"
-                    onChange={setImage4}
-                />
-                {errors.image1 && <p className="input-error">{errors.image4}</p>}
-                <ImageField
-                    label="D"
-                    onChange={setImage5}
-                />
-                {errors.image1 && <p className="input-error">{errors.image5}</p>}
-                <ImageField
-                    label="E"
-                    onChange={setImage6}
-                />
+                {errors.image2 && <p className="input-error">{errors.image2}</p>}
+                {errors.image3 && <p className="input-error">{errors.image3}</p>}
+                {errors.image4 && <p className="input-error">{errors.image4}</p>}
+                {errors.image5 && <p className="input-error">{errors.image5}</p>}
                 {errors.image6 && <p className="input-error">{errors.image6}</p>}
             </FormWrapperComponent>
 
