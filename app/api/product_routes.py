@@ -2,6 +2,7 @@ from flask import Blueprint, request
 from flask_login import login_required, current_user
 from app.models import db, Product, ProductImages
 from app.forms import ProductDetailsForm, ProductImagesForm
+from app.api.aws_helper_routes import upload_file_to_s3, get_uniquefilename
 
 
 product_routes = Blueprint('products', __name__)
@@ -27,15 +28,38 @@ def create_product_images(id):
     if form.validate_on_submit():
         product = Product.query.get(id)
 
+        uploaded_images = []
+        for i in range(1, 7):
+            file = request.files.get(f"image{i}")
+            if file:
+                filename = get_uniquefilename(file.filename)
+                ext = filename.rsplit(".", 1)[1].lower()
+
+
+                if ext in {"png", "jpg", "jpeg", "gif"}:
+                    upload_result = upload_file_to_s3(file, filename)
+
+                    if "errors" in upload_result:
+                        return {'errors': upload_result['errors']}, 400
+
+                    print("URL", upload_result['url'])
+
+                    uploaded_images.append(upload_result['url'])
+                else:
+                    uploaded_images.append(None)
+            else:
+                uploaded_images.append(None)
+
         product_images = ProductImages(
-            image1=form.data['image1'],
-            image2=form.data['image2'],
-            image3=form.data['image3'],
-            image4=form.data['image4'],
-            image5=form.data['image5'],
-            image6=form.data['image6'],
+            image1=uploaded_images[0],
+            image2=uploaded_images[1],
+            image3=uploaded_images[2],
+            image4=uploaded_images[3],
+            image5=uploaded_images[4],
+            image6=uploaded_images[5],
             product_id=form.data['productId'],
         )
+
         db.session.add(product_images)
         db.session.commit()
 
@@ -51,8 +75,9 @@ def edit_product_images(id):
     form = ProductImagesForm()
     form['csrf_token'].data = request.cookies['csrf_token']
 
-
     if form.validate_on_submit():
+        print("!!! FORM")
+        print(form)
         product = Product.query.get(id)
         product_images = ProductImages.query.filter(ProductImages.product_id == id).first()
 

@@ -7,6 +7,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import "./ProductImagesForm.css"
 import FormWrapperComponent from "../FormWrapperComponent";
 import InputField from "../InputField";
+import ImageField from "../ImageField";
 
 export default function ProductImagesForm({
 }) {
@@ -99,29 +100,24 @@ export default function ProductImagesForm({
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        const formData = new FormData();
+
+        formData.append("image1",image1)
+        formData.append("image2",image2)
+        formData.append("image3",image3)
+        formData.append("image4",image4)
+        formData.append("image5",image5)
+        formData.append("image6",image6)
+        formData.append("productId",product.id)
+
         const data =
             componentType === "update"
                 ? await dispatch(
-                    editProductImagesThunk(
-                        image1,
-                        image2,
-                        image3,
-                        image4,
-                        image5,
-                        image6,
-                        product.id
-                    )
+                    editProductImagesThunk(formData)
                 )
                 : await dispatch(
-                    createProductImagesThunk(
-                        image1,
-                        image2,
-                        image3,
-                        image4,
-                        image5,
-                        image6,
-                        product.id
-                    )
+                    createProductImagesThunk(formData)
                 );
         if (data) {
             setErrors(data);
@@ -140,40 +136,34 @@ export default function ProductImagesForm({
                 onSubmit={handleSubmit}
                 submitButtonText={componentType === "update" ? "Update" : "Create"}
             >
-                
-                <InputField
+
+                <ImageField
                     label="Main"
-                    value={image1}
                     onChange={setImage1}
                 />
                 {errors.image1 && <p className="input-error">{errors.image1}</p>}
-                <InputField
+                <ImageField
                     label="A"
-                    value={image2}
                     onChange={setImage2}
                 />
                 {errors.image1 && <p className="input-error">{errors.image2}</p>}
-                <InputField
+                <ImageField
                     label="B"
-                    value={image3}
                     onChange={setImage3}
                 />
                 {errors.image1 && <p className="input-error">{errors.image3}</p>}
-                <InputField
+                <ImageField
                     label="C"
-                    value={image4}
                     onChange={setImage4}
                 />
                 {errors.image1 && <p className="input-error">{errors.image4}</p>}
-                <InputField
+                <ImageField
                     label="D"
-                    value={image5}
                     onChange={setImage5}
                 />
                 {errors.image1 && <p className="input-error">{errors.image5}</p>}
-                <InputField
+                <ImageField
                     label="E"
-                    value={image6}
                     onChange={setImage6}
                 />
                 {errors.image6 && <p className="input-error">{errors.image6}</p>}
