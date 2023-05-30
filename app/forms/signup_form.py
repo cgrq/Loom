@@ -1,7 +1,9 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField
+from flask_wtf.file import FileField, FileAllowed, FileRequired
 from wtforms.validators import DataRequired, ValidationError, Length
 from app.models import User
+from app.api.aws_helper_routes import ALLOWED_EXTENSIONS
 import re
 
 
@@ -27,24 +29,19 @@ def valid_email(form, field):
     if not valid_email:
         raise ValidationError('Please provide a valid email address.')
 
-def valid_image(form, field):
-        profileImage = field.data
 
-        if profileImage:
-            if not profileImage.lower().endswith(('.jpg', '.jpeg', '.png', '.gif')):
-                raise ValidationError('Only JPG, JPEG, PNG, and GIF images are allowed.')
 
 
 class SignUpForm(FlaskForm):
     firstName = StringField('firstName', validators=[
-                            DataRequired(), Length(1, 40)])  # added this
+                            DataRequired(), Length(1, 40)])
     lastName = StringField('lastName', validators=[
-                           DataRequired(), Length(1, 40)])  # added this
+                           DataRequired(), Length(1, 40)]) 
     username = StringField(
         'username', validators=[DataRequired(), username_exists, Length(3, 20)])
 
     email = StringField('email', validators=[
                         DataRequired(), user_exists, valid_email, Length(1, 50)])
 
-    profileImage = StringField('profileImage', validators=[valid_image, Length(1, 500)])  # added this
+    profileImage = FileField("profileImage", validators=[FileAllowed(list(ALLOWED_EXTENSIONS))])
     password = StringField('password', validators=[DataRequired(), Length(1, 50)])

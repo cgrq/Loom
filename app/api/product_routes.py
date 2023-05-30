@@ -118,26 +118,43 @@ def edit_product_images(id):
             else:
                 uploaded_images.append(None)
 
-        if form.is_image1_modified() and uploaded_images[0]:
-            product_images.image1 = uploaded_images[0]
-        elif not form.is_image1_modified() and not uploaded_images[0]:
-            uploaded_images[0] = product_images.image1
+        # Retrieve original image URLs from the database
+        original_images = [
+            getattr(product_images, f"image{i + 1}")
+            for i in range(6)
+        ]
 
-        if uploaded_images[1]:
-            product_images.image2 = uploaded_images[1]
-        if uploaded_images[2]:
-            product_images.image3 = uploaded_images[2]
-        if uploaded_images[3]:
-            product_images.image4 = uploaded_images[3]
-        if uploaded_images[4]:
-            product_images.image5 = uploaded_images[4]
-        if uploaded_images[5]:
-            product_images.image6 = uploaded_images[5]
+        request_images = []
+        for i in range(1, 6 + 1):
+            image = f"image{i}"
+            print("REQUEST DATA:")
+            print(request.form)
+
+            request_images.append(request.form.get(image))
+
+        print("REQUEST IMAGES:")
+        print(request_images)
+        # Handle null values and modifications
+        for i in range(6):
+            print("UPLOADED IMAGE")
+            print(uploaded_images[i])
+
+            if request_images[i] != original_images[i]:
+                # Update image URL if it has been modified
+                setattr(product_images, f"image{i + 1}", uploaded_images[i])
+
+            if request_images[i] == "":
+                # Retain original image URL if no new file is provided
+                setattr(product_images, f"image{i + 1}", None)
 
         db.session.commit()
 
         return {"productImages": product_images.to_dict()}
     return {'errors': form.errors}, 401
+
+
+
+
 
 
 @product_routes.route('<int:id>/edit', methods=['PUT'])

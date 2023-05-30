@@ -28,6 +28,7 @@ export default function ProductImagesForm({
 
     const [selectedImage, setSelectedImage] = useState("image1")
     const [productImages, setProductImages] = useState([image1])
+    const [updatingProductImage, setUpdatingProductImages] = useState(false);
 
 
     // Current product variable.
@@ -45,9 +46,6 @@ export default function ProductImagesForm({
     const { allProducts } = useSelector((state) => state.products)
     const { storefrontProducts } = useSelector((state) => state.products)
     const { userStorefront } = useSelector((state) => state.storefronts)
-
-
-
 
     // Get the user's storefront on mount...
     useEffect(() => {
@@ -87,7 +85,6 @@ export default function ProductImagesForm({
     // Set form input state variables to current product's values if making an update.
     useEffect(() => {
         if (product && product.productImages && componentType == "update") {
-
             setImage1(product.productImages[0].image1)
             setImage2(product.productImages[0].image2)
             setImage3(product.productImages[0].image3)
@@ -99,15 +96,15 @@ export default function ProductImagesForm({
         }
     }, [product])
 
-    useEffect(()=>{
+    useEffect(() => {
         setProductImages([image1, image2, image3, image4, image5, image6].filter((url) => {
             if (typeof url === 'string' && url.startsWith('http')) {
-              return true;
+                return true;
             } else if (url instanceof File) {
-              return true;
+                return true;
             }
             return false;
-          }));
+        }));
 
     }, [image1, image2, image3, image4, image5, image6])
 
@@ -117,43 +114,7 @@ export default function ProductImagesForm({
         return null
     }
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        if(image1 === "https://loom-shopping.s3.us-west-1.amazonaws.com/product+image+upload+placeholder/image1.png") {
-            setErrors({
-                image1: "The first image is required"
-            })
-            return;
-        }
 
-        const formData = new FormData();
-
-        formData.append("image1", image1)
-        formData.append("image2", image2)
-        formData.append("image3", image3)
-        formData.append("image4", image4)
-        formData.append("image5", image5)
-        formData.append("image6", image6)
-        formData.append("productId", product.id)
-        console.log(`🖥 ~ file: index.js:133 ~ handleSubmit ~ formData:`, formData)
-
-
-
-        const data =
-            componentType === "update"
-                ? await dispatch(
-                    editProductImagesThunk(formData)
-                )
-                : await dispatch(
-                    createProductImagesThunk(formData)
-                );
-        if (data) {
-            setErrors(data);
-        } else {
-            history.push('/storefront');
-        }
-
-    };
 
     const returnSelectedImage = () => {
         switch (selectedImage) {
@@ -194,7 +155,89 @@ export default function ProductImagesForm({
 
     }
 
-    if(!productImages) return null
+    const handleRemoveButtonImageClick = (index) => {
+        switch (index) {
+          case 1:
+            setImage1(image2);
+            setImage2(image3);
+            setImage3(image4);
+            setImage4(image5);
+            setImage5(image6);
+            setImage6("");
+            setSelectedImage("image1");
+            break;
+          case 2:
+            setImage2(image3);
+            setImage3(image4);
+            setImage4(image5);
+            setImage5(image6);
+            setImage6("");
+            setSelectedImage("image1");
+            break;
+          case 3:
+            setImage3(image4);
+            setImage4(image5);
+            setImage5(image6);
+            setImage6("");
+            setSelectedImage("image1");
+            break;
+          case 4:
+            setImage4(image5);
+            setImage5(image6);
+            setImage6("");
+            setSelectedImage("image1");
+            break;
+          case 5:
+            setImage5(image6);
+            setImage6("");
+            setSelectedImage("image1");
+            break;
+          case 6:
+            setImage6("");
+            setSelectedImage("image1");
+            break;
+          default:
+            break;
+        }
+      };
+
+      const handleSubmit = async (e) => {
+        e.preventDefault();
+        if (image1 === "https://loom-shopping.s3.us-west-1.amazonaws.com/product+image+upload+placeholder/image1.png") {
+            setErrors({
+                image1: "The first image is required"
+            })
+            return;
+        }
+
+        const formData = new FormData();
+
+        formData.append("image1", image1)
+        formData.append("image2", image2)
+        formData.append("image3", image3)
+        formData.append("image4", image4)
+        formData.append("image5", image5)
+        formData.append("image6", image6)
+        formData.append("productId", product.id)
+
+        const data =
+            componentType === "update"
+                ? await dispatch(
+                    editProductImagesThunk(formData)
+                )
+                : await dispatch(
+                    createProductImagesThunk(formData)
+                );
+        if (data) {
+            setErrors(data);
+        } else {
+            history.push('/storefront');
+        }
+
+    };
+
+
+    if (!productImages) return null
 
     return (
         <>
@@ -209,11 +252,14 @@ export default function ProductImagesForm({
                     imageUrls={productImages}
                     componentType={componentType}
                     onAddButtonImageClick={returnImageSetter()}
+                    onRemoveButtonImageClick={handleRemoveButtonImageClick}
                 />
-                <ImageField
-                    label={"Upload new image"}
-                    onChange={returnImageSetter()}
-                />
+                <div className="product-image-form-image-field">
+                    <ImageField
+                        label={"Upload new image"}
+                        onChange={returnImageSetter()}
+                    />
+                </div>
                 {errors.image1 && <p className="input-error">{errors.image1}</p>}
                 {errors.image2 && <p className="input-error">{errors.image2}</p>}
                 {errors.image3 && <p className="input-error">{errors.image3}</p>}

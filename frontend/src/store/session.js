@@ -76,21 +76,11 @@ export const logout = () => async (dispatch) => {
 };
 
 export const signUp =
-  (username, email, password, firstName, lastName, profileImage) =>
+  (formData) =>
     async (dispatch) => {
       const response = await fetch("/api/auth/signup", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username,
-          email,
-          password,
-          firstName,
-          lastName,
-          profileImage,
-        }),
+        body: formData,
       });
 
       if (response.ok) {
@@ -109,21 +99,11 @@ export const signUp =
     };
 // SignupFormModal
 export const editUser =
-  (username, email, password, firstName, lastName, profileImage) =>
+  (formData) =>
     async (dispatch) => {
       const response = await fetch(`/api/auth/edit`, {
         method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username,
-          email,
-          password,
-          firstName,
-          lastName,
-          profileImage,
-        }),
+        body: formData,
       });
 
       if (response.ok) {
