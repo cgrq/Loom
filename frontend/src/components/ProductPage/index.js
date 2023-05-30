@@ -18,6 +18,13 @@ export function ProductPage() {
     const [avgRating, setAvgRating] = useState()
     const [totalRatings, setTotalRatings] = useState()
 
+    const [image1, setImage1] = useState("");
+    const [image2, setImage2] = useState("");
+    const [image3, setImage3] = useState("");
+    const [image4, setImage4] = useState("");
+    const [image5, setImage5] = useState("");
+    const [image6, setImage6] = useState("");
+
     const [selectedImage, setSelectedImage] = useState()
 
     useEffect(() => {
@@ -50,7 +57,14 @@ export function ProductPage() {
         }
 
         if (Object.values(product).length > 0 && product.productImages && product.productImages[0] && product.productImages[0].image1) {
-            setSelectedImage(product.productImages[0].image1)
+            setImage1(product.productImages[0].image1)
+            setImage2(product.productImages[0].image2)
+            setImage3(product.productImages[0].image3)
+            setImage4(product.productImages[0].image4)
+            setImage5(product.productImages[0].image5)
+            setImage6(product.productImages[0].image6)
+
+            setSelectedImage("image1")
         }
     }, [product])
 
@@ -71,6 +85,25 @@ export function ProductPage() {
         }
     }, [allReviews])
 
+    const returnSelectedImage = () => {
+        switch (selectedImage) {
+            case "image1":
+                return image1;
+            case "image2":
+                return image2;
+            case "image3":
+                return image3;
+            case "image4":
+                return image4;
+            case "image5":
+                return image5;
+            case "image6":
+                return image6;
+            default:
+                return "";
+        }
+    }
+
     if ((!avgRating && avgRating !== 0) || (!totalRatings && totalRatings !== 0) || !allReviews || !Object.values(product).length || !product.name || !product.productImages) return null;
 
     const productImages = Object.values(product.productImages[0]).filter((value) => typeof value === 'string' && value.startsWith('http'));
@@ -83,7 +116,7 @@ export function ProductPage() {
                 </div>
                 <div className="product-page-content-wrapper">
                     <ProductImages
-                        selectedImage={selectedImage}
+                        selectedImage={returnSelectedImage()}
                         setSelectedImage={setSelectedImage}
                         imageUrls={productImages}
                     />
