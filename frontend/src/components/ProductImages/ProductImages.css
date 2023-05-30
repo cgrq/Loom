@@ -13,10 +13,16 @@
     object-fit: cover;
     border:1px solid rgb(213, 213, 213);
 }
-.product-image-button-wrapper{
+
+/* Image Buttons */
+
+.product-image-button-container{
     padding-top:40px;
     display:flex;
     align-items: center;
+}
+.product-image-button-wrapper{
+    position: relative;
 }
 .product-image-button{
     border:1px solid rgb(213, 213, 213);
@@ -33,9 +39,21 @@
 }
 .product-image-add-button-wrapper{
     margin-left:10px;
+    margin-top:-6px;
     border:1px solid rgb(178, 178, 178);
     padding:5px 10px;
     border-radius: 5px;
     color:rgb(178, 178, 178);
     cursor: pointer;
+}
+.product-image-remove-image-button-wrapper{
+    position: absolute;
+    left:24px;
+    display:flex;
+    justify-content: center;
+}
+.product-image-remove-image-button i{
+    cursor: pointer;
+    font-size: 10px;
+    color:rgb(185, 184, 184)
 }

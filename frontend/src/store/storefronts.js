@@ -20,17 +20,11 @@ const removeStorefront = (storefrontId) => ({
 });
 
 export const createStorefrontThunk =
-  (description, bannerImage) =>
+  (formData) =>
     async (dispatch) => {
       const response = await fetch("api/storefronts/create", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          description,
-          bannerImage
-        }),
+        body: formData,
       });
 
       if (response.ok) {
@@ -50,17 +44,11 @@ export const createStorefrontThunk =
     };
 
 export const editStorefrontThunk =
-  (description, bannerImage) =>
+  (formData) =>
     async (dispatch) => {
       const response = await fetch(`/api/storefronts/edit`, {
         method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          description,
-          bannerImage
-        }),
+        body: formData,
       });
 
       if (response.ok) {

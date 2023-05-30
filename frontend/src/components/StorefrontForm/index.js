@@ -7,6 +7,7 @@ import FormWrapperComponent from "../FormWrapperComponent";
 import DemoUserButton from "../DemoUserButton";
 import DeleteButton from "../DeleteButton";
 import InputField from "../InputField";
+import ImageField from "../ImageField";
 
 export default function StorefrontForm() {
     const history = useHistory();
@@ -20,6 +21,7 @@ export default function StorefrontForm() {
     const [componentType, setComponentType] = useState("create")
     const [hidePreviewImage, setHidePreviewImage] = useState(false);
     const [errors, setErrors] = useState({});
+    const [imageSource, setImageSource] = useState(null);
 
     useEffect(() => {
         dispatch(getStorefrontByName(storefrontName))
@@ -33,23 +35,36 @@ export default function StorefrontForm() {
         }
     }, [userStorefront])
 
+
+    useEffect(() => {
+        if (bannerImage instanceof File) {
+            const reader = new FileReader();
+            reader.onload = () => {
+                setImageSource(reader.result);
+            };
+            reader.readAsDataURL(bannerImage);
+        } else {
+            setImageSource(bannerImage);
+        }
+    }, [bannerImage]);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        const formData = new FormData();
+
+        formData.append("description", description)
+        formData.append("bannerImage", bannerImage)
+
 
         const data =
             componentType === "update"
                 ?
                 await dispatch(
-                    editStorefrontThunk(
-                        description,
-                        bannerImage
-                    )
+                    editStorefrontThunk(formData)
                 )
                 : await dispatch(
-                    createStorefrontThunk(
-                        description,
-                        bannerImage
-                    )
+                    createStorefrontThunk(formData)
                 );
         if (data) {
             setErrors(data);
@@ -90,7 +105,7 @@ export default function StorefrontForm() {
                 <div className="storefront-form-image-preview-container">
                     <div className="storefront-form-image-preview-wrapper">
                         <img
-                            src={bannerImage}
+                            src={imageSource}
                             onLoad={handleImageLoad}
                             onError={handleImageError}
                             className={"storefront-form-image-preview " + (hidePreviewImage ? "hidden" : "")}
@@ -101,11 +116,12 @@ export default function StorefrontForm() {
                         />
                     </div>
                 </div>
-                <InputField
+
+                <ImageField
                     label="Banner Image"
-                    value={bannerImage}
                     onChange={setBannerImage}
                 />
+
                 {errors.bannerImage && <p className="input-error">{errors.bannerImage}</p>}
                 <InputField
                     label="Description"

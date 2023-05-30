@@ -2,6 +2,7 @@ from flask import Blueprint, request
 from app.models import User, db
 from app.forms import LoginForm, SignUpForm, EditUserForm
 from flask_login import current_user, login_user, logout_user
+from app.api.aws_helper_routes import upload_file_to_s3, delete_image, get_uniquefilename
 
 auth_routes = Blueprint('auth', __name__)
 
@@ -52,13 +53,21 @@ def sign_up():
     form['csrf_token'].data = request.cookies['csrf_token']
 
     if form.validate_on_submit():
+
+        profile_image = request.files.get('profileImage')
+        if profile_image:
+            filename = get_uniquefilename(profile_image.filename)
+            profile_image_url = upload_file_to_s3(profile_image, filename)['url']
+        else:
+            profile_image_url = None
+
         user = User(
             username=form.data['username'],
             email=form.data['email'],
             password=form.data['password'],
             first_name=form.data['firstName'],
             last_name=form.data['lastName'],
-            profile_image=form.data['profileImage']
+            profile_image=profile_image_url
         )
         db.session.add(user)
         db.session.commit()
@@ -78,13 +87,24 @@ def edit():
     if form.validate_on_submit():
         user = User.query.get(current_user.id)
 
+        profile_image = request.files.get('bannerImage')
+        if profile_image:
+            filename = get_uniquefilename(profile_image.filename)
+            profile_image_url = upload_file_to_s3(profile_image, filename)['url']
+            if user.profile_image:
+                delete_image(user.profile_image)
+            user.profile_image = profile_image_url
+        else:
+            if user.profile_image:
+                delete_image(user.profile_image)
+            user.profile_image = None
+
 
         user.username = form.data['username']
         user.email = form.data['email']
         user.password = form.data['password']
         user.first_name = form.data['firstName']
         user.last_name = form.data['lastName']
-        user.profile_image = form.data['profileImage']
 
         db.session.commit()
 

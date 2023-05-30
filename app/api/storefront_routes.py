@@ -2,6 +2,7 @@ from flask import Blueprint, request
 from flask_login import login_required, current_user
 from app.models import db, Storefront
 from app.forms import StorefrontForm
+from app.api.aws_helper_routes import upload_file_to_s3, delete_image, get_uniquefilename
 
 
 storefront_routes = Blueprint('storefronts', __name__)
@@ -18,6 +19,7 @@ def get_user_storefront():
 
     return {"storefront":storefront.to_dict()}
 
+
 @storefront_routes.route('/create', methods=['POST'])
 @login_required
 def create_storefront():
@@ -28,10 +30,17 @@ def create_storefront():
     form['csrf_token'].data = request.cookies['csrf_token']
 
     if form.validate_on_submit():
+        banner_image = request.files.get('bannerImage')
+        if banner_image:
+            filename = get_uniquefilename(banner_image.filename)
+            banner_image_url = upload_file_to_s3(banner_image, filename)['url']
+        else:
+            banner_image_url = None
+
         storefront = Storefront(
             name=current_user.username,
             description=form.data['description'],
-            banner_image=form.data['bannerImage'],
+            banner_image=banner_image_url,
             user_id=current_user.id
         )
         db.session.add(storefront)
@@ -52,9 +61,19 @@ def edit_storefront():
     if form.validate_on_submit():
         storefront = Storefront.query.filter(Storefront.user_id == current_user.id).first()
 
-        storefront.description = form.data['description']
-        storefront.banner_image = form.data['bannerImage']
+        banner_image = request.files.get('bannerImage')
+        if banner_image:
+            filename = get_uniquefilename(banner_image.filename)
+            banner_image_url = upload_file_to_s3(banner_image, filename)['url']
+            if storefront.banner_image:
+                delete_image(storefront.banner_image)
+            storefront.banner_image = banner_image_url
+        else:
+            if storefront.banner_image:
+                delete_image(storefront.banner_image)
+            storefront.banner_image = None
 
+        storefront.description = form.data['description']
         db.session.commit()
 
         return {"storefront": storefront.to_dict()}

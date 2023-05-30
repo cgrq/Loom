@@ -118,6 +118,7 @@ export function ProductPage() {
                     <ProductImages
                         selectedImage={returnSelectedImage()}
                         setSelectedImage={setSelectedImage}
+                        componentType="read"
                         imageUrls={productImages}
                     />
                     <div className="product-page-details-wrapper">

@@ -1,8 +1,9 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField
-from wtforms.validators import DataRequired, ValidationError, Length
-from .signup_form import valid_image
+from flask_wtf.file import FileField, FileAllowed, FileRequired
+from wtforms import StringField,IntegerField
+from wtforms.validators import DataRequired,  Length
+from app.api.aws_helper_routes import ALLOWED_EXTENSIONS
 
 class StorefrontForm(FlaskForm):
     description = StringField('description', validators=[DataRequired(), Length(1, 255)])
-    bannerImage = StringField('bannerImage', validators=[valid_image, Length(1, 500)])
+    bannerImage = FileField("bannerImage", validators=[FileAllowed(list(ALLOWED_EXTENSIONS))])
