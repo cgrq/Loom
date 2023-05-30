@@ -6,7 +6,7 @@ class Review(db.Model):
     __tablename__ = 'reviews'
 
     if environment == "production":
-        __table_args__ = {'schema': SCHEMA}
+        __table_args__ = (db.UniqueConstraint('user_id', 'product_id'), {'schema': SCHEMA})
 
     id = db.Column(db.Integer, primary_key=True)
     rating = db.Column(db.Integer)
@@ -24,9 +24,6 @@ class Review(db.Model):
 
     product = db.relationship('Product', back_populates="reviews")
     user = db.relationship('User', back_populates="reviews")
-
-    # Add a unique constraint on user_id and product_id
-    __table_args__ = (db.UniqueConstraint('user_id', 'product_id'),)
 
     def to_dict(self):
         user = User.query.get(self.user_id)
