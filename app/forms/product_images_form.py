@@ -5,7 +5,7 @@ from wtforms.validators import DataRequired,  Length
 from app.api.aws_helper_routes import ALLOWED_EXTENSIONS
 
 class ProductImagesForm(FlaskForm):
-    image1 = FileField("Image1", validators=[FileRequired(message="The first image is required"),FileAllowed(list(ALLOWED_EXTENSIONS))])
+    image1 = FileField("Image1", validators=[FileAllowed(list(ALLOWED_EXTENSIONS))])
     image2 = FileField("Image2", validators=[FileAllowed(list(ALLOWED_EXTENSIONS))])
     image3 = FileField("Image3", validators=[FileAllowed(list(ALLOWED_EXTENSIONS))])
     image4 = FileField("Image4", validators=[FileAllowed(list(ALLOWED_EXTENSIONS))])

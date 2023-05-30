@@ -117,9 +117,14 @@ export default function ProductImagesForm({
         return null
     }
 
-
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if(image1 === "https://loom-shopping.s3.us-west-1.amazonaws.com/product+image+upload+placeholder/image1.png") {
+            setErrors({
+                image1: "The first image is required"
+            })
+            return;
+        }
 
         const formData = new FormData();
 
@@ -130,6 +135,9 @@ export default function ProductImagesForm({
         formData.append("image5", image5)
         formData.append("image6", image6)
         formData.append("productId", product.id)
+        console.log(`🖥 ~ file: index.js:133 ~ handleSubmit ~ formData:`, formData)
+
+
 
         const data =
             componentType === "update"

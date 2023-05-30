@@ -39,9 +39,6 @@ export default function ProductForm({
     useEffect(() => {
         setIsUserStorefront(Object.values(storefrontProducts).find(product => product.storefrontId === userStorefront.id))
 
-
-
-
     }, [storefrontProducts]);
 
     useEffect(()=>{
