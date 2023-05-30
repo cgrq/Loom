@@ -1,5 +1,6 @@
 .star-setter-star{
-    font-size: 18px;
+    width: 16px;
+    margin:0 1px;
 }
 
 .star-setter-unselected{
@@ -11,6 +12,6 @@
     color:rgb(181, 181, 181);
 
 }
-.star-setter-clickable i{
+.star-setter-clickable img{
     cursor:pointer !important;
 }

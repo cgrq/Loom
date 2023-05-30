@@ -150,7 +150,7 @@ export default function ProductPageReviews({
                         review.productId === productId && (
                             <div key={review.id} className="product-page-review-wrapper">
                                 <div className="product-page-review-details-wrapper">
-                                    <img src={review.userProfileImage} />
+                                    <img className="product-page-review-details-image" src={review.userProfileImage} />
                                     <span>{review.username}</span>
                                     <StarSetter value={review.rating} />
                                 </div>
