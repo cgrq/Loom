@@ -1,69 +1,50 @@
-import "./StarSetter.css"
+import React from 'react';
+import './StarSetter.css';
 
 export default function StarSetter({
-    value, // Rating value
-    onChange, // Rating setter
-    clickable = false,
+  value, // Rating value
+  onChange, // Rating setter
+  clickable = false,
 }) {
-
-    const handleStarClick = (number) => {
-        if (onChange) {
-            onChange(number)
-        }
+  const handleStarClick = (number) => {
+    if (onChange) {
+      onChange(number);
     }
+  };
 
-    return (
-        <div className={`${clickable ? "star-setter-clickable" : ""}`}>
-            <Star
-                value={value}
-                onChange={handleStarClick}
-                number={1}
-            />
-            <Star
-                value={value}
-                onChange={handleStarClick}
-                number={2}
-            />
-            <Star
-                value={value}
-                onChange={handleStarClick}
-                number={3}
-            />
-            <Star
-                value={value}
-                onChange={handleStarClick}
-                number={4}
-            />
-            <Star
-                value={value}
-                onChange={handleStarClick}
-                number={5}
-            />
-        </div>
-    )
+  return (
+    <div className={`${clickable ? 'star-setter-clickable' : ''}`}>
+      {[1, 2, 3, 4, 5].map((number) => (
+        <Star
+          key={number}
+          value={value}
+          onChange={handleStarClick}
+          number={number}
+        />
+      ))}
+    </div>
+  );
 }
 
-function Star({
-    value,
-    onChange,
-    number
-}){
-    const numberMinusOne = number - 1;
+function Star({ value, onChange, number }) {
+  const filledStars = Math.floor(value);
+  const decimalPart = value - filledStars;
+  const numberMinusOne = number - 1;
 
-    return (
-        <>
-             {
-                (value > 1 && value > (numberMinusOne + .25) && value < (numberMinusOne + .75))
-                    // Half Star
-                    ? <i
-                        className={`fas fa-star-half star-setter-star star-setter-selected`}
-                      />
-                    // Full Star
-                    : <i
-                        className={`fas fa-star star-setter-star ${(value >= number) ? "star-setter-selected" : "star-setter-unselected"}`}
-                        onClick={()=>onChange(number)}
-                      />
-            }
-        </>
-    )
+  return (
+    <img
+      src={
+        value >= number
+          ? process.env.PUBLIC_URL + '/stars/full.png'
+          : decimalPart > 0 &&
+            value > numberMinusOne &&
+            value < number
+          ? process.env.PUBLIC_URL + `/stars/tenth${Math.ceil(decimalPart * 10)}.png`
+          : process.env.PUBLIC_URL + '/stars/empty.png'
+      }
+      className="star-setter-star"
+      onClick={() => onChange(number)}
+      alt={value >= number ? 'filled star' : 'empty star'}
+    />
+  );
 }

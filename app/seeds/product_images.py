@@ -10,11 +10,6 @@ def seed_product_images():
     for u in product_images:
         product_image = ProductImages(
             image1=u['image1'],
-            image2=u['image2'],
-            image3=u['image3'],
-            image4=u['image4'],
-            image5=u['image5'],
-            image6=u['image6'],
             product_id=u['product_id'],
         )
         db.session.add(product_image)
