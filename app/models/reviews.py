@@ -7,6 +7,8 @@ class Review(db.Model):
 
     if environment == "production":
         __table_args__ = (db.UniqueConstraint('user_id', 'product_id'), {'schema': SCHEMA})
+    else:
+        __table_args__ = (db.UniqueConstraint('user_id', 'product_id'),)
 
     id = db.Column(db.Integer, primary_key=True)
     rating = db.Column(db.Integer)
