@@ -1806,7 +1806,7 @@
         "price": 104,
         "category": "clothing",
         "subcategory": "tops",
-        "storefront_id": 18
+        "storefront_id": 8
     },
     {
         "name": "Sonair",
@@ -1815,7 +1815,7 @@
         "price": 319,
         "category": "clothing",
         "subcategory": "footwear",
-        "storefront_id": 14
+        "storefront_id":4
     },
     {
         "name": "Junedon",
@@ -1842,7 +1842,7 @@
         "price": 499,
         "category": "furniture",
         "subcategory": "storage",
-        "storefront_id": 19
+        "storefront_id": 9
     },
     {
         "name": "Sonsing",
@@ -1851,7 +1851,7 @@
         "price": 507,
         "category": "art",
         "subcategory": "walls",
-        "storefront_id": 15
+        "storefront_id": 5
     },
     {
         "name": "Quo Lux",
@@ -1878,7 +1878,7 @@
         "price": 12,
         "category": "clothing",
         "subcategory": "footwear",
-        "storefront_id": 15
+        "storefront_id": 5
     },
     {
         "name": "Redhold",
@@ -1887,7 +1887,7 @@
         "price": 987,
         "category": "furniture",
         "subcategory": "seating",
-        "storefront_id": 16
+        "storefront_id": 6
     },
     {
         "name": "Restowe",
@@ -1896,7 +1896,7 @@
         "price": 993,
         "category": "art",
         "subcategory": "spaces",
-        "storefront_id": 12
+        "storefront_id": 2
     },
     {
         "name": "Zaam-Dox",
@@ -1914,7 +1914,7 @@
         "price": 803,
         "category": "art",
         "subcategory": "walls",
-        "storefront_id": 11
+        "storefront_id": 1
     },
     {
         "name": "Overhold",
@@ -1950,7 +1950,7 @@
         "price": 420,
         "category": "art",
         "subcategory": "walls",
-        "storefront_id": 13
+        "storefront_id": 3
     },
     {
         "name": "Opening Two",
@@ -1986,7 +1986,7 @@
         "price": 38,
         "category": "art",
         "subcategory": "desk",
-        "storefront_id": 18
+        "storefront_id": 8
     },
     {
         "name": "Ulop",
@@ -1995,7 +1995,7 @@
         "price": 639,
         "category": "clothing",
         "subcategory": "bottoms",
-        "storefront_id": 20
+        "storefront_id": 10
     },
     {
         "name": "Duobam",
@@ -2022,6 +2022,6 @@
         "price": 530,
         "category": "art",
         "subcategory": "desk",
-        "storefront_id": 19
+        "storefront_id": 9
     }
 ]
