@@ -7,7 +7,6 @@ export function FilterProvider({ children }) {
   const [selectedFilter, setSelectedFilter] = useState(null);
 
   // Define any additional state or functions related to the selected filter
-
   return (
     <FilterContext.Provider value={{ selectedFilter, setSelectedFilter }}>
       {children}
