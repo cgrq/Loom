@@ -43,8 +43,6 @@ Loom is an e-commerce site that enables selling products p2p.
 
 # Running project locally
 
-## Step 1 (Run backend)
-
 * Install python dependencies by running the `pipenv install -r requirements.txt` command.
 
 * Install node dependencies by running the `npm install --prefix frontend`
