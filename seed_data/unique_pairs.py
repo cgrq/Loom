@@ -15,7 +15,7 @@ for review in reviews:
 
     # Check if the combination already exists in the set
     while (product_id, user_id) in existing_combinations:
-        product_id = random.randint(1, 200)  # Change the product_id to a random value
+        product_id = random.randint(201, 225)  # Change the product_id to a random value
 
     # Update the product_id in the review
     review["product_id"] = product_id
