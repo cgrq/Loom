@@ -26,6 +26,7 @@
 
 .navigation-profile-buttons-wrapper {
     margin-right: 30px;
+    position:relative;
 }
 
 .navigation-content-auth-buttons-wrapper>a {
