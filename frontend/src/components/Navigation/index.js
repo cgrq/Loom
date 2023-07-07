@@ -6,6 +6,7 @@ import "./Navigation.css"
 import { useEffect } from "react";
 import { getUserStorefrontThunk } from "../../store/storefronts"
 import { getStorefrontProductsThunk } from "../../store/products";
+import CartButton from "../CartButton";
 
 export default function Navigation() {
     const dispatch = useDispatch()
@@ -18,7 +19,7 @@ export default function Navigation() {
         }
     }, [user])
 
-    
+
 
     // useEffect(() => {
     //     if (userStorefront && userStorefront.id) {
@@ -36,7 +37,7 @@ export default function Navigation() {
                     <ProfileButton user={user} />
                 </div>
                 <div className="navigation-cart-wrapper">
-                    <i className="fas fa-shopping-cart"></i>
+                    <CartButton />
                 </div>
             </div>
         </div>
