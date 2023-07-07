@@ -1,19 +1,20 @@
-.navigation-content-auth-buttons-wrapper{
+.navigation-content-auth-buttons-wrapper {
     display: flex;
-    margin-top:60px;
-    width:260px;
+    margin-top: 60px;
+    width: 260px;
     justify-content: center;
-        padding:20px;
-        max-width: 260px;
+    padding: 20px;
+    max-width: 260px;
 }
-.navigation-content-auth-buttons-wrapper > a{
-    margin-bottom:10px;
+
+.navigation-content-auth-buttons-wrapper>a {
+    margin-bottom: 10px;
 }
 
 @media screen and (max-width: 767px) {
-    .navigation-content-auth-buttons-wrapper{
-        width:calc(90vw - 40px);
+    .navigation-content-auth-buttons-wrapper {
+        width: calc(90vw - 40px);
         /* flex-flow: column nowrap; */
         align-items: center;
     }
-  }
+}
