@@ -24,6 +24,9 @@ class Product(db.Model):
 
     storefront = db.relationship('Storefront', back_populates="products")
 
+    cart_items = db.relationship(
+        "CartItem", back_populates="product", cascade="all, delete-orphan")
+
     reviews = db.relationship(
         "Review", back_populates="product", cascade="all, delete-orphan")
 

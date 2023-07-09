@@ -29,6 +29,9 @@ class User(db.Model, UserMixin):
     reviews = db.relationship(
         "Review", back_populates="user", cascade="all, delete-orphan")
 
+    orders = db.relationship(
+        "Order", back_populates="user", cascade="all, delete-orphan")
+
     @property
     def password(self):
         return self.hashed_password

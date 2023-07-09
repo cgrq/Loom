@@ -21,6 +21,9 @@ class Order(db.Model):
     storefront_id = db.Column(db.Integer, db.ForeignKey(
         add_prefix_for_prod("storefronts.id"), ondelete="CASCADE"), nullable=False)
 
+    cart_items = db.relationship(
+        "CartItem", back_populates="orders", cascade="all, delete-orphan")
+
     user = db.relationship('User', back_populates="orders")
     storefront = db.relationship('Storefront', back_populates="orders")
 
