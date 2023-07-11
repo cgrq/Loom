@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { setCurrentProduct } from "../../store/products"
 import StarSetter from "../StarSetter"
+import AddToCartButton from "../AddToCartButton"
 
 
 export default function ProductCard({ product }) {
@@ -41,7 +42,6 @@ export default function ProductCard({ product }) {
         } else {
             setImageLoaded(false)
         }
-
     }, [imageUrl])
 
     // if (!imageUrl || !product || !product.productImages || !product.productImages[0] || !allReviews) return null
@@ -49,36 +49,39 @@ export default function ProductCard({ product }) {
     return (
         <div key={product.id} className="product-card-wrapper">
             <NavLink to={`/products/${product.name}`}>
-
                 <img
                     // onError={() => setImageUrl(process.env.PUBLIC_URL + "/default-image.png")}
                     src={imageUrl}
                 />
-
-
-
             </NavLink>
-
             <div className="product-card-details-wrapper">
-                <div className="product-card-name-wrapper">
+                <div className="product-card-price-wrapper">
                     <div className="product-card-price">${product.price}</div>
                     <StarSetter
                         value={avgRating}
                     />
                 </div>
-                <span className="product-card-name">{product.name}</span>
-                {
-                    user
-                    && storefrontProducts
-                    && storefrontProducts[product.id]
-                    && userStorefront
-                    && storefrontProducts[product.id].storefrontId === userStorefront.id
-                    && (
-                        <NavLink to={`/products/${product.name}/edit`}>
-                            Edit
-                        </NavLink>
-                    )
-                }
+                <div className="product-card-name-wrapper">
+                    <span className="product-card-name">{product.name}</span>
+                </div>
+                <div className="product-card-lower-wrapper">
+                    {
+                        user
+                        && storefrontProducts
+                        && storefrontProducts[product.id]
+                        && userStorefront
+                        && storefrontProducts[product.id].storefrontId === userStorefront.id
+                        ? (
+                            <NavLink to={`/products/${product.name}/edit`}>
+                                Edit
+                            </NavLink>
+                        )
+                        :
+                        (
+                            <AddToCartButton productId={product.id}/>
+                        )
+                    }
+                </div>
 
             </div>
         </div>

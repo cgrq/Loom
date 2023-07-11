@@ -1,0 +1,10 @@
+.add-to-cart-button{
+    padding:0 5px;
+    font: Arial;
+    cursor: pointer;
+    border:none;
+    padding:5px 8px;
+    min-width: 85px;
+    font-size: 12px;
+    border-radius: 5px;
+}

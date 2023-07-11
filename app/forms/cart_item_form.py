@@ -3,4 +3,6 @@ from wtforms import IntegerField
 from wtforms.validators import DataRequired
 
 class CartItemForm(FlaskForm):
-    quantity = IntegerField('rating', validators=[DataRequired(message="This field is required and must be a number")])
+    quantity = IntegerField('quantity', validators=[DataRequired(message="This field is required and must be a number")])
+    productId = IntegerField('productId', validators=[DataRequired(message="This field is required and must be a number")])
+    orderId = IntegerField('orderId', validators=[DataRequired(message="This field is required and must be a number")])
