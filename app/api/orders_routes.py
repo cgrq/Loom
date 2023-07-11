@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
-from app.models import db, Order
+from app.models import db, Order, CartItem
 from app.forms import OrderForm
 
 
@@ -19,7 +19,6 @@ def create_order():
         order = Order(
             status = form.data['status'],
             user_id = current_user.id,
-            storefront_id = form.data['storefrontId'],
         )
         db.session.add(order)
         db.session.commit()
@@ -31,7 +30,7 @@ def create_order():
 @login_required
 def edit_order(id):
     """
-    Edits a order
+    Edit an order
     """
     form = OrderForm()
 
@@ -57,3 +56,16 @@ def delete_order(id):
     db.session.commit()
 
     return {"message":"Delete successful"}
+
+@orders_routes.route('/<int:id>/cart-items')
+def get_order_cart_items(id):
+    """
+    Query for an order's cart items
+    """
+    cart_items = CartItem.query.filter(CartItem.order_id == id)
+
+    if cart_items is None:
+        return {"cartItems": None}
+
+
+    return {"cartItems":[cart_item.to_dict() for cart_item in cart_items]}

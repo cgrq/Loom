@@ -126,10 +126,7 @@ export const getReviewsByProductId = (productId) => async (dispatch) => {
   }
 };
 
-
-
 const initialState = {};
-
 
 export default function reducer(state = initialState, action) {
   let newState = {
@@ -137,7 +134,6 @@ export default function reducer(state = initialState, action) {
   }
   switch (action.type) {
     case SET_REVIEW:
-
       newState[action.payload.review.productId] = { ...newState[action.payload.review.productId] }
       newState[action.payload.review.productId][action.payload.review.userId] = action.payload.review
 
@@ -152,7 +148,6 @@ export default function reducer(state = initialState, action) {
       return newState;
 
     case REMOVE_REVIEW:
-      console.log("~~~~~~~~~~~~~~~~~~> PAYLOAD", action.payload)
       delete newState[action.payload.review.productId][action.payload.review.userId]
 
       return newState;

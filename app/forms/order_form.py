@@ -3,5 +3,5 @@ from wtforms import StringField
 from wtforms.validators import DataRequired, Length
 
 class OrderForm(FlaskForm):
-    quantity = StringField('lastName', validators=[
+    status = StringField('status', validators=[
                            DataRequired(), Length(1, 40)])

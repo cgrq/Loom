@@ -55,7 +55,6 @@ export default function CartButton({ user }) {
         ref={cartListRef}
       >
         {
-
            <UserLoggedOutNav />
         }
       </div>

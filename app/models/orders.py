@@ -18,21 +18,16 @@ class Order(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey(
         add_prefix_for_prod("users.id"), ondelete="CASCADE"), nullable=False)
 
-    storefront_id = db.Column(db.Integer, db.ForeignKey(
-        add_prefix_for_prod("storefronts.id"), ondelete="CASCADE"), nullable=False)
-
     cart_items = db.relationship(
         "CartItem", back_populates="orders", cascade="all, delete-orphan")
 
     user = db.relationship('User', back_populates="orders")
-    storefront = db.relationship('Storefront', back_populates="orders")
 
     def to_dict(self):
         return {
             'id': self.id,
             'status': self.status,
             'userId': self.user_id,
-            'storefrontId': self.storefront_id,
             'created_at': self.created_at,
             'updated_at': self.updated_at,
         }
