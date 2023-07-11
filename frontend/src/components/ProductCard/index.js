@@ -19,8 +19,8 @@ export default function ProductCard({ product }) {
 
 
     useEffect(() => {
-        if (product && product.productImages && product.productImages[0]) {
-            setImageUrl(product.productImages.length > 0 ? product.productImages[0].image1 : process.env.PUBLIC_URL + "/default-profile-pic.png")
+        if (product) {
+            setImageUrl(product.productImages ? product.productImages.image1 : process.env.PUBLIC_URL + "/default-profile-pic.png")
         }
     }, [product])
 

@@ -6,6 +6,7 @@ import CTAButton from "../CTAButton";
 import UserLoggedOutNav from "../UserLoggedOutNav";
 import { getUserStorefrontThunk } from "../../store/storefronts";
 import { useDispatch } from "react-redux";
+import CartItem from "../CartList";
 
 export default function CartButton({ user }) {
   // State for showing/hiding cart list dropdown
@@ -55,7 +56,7 @@ export default function CartButton({ user }) {
         ref={cartListRef}
       >
         {
-           <UserLoggedOutNav />
+           <CartItem />
         }
       </div>
     </div>

@@ -1,0 +1,16 @@
+.cart-list-wrapper {
+    display: flex;
+    flex-flow: column;
+    margin-top: 30px;
+    align-items: center;
+    padding: 20px;
+    color:rgb(114, 114, 114);
+}
+
+@media screen and (max-width: 767px) {
+    .cart-list-wrapper {
+        width: calc(90vw - 40px);
+        /* flex-flow: column nowrap; */
+        align-items: center;
+    }
+}

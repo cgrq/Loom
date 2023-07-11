@@ -56,13 +56,13 @@ export function ProductPage() {
             dispatch(getReviewsByProductId(product.id))
         }
 
-        if (Object.values(product).length > 0 && product.productImages && product.productImages[0] && product.productImages[0].image1) {
-            setImage1(product.productImages[0].image1)
-            setImage2(product.productImages[0].image2)
-            setImage3(product.productImages[0].image3)
-            setImage4(product.productImages[0].image4)
-            setImage5(product.productImages[0].image5)
-            setImage6(product.productImages[0].image6)
+        if (Object.values(product).length > 0 && product.productImages && product.productImages.image1) {
+            setImage1(product.productImages.image1)
+            setImage2(product.productImages.image2)
+            setImage3(product.productImages.image3)
+            setImage4(product.productImages.image4)
+            setImage5(product.productImages.image5)
+            setImage6(product.productImages.image6)
 
             setSelectedImage("image1")
         }
@@ -106,7 +106,7 @@ export function ProductPage() {
 
     if ((!avgRating && avgRating !== 0) || (!totalRatings && totalRatings !== 0) || !allReviews || !Object.values(product).length || !product.name || !product.productImages) return null;
 
-    const productImages = Object.values(product.productImages[0]).filter((value) => typeof value === 'string' && value.startsWith('http'));
+    const productImages = Object.values(product.productImages).filter((value) => typeof value === 'string' && value.startsWith('http'));
 
     return (
         <div>

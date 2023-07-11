@@ -21,6 +21,7 @@ class CartItem(db.Model):
         add_prefix_for_prod("orders.id"), ondelete="CASCADE"), nullable=False)
 
     product = db.relationship('Product', back_populates="cart_items")
+
     orders = db.relationship('Order', back_populates="cart_items")
 
     def to_dict(self):
@@ -28,6 +29,7 @@ class CartItem(db.Model):
             'id': self.id,
             'quantity': self.quantity,
             'productId': self.product_id,
+            'product': self.product.to_dict(),
             'orderId': self.order_id,
             'created_at': self.created_at,
             'updated_at': self.updated_at,

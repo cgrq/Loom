@@ -1,0 +1,10 @@
+.cart-list-item-wrapper{
+    display:flex;
+    width:300px;
+    border:1px solid black;
+}
+.cart-list-item-wrapper img {
+    width:40px;
+    height:40px;
+    object-fit: contain;
+}

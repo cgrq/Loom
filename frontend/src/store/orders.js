@@ -88,12 +88,12 @@ export const createCartItemThunk =
                         status: "in progress"
                     }),
                 });
-                console.log(`🖥 ~ file: orders.js:94 ~  order:`,  order)
 
                 if (order.ok) {
                     const data = await order.json();
                     dispatch(setOrder(data));
-                    orderId = order.id;
+                    orderId = data.order.id;
+
                 } else if (order.status < 500) {
                     const data = await order.json();
 
