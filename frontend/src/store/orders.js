@@ -165,23 +165,25 @@ export const editOrderThunk =
         };
 
 export const editCartItemThunk =
-    (quantity, productId, orderId) =>
+    (itemId, quantity) =>
         async (dispatch) => {
 
-            const response = await fetch("/api/cart-items/create", {
+            console.log(`🖥 ~ file: orders.js:173 ~ itemId:`, itemId)
+            const response = await fetch(`/api/cart-items/${itemId}/edit`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
                     quantity,
-                    productId,
-                    orderId
+                    orderId:1,
+                    productId:1,
                 }),
             });
 
             if (response.ok) {
                 const data = await response.json();
+                console.log(`🖥 ~ file: orders.js:186 ~ data:`, data)
                 dispatch(setCartItem(data));
                 return null;
             } else if (response.status < 500) {
@@ -286,13 +288,12 @@ export default function reducer(state = initialState, action) {
     }
     switch (action.type) {
         case SET_ORDER:
-            console.log('Handling SET_ORDER action with payload:', action.payload);
             newState.currentOrder = action.payload.order
 
             return newState;
 
         case SET_CART_ITEM:
-            console.log('Handling SET_CART_ITEMS action with payload:', action.payload);
+            console.log(`🖥 ~ file: orders.js:297 ~ reducer ~ action.payload.cartItem.id:`, action.payload.cartItem)
             newState.cart[action.payload.cartItem.id] = action.payload.cartItem
 
             return newState;
@@ -314,8 +315,13 @@ export default function reducer(state = initialState, action) {
 
             return newState;
 
+        case RESET_CART_ITEMS:
+            newState.cart = {}
+
+            return newState;
+
         case RESET_ORDERS:
-            newState = {}
+            newState.currentOrder = {}
             return newState;
 
         default:

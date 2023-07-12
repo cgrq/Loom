@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import "./CartListItem.css"
 import { NavLink } from "react-router-dom/cjs/react-router-dom"
-import { deleteCartItem } from "../../store/orders"
+import { deleteCartItem, editCartItemThunk } from "../../store/orders"
 import { useDispatch } from "react-redux"
 
 export default function CartListItem({ item }) {
@@ -15,6 +15,12 @@ export default function CartListItem({ item }) {
         }
     },[item])
 
+    const handleChangeInQuantity = (e) => {
+        setQuantity(e.target.value)
+        dispatch(editCartItemThunk(item.id, quantity))
+        console.log(`🖥 ~ file: index.js:21 ~ handleChangeInQuantity ~ item.id:`, item.id)
+    }
+
     const handleDelete = (e) => {
         dispatch(deleteCartItem(item.id))
     }
@@ -27,7 +33,7 @@ export default function CartListItem({ item }) {
             <select
                 className="cart-list-item-quantity"
                 value={quantity}
-                onChange={(e) => setQuantity(e.target.value)}
+                onChange={handleChangeInQuantity}
             >
                 {Array.from({ length: 100 }, (_, index) => (
                     <option key={index + 1} value={index + 1}>
