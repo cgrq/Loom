@@ -44,7 +44,7 @@ def edit_cart_item(id):
 
         db.session.commit()
 
-        return {"cart_item": cart_item.to_dict()}
+        return {"cartItem": cart_item.to_dict()}
     return {'errors': form.errors}, 401
 
 @cart_item_routes.route('<int:id>/delete', methods=['DELETE'])

@@ -88,12 +88,12 @@ export const createCartItemThunk =
                         status: "in progress"
                     }),
                 });
-                console.log(`🖥 ~ file: orders.js:94 ~  order:`,  order)
 
                 if (order.ok) {
                     const data = await order.json();
                     dispatch(setOrder(data));
-                    orderId = order.id;
+                    orderId = data.order.id;
+
                 } else if (order.status < 500) {
                     const data = await order.json();
 
@@ -133,25 +133,56 @@ export const createCartItemThunk =
         };
 
 export const editOrderThunk =
-    (id, rating, message, productId, userId) =>
+    (orderId) =>
         async (dispatch) => {
 
-            const response = await fetch(`/api/orders/${id}/edit`, {
+            const response = await fetch(`/api/orders/${orderId}/edit`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    rating,
-                    message,
-                    productId,
-                    userId
+                    status: "complete"
                 }),
             });
 
             if (response.ok) {
                 const data = await response.json();
                 dispatch(setOrder(data));
+                dispatch(resetCartItems())
+                return null;
+            } else if (response.status < 500) {
+                const data = await response.json();
+
+                if (data.errors) {
+                    return data.errors;
+                }
+            } else {
+                return ["An error occurred. Please try again."];
+            }
+        };
+
+export const editCartItemThunk =
+    (itemId, quantity) =>
+        async (dispatch) => {
+
+            console.log(`🖥 ~ file: orders.js:173 ~ itemId:`, itemId)
+            const response = await fetch(`/api/cart-items/${itemId}/edit`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    quantity,
+                    orderId:1,
+                    productId:1,
+                }),
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                console.log(`🖥 ~ file: orders.js:186 ~ data:`, data)
+                dispatch(setCartItem(data));
                 return null;
             } else if (response.status < 500) {
                 const data = await response.json();
@@ -191,11 +222,11 @@ export const getAllOrdersThunk = () => async (dispatch) => {
     }
 };
 
-export const getOrderById = (productId) => async (dispatch) => {
-    const response = await fetch(`/api/orders/product/${productId}`);
+export const getCurrentOrder = () => async (dispatch) => {
+    const response = await fetch(`/api/orders/current`);
     if (response.ok) {
         const orders = await response.json();
-        dispatch(setOrders(orders));
+        dispatch(setOrder(orders));
         return null;
     } else {
         const errorResponse = await response.json();
@@ -205,48 +236,53 @@ export const getOrderById = (productId) => async (dispatch) => {
 
 export const deleteCartItem = (cartItemId) => async (dispatch) => {
     const response = await fetch(`/api/cart-items/${cartItemId}/delete`, {
-      method: 'DELETE'
+        method: 'DELETE'
     });
 
 
     if (response.ok) {
-      dispatch(removeCartItem({cartItemId}));
-      return null;
+        dispatch(removeCartItem({ cartItemId }));
+        return null;
     } else {
-      const errorResponse = await response.json();
-      return errorResponse.errors;
+        const errorResponse = await response.json();
+        return errorResponse.errors;
     }
-  };
+};
 
-  export const getAllCartItemsThunk = () => async (dispatch) => {
+export const getAllCartItemsThunk = () => async (dispatch) => {
     const response = await fetch(`/api/cart-items/`);
     if (response.ok) {
-      const cartItems = await response.json();
-      dispatch(setCartItems(cartItems));
-      return null;
+        const cartItems = await response.json();
+        dispatch(setCartItems(cartItems));
+        return null;
     } else {
-      const errorResponse = await response.json();
-      return errorResponse.errors;
+        const errorResponse = await response.json();
+        return errorResponse.errors;
     }
-  };
+};
 
-  export const getCartItemById = (productId) => async (dispatch) => {
-    const response = await fetch(`/api/cart-items/product/${productId}`);
+export const getCartItemByOrderId = (orderId) => async (dispatch) => {
+    const response = await fetch(`/api/orders/${orderId}/cart-items`);
     if (response.ok) {
-      const cartItems = await response.json();
-      dispatch(setCartItems(cartItems));
-      return null;
+        const cartItems = await response.json();
+        dispatch(setCartItems(cartItems));
+        return null;
     } else {
-      const errorResponse = await response.json();
-      return errorResponse.errors;
+        const errorResponse = await response.json();
+        return errorResponse.errors;
     }
-  };
+};
 
-const initialState = { currentOrder: null, cart: [] };
+const initialState = {
+    currentOrder: {},
+    cart: {}
+};
 
 export default function reducer(state = initialState, action) {
     let newState = {
-        ...state
+        ...state,
+        currentOrder: { ...state.currentOrder },
+        cart: { ...state.cart }
     }
     switch (action.type) {
         case SET_ORDER:
@@ -254,31 +290,37 @@ export default function reducer(state = initialState, action) {
 
             return newState;
 
-        case SET_ORDERS:
-            action.payload.orders.forEach(order => {
-                newState[order.productId] = { ...newState[order.productId] }
-                newState[order.productId][order.userId] = order
-            })
-
-            return newState;
-
         case SET_CART_ITEM:
+            console.log(`🖥 ~ file: orders.js:297 ~ reducer ~ action.payload.cartItem.id:`, action.payload.cartItem)
             newState.cart[action.payload.cartItem.id] = action.payload.cartItem
 
             return newState;
 
         case SET_CART_ITEMS:
             action.payload.cartItems.forEach(cartItem => {
-                newState.cart[cartItem.id] = action.payload.cartItem
+
+                newState.cart[cartItem.id] = cartItem
             })
 
+            return newState
+
+        case REMOVE_CART_ITEM:
+            delete newState.cart[action.payload.cartItemId]
+
+            return newState;
         case REMOVE_ORDER:
             delete newState.currentOrder
 
             return newState;
 
+        case RESET_CART_ITEMS:
+            newState.cart = {}
+
+            return newState;
+
         case RESET_ORDERS:
-            newState = {}
+            newState.currentOrder = {}
+
             return newState;
 
         default:

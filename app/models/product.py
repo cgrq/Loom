@@ -30,25 +30,10 @@ class Product(db.Model):
     reviews = db.relationship(
         "Review", back_populates="product", cascade="all, delete-orphan")
 
-    product_images = db.relationship(
-        "ProductImages", back_populates="product", cascade="all, delete-orphan")
+    product_images = db.relationship('ProductImages', uselist=False, back_populates='product')
 
     def to_dict(self):
-        if len(self.product_images) == 0:
-            return {
-                'id': self.id,
-                'name': self.name,
-                'description': self.description,
-                'quantity': self.quantity,
-                'price': self.price,
-                'category': self.category,
-                'productImages': [],
-                'storefrontId': self.storefront_id,
-                'subcategory': self.subcategory,
-                'created_at': self.created_at,
-                'updated_at': self.updated_at,
-            }
-        else:
+        
             return {
                 'id': self.id,
                 'name': self.name,
@@ -57,7 +42,7 @@ class Product(db.Model):
                 'price': self.price,
                 'category': self.category,
                 'subcategory': self.subcategory,
-                'productImages': [images.to_dict() for images in self.product_images],
+                'productImages': self.product_images.to_dict(),
                 'storefrontId': self.storefront_id,
                 'created_at': self.created_at,
                 'updated_at': self.updated_at,

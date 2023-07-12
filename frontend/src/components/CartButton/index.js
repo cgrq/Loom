@@ -1,11 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
-import UserProfileNav from "../UserProfileNav";
 import "./CartButton.css";
-import { NavLink } from "react-router-dom";
-import CTAButton from "../CTAButton";
-import UserLoggedOutNav from "../UserLoggedOutNav";
 import { getUserStorefrontThunk } from "../../store/storefronts";
 import { useDispatch } from "react-redux";
+import CartList from "../CartList";
 
 export default function CartButton({ user }) {
   // State for showing/hiding cart list dropdown
@@ -55,7 +52,7 @@ export default function CartButton({ user }) {
         ref={cartListRef}
       >
         {
-           <UserLoggedOutNav />
+           <CartList />
         }
       </div>
     </div>
