@@ -40,8 +40,7 @@
 }
 
 @media screen and (max-width: 767px) {
-    .cart-list-item-quantity option{
-        font-size: 200px !important;
-        min-height:fit-content !important
+    .cart-list-item-name{
+        width:80px;
     }
 }
