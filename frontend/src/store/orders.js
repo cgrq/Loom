@@ -133,25 +133,23 @@ export const createCartItemThunk =
         };
 
 export const editOrderThunk =
-    (id, rating, message, productId, userId) =>
+    (orderId) =>
         async (dispatch) => {
 
-            const response = await fetch(`/api/orders/${id}/edit`, {
+            const response = await fetch(`/api/orders/${orderId}/edit`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    rating,
-                    message,
-                    productId,
-                    userId
+                    status: "complete"
                 }),
             });
 
             if (response.ok) {
                 const data = await response.json();
                 dispatch(setOrder(data));
+                dispatch(resetCartItems())
                 return null;
             } else if (response.status < 500) {
                 const data = await response.json();
@@ -322,6 +320,7 @@ export default function reducer(state = initialState, action) {
 
         case RESET_ORDERS:
             newState.currentOrder = {}
+
             return newState;
 
         default:

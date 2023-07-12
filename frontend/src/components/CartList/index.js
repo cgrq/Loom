@@ -2,37 +2,55 @@ import { useDispatch, useSelector } from "react-redux"
 import "./CartList.css"
 import CartListItem from "../CartListItem"
 import CTAButton from "../CTAButton"
-import { useEffect } from "react"
-import { getCartItemByOrderId, getCurrentOrder } from "../../store/orders"
+import { useEffect, useState } from "react"
+import { editOrderThunk, getCartItemByOrderId, getCurrentOrder } from "../../store/orders"
 
-export default function CartList(){
+export default function CartList() {
     const dispatch = useDispatch()
-    const { currentOrder } = useSelector((state)=>state.orders)
-    const { cart } = useSelector((state)=>state.orders)
+    const { currentOrder } = useSelector((state) => state.orders)
+    const { cart } = useSelector((state) => state.orders)
+    const [hasCheckedOut, setHasCheckedOut] = useState(false)
 
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(getCurrentOrder())
     }, [])
 
     useEffect(() => {
+        if (handleCheckout) {
+            setTimeout(() => setHasCheckedOut(false), 3000);
+        }
+    }, [hasCheckedOut])
+
+    useEffect(() => {
         const { id: currentOrderId } = currentOrder || {};
-        if(currentOrderId){
+        if (currentOrderId) {
             console.log('Dispatching getCartItemByOrderId with currentOrderId:', currentOrderId);
             dispatch(getCartItemByOrderId(currentOrderId));
         }
     }, [currentOrder?.id]);  // Depend on currentOrder.id instead of currentOrder
 
-
+    const handleCheckout = () => {
+        dispatch(editOrderThunk(currentOrder.id))
+        setHasCheckedOut(true)
+    }
 
     return (
         <div className="cart-list-wrapper">
             <div>Cart</div>
             {
-                cart
-                    ? Object.values(cart).map(item => <CartListItem key={item.id} item={item} />)
-                    :<div>No items in cart</div>
+                Object.values(cart).length > 0
+                    ? <>
+                        {Object.values(cart).map(item => <CartListItem key={item.id} item={item} />)}
+                        <CTAButton
+                            buttonText={"Checkout"}
+                            onClick={handleCheckout}
+                        />
+                    </>
+            : hasCheckedOut
+            ? <div>Your order is on it's way</div>
+            : <div>No items in cart</div>
             }
-            <CTAButton buttonText={"Checkout"}/>
+
         </div>
     )
 }
