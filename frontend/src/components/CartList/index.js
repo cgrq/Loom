@@ -47,8 +47,8 @@ export default function CartList() {
                         />
                     </>
             : hasCheckedOut
-            ? <div>Your order is on it's way</div>
-            : <div>No items in cart</div>
+            ? <div className="cart-empty">Your order is on it's way</div>
+            : <div className="cart-empty">No items in cart</div>
             }
 
         </div>

@@ -7,6 +7,13 @@
     color:rgb(114, 114, 114);
 }
 
+.cart-empty{
+    width:382px;
+    padding:40px 0;
+    text-align: center;
+    color:black;
+}
+
 @media screen and (max-width: 767px) {
     .cart-list-wrapper {
         width: calc(90vw - 40px);
