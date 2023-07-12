@@ -7,10 +7,12 @@
 }
 
 .cart-list-item-quantity {
-    text-align: left;
+    text-align: center;
     font-size: 14px;
     width: 50px;
     border: none;
+    color:black;
+    background-color: white;
 }
 
 .cart-list-item-price {
