@@ -40,9 +40,10 @@
 }
 
 @media screen and (max-width: 767px) {
-
   .cart-list {
-    top: -20px;
-    right: -110.5px;
+    position:fixed;
+    width: 100vw;
+    margin-top:40px;
+    left:0;
   }
 }

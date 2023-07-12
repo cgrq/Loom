@@ -7,6 +7,11 @@
     color:rgb(114, 114, 114);
 }
 
+.cart-list-title{
+    margin-top:40px;
+    margin-bottom:20px;
+}
+
 .cart-empty{
     width:382px;
     padding:40px 0;
@@ -14,9 +19,10 @@
     color:black;
 }
 
+.cart-list-wrapper button{
+    margin-top:20px;
+}
+
 @media screen and (max-width: 767px) {
-    .cart-list-wrapper {
-        width: calc(90vw - 40px);
-        align-items: center;
-    }
+    
 }

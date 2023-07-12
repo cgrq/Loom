@@ -1,6 +1,5 @@
 .nav-user-profile-nav{
   width:400px;
-  min-width: 220px;
   padding:60px;
 }
 .right-nav-container{
@@ -128,5 +127,9 @@ align-items: center;
 
   .nav-user-profile-nav{
     width:calc(100vw - 180px);
+
+  }
+  .demo-warning{
+    width:100%;
   }
 }

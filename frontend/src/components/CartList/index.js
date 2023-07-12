@@ -36,7 +36,7 @@ export default function CartList() {
 
     return (
         <div className="cart-list-wrapper">
-            <div>Cart</div>
+            <div className="cart-list-title">Cart</div>
             {
                 Object.values(cart).length > 0
                     ? <>
@@ -46,11 +46,10 @@ export default function CartList() {
                             onClick={handleCheckout}
                         />
                     </>
-            : hasCheckedOut
-            ? <div className="cart-empty">Your order is on it's way</div>
-            : <div className="cart-empty">No items in cart</div>
+                    : hasCheckedOut
+                        ? <div className="cart-empty">Your order is on it's way</div>
+                        : <div className="cart-empty">No items in cart</div>
             }
-
         </div>
     )
 }
