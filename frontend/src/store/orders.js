@@ -166,7 +166,6 @@ export const editCartItemThunk =
     (itemId, quantity) =>
         async (dispatch) => {
 
-            console.log(`🖥 ~ file: orders.js:173 ~ itemId:`, itemId)
             const response = await fetch(`/api/cart-items/${itemId}/edit`, {
                 method: "PUT",
                 headers: {
