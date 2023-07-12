@@ -57,6 +57,24 @@ def delete_order(id):
 
     return {"message":"Delete successful"}
 
+@orders_routes.route('/current')
+def get_current_order():
+    """
+    Query for current user's order
+    """
+    order = Order.query.filter(
+        Order.user_id == current_user.id,
+        Order.status == 'in progress'
+    ).first()
+
+
+    if order is None:
+        return {"order": None}
+
+
+    return {"order":order.to_dict()}
+
+
 @orders_routes.route('/<int:id>/cart-items')
 def get_order_cart_items(id):
     """
