@@ -109,7 +109,7 @@ export function ProductPage() {
     const productImages = Object.values(product.productImages).filter((value) => typeof value === 'string' && value.startsWith('http'));
 
     return (
-        <div>
+        <div className="product-page-wrapper">
             <div className="product-page-upper-wrapper">
                 <div className="product-page-title-wrapper">
                     <h1 className="product-page-name">{product.name}</h1>
@@ -151,7 +151,7 @@ export function ProductPage() {
                                 </>
                             }
                         </div>
-                        <div className="product-page-details-row">
+                        <div className="product-page-details-row product-page-details-description">
                             <div className="product-page-details-label">
                                 Product Description:
                             </div>
