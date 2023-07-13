@@ -2,7 +2,6 @@
     display:flex;
     justify-content: center;
 }
-
 .card-feed-filter-category{
     display: flex;
     flex-flow: column;
@@ -16,4 +15,13 @@
 }
 .card-feed-filter-subcategorys-wrapper{
     display:flex;
+}
+@media screen and (max-width: 767px){
+    .card-feed-filter-wrapper{
+        width:100vw;
+        justify-content: flex-start;
+        padding:20px 40px;
+        padding-top: 10px;
+        overflow-y:  scroll;
+    }
 }

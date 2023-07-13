@@ -27,7 +27,7 @@ export default function CartList() {
             console.log('Dispatching getCartItemByOrderId with currentOrderId:', currentOrderId);
             dispatch(getCartItemByOrderId(currentOrderId));
         }
-    }, [currentOrder?.id]);  // Depend on currentOrder.id instead of currentOrder
+    }, [currentOrder?.id]);
 
     const handleCheckout = () => {
         dispatch(editOrderThunk(currentOrder.id))

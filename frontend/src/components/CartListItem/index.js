@@ -18,7 +18,6 @@ export default function CartListItem({ item }) {
     const handleChangeInQuantity = (e) => {
         setQuantity(e.target.value)
         dispatch(editCartItemThunk(item.id, quantity))
-        console.log(`🖥 ~ file: index.js:21 ~ handleChangeInQuantity ~ item.id:`, item.id)
     }
 
     const handleDelete = (e) => {
@@ -29,7 +28,6 @@ export default function CartListItem({ item }) {
 
     return (
         <div key = {item.id}className="cart-list-item-wrapper">
-
             <select
                 className="cart-list-item-quantity"
                 value={quantity}

@@ -4,7 +4,7 @@
     justify-content: center;
     box-shadow: 0px 8px 13px 1px rgba(0, 0, 0, 0.087);
     background-color: #f7f7f7;
-    width:calc(100vw - 20px);
+    width:calc(100vw);
     padding:10px 0;
 }
 .homepage-feed-wrapper{
