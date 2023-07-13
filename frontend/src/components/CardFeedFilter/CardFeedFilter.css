@@ -2,26 +2,28 @@
     display:flex;
     justify-content: center;
 }
+
 .card-feed-filter-category{
+    margin:0 15px;
     display: flex;
     flex-flow: column;
     align-items: center;
-    margin:0 15px;
 }
+
 .card-feed-filter-category-title{
+    margin-bottom:3px;
     color:rgb(200, 200, 200);
     font-family: "Space Grotesk";
-    margin-bottom:3px;
 }
+
 .card-feed-filter-subcategorys-wrapper{
     display:flex;
 }
-@media screen and (max-width: 767px){
+
+@media screen and (max-width: 1000px) {
     .card-feed-filter-wrapper{
-        width:100vw;
-        justify-content: flex-start;
         padding:20px 40px;
         padding-top: 10px;
-        overflow-y:  scroll;
+        justify-content: flex-start;
     }
 }
