@@ -122,7 +122,6 @@ export default function Storefront() {
                     <div className="storefront-banner-image-fade-left" />
                     <div className="storefront-banner-image-fade-right" />
                     <img className="storefront-banner-image" src={currentStorefront.banner_image} />
-
                 </div>
             </div>
 
@@ -142,17 +141,18 @@ export default function Storefront() {
                 </div>
                 {
                     showProfile
-                        ? (
-                            <div className="storefront-description-wrapper">
-                                <span className="storefront-description-label">Description:</span>
-                                {currentStorefront.description}
-                            </div>
-                        )
-                        : <CardFeedFilter
-                            products={products}
-                            setProducts={setProducts}
-                            userStorefront={true}
-                          />
+                        ? <div className="storefront-description-wrapper">
+                            <span className="storefront-description-label">Description:</span>
+                            {currentStorefront.description}
+                        </div>
+
+                        : <div className="storefront-filter-wrapper">
+                            <CardFeedFilter
+                                products={products}
+                                setProducts={setProducts}
+                                userStorefront={true}
+                            />
+                        </div>
                 }
 
             </div>
