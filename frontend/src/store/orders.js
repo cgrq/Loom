@@ -180,7 +180,6 @@ export const editCartItemThunk =
 
             if (response.ok) {
                 const data = await response.json();
-                console.log(`🖥 ~ file: orders.js:186 ~ data:`, data)
                 dispatch(setCartItem(data));
                 return null;
             } else if (response.status < 500) {
@@ -290,7 +289,6 @@ export default function reducer(state = initialState, action) {
             return newState;
 
         case SET_CART_ITEM:
-            console.log(`🖥 ~ file: orders.js:297 ~ reducer ~ action.payload.cartItem.id:`, action.payload.cartItem)
             newState.cart[action.payload.cartItem.id] = action.payload.cartItem
 
             return newState;

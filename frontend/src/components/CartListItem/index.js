@@ -15,9 +15,12 @@ export default function CartListItem({ item }) {
         }
     },[item])
 
+    useEffect(()=>{
+        dispatch(editCartItemThunk(item.id, quantity))
+    }, [quantity])
+
     const handleChangeInQuantity = (e) => {
         setQuantity(e.target.value)
-        dispatch(editCartItemThunk(item.id, quantity))
     }
 
     const handleDelete = (e) => {
