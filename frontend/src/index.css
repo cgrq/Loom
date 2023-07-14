@@ -30,6 +30,7 @@ h1, h2{
 .app-body-wrapper {
     height: calc(100vh - 100px);
     width:100%;
+    overflow-y: scroll;
 }
 
 .app-body-content-wrapper {
