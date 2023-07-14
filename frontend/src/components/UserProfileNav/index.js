@@ -96,6 +96,10 @@ export default function UserProfileNav({ user, closeMenu }) {
                     </div>
 
                 </div>
+                <div className="nav-social-links-wrapper">
+          <a href="https://github.com/cgrq/Gather"><img src={process.env.PUBLIC_URL + "/github.png"}/></a>
+          <a href="https://www.linkedin.com/in/cgrq/"><img src={process.env.PUBLIC_URL + "/linkedin.png"}/></a>
+        </div>
             </div>
         </div>
     )

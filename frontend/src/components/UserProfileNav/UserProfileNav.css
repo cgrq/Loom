@@ -1,6 +1,7 @@
 .nav-user-profile-nav{
   width:400px;
   padding:60px;
+  padding-bottom: 20px;
 }
 .right-nav-container{
   display:flex;
@@ -123,6 +124,18 @@ align-items: center;
   width:250px;
   margin:10px auto;
 }
+/* Social Links */
+.nav-social-links-wrapper{
+  display:flex;
+  justify-content: center;
+  width:100%;
+}
+.nav-social-links-wrapper img{
+  width:20px;
+  margin:40px 20px;
+  margin-bottom: 0;
+}
+
 @media screen and (max-width: 540px) {
 
   .nav-user-profile-nav{
