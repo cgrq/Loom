@@ -3,13 +3,12 @@
     padding: 0;
     font-family: "Space Grotesk";
 }
-body{
+body {
     overflow: hidden;
 }
-h1, h2{
+h1, h2 {
     font-family: "Montserrat Alternates";
     color: #7a7a7a
-
 }
 
 .app-wrapper {
@@ -37,7 +36,7 @@ h1, h2{
     display: flex;
     justify-content: center;
 }
-.active{
+.active {
     width:fit-content;
     padding:0;
     height:fit-content;
@@ -50,14 +49,14 @@ h1, h2{
     padding:10px;
     border-left:1px solid red;
 }
-.nav-user-details-wrapper{
+.nav-user-details-wrapper {
     margin-left: 16px;
 }
 .nav-user-name-wrapper {
     display: flex;
     flex-flow: row nowrap;
 }
-.nav-user-name{
+.nav-user-name {
     display:inline-block;
     max-width: 160px;
     white-space: nowrap;

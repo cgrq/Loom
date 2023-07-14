@@ -1,6 +1,6 @@
 .homepage-filter-wrapper{
     display: flex;
-    padding:0 !important;
+    padding:20px 0;
     width:calc(100vw);
     box-sizing: border-box;
     align-items: center;
@@ -24,5 +24,4 @@
         background-color: #ffffff;
         justify-content: flex-start;
     }
-
 }
