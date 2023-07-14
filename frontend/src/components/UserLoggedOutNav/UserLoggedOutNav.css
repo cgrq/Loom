@@ -1,14 +1,32 @@
-.navigation-content-auth-buttons-wrapper {
+.navigation-content-auth-wrapper {
     display: flex;
     margin-top: 60px;
     width: 260px;
     justify-content: center;
+    flex-flow: column;
     padding: 20px;
     max-width: 260px;
 }
 
-.navigation-content-auth-buttons-wrapper>a {
-    margin-bottom: 10px;
+.navigation-content-auth-buttons-wrapper{
+    width:100%;
+    display:flex;
+    justify-content: center;
+}
+.navigation-content-auth-buttons-wrapper > a {
+}
+
+/* Social Links */
+.logged-out-social-links-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.logged-out-social-links-wrapper img {
+    width: 20px;
+    margin: 40px 20px;
+    margin-bottom: 0;
 }
 
 @media screen and (max-width: 767px) {
