@@ -39,6 +39,18 @@
   border: none;
 }
 
+.cart-logged-out-wrapper{
+  display: flex;
+  height:300px;
+  width:fit-content;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding:0 60px;
+  font-size: 20px;
+  white-space: nowrap;
+}
+
 @media screen and (max-width: 767px) {
   .cart-list {
     position:fixed;

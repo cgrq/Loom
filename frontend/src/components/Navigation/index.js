@@ -37,7 +37,7 @@ export default function Navigation() {
                     <ProfileButton user={user} />
                 </div>
                 <div className="navigation-cart-wrapper">
-                    <CartButton />
+                    <CartButton user={user} />
                 </div>
             </div>
         </div>
