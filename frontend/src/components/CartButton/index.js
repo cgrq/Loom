@@ -3,13 +3,13 @@ import "./CartButton.css";
 import { getUserStorefrontThunk } from "../../store/storefronts";
 import { useDispatch } from "react-redux";
 import CartList from "../CartList";
+import UserLoggedOutNav from "../UserLoggedOutNav"
 
 export default function CartButton({ user }) {
   // State for showing/hiding cart list dropdown
   const dispatch = useDispatch()
   const [showMenu, setShowMenu] = useState(false);
 
-  // Ref of
   const cartListRef = useRef();
 
   const openMenu = () => {
@@ -52,7 +52,11 @@ export default function CartButton({ user }) {
         ref={cartListRef}
       >
         {
-           <CartList />
+          user
+            ? <CartList />
+            : <div className="cart-logged-out-wrapper">
+                Log in to add items to your cart
+            </div>
         }
       </div>
     </div>

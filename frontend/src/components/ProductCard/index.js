@@ -78,6 +78,7 @@ export default function ProductCard({ product }) {
                         )
                         :
                         (
+                            user &&
                             <AddToCartButton productId={product.id}/>
                         )
                     }
