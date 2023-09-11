@@ -227,7 +227,21 @@ def get_product_by_name(name):
 @product_routes.route('/')
 def get_products():
     """
-    Query for all products and return them as a list of product dictionaries
+    Query for all products, paginating results by page
     """
-    products = Product.query.all()
+    # Get the page and per_page values from query parameters (default to 1 and 10)
+    page = int(request.args.get('page', 1))
+    per_page = int(request.args.get('per_page', 18))
+
+    # Calculate the offset based on the page and per_page values
+    offset = (page - 1) * per_page
+
+    # Query the database for products with pagination
+    products = Product.query.order_by(desc(Product.created_at)).offset(offset).limit(per_page).all()
+
+    # Count total products for pagination metadata
+    total_products = Product.query.count()
+
+    # Calculate total pages
+    total_pages = (total_products + per_page - 1) // per_page
     return {'products': [product.to_dict() for product in products]}
