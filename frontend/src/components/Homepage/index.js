@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import ProductCardFeed from "../ProductCardFeed";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProductsThunk, getStorefrontProductsThunk } from "../../store/products";
@@ -8,10 +8,11 @@ import { getAllReviewsThunk } from "../../store/reviews";
 
 export default function Homepage() {
     const dispatch = useDispatch();
-    const { allProducts } = useSelector(state=> state.products);
-    const [ products, setProducts ] = useState("");
-    const [ productType, setProductType ] = useState("");
-    const { userStorefront } = useSelector(state=>state.storefronts)
+    const feedWrapperRef = useRef(null);
+    const { allProducts } = useSelector(state => state.products);
+    const [products, setProducts] = useState("");
+    const [productType, setProductType] = useState("");
+    const { userStorefront } = useSelector(state => state.storefronts)
     const { tops } = useSelector(state => state.products);
     const { bottoms } = useSelector(state => state.products);
     const { footwear } = useSelector(state => state.products);
@@ -21,79 +22,132 @@ export default function Homepage() {
     const { walls } = useSelector(state => state.products);
     const { spaces } = useSelector(state => state.products);
     const { desk } = useSelector(state => state.products);
-
+    const [perPage, setPerPage] = useState(18);
+    const [isLoadingMore, setIsLoadingMore] = useState(false);
     const [isLoaded, setIsLoaded] = useState(false);
 
-    useEffect(()=>{
-        dispatch(getAllProductsThunk())
-        dispatch(getAllReviewsThunk())
-    }, [])
+    let page = 1;
 
-    useEffect(()=>{
-        if(!isLoaded && Object.values(allProducts).length > 0){
-            setProducts(allProducts)
+    useEffect(() => {
+        dispatch(getAllProductsThunk(page, perPage));
+        dispatch(getAllReviewsThunk());
+    }, []);
+
+    const loadMoreData = async () => {
+        if (page < 10) {
+            setIsLoadingMore(true);
+            page++
+
+            const response = await dispatch(getAllProductsThunk(page, perPage));
+
+            if (!response) {
+                setIsLoadingMore(false);
+            }
+        }
+    };
+
+    useEffect(() => {
+        const feedWrapper = feedWrapperRef.current;
+        console.log("load")
+
+        if (feedWrapper) {
+            console.log("feed wrapper")
+            feedWrapper.addEventListener("scroll", handleScroll);
+        }
+
+        return () => {
+            if (feedWrapper) {
+                feedWrapper.removeEventListener("scroll", handleScroll);
+            }
+        };
+    }, [isLoaded]);
+
+
+    const handleScroll = () => {
+        console.log("scrolling")
+        const feedWrapper = feedWrapperRef.current;
+
+        if (!feedWrapper) {
+            return;
+        }
+
+        const { scrollTop, scrollHeight, clientHeight } = feedWrapper;
+
+        console.log("scroll height - scroll top",scrollHeight - scrollTop)
+
+        console.log("client height - 100", clientHeight + 100)
+
+        if (scrollHeight - scrollTop <= clientHeight + 100 && !isLoadingMore) {
+            loadMoreData();
+        }
+    };
+
+
+    useEffect(() => {
+        if (!isLoaded && Object.values(allProducts).length > 0) {
             setIsLoaded(true)
         }
+        setProducts(allProducts)
     }, [allProducts])
 
-    useEffect(()=>{
-        if (productType === "tops"){
+    useEffect(() => {
+        if (productType === "tops") {
             setProducts(tops)
         }
     }, [tops])
 
-    useEffect(()=>{
-        if (productType === "bottoms"){
+    useEffect(() => {
+        if (productType === "bottoms") {
             setProducts(bottoms)
         }
     }, [bottoms])
 
-    useEffect(()=>{
-        if (productType === "footwear"){
+    useEffect(() => {
+        if (productType === "footwear") {
             setProducts(footwear)
         }
     }, [footwear])
 
-    useEffect(()=>{
-        if (productType === "seating"){
+    useEffect(() => {
+        if (productType === "seating") {
             setProducts(seating)
         }
     }, [seating])
 
-    useEffect(()=>{
-        if (productType === "surfaces"){
+    useEffect(() => {
+        if (productType === "surfaces") {
             setProducts(surfaces)
         }
     }, [surfaces])
 
-    useEffect(()=>{
-        if (productType === "storage"){
+    useEffect(() => {
+        if (productType === "storage") {
             setProducts(storage)
         }
     }, [storage])
 
-    useEffect(()=>{
-        if (productType === "walls"){
+    useEffect(() => {
+        if (productType === "walls") {
             setProducts(walls)
         }
     }, [walls])
 
-    useEffect(()=>{
-        if (productType === "spaces"){
+    useEffect(() => {
+        if (productType === "spaces") {
             setProducts(spaces)
         }
     }, [spaces])
 
-    useEffect(()=>{
-        if (productType === "desk"){
+    useEffect(() => {
+        if (productType === "desk") {
             setProducts(desk)
         }
     }, [desk])
 
 
 
-    useEffect(()=>{
-        if(userStorefront){
+    useEffect(() => {
+        if (userStorefront) {
             dispatch(getStorefrontProductsThunk(userStorefront.id))
         }
     }, [userStorefront])
@@ -109,10 +163,10 @@ export default function Homepage() {
                     setProductType={setProductType}
                 />
             </div>
-            <div className="homepage-feed-wrapper">
-            <ProductCardFeed
-                products={products}
-            />
+            <div className="homepage-feed-wrapper" ref={feedWrapperRef}>
+                <ProductCardFeed
+                    products={products}
+                />
             </div>
         </div>
     )
