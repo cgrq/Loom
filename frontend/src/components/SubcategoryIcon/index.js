@@ -13,7 +13,7 @@ export function SubcomponentIcon({
     const {allProducts, storefrontProducts} = useSelector(state => state.products)
     const product = useSelector(state => state.products[type]);
     const userProduct = useSelector(state => state.products[`storefront${type.slice(0,1).toUpperCase() + type.slice(1)}`]);
-    const { selectedFilter,setSelectedFilter } = useFilter();
+    const { selectedFilter, setSelectedFilter } = useFilter();
 
     if(!type) return null;
 
@@ -23,7 +23,7 @@ export function SubcomponentIcon({
             setProducts(userStorefront ? storefrontProducts : allProducts)
         } else {
             setSelectedFilter(type);
-            setProducts(userStorefront ? userProduct : product)
+            setProducts(userStorefront ? userProduct : product);
         }
     }
 
