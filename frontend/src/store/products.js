@@ -169,8 +169,10 @@ export const deleteProduct = (id, subcategory) => async (dispatch) => {
   }
 };
 
-export const getAllProductsThunk = () => async (dispatch) => {
-  const response = await fetch(`/api/products/`);
+export const getAllProductsThunk = (page = 1, perPage = 18) => async (dispatch) => {
+
+  const response = await fetch(`/api/products/?page=${page}&per_page=${perPage}`);
+
   if (response.ok) {
     const products = await response.json();
     dispatch(setProducts(products));
@@ -179,7 +181,9 @@ export const getAllProductsThunk = () => async (dispatch) => {
     const errorResponse = await response.json();
     return errorResponse.errors;
   }
+
 };
+
 export const getStorefrontProductsThunk = (storefrontId) => async (dispatch) => {
   const response = await fetch(`/api/products/storefront/${storefrontId}`);
   if (response.ok) {
