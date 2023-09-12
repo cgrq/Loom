@@ -20,13 +20,6 @@ export default function Navigation() {
     }, [user])
 
 
-
-    // useEffect(() => {
-    //     if (userStorefront && userStorefront.id) {
-    //         dispatch(getStorefrontProductsThunk(userStorefront.id))
-    //     }
-    // }, [userStorefront])
-
     return (
         <div className="navigation-content-wrapper">
             <NavLink exact to="/" activeClassName="active">

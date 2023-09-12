@@ -10,15 +10,15 @@ export function SubcomponentIcon({
 }) {
 
     const publicUrl = process.env.PUBLIC_URL;
-    const {allProducts, storefrontProducts} = useSelector(state => state.products)
+    const { allProducts, storefrontProducts } = useSelector(state => state.products)
     const product = useSelector(state => state.products[type]);
-    const userProduct = useSelector(state => state.products[`storefront${type.slice(0,1).toUpperCase() + type.slice(1)}`]);
+    const userProduct = useSelector(state => state.products[`storefront${type.slice(0, 1).toUpperCase() + type.slice(1)}`]);
     const { selectedFilter, setSelectedFilter } = useFilter();
 
-    if(!type) return null;
+    if (!type) return null;
 
-    const handleClick= () => {
-        if(selectedFilter === type){
+    const handleClick = () => {
+        if (selectedFilter === type) {
             setSelectedFilter("all");
             setProducts(userStorefront ? storefrontProducts : allProducts)
         } else {
@@ -28,8 +28,10 @@ export function SubcomponentIcon({
     }
 
     return (
-        <div className="subcategory-wrapper" onClick={handleClick}>
-            <img src={publicUrl + `/filter-icons/${type === selectedFilter ? type + "-selected" : type}.png`} />
+        <div className={`subcategory-wrapper ${selectedFilter === type && "subcategory-wrapper-selected"}`} onClick={handleClick}>
+            <div className="subcategory-image-wrapper">
+                <img src={publicUrl + `/filter-icons/${type}.svg`} />
+            </div>
             <span>{type.slice(0, 1).toUpperCase() + type.slice(1)}</span>
         </div>
     )
