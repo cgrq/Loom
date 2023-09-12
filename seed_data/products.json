@@ -1809,15 +1809,6 @@
         "storefront_id": 8
     },
     {
-        "name": "Sonair",
-        "description": "vitae mattis nibh ligula nec sem duis aliquam convallis nunc proin",
-        "quantity": 1350,
-        "price": 319,
-        "category": "clothing",
-        "subcategory": "footwear",
-        "storefront_id":4
-    },
-    {
         "name": "Junedon",
         "description": "in hac habitasse platea dictumst etiam faucibus cursus urna ut",
         "quantity": 34,

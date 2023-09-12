@@ -8,7 +8,7 @@ class ProductImages(db.Model):
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True,autoincrement=True)
     image1 = db.Column(db.String(500),nullable=False)
     image2 = db.Column(db.String(500))
     image3 = db.Column(db.String(500))
@@ -22,7 +22,7 @@ class ProductImages(db.Model):
     # Foreign Keys
     product_id = db.Column(db.Integer, db.ForeignKey(
         add_prefix_for_prod("products.id"), ondelete="CASCADE"), primary_key=True, unique=True)
-    
+
     product = db.relationship('Product', back_populates='product_images')
 
     def to_dict(self):
