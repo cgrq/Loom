@@ -1,902 +1,902 @@
 [
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/footwear/footwear-1.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/footwear/footwear-1.webp",
         "product_id": 1
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/tops/white-tee-1.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/tops/white-tee-1.webp",
         "product_id": 2
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/tops/white-tee-2.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/tops/white-tee-2.webp",
         "product_id": 3
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/bottoms/bottoms-1.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/bottoms/bottoms-1.webp",
         "product_id": 4
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/bottoms/bottoms-2.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/bottoms/bottoms-2.webp",
         "product_id": 5
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/bottoms/bottoms-3.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/bottoms/bottoms-3.webp",
         "product_id": 6
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/tops/white-tee-3.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/tops/white-tee-3.webp",
         "product_id": 7
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/tops/white-tee-4.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/tops/white-tee-4.webp",
         "product_id": 8
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/bottoms/bottoms-4.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/bottoms/bottoms-4.webp",
         "product_id": 9
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/bottoms/bottoms-5.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/bottoms/bottoms-5.webp",
         "product_id": 10
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/bottoms/bottoms-6.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/bottoms/bottoms-6.webp",
         "product_id": 11
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/bottoms/bottoms-7.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/bottoms/bottoms-7.webp",
         "product_id": 12
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/tops/white-tee-5.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/tops/white-tee-5.webp",
         "product_id": 13
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/tops/white-tee-6.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/tops/white-tee-6.webp",
         "product_id": 14
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/bottoms/bottoms-8.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/bottoms/bottoms-8.webp",
         "product_id": 15
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/bottoms/bottoms-9.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/bottoms/bottoms-9.webp",
         "product_id": 16
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/tops/white-tee-7.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/tops/white-tee-7.webp",
         "product_id": 17
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/bottoms/bottoms-10.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/bottoms/bottoms-10.webp",
         "product_id": 18
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/bottoms/bottoms-11.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/bottoms/bottoms-11.webp",
         "product_id": 19
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/footwear/footwear-2.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/footwear/footwear-2.webp",
         "product_id": 20
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/footwear/footwear-3.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/footwear/footwear-3.webp",
         "product_id": 21
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/tops/white-tee-8.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/tops/white-tee-8.webp",
         "product_id": 22
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/bottoms/bottoms-12.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/bottoms/bottoms-12.webp",
         "product_id": 23
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/bottoms/bottoms-13.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/bottoms/bottoms-13.webp",
         "product_id": 24
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/tops/white-tee-9.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/tops/white-tee-9.webp",
         "product_id": 25
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/footwear/footwear-4.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/footwear/footwear-4.webp",
         "product_id": 26
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/footwear/footwear-5.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/footwear/footwear-5.webp",
         "product_id": 27
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/footwear/footwear-6.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/footwear/footwear-6.webp",
         "product_id": 28
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/bottoms/bottoms-14.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/bottoms/bottoms-14.webp",
         "product_id": 29
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/footwear/footwear-7.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/footwear/footwear-7.webp",
         "product_id": 30
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/tops/white-tee-10.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/tops/white-tee-10.webp",
         "product_id": 31
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/footwear/footwear-8.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/footwear/footwear-8.webp",
         "product_id": 32
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/bottoms/bottoms-15.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/bottoms/bottoms-15.webp",
         "product_id": 33
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/tops/white-tee-11.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/tops/white-tee-11.webp",
         "product_id": 34
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/footwear/footwear-9.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/footwear/footwear-9.webp",
         "product_id": 35
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/bottoms/bottoms-16.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/bottoms/bottoms-16.webp",
         "product_id": 36
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/footwear/footwear-10.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/footwear/footwear-10.webp",
         "product_id": 37
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/bottoms/bottoms-17.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/bottoms/bottoms-17.webp",
         "product_id": 38
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/footwear/footwear-11.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/footwear/footwear-11.webp",
         "product_id": 39
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/bottoms/bottoms-18.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/bottoms/bottoms-18.webp",
         "product_id": 40
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/tops/white-tee-12.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/tops/white-tee-12.webp",
         "product_id": 41
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/bottoms/bottoms-19.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/bottoms/bottoms-19.webp",
         "product_id": 42
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/bottoms/bottoms-20.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/bottoms/bottoms-20.webp",
         "product_id": 43
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/bottoms/bottoms-21.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/bottoms/bottoms-21.webp",
         "product_id": 44
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/tops/white-tee-13.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/tops/white-tee-13.webp",
         "product_id": 45
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/bottoms/bottoms-22.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/bottoms/bottoms-22.webp",
         "product_id": 46
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/tops/white-tee-14.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/tops/white-tee-14.webp",
         "product_id": 47
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/bottoms/bottoms-23.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/bottoms/bottoms-23.webp",
         "product_id": 48
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/footwear/footwear-12.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/footwear/footwear-12.webp",
         "product_id": 49
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/footwear/footwear-13.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/footwear/footwear-13.webp",
         "product_id": 50
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/bottoms/bottoms-24.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/bottoms/bottoms-24.webp",
         "product_id": 51
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/footwear/footwear-14.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/footwear/footwear-14.webp",
         "product_id": 52
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/bottoms/bottoms-25.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/bottoms/bottoms-25.webp",
         "product_id": 53
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/footwear/footwear-15.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/footwear/footwear-15.webp",
         "product_id": 54
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/bottoms/bottoms-26.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/bottoms/bottoms-26.webp",
         "product_id": 55
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/bottoms/bottoms-27.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/bottoms/bottoms-27.webp",
         "product_id": 56
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/tops/white-tee-15.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/tops/white-tee-15.webp",
         "product_id": 57
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/footwear/footwear-16.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/footwear/footwear-16.webp",
         "product_id": 58
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/bottoms/bottoms-28.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/bottoms/bottoms-28.webp",
         "product_id": 59
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/bottoms/bottoms-29.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/bottoms/bottoms-29.webp",
         "product_id": 60
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/footwear/footwear-17.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/footwear/footwear-17.webp",
         "product_id": 61
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/tops/white-tee-16.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/tops/white-tee-16.webp",
         "product_id": 62
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/tops/white-tee-17.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/tops/white-tee-17.webp",
         "product_id": 63
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/tops/white-tee-18.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/tops/white-tee-18.webp",
         "product_id": 64
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/tops/white-tee-19.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/tops/white-tee-19.webp",
         "product_id": 65
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/footwear/footwear-18.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/footwear/footwear-18.webp",
         "product_id": 66
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/tops/white-tee-20.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/tops/white-tee-20.webp",
         "product_id": 67
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/seating/seating-1.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/seating/seating-1.webp",
         "product_id": 68
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/surfaces/surfaces-1.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/surfaces/surfaces-1.webp",
         "product_id": 69
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/seating/seating-2.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/seating/seating-2.webp",
         "product_id": 70
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/storage/storage-1.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/storage/storage-1.webp",
         "product_id": 71
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/seating/seating-3.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/seating/seating-3.webp",
         "product_id": 72
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/storage/storage-2.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/storage/storage-2.webp",
         "product_id": 73
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/seating/seating-4.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/seating/seating-4.webp",
         "product_id": 74
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/storage/storage-3.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/storage/storage-3.webp",
         "product_id": 75
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/seating/seating-5.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/seating/seating-5.webp",
         "product_id": 76
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/storage/storage-4.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/storage/storage-4.webp",
         "product_id": 77
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/storage/storage-5.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/storage/storage-5.webp",
         "product_id": 78
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/seating/seating-6.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/seating/seating-6.webp",
         "product_id": 79
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/seating/seating-7.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/seating/seating-7.webp",
         "product_id": 80
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/surfaces/surfaces-2.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/surfaces/surfaces-2.webp",
         "product_id": 81
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/surfaces/surfaces-3.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/surfaces/surfaces-3.webp",
         "product_id": 82
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/storage/storage-6.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/storage/storage-6.webp",
         "product_id": 83
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/storage/storage-7.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/storage/storage-7.webp",
         "product_id": 84
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/seating/seating-8.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/seating/seating-8.webp",
         "product_id": 85
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/seating/seating-9.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/seating/seating-9.webp",
         "product_id": 86
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/surfaces/surfaces-4.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/surfaces/surfaces-4.webp",
         "product_id": 87
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/surfaces/surfaces-5.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/surfaces/surfaces-5.webp",
         "product_id": 88
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/surfaces/surfaces-6.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/surfaces/surfaces-6.webp",
         "product_id": 89
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/surfaces/surfaces-7.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/surfaces/surfaces-7.webp",
         "product_id": 90
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/storage/storage-8.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/storage/storage-8.webp",
         "product_id": 91
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/storage/storage-9.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/storage/storage-9.webp",
         "product_id": 92
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/storage/storage-10.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/storage/storage-10.webp",
         "product_id": 93
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/seating/seating-10.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/seating/seating-10.webp",
         "product_id": 94
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/storage/storage-11.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/storage/storage-11.webp",
         "product_id": 95
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/seating/seating-11.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/seating/seating-11.webp",
         "product_id": 96
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/seating/seating-12.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/seating/seating-12.webp",
         "product_id": 97
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/surfaces/surfaces-8.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/surfaces/surfaces-8.webp",
         "product_id": 98
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/storage/storage-12.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/storage/storage-12.webp",
         "product_id": 99
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/seating/seating-13.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/seating/seating-13.webp",
         "product_id": 100
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/seating/seating-14.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/seating/seating-14.webp",
         "product_id": 101
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/seating/seating-15.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/seating/seating-15.webp",
         "product_id": 102
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/seating/seating-16.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/seating/seating-16.webp",
         "product_id": 103
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/surfaces/surfaces-9.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/surfaces/surfaces-9.webp",
         "product_id": 104
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/seating/seating-17.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/seating/seating-17.webp",
         "product_id": 105
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/surfaces/surfaces-10.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/surfaces/surfaces-10.webp",
         "product_id": 106
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/surfaces/surfaces-11.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/surfaces/surfaces-11.webp",
         "product_id": 107
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/seating/seating-18.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/seating/seating-18.webp",
         "product_id": 108
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/seating/seating-19.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/seating/seating-19.webp",
         "product_id": 109
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/storage/storage-13.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/storage/storage-13.webp",
         "product_id": 110
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/storage/storage-14.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/storage/storage-14.webp",
         "product_id": 111
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/seating/seating-20.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/seating/seating-20.webp",
         "product_id": 112
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/surfaces/surfaces-12.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/surfaces/surfaces-12.webp",
         "product_id": 113
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/surfaces/surfaces-13.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/surfaces/surfaces-13.webp",
         "product_id": 114
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/storage/storage-15.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/storage/storage-15.webp",
         "product_id": 115
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/storage/storage-16.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/storage/storage-16.webp",
         "product_id": 116
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/surfaces/surfaces-14.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/surfaces/surfaces-14.webp",
         "product_id": 117
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/seating/seating-21.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/seating/seating-21.webp",
         "product_id": 118
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/seating/seating-22.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/seating/seating-22.webp",
         "product_id": 119
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/storage/storage-17.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/storage/storage-17.webp",
         "product_id": 120
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/storage/storage-18.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/storage/storage-18.webp",
         "product_id": 121
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/surfaces/surfaces-15.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/surfaces/surfaces-15.webp",
         "product_id": 122
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/storage/storage-19.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/storage/storage-19.webp",
         "product_id": 123
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/surfaces/surfaces-16.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/surfaces/surfaces-16.webp",
         "product_id": 124
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/storage/storage-20.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/storage/storage-20.webp",
         "product_id": 125
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/seating/seating-23.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/seating/seating-23.webp",
         "product_id": 126
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/storage/storage-21.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/storage/storage-21.webp",
         "product_id": 127
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/seating/seating-24.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/seating/seating-24.webp",
         "product_id": 128
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/surfaces/surfaces-17.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/surfaces/surfaces-17.webp",
         "product_id": 129
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/surfaces/surfaces-18.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/surfaces/surfaces-18.webp",
         "product_id": 130
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/storage/storage-22.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/storage/storage-22.webp",
         "product_id": 131
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/seating/seating-25.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/seating/seating-25.webp",
         "product_id": 132
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/storage/storage-23.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/storage/storage-23.webp",
         "product_id": 133
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/storage/storage-24.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/storage/storage-24.webp",
         "product_id": 134
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/desks/desk-1.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/desks/desk-1.webp",
         "product_id": 135
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/spaces/spaces-1.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/spaces/spaces-1.webp",
         "product_id": 136
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/desks/desk-2.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/desks/desk-2.webp",
         "product_id": 137
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/desks/desk-3.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/desks/desk-3.webp",
         "product_id": 138
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/walls/walls-1.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/walls/walls-1.webp",
         "product_id": 139
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/spaces/spaces-2.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/spaces/spaces-2.webp",
         "product_id": 140
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/desks/desk-4.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/desks/desk-4.webp",
         "product_id": 141
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/walls/walls-2.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/walls/walls-2.webp",
         "product_id": 142
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/desks/desk-5.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/desks/desk-5.webp",
         "product_id": 143
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/walls/walls-3.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/walls/walls-3.webp",
         "product_id": 144
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/desks/desk-6.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/desks/desk-6.webp",
         "product_id": 145
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/walls/walls-4.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/walls/walls-4.webp",
         "product_id": 146
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/desks/desk-7.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/desks/desk-7.webp",
         "product_id": 147
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/spaces/spaces-3.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/spaces/spaces-3.webp",
         "product_id": 148
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/walls/walls-5.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/walls/walls-5.webp",
         "product_id": 149
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/walls/walls-6.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/walls/walls-6.webp",
         "product_id": 150
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/desks/desk-8.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/desks/desk-8.webp",
         "product_id": 151
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/desks/desk-9.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/desks/desk-9.webp",
         "product_id": 152
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/desks/desk-10.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/desks/desk-10.webp",
         "product_id": 153
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/walls/walls-7.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/walls/walls-7.webp",
         "product_id": 154
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/walls/walls-8.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/walls/walls-8.webp",
         "product_id": 155
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/desks/desk-11.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/desks/desk-11.webp",
         "product_id": 156
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/spaces/spaces-4.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/spaces/spaces-4.webp",
         "product_id": 157
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/walls/walls-9.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/walls/walls-9.webp",
         "product_id": 158
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/walls/walls-10.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/walls/walls-10.webp",
         "product_id": 159
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/walls/walls-11.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/walls/walls-11.webp",
         "product_id": 160
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/spaces/spaces-5.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/spaces/spaces-5.webp",
         "product_id": 161
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/desks/desk-12.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/desks/desk-12.webp",
         "product_id": 162
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/walls/walls-12.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/walls/walls-12.webp",
         "product_id": 163
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/spaces/spaces-6.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/spaces/spaces-6.webp",
         "product_id": 164
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/desks/desk-13.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/desks/desk-13.webp",
         "product_id": 165
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/spaces/spaces-7.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/spaces/spaces-7.webp",
         "product_id": 166
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/walls/walls-13.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/walls/walls-13.webp",
         "product_id": 167
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/spaces/spaces-8.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/spaces/spaces-8.webp",
         "product_id": 168
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/desks/desk-14.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/desks/desk-14.webp",
         "product_id": 169
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/spaces/spaces-9.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/spaces/spaces-9.webp",
         "product_id": 170
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/desks/desk-15.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/desks/desk-15.webp",
         "product_id": 171
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/walls/walls-14.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/walls/walls-14.webp",
         "product_id": 172
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/walls/walls-15.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/walls/walls-15.webp",
         "product_id": 173
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/walls/walls-16.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/walls/walls-16.webp",
         "product_id": 174
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/desks/desk-16.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/desks/desk-16.webp",
         "product_id": 175
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/walls/walls-17.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/walls/walls-17.webp",
         "product_id": 176
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/desks/desk-17.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/desks/desk-17.webp",
         "product_id": 177
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/spaces/spaces-10.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/spaces/spaces-10.webp",
         "product_id": 178
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/walls/walls-18.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/walls/walls-18.webp",
         "product_id": 179
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/walls/walls-19.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/walls/walls-19.webp",
         "product_id": 180
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/walls/walls-20.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/walls/walls-20.webp",
         "product_id": 181
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/walls/walls-21.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/walls/walls-21.webp",
         "product_id": 182
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/desks/desk-18.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/desks/desk-18.webp",
         "product_id": 183
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/spaces/spaces-11.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/spaces/spaces-11.webp",
         "product_id": 184
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/walls/walls-22.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/walls/walls-22.webp",
         "product_id": 185
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/walls/walls-23.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/walls/walls-23.webp",
         "product_id": 186
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/walls/walls-24.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/walls/walls-24.webp",
         "product_id": 187
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/spaces/spaces-12.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/spaces/spaces-12.webp",
         "product_id": 188
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/desks/desk-19.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/desks/desk-19.webp",
         "product_id": 189
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/desks/desk-20.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/desks/desk-20.webp",
         "product_id": 190
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/walls/walls-25.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/walls/walls-25.webp",
         "product_id": 191
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/desks/desk-21.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/desks/desk-21.webp",
         "product_id": 192
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/desks/desk-22.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/desks/desk-22.webp",
         "product_id": 193
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/desks/desk-23.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/desks/desk-23.webp",
         "product_id": 194
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/spaces/spaces-13.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/spaces/spaces-13.webp",
         "product_id": 195
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/desks/desk-24.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/desks/desk-24.webp",
         "product_id": 196
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/walls/walls-26.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/walls/walls-26.webp",
         "product_id": 197
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/desks/desk-25.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/desks/desk-25.webp",
         "product_id": 198
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/desks/desk-26.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/desks/desk-26.webp",
         "product_id": 199
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/walls/walls-27.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/walls/walls-27.webp",
         "product_id": 200
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/091df7415bd844b580f91e6835c9b688.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/shirt3.webp",
         "product_id": 201
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/b6bb9334805b488e860851047978e5f0.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/seating-3.webp",
         "product_id": 202
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/3a15f0a087b34a89aa4d49e830780785.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/surfaces3.webp",
         "product_id": 203
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/2ed064fe5b2d4243bf11e70e0b06d0b3.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/storage2.webp",
         "product_id": 204
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/c47a2934717c452a9df9f7a7a242864a.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/wall3.webp",
         "product_id": 205
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/89febc9516834a00833ab8d7ef5d7e24.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/desk3.png",
         "product_id": 206
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/6bf842e4657e4c6f9497d5ba05ed707d.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/shirt2.webp",
         "product_id": 207
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/ae3c10547af942cdbb2e5621a253396b.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/shoes4.webp",
         "product_id": 208
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/21a1a87e8ecb40289e5fac158bb54aa8.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/seating2.webp",
         "product_id": 209
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/e320218125f14a9aa2cb8d8668afeb07.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/spaces1.webp",
         "product_id": 210
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/8b401363ab2343eca04edd79e3fb4a94.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/seating1.webp",
         "product_id": 211
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/90d740210b484f5594c388062f9eaf74.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/wall2.webp",
         "product_id": 212
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/491f022afe884251ad729ac14542e458.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/shoes3.webp",
         "product_id": 213
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/seed_shoes.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/pants2.webp",
         "product_id": 214
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/05e46a2991254eed9b2c093d1dc3ca6b.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/shirt1.webp",
         "product_id": 215
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/728d2b6cf65246af8a7cfeaf4a291030.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/wall1.webp",
         "product_id": 216
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/e064a669829541d4bf28f01588565e08.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/surfaces2.webp",
         "product_id": 217
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/be76d3bb8d024d1989e5d8943f314005.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/shoes2.webp",
         "product_id": 218
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/58da32d4ef434cb59402cd271318a8a8.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/surfaces1.webp",
         "product_id": 219
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/9a8ab8ca5c2547eabf19a41cd7905ff0.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/desk2.webp",
         "product_id": 220
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/a590f999dd9f431ca5838662c939f4ad.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/pants1.png",
         "product_id": 221
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/c77e4d2983a04940a9ae84ee016c79c0.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/storage1.webp",
         "product_id": 222
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/309c427bca914c2b907b03df63c096d7.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/shoes1.webp",
         "product_id": 223
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/245d01f74c7c47e2bac8193431862503.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/desk1.webp",
         "product_id": 224
     },
     {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/779c3a401b66449794796918fe112083.png",
+        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/desk1.webp",
         "product_id": 225
     }
 ]

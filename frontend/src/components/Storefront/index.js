@@ -2,7 +2,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { NavLink, useHistory, useParams } from "react-router-dom";
 import { getStorefrontProductsThunk } from "../../store/products"
-import ProductCard from "../ProductCard";
 import "./Storefront.css"
 import { getStorefrontByName } from "../../store/storefronts";
 import ProductCardFeed from "../ProductCardFeed";
