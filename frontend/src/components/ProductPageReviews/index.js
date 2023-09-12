@@ -158,7 +158,7 @@ export default function ProductPageReviews({
                                             onError={() => setImageLoadError(true)}
                                         />
                                         <span>{review.username}</span>
-                                        <StarSetter value={review.rating} />
+                                        <StarSetter value={Math.round(review.rating)} />
                                     </div>
                                     <div className="product-page-review-message-wrapper">
                                         {review.message}
