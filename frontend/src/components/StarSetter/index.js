@@ -44,6 +44,7 @@ function Star({ value, onChange, number }) {
       }
       className="star-setter-star"
       onClick={() => onChange(number)}
+      onError={(e)=>{e.target.src = process.env.PUBLIC_URL + '/stars/empty.png'}}
       alt={value >= number ? 'filled star' : 'empty star'}
     />
   );
