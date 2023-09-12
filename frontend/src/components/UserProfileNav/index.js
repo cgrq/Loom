@@ -40,7 +40,7 @@ export default function UserProfileNav({ user, closeMenu }) {
                 {user && (
                     <div className="nav-user-info-wrapper">
                         <div className="nav-user-img-edit-wrapper">
-                            <img className="nav-user-img" onError={() => setImageUrl(process.env.PUBLIC_URL + "/default-image.png")} src={imageUrl}></img>
+                            <img className="nav-user-img" onError={() => setImageUrl(process.env.PUBLIC_URL + "/default-profile-pic.png")} src={imageUrl}></img>
                         {user && !demoUserIds.includes(user.id) && (
                                 <NavLink onClick={closeMenu} exact to="/edit-profile" activeClassName="active">
                                     Edit

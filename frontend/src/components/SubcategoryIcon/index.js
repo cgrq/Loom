@@ -28,8 +28,8 @@ export function SubcomponentIcon({
     }
 
     return (
-        <div className={`subcategory-wrapper ${selectedFilter === type && "subcategory-wrapper-selected"}`} onClick={handleClick}>
-            <div className="subcategory-image-wrapper">
+        <div className="subcategory-wrapper" onClick={handleClick}>
+            <div className={`subcategory-image-wrapper ${selectedFilter === type && "subcategory-image-wrapper-selected"}`}>
                 <img src={publicUrl + `/filter-icons/${type}.svg`} />
             </div>
             <span>{type.slice(0, 1).toUpperCase() + type.slice(1)}</span>

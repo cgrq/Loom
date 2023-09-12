@@ -11,8 +11,7 @@
     border-radius: 20px;
     padding:10px 0;
 }
-.subcategory-wrapper:hover,
-.subcategory-wrapper-selected{
+.subcategory-wrapper:hover{
     box-shadow: 0px 8px 13px 1px rgba(0, 0, 0, 0.087);
 }
 .subcategory-image-wrapper{
@@ -25,4 +24,6 @@
     margin:0 10px;
     margin-bottom:5px;
 }
-
+.subcategory-image-wrapper-selected{
+    background-color: rgb(157, 157, 157);
+}

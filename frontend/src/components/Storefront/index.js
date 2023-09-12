@@ -12,13 +12,11 @@ import { useFilter } from "../../context/Filter";
 export default function Storefront() {
     const dispatch = useDispatch()
     const history = useHistory()
-    const { user } = useSelector((state) => state.session)
     const { storefrontName } = useParams();
+
+    const { user } = useSelector((state) => state.session)
     const { currentStorefront } = useSelector((state) => state.storefronts)
     const { storefrontProducts } = useSelector((state) => state.products)
-    const { selectedFilter } = useFilter()
-    const [ showProfile, setShowProfile ] = useState(false)
-    const [ products, setProducts ] = useState()
     const { userStorefront } = useSelector(state=>state.storefronts)
     const tops = useSelector(state => state.products.storefrontTops);
     const bottoms = useSelector(state => state.products.storefrontBottoms);
@@ -29,6 +27,13 @@ export default function Storefront() {
     const walls  = useSelector(state => state.products.storefrontWalls);
     const spaces  = useSelector(state => state.products.storefrontSpaces);
     const desk  = useSelector(state => state.products.storefrontDesk);
+
+    const { selectedFilter } = useFilter()
+
+    const [ showProfile, setShowProfile ] = useState(false)
+    const [ products, setProducts ] = useState()
+    const [ profileImage, setProfileImage] = useState()
+
 
     useEffect(()=>{
         if(storefrontName){
@@ -49,6 +54,9 @@ export default function Storefront() {
     useEffect(() => {
         if (currentStorefront && currentStorefront.id) {
             dispatch(getStorefrontProductsThunk(currentStorefront.id))
+        }
+        if(currentStorefront && currentStorefront.user && currentStorefront.user.profile_image){
+            setProfileImage(currentStorefront.user.profile_image)
         }
     }, [currentStorefront])
 
@@ -127,7 +135,10 @@ export default function Storefront() {
 
             <div className="storefront-details-wrapper">
                 <div className="storefront-details-profile-wrapper">
-                    <img className="storefront-user-image" src={currentStorefront.user.profile_image} />
+                    <img
+                        className="storefront-user-image"
+                        src={profileImage}
+                        onError={()=>setProfileImage(process.env.PUBLIC_URL + "/default-profile-pic.png")}/>
                     <div
                         className="storefront-toggle-show-profile-button"
                         onClick={()=> setShowProfile(!showProfile)}
