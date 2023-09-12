@@ -11,14 +11,16 @@ import { createReviewThunk, deleteReview, editReviewThunk, getReviewsByProductId
 export default function ProductPageReviews({
     productId
 }) {
-    const dispatch = useDispatch()
-    const { user } = useSelector(state => state.session)
-    const allReviews  = useSelector(state => state.reviews)
-    const [reviewId, setReviewId] = useState()
+    const dispatch = useDispatch();
+    const { user } = useSelector((state) => state.session);
+    const allReviews = useSelector((state) => state.reviews);
+    const [reviewId, setReviewId] = useState();
     const [userReview, setUserReview] = useState("");
     const [rating, setRating] = useState(0);
-    const [editingReview, setEditingReview] = useState(false)
-    const [errors, setErrors] = useState({})
+    const [editingReview, setEditingReview] = useState(false);
+    const [errors, setErrors] = useState({});
+    const [imageLoadError, setImageLoadError] = useState(false);
+
 
     useEffect(() => {
         dispatch(getReviewsByProductId(productId))
@@ -146,24 +148,28 @@ export default function ProductPageReviews({
                 {
                     allReviews[productId]
                         ?
-                    (Object.values(allReviews[productId]).map((review) => (
-                        review.productId === productId && (
-                            <div key={review.id} className="product-page-review-wrapper">
-                                <div className="product-page-review-details-wrapper">
-                                    <img className="product-page-review-details-image" src={review.userProfileImage} />
-                                    <span>{review.username}</span>
-                                    <StarSetter value={review.rating} />
+                        (Object.values(allReviews[productId]).map((review) => (
+                            review.productId === productId && (
+                                <div key={review.id} className="product-page-review-wrapper">
+                                    <div className="product-page-review-details-wrapper">
+                                        <img
+                                            className="product-page-review-details-image"
+                                            src={imageLoadError ? (process.env.PUBLIC_URL + "/default-profile-pic.png") : review.userProfileImage}
+                                            onError={() => setImageLoadError(true)}
+                                        />
+                                        <span>{review.username}</span>
+                                        <StarSetter value={review.rating} />
+                                    </div>
+                                    <div className="product-page-review-message-wrapper">
+                                        {review.message}
+                                    </div>
+                                    <div className="product-page-review-date-wrapper">
+                                        {formatDate(review.updated_at)}
+                                    </div>
                                 </div>
-                                <div className="product-page-review-message-wrapper">
-                                    {review.message}
-                                </div>
-                                <div className="product-page-review-date-wrapper">
-                                    {formatDate(review.updated_at)}
-                                </div>
-                            </div>
-                        )
-                    )))
-                    : <></>
+                            )
+                        )))
+                        : <></>
                 }
             </div>
         </div>
