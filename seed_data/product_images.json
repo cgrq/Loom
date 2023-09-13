@@ -894,9 +894,5 @@
     {
         "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/desk1.webp",
         "product_id": 224
-    },
-    {
-        "image1": "https://loom-shopping.s3.us-west-1.amazonaws.com/desk1.webp",
-        "product_id": 225
     }
 ]
