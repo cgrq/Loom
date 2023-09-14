@@ -1,22 +1,25 @@
+'use client'
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createProductImagesThunk, editProductImagesThunk, getStorefrontProductsThunk } from "../../store/products";
 import { getUserStorefrontThunk } from "../../store/storefronts"
 
-import { useHistory, useParams } from 'react-router-dom';
-import "./ProductImagesForm.css"
+import { useRouter } from 'next/router';
+import Link from 'next/link';
+import Navigation from 'next/navigation';
+import "./ProductImagesFormComponent.css"
 import FormWrapperComponent from "../FormWrapperComponent";
 import ProductImages from "../ProductImages";
 import ImageField from "../ImageField";
 
 
-export default function ProductImagesForm({
+export default function ProductImagesFormComponent({
 }) {
-    const history = useHistory();
+    const router = useRouter();
     const dispatch = useDispatch();
 
     // Product name variable from route url.
-    const { productName } = useParams();
+    const { productName } = router.query;
 
     // Form input field state variables.
     const [image1, setImage1] = useState("https://loom-shopping.s3.us-west-1.amazonaws.com/product+image+upload+placeholder/image1.png");
@@ -77,10 +80,10 @@ export default function ProductImagesForm({
             } else {
                 // If it doesn't exist...
                 // ...redirect users to the resource not found page.
-                history.push("/not-found");
+                router.push("/not-found");
             }
         }
-    }, [storefrontProducts, productName, history]);
+    }, [storefrontProducts, productName, router]);
 
     // Set form input state variables to current product's values if making an update.
     useEffect(() => {
@@ -231,7 +234,7 @@ export default function ProductImagesForm({
         if (data) {
             setErrors(data);
         } else {
-            history.push('/storefront');
+            router.push('/storefront');
         }
 
     };

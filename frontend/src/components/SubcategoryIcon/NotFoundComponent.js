@@ -1,7 +1,9 @@
+'use client'
 import { useDispatch, useSelector } from "react-redux";
-import "./SubcategoryIcon.css"
+import "./SubcategoryIcon.css";
 import { useEffect, useState } from "react";
 import { useFilter } from "../../context/Filter";
+import Image from 'next/image';
 
 export function SubcomponentIcon({
     type, // Must be one of: (tops,bottoms,footwear,seating,storage,walls,spaces,desk)
@@ -30,9 +32,11 @@ export function SubcomponentIcon({
     return (
         <div className="subcategory-wrapper" onClick={handleClick}>
             <div className={`subcategory-image-wrapper ${selectedFilter === type && "subcategory-image-wrapper-selected"}`}>
-                <img src={publicUrl + `/filter-icons/${type}.svg`} />
+                <Image src={publicUrl + `/filter-icons/${type}.svg`} alt={type} />
             </div>
             <span>{type.slice(0, 1).toUpperCase() + type.slice(1)}</span>
         </div>
     )
 }
+
+export default NotFoundComponent;

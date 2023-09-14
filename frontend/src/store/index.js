@@ -1,3 +1,4 @@
+'use client'
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import session from "./session";
@@ -26,6 +27,18 @@ if (process.env.NODE_ENV === "production") {
 }
 
 const configureStore = (preloadedState) => {
+  useEffect(() => {
+    const handleResize = () => {
+      // handle window resize logic here
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return createStore(rootReducer, preloadedState, enhancer);
 };
 

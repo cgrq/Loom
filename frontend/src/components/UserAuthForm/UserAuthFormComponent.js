@@ -1,16 +1,18 @@
+'use client'
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { signUp, editUser, deleteUser } from "../../store/session";
-import { useHistory } from 'react-router-dom';
-import "./UserAuthForm.css"
+import { useRouter } from 'next/router';
+import Link from 'next/link';
+import "react-datepicker/dist/react-datepicker.css";
 import DemoUserButton from "../DemoUserButton";
 import FormWrapperComponent from "../FormWrapperComponent";
 import DeleteButton from "../DeleteButton";
 import InputField from "../InputField";
 import ImageField from "../ImageField";
 
-export default function UserAuthForm({ componentType }) {
-  const history = useHistory();
+export default function UserAuthFormComponent({ componentType }) {
+  const router = useRouter();
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
   const { userStorefront } = useSelector((state) => state.storefronts);
@@ -57,9 +59,9 @@ export default function UserAuthForm({ componentType }) {
         setErrors(data);
       } else {
         if (startStorefront) {
-          history.push('/create-a-storefront');
+          router.push('/create-a-storefront');
         } else {
-          history.push('/');
+          router.push('/');
         }
       }
     } else {

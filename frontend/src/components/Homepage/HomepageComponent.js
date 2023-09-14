@@ -1,12 +1,13 @@
+'use client'
 import { useEffect, useState, useRef } from "react";
 import ProductCardFeed from "../ProductCardFeed";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProductsThunk, getStorefrontProductsThunk } from "../../store/products";
-import "./Homepage.css"
+import "./HomepageComponent.css"
 import CardFeedFilter from "../CardFeedFilter";
 import { getAllReviewsThunk } from "../../store/reviews";
 
-export default function Homepage() {
+export default function HomepageComponent() {
     const dispatch = useDispatch();
     const feedWrapperRef = useRef(null);
     const { allProducts } = useSelector(state => state.products);
@@ -47,11 +48,23 @@ export default function Homepage() {
     };
 
     useEffect(() => {
+        const handleScroll = () => {
+            const feedWrapper = feedWrapperRef.current;
+
+            if (!feedWrapper) {
+                return;
+            }
+
+            const { scrollTop, scrollHeight, clientHeight } = feedWrapper;
+
+            if (scrollHeight - scrollTop <= clientHeight + 100 && !isLoadingMore) {
+                loadMoreData();
+            }
+        };
+
         const feedWrapper = feedWrapperRef.current;
-        console.log("load")
 
         if (feedWrapper) {
-            console.log("feed wrapper")
             feedWrapper.addEventListener("scroll", handleScroll);
         }
 
@@ -60,28 +73,7 @@ export default function Homepage() {
                 feedWrapper.removeEventListener("scroll", handleScroll);
             }
         };
-    }, [isLoaded]);
-
-
-    const handleScroll = () => {
-        console.log("scrolling")
-        const feedWrapper = feedWrapperRef.current;
-
-        if (!feedWrapper) {
-            return;
-        }
-
-        const { scrollTop, scrollHeight, clientHeight } = feedWrapper;
-
-        console.log("scroll height - scroll top",scrollHeight - scrollTop)
-
-        console.log("client height - 100", clientHeight + 100)
-
-        if (scrollHeight - scrollTop <= clientHeight + 100 && !isLoadingMore) {
-            loadMoreData();
-        }
-    };
-
+    }, [isLoadingMore]);
 
     useEffect(() => {
         if (!isLoaded && Object.values(allProducts).length > 0) {
@@ -143,8 +135,6 @@ export default function Homepage() {
             setProducts(desk)
         }
     }, [desk])
-
-
 
     useEffect(() => {
         if (userStorefront) {

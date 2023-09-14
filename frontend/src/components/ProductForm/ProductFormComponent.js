@@ -1,20 +1,21 @@
+'use client'
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import FormWrapperComponent from "../FormWrapperComponent"
-import { useHistory, useParams } from 'react-router-dom';
-import "./ProductForm.css"
-import { getProductByName, createProductThunk, editProductThunk,  deleteProduct, getStorefrontProductsThunk } from "../../store/products";
+import FormWrapperComponent from "../FormWrapperComponent";
+import { useRouter } from 'next/router';
+import Link from 'next/link';
+import { getProductByName, createProductThunk, editProductThunk, deleteProduct, getStorefrontProductsThunk } from "../../store/products";
 import InputField from "../InputField";
 import DeleteButton from "../DeleteButton";
 import SelectField from "../SelectField";
 import { getUserStorefrontThunk } from "../../store/storefronts";
 
-export default function ProductForm({
+export default function ProductFormComponent({
     componentType, // Either update or create. Leaving blank defaults to create
 }) {
-    const history = useHistory();
+    const router = useRouter();
     const dispatch = useDispatch();
-    const { productName } = useParams();
+    const { productName } = router.query;
     const sessionUser = useSelector((state) => state.session.user);
     const { userStorefront } = useSelector((state) => state.storefronts)
     const { storefrontProducts } = useSelector((state) => state.products)
@@ -41,7 +42,7 @@ export default function ProductForm({
 
     }, [storefrontProducts]);
 
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(getStorefrontProductsThunk(userStorefront.id));
 
         // If the current signed in user has a storefront,
@@ -107,12 +108,13 @@ export default function ProductForm({
         if (data) {
             setErrors(data);
         } else {
-            history.push(`/products/${name}/edit/images`)
+            router.push(`/products/${name}/edit/images`)
         }
 
     };
+
     const handleDelete = async () => {
-        history.push('/storefront');
+        router.push('/storefront');
 
         const data = await dispatch(deleteProduct(id));
 
@@ -134,18 +136,18 @@ export default function ProductForm({
                 onSubmit={handleSubmit}
                 submitButtonText="Next"
                 lowerComponent={() =>
-                (
-                    componentType === "update"
-                        ? (
-                            <DeleteButton
-                                onDeleteThunk={deleteProduct(id, subcategory)}
-                                redirectUrl={`/${userStorefront.name}`}
-                                setErrors={setErrors}
-                            />
+                    (
+                        componentType === "update"
+                            ? (
+                                <DeleteButton
+                                    onDeleteThunk={deleteProduct(id, subcategory)}
+                                    redirectUrl={`/${userStorefront.name}`}
+                                    setErrors={setErrors}
+                                />
 
-                        )
-                        : null
-                )}
+                            )
+                            : null
+                    )}
             >
                 <InputField
                     label="Name"
@@ -185,7 +187,7 @@ export default function ProductForm({
                 {
                     category && category === "clothing" &&
                     <>
-                         <SelectField
+                        <SelectField
                             label="Subcategory"
                             value={subcategory}
                             options={["tops", "bottoms", "footwear"]}
@@ -197,7 +199,7 @@ export default function ProductForm({
                 {
                     category && category === "furniture" &&
                     <>
-                         <SelectField
+                        <SelectField
                             label="Subcategory"
                             value={subcategory}
                             options={["seating", "surfaces", "storage"]}
@@ -209,7 +211,7 @@ export default function ProductForm({
                 {
                     category && category === "art" &&
                     <>
-                         <SelectField
+                        <SelectField
                             label="Subcategory"
                             value={subcategory}
                             options={["walls", "spaces", "desk"]}
@@ -218,6 +220,7 @@ export default function ProductForm({
                         {errors.subcategory && <p className="input-error">{errors.subcategory}</p>}
                     </>
                 }
+
 
 
             </FormWrapperComponent>

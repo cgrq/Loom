@@ -1,6 +1,8 @@
+'use client'
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { useParams } from "react-router-dom"
+import { useRouter } from "next/router"
+import Link from "next/link"
 import { getProductByName, resetProducts } from "../../store/products"
 import "./ProductPage.css"
 import ProductPageReviews from "../ProductPageReviews"
@@ -11,7 +13,8 @@ import ProductImages from "../ProductImages"
 
 export function ProductPage() {
     const dispatch = useDispatch()
-    const { productName } = useParams()
+    const router = useRouter()
+    const { productName } = router.query
     const { allProducts } = useSelector(state => state.products)
     const allReviews = useSelector(state => state.reviews)
     const [product, setProduct] = useState({})
@@ -33,7 +36,7 @@ export function ProductPage() {
         return () => {
             dispatch(resetProducts())
         }
-    }, [])
+    }, [productName])
 
     useEffect(() => {
         const allProductsArr = Object.values(allProducts);
@@ -49,7 +52,7 @@ export function ProductPage() {
                 setProduct(currentProduct);
             }
         }
-    }, [allProducts])
+    }, [allProducts, productName])
 
     useEffect(() => {
         if (product.id) {
@@ -168,3 +171,5 @@ export function ProductPage() {
         </div>
     )
 }
+
+export default ProductPage;

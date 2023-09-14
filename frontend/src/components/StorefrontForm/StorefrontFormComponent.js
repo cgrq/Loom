@@ -1,18 +1,22 @@
+'use client'
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createStorefrontThunk, editStorefrontThunk, getStorefrontByName, deleteStorefront } from "../../store/storefronts";
-import { useHistory, useParams } from 'react-router-dom';
-import "./Storefront.css"
+import { useRouter } from 'next/router';
+import Link from 'next/link';
+import { Image } from 'next/image';
+import "react-datepicker/dist/react-datepicker.css";
+import "./Storefront.css";
 import FormWrapperComponent from "../FormWrapperComponent";
 import DemoUserButton from "../DemoUserButton";
 import DeleteButton from "../DeleteButton";
 import InputField from "../InputField";
 import ImageField from "../ImageField";
 
-export default function StorefrontForm() {
-    const history = useHistory();
+export default function StorefrontFormComponent() {
+    const router = useRouter();
     const dispatch = useDispatch();
-    const { storefrontName } = useParams();
+    const { storefrontName } = router.query;
     const { user } = useSelector((state) => state.session);
     const { userStorefront } = useSelector((state) => state.storefronts)
 
@@ -34,7 +38,6 @@ export default function StorefrontForm() {
             setBannerImage(userStorefront.banner_image)
         }
     }, [userStorefront])
-
 
     useEffect(() => {
         if (bannerImage instanceof File) {
@@ -69,7 +72,7 @@ export default function StorefrontForm() {
         if (data) {
             setErrors(data);
         } else {
-            history.push(`/${user.username}`);
+            router.push(`/${user.username}`);
         }
 
     };
@@ -85,34 +88,36 @@ export default function StorefrontForm() {
     return user ? (
         <>
             <FormWrapperComponent
-                title={`${userStorefront ? "Edit":"Create"} Storefront`}
+                title={`${userStorefront ? "Edit" : "Create"} Storefront`}
                 onSubmit={handleSubmit}
-                submitButtonText={`${userStorefront ? "Edit":"Create"}`}
+                submitButtonText={`${userStorefront ? "Edit" : "Create"}`}
                 lowerComponent={() =>
-                (componentType === "update"
-                    ? (
-                        <DeleteButton
-                            onDeleteThunk={deleteStorefront(userStorefront.id)}
-                            redirectUrl={`/`}
-                            setErrors={setErrors}
-                        />
-                    )
-                    : (
-                        null
-                    ))
+                    (componentType === "update"
+                        ? (
+                            <DeleteButton
+                                onDeleteThunk={deleteStorefront(userStorefront.id)}
+                                redirectUrl={`/`}
+                                setErrors={setErrors}
+                            />
+                        )
+                        : (
+                            null
+                        ))
                 }
             >
                 <div className="storefront-form-image-preview-container">
                     <div className="storefront-form-image-preview-wrapper">
-                        <img
+                        <Image
                             src={imageSource}
                             onLoad={handleImageLoad}
                             onError={handleImageError}
                             className={"storefront-form-image-preview " + (hidePreviewImage ? "hidden" : "")}
+                            alt="Storefront Image"
                         />
-                        <img
+                        <Image
                             src={process.env.PUBLIC_URL + "/storefront-banner-preview.png"}
                             className="storefront-form-image-placeholder"
+                            alt="Storefront Placeholder Image"
                         />
                     </div>
                 </div>

@@ -1,18 +1,20 @@
+'use client'
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../store/session";
-import { useHistory } from 'react-router-dom';
-import "./LoginForm.css"
+import { useRouter } from 'next/router';
+import Link from 'next/link';
+import { Navigation } from 'next/navigation';
+import "./LoginFormComponent.css";
 import DemoUserButton from "../DemoUserButton";
 import FormWrapperComponent from "../FormWrapperComponent";
 import InputField from "../InputField";
 
-export default function LoginForm() {
-    const history = useHistory();
+export default function LoginFormComponent() {
+    const router = useRouter();
     const dispatch = useDispatch();
 
     const [email, setEmail] = useState("");
-
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState({});
 
@@ -24,11 +26,11 @@ export default function LoginForm() {
                 email,
                 password,
             )
-        )
+        );
         if (data) {
             setErrors(data);
         } else {
-            history.push('/');
+            router.push('/');
         }
     };
 
@@ -38,9 +40,9 @@ export default function LoginForm() {
             onSubmit={handleSubmit}
             submitButtonText={"Log in"}
             lowerComponent={() =>
-            (
-                <DemoUserButton setErrors={setErrors} />
-            )
+                (
+                    <DemoUserButton setErrors={setErrors} />
+                )
             }
         >
             <InputField

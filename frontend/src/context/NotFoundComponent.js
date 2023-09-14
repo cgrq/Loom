@@ -1,20 +1,27 @@
-import React, { useRef, useState, useContext } from "react";
-import ReactDOM from "react-dom";
-import "./Modal.css";
+'use client'
+import React, { createContext, useState } from 'react';
 
-const ModalContext = React.createContext();
+const FilterContext = createContext();
 
-export function ModalProvider({ children }) {
-  const modalRef = useRef();
-  const [modalContent, setModalContent] = useState(null);
-  // callback function that will be called when modal is closing
-  const [onModalClose, setOnModalClose] = useState(null);
+// Create a context provider component
+export function FilterProvider({ children }) {
+  const [selectedFilter, setSelectedFilter] = useState(null);
 
-  const closeModal = () => {
-    setModalContent(null); // clear the modal contents
-    // If callback function is truthy, call the callback function and reset it
-    // to null:
-    if (typeof onModalClose === "function") {
+  // Define any additional state or functions related to the selected filter
+  return (
+    <FilterContext.Provider value={{ selectedFilter, setSelectedFilter }}>
+      {children}
+    </FilterContext.Provider>
+  );
+}
+
+// Create a custom hook to access the selected filter context
+export function useFilter() {
+  return React.useContext(FilterContext);
+}
+
+export default NotFoundComponent;
+ction") {
       setOnModalClose(null);
       onModalClose();
     }
@@ -55,3 +62,5 @@ export function Modal() {
 }
 
 export const useModal = () => useContext(ModalContext);
+
+export default NotFoundComponent;
