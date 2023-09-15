@@ -22,6 +22,14 @@
   background: none;
   z-index: 30000;
   border: none;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-icon-button-svg{
+  height:25px;
+  width:25px;
 }
 
 .profile-list {
@@ -32,8 +40,8 @@
   align-items: center;
   overflow: hidden;
   background-color: white;
-  top:-17px;
-  right: -72px;
+  top:-25px;
+  right: -79px;
   box-shadow: 0px 8px 13px 1px rgba(0, 0, 0, 0.087);
 }
 
