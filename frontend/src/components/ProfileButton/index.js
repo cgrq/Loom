@@ -47,7 +47,7 @@ function ProfileButton({ user }) {
   return (
     <div className="profile-container">
       <button className="profile-icon-button clickable" onClick={openMenu}>
-        <i className="fas fa-user-circle profile-icon" />
+        <img className="profile-icon-button-svg" src={process.env.PUBLIC_URL + "profile.svg"}></img>
       </button>
       <div
         className={`${(showMenu ? "" : "hidden ")

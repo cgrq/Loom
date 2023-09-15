@@ -44,7 +44,7 @@ export default function CartButton({ user }) {
   return (
     <div className="cart-container">
       <button className="cart-icon-button clickable" onClick={openMenu}>
-        <i className="fas fa-shopping-cart"></i>
+        <img className="cart-icon-svg" src={process.env.PUBLIC_URL + "./shopping-cart.svg"}></img>
       </button>
       <div
         className={`${(showMenu ? "" : "hidden ")
