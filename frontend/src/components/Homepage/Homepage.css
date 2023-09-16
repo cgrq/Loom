@@ -14,7 +14,7 @@
     height:calc(100vh - 260px);
 }
 
-@media screen and (max-width: 1240px) {
+@media screen and (max-width: 1000px) {
     .homepage-filter-wrapper {
         display: flex;
         padding:10px 0;
