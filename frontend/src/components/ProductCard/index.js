@@ -50,7 +50,7 @@ export default function ProductCard({ product }) {
         <div key={product.id} className="product-card-wrapper">
             <NavLink to={`/products/${product.name}`}>
                 <img
-                    // onError={() => setImageUrl(process.env.PUBLIC_URL + "/default-image.png")}
+                    onError={() => setImageUrl(process.env.PUBLIC_URL + "/default-image.png")}
                     src={imageUrl}
                 />
             </NavLink>
