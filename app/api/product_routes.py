@@ -244,4 +244,5 @@ def get_products():
 
     # Calculate total pages
     total_pages = (total_products + per_page - 1) // per_page
-    return {'products': [product.to_dict() for product in products]}
+
+    return {'products': [product.to_dict() for product in products], 'total_pages': total_pages}
