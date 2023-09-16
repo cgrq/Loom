@@ -278,6 +278,8 @@ export default function reducer(state = initialState, action) {
         newState[product.subcategory][product.id] = product
       })
 
+      newState.totalPages = action.payload.total_pages
+
       return newState;
 
     case SET_STOREFRONT_PRODUCTS:
@@ -289,11 +291,6 @@ export default function reducer(state = initialState, action) {
       return newState;
 
     case SET_PRODUCT_IMAGES:
-      // newState.storefrontProducts[action.payload.productImages.product_id].productImages = action.payload.productImages
-      // newState.allProducts[action.payload.productImages.product_id].productImages = action.payload.productImages
-      // newState[action.payload.productSubcategory][action.payload.productImages.product_id] = action.payload.productImages
-      // newState[formatStorefrontCategoryNameForReducer(action.payload.productSubcategory)][action.payload.productImages.product_id] = action.payload.productImages
-
       return newState;
 
     case REMOVE_PRODUCT:
