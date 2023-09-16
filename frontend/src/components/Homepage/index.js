@@ -1,10 +1,9 @@
 import { useEffect, useState, useRef } from "react";
 import ProductCardFeed from "../ProductCardFeed";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllProductsThunk, getStorefrontProductsThunk } from "../../store/products";
+import { getStorefrontProductsThunk } from "../../store/products";
 import "./Homepage.css"
 import CardFeedFilter from "../CardFeedFilter";
-import { getAllReviewsThunk } from "../../store/reviews";
 
 export default function Homepage() {
     const dispatch = useDispatch();
@@ -25,44 +24,45 @@ export default function Homepage() {
     const [perPage, setPerPage] = useState(18);
     const [isLoadingMore, setIsLoadingMore] = useState(false);
     const [isLoaded, setIsLoaded] = useState(false);
+    const [checkedInitialScreenWidth, setCheckedInitialScreenWidth] = useState(false)
 
     let page = 1;
 
     useEffect(() => {
-        const loadInitialData = async () => {
-            const [productsModule, reviewsModule] = await Promise.all([
-                import("../../store/products"),
-                import("../../store/reviews")
-            ]);
+        const handleResize = () => {
+            const width = window.innerWidth;
 
-            const { getAllProductsThunk } = productsModule;
-            const { getAllReviewsThunk } = reviewsModule;
+            if (width <= 768) {
+                setPerPage(5); // Set lower value for mobile
+            } else {
+                setPerPage(18); // Set higher value for desktop
+            }
 
-            dispatch(getAllProductsThunk(page, perPage));
-            dispatch(getAllReviewsThunk());
+            if(!checkedInitialScreenWidth){
+                setCheckedInitialScreenWidth(true)
+            }
         };
 
-        loadInitialData();
+        handleResize(); // Set initial value based on current viewport width
+
+        window.addEventListener("resize", handleResize);
+
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
     }, []);
 
-    const loadMoreData = async () => {
-        if (page <= totalPages) {
-            setIsLoadingMore(true);
-            page++;
-
-            const productsModule = await import("../../store/products");
-            const { getAllProductsThunk } = productsModule;
-
-            const response = await dispatch(getAllProductsThunk(page, perPage));
-
-            if (!response) {
-                setIsLoadingMore(false);
-            }
+    useEffect(()=>{
+        if(checkedInitialScreenWidth){
+            loadInitialData();
         }
-    };
+
+    },[checkedInitialScreenWidth])
 
     useEffect(() => {
         const feedWrapper = feedWrapperRef.current;
+
+        console.log("FEED WRAPPER:", feedWrapper)
 
         if (feedWrapper) {
             console.log("feed wrapper")
@@ -75,22 +75,6 @@ export default function Homepage() {
             }
         };
     }, [isLoaded]);
-
-
-    const handleScroll = () => {
-        const feedWrapper = feedWrapperRef.current;
-
-        if (!feedWrapper) {
-            return;
-        }
-
-        const { scrollTop, scrollHeight, clientHeight } = feedWrapper;
-
-        if (scrollHeight - scrollTop <= clientHeight + 100 && !isLoadingMore) {
-            loadMoreData();
-        }
-    };
-
 
     useEffect(() => {
         if (productType === "tops") {
@@ -117,12 +101,55 @@ export default function Homepage() {
     }, [productType, allProducts, tops, bottoms, footwear, seating, surfaces, storage, walls, spaces, desk]);
 
 
-
     useEffect(() => {
         if (userStorefront) {
             dispatch(getStorefrontProductsThunk(userStorefront.id))
         }
     }, [userStorefront])
+
+    const loadInitialData = async () => {
+        // Asynchronously load the thunks to improve initial content render
+        const productsModule = await import("../../store/products");
+        const reviewsModule = await import("../../store/reviews");
+    
+        const { getAllProductsThunk } = productsModule;
+        const { getAllReviewsThunk } = reviewsModule;
+    
+        await dispatch(getAllProductsThunk(page, perPage));
+        await dispatch(getAllReviewsThunk());
+
+        setIsLoaded(true)
+    };
+
+    const loadMoreData = async () => {
+        if (page <= totalPages) {
+            setIsLoadingMore(true);
+            page++;
+
+            const productsModule = await import("../../store/products");
+            const { getAllProductsThunk } = productsModule;
+
+            const response = await dispatch(getAllProductsThunk(page, perPage));
+
+            if (!response) {
+                setIsLoadingMore(false);
+            }
+        }
+    };
+
+    const handleScroll = () => {
+        const feedWrapper = feedWrapperRef.current;
+
+        if (!feedWrapper) {
+            return;
+        }
+
+        const { scrollTop, scrollHeight, clientHeight } = feedWrapper;
+
+        if (scrollHeight - scrollTop <= clientHeight + 100 && !isLoadingMore) {
+            loadMoreData();
+        }
+    };
 
     if (!Object.values(products).length) return null
 
