@@ -6,12 +6,10 @@
 
 .star-setter-unselected{
     color:rgb(224, 224, 224);
-
 }
 
 .star-setter-selected{
     color:rgb(181, 181, 181);
-
 }
 .star-setter-clickable img{
     cursor:pointer !important;

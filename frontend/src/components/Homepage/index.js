@@ -62,10 +62,8 @@ export default function Homepage() {
     useEffect(() => {
         const feedWrapper = feedWrapperRef.current;
 
-        console.log("FEED WRAPPER:", feedWrapper)
 
         if (feedWrapper) {
-            console.log("feed wrapper")
             feedWrapper.addEventListener("scroll", handleScroll);
         }
 
