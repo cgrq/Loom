@@ -173,11 +173,9 @@ export const getAllProductsThunk = (page = 1, perPage = 18) => async (dispatch) 
 
   const response = await fetch(`/api/products/?page=${page}&per_page=${perPage}`);
 
-  console.log("Thunk - page", page)
 
   if (response.ok) {
     const products = await response.json();
-    console.log("Products:", products)
     dispatch(setProducts(products));
     return null;
   } else {

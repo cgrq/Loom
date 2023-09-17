@@ -24,7 +24,6 @@ export default function CartList() {
     useEffect(() => {
         const { id: currentOrderId } = currentOrder || {};
         if (currentOrderId) {
-            console.log('Dispatching getCartItemByOrderId with currentOrderId:', currentOrderId);
             dispatch(getCartItemByOrderId(currentOrderId));
         }
     }, [currentOrder?.id]);

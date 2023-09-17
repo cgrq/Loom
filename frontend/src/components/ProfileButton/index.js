@@ -21,9 +21,7 @@ function ProfileButton({ user }) {
 
   };
 
-  useEffect(()=>{
-    dispatch(getUserStorefrontThunk())
-},[showMenu])
+
 
   useEffect(() => {
     if (!showMenu) return;

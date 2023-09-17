@@ -28,15 +28,14 @@ class Review(db.Model):
     user = db.relationship('User', back_populates="reviews")
 
     def to_dict(self):
-        user = User.query.get(self.user_id)
         return {
             'id': self.id,
             'rating': self.rating,
             'message': self.message,
             'productId': self.product_id,
             'userId': self.user_id,
-            'username': user.username,
-            'userProfileImage': user.profile_image,
+            'username': self.user.username,
+            'userProfileImage': self.user.profile_image,
             'created_at': self.created_at,
             'updated_at': self.updated_at,
         }
