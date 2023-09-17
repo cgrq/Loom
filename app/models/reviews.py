@@ -34,8 +34,8 @@ class Review(db.Model):
             'message': self.message,
             'productId': self.product_id,
             'userId': self.user_id,
-            'username': user.username,
-            'userProfileImage': user.profile_image,
+            'username': self.user.username,
+            'userProfileImage': self.user.profile_image,
             'created_at': self.created_at,
             'updated_at': self.updated_at,
         }
