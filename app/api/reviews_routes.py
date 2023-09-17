@@ -12,8 +12,7 @@ def get_reviews():
     """
     Query for all reviews and returns them as a list of review dictionaries
     """
-    reviews = Review.query.all()
-    print(reviews)
+    reviews = Review.query.options(db.joinedload(Review.user)).all()
     return {'reviews': [review.to_dict() for review in reviews]}
 
 
@@ -22,7 +21,7 @@ def get_product_reviews(productId):
     """
     Query for all reviews by product id and return a list of reviews as dictionaries
     """
-    reviews = Review.query.filter(Review.product_id == productId).all()
+    reviews = Review.query.filter(Review.product_id == productId).options(db.joinedload(Review.user)).all()
 
     if not reviews:
         return {"reviews": []}
@@ -48,9 +47,6 @@ def create_review():
         )
         db.session.add(review)
         db.session.commit()
-
-        print("~~~~~~~~!!!!!! REVIEW")
-        print(review.to_dict())
 
         return {"review": review.to_dict()}
     return {'errors': form.errors}, 401
