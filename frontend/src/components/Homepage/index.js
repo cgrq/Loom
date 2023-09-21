@@ -34,7 +34,11 @@ export default function Homepage() {
 
             if (width <= 768) {
                 setPerPage(5); // Set lower value for mobile
-            } else {
+            } 
+            else if(width >= 1960){
+                setPerPage(27)
+            } 
+            else {
                 setPerPage(18); // Set higher value for desktop
             }
 
